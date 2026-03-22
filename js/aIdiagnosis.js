@@ -39,14 +39,17 @@ function initializeMobileMenu() {
 // Dark Mode
 function initializeDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
     const html = document.documentElement;
     const logoImg = document.getElementById('logoImage');
     
     const currentTheme = localStorage.getItem('theme') || 'light';
     if (currentTheme === 'dark') {
         html.classList.add('dark');
+        if (darkModeIcon) darkModeIcon.textContent = 'dark_mode';
         if (logoImg) logoImg.src = 'assets/Logo0.png';
     } else {
+        if (darkModeIcon) darkModeIcon.textContent = 'light_mode';
         if (logoImg) logoImg.src = 'assets/Logo.png';
     }
 
@@ -54,6 +57,7 @@ function initializeDarkMode() {
         html.classList.toggle('dark');
         const isDark = html.classList.contains('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        if (darkModeIcon) darkModeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
         if (logoImg) logoImg.src = isDark ? 'assets/Logo0.png' : 'assets/Logo.png';
     });
 }

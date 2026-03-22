@@ -36,9 +36,15 @@ function initializeDarkMode() {
     const logoImage = document.getElementById('logoImage');
     const htmlElement = document.documentElement;
     
+    // Return early if elements don't exist
+    if (!darkModeToggle || !darkModeIcon || !logoImage) {
+        console.warn('Dark mode elements not found');
+        return;
+    }
+    
     // Logo paths
-    const lightLogo = 'assets/Logo.png';
-    const darkLogo = 'assets/Logo0.png';
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
     
     // Check for saved preference or default to light mode
     const currentMode = localStorage.getItem('darkMode') || 'light';
@@ -152,40 +158,56 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hide current page from Features dropdown
     hideCurrentPageFromDropdown();
     
-    // Toggle notification dropdown
-    notificationBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        notificationDropdown.classList.toggle('hidden');
-        profileDropdown.classList.add('hidden'); // Close profile dropdown
-    });
+    // Only set up notification/profile handlers if elements exist
+    if (notificationBtn && notificationDropdown) {
+        // Toggle notification dropdown
+        notificationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('hidden');
+            if (profileDropdown) {
+                profileDropdown.classList.add('hidden'); // Close profile dropdown
+            }
+        });
+    }
     
-    // Toggle profile dropdown
-    profileBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        profileDropdown.classList.toggle('hidden');
-        notificationDropdown.classList.add('hidden'); // Close notification dropdown
-    });
+    if (profileBtn && profileDropdown) {
+        // Toggle profile dropdown
+        profileBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+            if (notificationDropdown) {
+                notificationDropdown.classList.add('hidden'); // Close notification dropdown
+            }
+        });
+    }
     
     // Close dropdowns when clicking outside
     document.addEventListener('click', function(e) {
-        if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
-            notificationDropdown.classList.add('hidden');
+        if (notificationBtn && notificationDropdown) {
+            if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+                notificationDropdown.classList.add('hidden');
+            }
         }
-        if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-            profileDropdown.classList.add('hidden');
+        if (profileBtn && profileDropdown) {
+            if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.add('hidden');
+            }
         }
     });
     
     // Close dropdowns when pressing Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            notificationDropdown.classList.add('hidden');
-            profileDropdown.classList.add('hidden');
+            if (notificationDropdown) {
+                notificationDropdown.classList.add('hidden');
+            }
+            if (profileDropdown) {
+                profileDropdown.classList.add('hidden');
+            }
         }
     });
-});
-
-// File upload functionality
+    
+    // ===== FILE UPLOAD FUNCTIONALITY =====
     let uploadedFiles = [];
     
     function updateFilePreview() {
@@ -246,29 +268,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Attach event listeners
-    document.getElementById('photo-upload').addEventListener('change', function() {
-      handleFileUpload(this);
-    });
+    const photoUpload = document.getElementById('photo-upload');
+    const videoUpload = document.getElementById('video-upload');
+    const pdfUpload = document.getElementById('pdf-upload');
+    const docUpload = document.getElementById('doc-upload');
+    const clearFilesBtn = document.getElementById('clearFiles');
     
-    document.getElementById('video-upload').addEventListener('change', function() {
-      handleFileUpload(this);
-    });
+    if (photoUpload) {
+      photoUpload.addEventListener('change', function() {
+        handleFileUpload(this);
+      });
+    }
     
-    document.getElementById('pdf-upload').addEventListener('change', function() {
-      handleFileUpload(this);
-    });
+    if (videoUpload) {
+      videoUpload.addEventListener('change', function() {
+        handleFileUpload(this);
+      });
+    }
     
-    document.getElementById('doc-upload').addEventListener('change', function() {
-      handleFileUpload(this);
-    });
+    if (pdfUpload) {
+      pdfUpload.addEventListener('change', function() {
+        handleFileUpload(this);
+      });
+    }
     
-    document.getElementById('clearFiles').addEventListener('click', function() {
-      uploadedFiles = [];
-      updateFilePreview();
-    });
+    if (docUpload) {
+      docUpload.addEventListener('change', function() {
+        handleFileUpload(this);
+      });
+    }
     
-    // Toggle Like
-    function toggleLike(button) {
+    if (clearFilesBtn) {
+      clearFilesBtn.addEventListener('click', function() {
+        uploadedFiles = [];
+        updateFilePreview();
+      });
+    }
+});
+
+// Toggle Like
+function toggleLike(button) {
       const likeCount = button.querySelector('.like-count');
       const currentCount = parseInt(likeCount.textContent);
       const icon = button.querySelector('.material-symbols-outlined');
