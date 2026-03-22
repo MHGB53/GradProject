@@ -711,11 +711,27 @@ function initializeMobileMenu() {
     });
 }
 
+// Hide current page from Features dropdown
+function hideCurrentPageFromDropdown() {
+    const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+    const dropdownLinks = document.querySelectorAll('.absolute.left-0.mt-2 a[href]');
+    
+    dropdownLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+            link.parentElement.style.display = 'none';
+        } else {
+            link.parentElement.style.display = '';
+        }
+    });
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initializeMobileMenu();
     initializeDarkMode();
     initializeDropdowns();
+    hideCurrentPageFromDropdown();
     initializeFileUpload();
     
     // Close modal when clicking outside

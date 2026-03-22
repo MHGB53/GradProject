@@ -79,8 +79,8 @@
 <header class="absolute top-0 left-0 z-10 w-full px-4 py-0 sm:px-6 lg:px-8 -mt-32">
 <div class="container mx-auto">
 <div class="flex items-center justify-between pt-4">
-<a class="flex items-center" href="#">
-  <img src="../assets/Logo.png" id="logoImage" alt="Dentor Logo" class="h-80 w-auto">
+<a class="inline-flex" href="#">
+  <img src="../assets/Logo1.png" id="logoImage" alt="Dentor Logo" class="h-80 w-auto">
 </a>
 <div class="flex-1 flex justify-center">
 <nav class="hidden md:flex items-center space-x-12 -ml-40">
@@ -89,9 +89,9 @@
 <a class="text-white/80 hover:text-white transition-colors text-lg font-semibold" href="#">About us</a>
 </nav>
 </div>
-<button class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded-full transition-all duration-300">
+<a href="Login.html" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 inline-block">
           Login
-        </button>
+        </a>
 </div>
 </div>
 </header>
@@ -111,10 +111,10 @@
             AI-powered platform that makes studying dentistry easier, smarter, and more interactive.
           </p>
 <div class="flex items-center space-x-4">
-<button class="bg-primary hover:bg-primary/90 text-white font-bold text-lg py-4 px-8 rounded-full transition-all duration-300 shadow-lg shadow-primary/30">
+<a href="Login.html" class="bg-primary hover:bg-primary/90 text-white font-bold text-lg py-4 px-8 rounded-full transition-all duration-300 shadow-lg shadow-primary/30 inline-block">
               Get Started
-            </button>
-<button class="border-2 border-white/50 hover:border-white text-white font-bold text-lg py-4 px-8 rounded-full transition-colors">
+            </a>
+<button onclick="document.getElementById('discover-features').scrollIntoView({ behavior: 'smooth' })" class="border-2 border-white/50 hover:border-white text-white font-bold text-lg py-4 px-8 rounded-full transition-colors">
               Learn More
             </button>
 </div>
@@ -129,7 +129,7 @@
 </div>
 
 <div class="container mx-auto relative z-10">
-<div class="text-center mb-20">
+<div class="text-center mb-20" id="discover-features">
 <h2 class="text-4xl sm:text-5xl font-bold tracking-tighter text-slate-900 dark:text-white mb-6">Discover Our Features</h2>
 <p class="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Everything you need to excel in your dental studies, all in one place.</p>
 </div>
@@ -561,9 +561,9 @@ We combine the latest in artificial intelligence, machine learning, and educatio
 <h2 class="text-4xl sm:text-5xl font-bold tracking-tighter text-white">Join the future of dental education.</h2>
 <p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto">Start your free trial today and see how Dentor can transform your studies.</p>
 <div class="mt-8">
-<button class="bg-white hover:bg-slate-100 text-primary font-bold text-lg py-4 px-8 rounded-full transition-all duration-300 shadow-lg">
+<a href="Login.html" class="bg-white hover:bg-slate-100 text-primary font-bold text-lg py-4 px-8 rounded-full transition-all duration-300 shadow-lg inline-block">
               Login
-            </button>
+            </a>
 </div>
 </div>
 </section>
@@ -587,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoImage = document.getElementById('logoImage');
     if (!logoImage) return;
     
-    const lightLogo = '../assets/Logo.png';
+    const lightLogo = '../assets/Logo1.png';
     const darkLogo = '../assets/Logo0.png';
     
     // Set initial logo based on current dark mode state

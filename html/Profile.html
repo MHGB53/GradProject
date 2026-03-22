@@ -82,12 +82,12 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-20">
 <div class="flex items-center gap-4">
-    <a class="flex items-center" href="Home.html">
-        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+    <a class="inline-flex" href="Home.html">
+        <img id="logoImage" src="../assets/Logo1.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
       </a>
 </div>
 <nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
-<a class="nav-link active px-6 py-3 text-sm font-semibold text-white bg-primary rounded-full shadow-lg shadow-primary/30 transition-all duration-500 relative group overflow-hidden" href="#" data-page="dashboard">
+<a class="nav-link active px-6 py-3 text-sm font-semibold text-white bg-primary rounded-full shadow-lg shadow-primary/30 transition-all duration-500 relative group overflow-hidden" href="dashboard.html" data-page="dashboard">
 <span class="relative z-10 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
 <span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
@@ -95,15 +95,79 @@
 <div class="absolute inset-0 bg-gradient-to-r from-primary-light to-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute top-0 right-0 w-3 h-3 bg-white/30 rounded-full blur-sm animate-pulse"></div>
 </a>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="features">
+<div class="relative group">
+<button class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
 <span class="relative z-10 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
 <span class="group-hover:scale-105 transition-transform duration-300">Features</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
 </span>
-<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</button>
+
+<!-- Features Dropdown -->
+<div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+<div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
+</div>
+<div class="p-2">
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📚</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+</div>
 </a>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="community">
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📝</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🏥</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📄</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
+</div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🦷</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray diagnostic training</p>
+</div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🧠</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="community.html" data-page="community">
 <span class="relative z-10 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">groups</span>
 <span class="group-hover:scale-105 transition-transform duration-300">Community</span>
@@ -111,7 +175,7 @@
 <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
 </a>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="leaderboard">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="leaderboard.html" data-page="leaderboard">
 <span class="relative z-10 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">emoji_events</span>
 <span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
@@ -119,7 +183,7 @@
 <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
 </a>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="chatbot">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html" data-page="chatbot">
 <span class="relative z-10 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
 <span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
@@ -335,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoImage = document.getElementById('logoImage');
     if (!logoImage) return;
     
-    const lightLogo = '../assets/Logo.png';
+    const lightLogo = '../assets/Logo1.png';
     const darkLogo = '../assets/Logo0.png';
     
     // Set initial logo based on current dark mode state

@@ -269,22 +269,18 @@ function handlePageNavigation(pageName) {
     console.log(`Navigating to: ${pageName}`);
     
     // Here you would typically handle your page routing
-    // For now, we'll just show a simple message
     switch(pageName) {
         case 'dashboard':
             // Already on dashboard
             break;
-        case 'features':
-            // Navigate to features page
-            break;
         case 'community':
-            // Navigate to community page
+            window.location.href = 'community.html';
             break;
         case 'leaderboard':
-            // Navigate to leaderboard page
+            window.location.href = 'leaderboard.html';
             break;
         case 'chatbot':
-            // Navigate to chatbot page
+            window.location.href = 'chatbot.html';
             break;
         default:
             console.log('Unknown page:', pageName);
@@ -383,6 +379,21 @@ function initializeMobileMenu() {
     });
 }
 
+// Hide current page from Features dropdown
+function hideCurrentPageFromDropdown() {
+    const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+    const dropdownLinks = document.querySelectorAll('.absolute.left-0.mt-2 a[href]');
+    
+    dropdownLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+            link.parentElement.style.display = 'none';
+        } else {
+            link.parentElement.style.display = '';
+        }
+    });
+}
+
 // Notification and Profile dropdown functionality
 document.addEventListener('DOMContentLoaded', function() {
     initializeMobileMenu();
@@ -394,6 +405,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize dark mode
     initializeDarkMode();
+    
+    // Hide current page from Features dropdown
+    hideCurrentPageFromDropdown();
     
     // Update greeting and date
     updateGreeting();

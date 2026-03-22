@@ -80,8 +80,8 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-20">
 <div class="flex items-center gap-4">
-    <a class="flex items-center" href="Home.html">
-        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+    <a class="inline-flex" href="Home.html">
+        <img id="logoImage" src="../assets/Logo1.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
       </a>
 </div>
 <nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
@@ -109,63 +109,6 @@
 </div>
 <div class="p-2">
 <a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">📚</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
-</div>
-</a>
-<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">📝</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
-</div>
-</a>
-<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">🏥</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
-</div>
-</a>
-<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">📄</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
-</div>
-</a>
-<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">🦷</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology Questions</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray diagnostic training</p>
-</div>
-</a>
-<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">🧠</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
-</div>
-</a>
-</div>
-</div>
-</div>
-<a href="community.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
 <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
 <span class="text-xl">📚</span>
 </div>
@@ -598,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoImage = document.getElementById('logoImage');
     if (!logoImage) return;
     
-    const lightLogo = '../assets/Logo.png';
+    const lightLogo = '../assets/Logo1.png';
     const darkLogo = '../assets/Logo0.png';
     
     // Set initial logo based on current dark mode state

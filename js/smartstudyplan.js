@@ -319,6 +319,21 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// Hide current page from Features dropdown
+function hideCurrentPageFromDropdown() {
+    const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+    const dropdownLinks = document.querySelectorAll('.absolute.left-0.mt-2 a[href]');
+    
+    dropdownLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+            link.parentElement.style.display = 'none';
+        } else {
+            link.parentElement.style.display = '';
+        }
+    });
+}
+
 // Notification and Profile dropdown functionality
 document.addEventListener('DOMContentLoaded', function() {
     initializeMobileMenu();
@@ -333,6 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize navigation
     initializeNavigation();
+    
+    // Hide current page from Features dropdown
+    hideCurrentPageFromDropdown();
     
     // Initialize sliders
     initializeSliders();

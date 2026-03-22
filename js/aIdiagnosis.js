@@ -440,11 +440,38 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// Hide current page from Features dropdown
+function hideCurrentPageFromDropdown() {
+    const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+    const dropdownLinks = document.querySelectorAll('.absolute.left-0.mt-2 a[href]');
+    
+    dropdownLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+            link.parentElement.style.display = 'none';
+        } else {
+            link.parentElement.style.display = '';
+        }
+    });
+}
+
 // Initialize
+// Validate full name - only letters and spaces
+function validateFullName() {
+    const patientNameInput = document.getElementById('patientName');
+    if (patientNameInput) {
+        patientNameInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, '');
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initializeMobileMenu();
     initializeDarkMode();
     initializeDropdowns();
+    hideCurrentPageFromDropdown();
     initializeFileUpload();
+    validateFullName();
     showStep(1);
 });

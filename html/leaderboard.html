@@ -80,8 +80,8 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-20">
 <div class="flex items-center gap-4">
-    <a class="flex items-center" href="Home.html">
-        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+    <a class="inline-flex" href="Home.html">
+        <img id="logoImage" src="../assets/Logo1.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
       </a>
 </div>
 <nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
@@ -181,7 +181,7 @@
 <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
 </a>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="chatbot">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html">
 <span class="relative z-10 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
 <span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
@@ -827,7 +827,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoImage = document.getElementById('logoImage');
     if (!logoImage) return;
     
-    const lightLogo = '../assets/Logo.png';
+    const lightLogo = '../assets/Logo1.png';
     const darkLogo = '../assets/Logo0.png';
     
     // Set initial logo based on current dark mode state

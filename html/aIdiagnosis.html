@@ -85,8 +85,8 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-20">
 <div class="flex items-center gap-4">
-    <a class="flex items-center" href="Home.html">
-        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+    <a class="inline-flex" href="Home.html">
+        <img id="logoImage" src="../assets/Logo1.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
     </a>
 </div>
 <nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
@@ -453,7 +453,7 @@
 <label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">
 Full Name <span class="text-red-500">*</span>
 </label>
-<input type="text" id="patientName" placeholder="Enter patient name" class="w-full px-4 py-2.5 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all text-text-primary dark:text-dark-text-primary">
+<input type="text" id="patientName" placeholder="Enter patient name" pattern="[A-Za-z\s]*" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" class="w-full px-4 py-2.5 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all text-text-primary dark:text-dark-text-primary">
 </div>
 <div>
 <label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">
@@ -886,7 +886,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoImage = document.getElementById('logoImage');
     if (!logoImage) return;
     
-    const lightLogo = '../assets/Logo.png';
+    const lightLogo = '../assets/Logo1.png';
     const darkLogo = '../assets/Logo0.png';
     
     // Set initial logo based on current dark mode state
