@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dentor - Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5bcba7",
+              "primary-light": "#7ad9b8",
+              "primary-dark": "#3db896",
+              "background": "#f6f8f7",
+              "dark-background": "#0f1f1b",
+              "text-primary": "#000000",
+              "dark-text-primary": "#ffffff",
+              "text-secondary": "#4b5563",
+              "dark-text-secondary": "#b0b9c3",
+              "border-color": "#e5e7eb",
+              "dark-border-color": "#374151",
+              "card": "#ffffff",
+              "dark-card": "#1a2c26",
+              "input-bg": "#f3f4f6",
+              "dark-input-bg": "#1f3a34",
+              "foreground": "#ffffff",
+              "dark-foreground": "#1a2c26",
+              "muted": "#9ca3af",
+              "dark-muted": "#6b7280",
+            },
+            fontFamily: {
+              "display": ["Manrope", "Interstate", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "13": "3.25rem",
+              "15": "3.75rem",
+              "128": "32rem"
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" }
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" }
+              }
+            },
+            boxShadow: {
+              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
+              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
+              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
+            }
+          },
+        },
+      }
+</script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<link rel="stylesheet" href="../css/community.css">
+</head>
+<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
+<div class="flex flex-col min-h-screen">
+<header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-4">
+    <a class="flex items-center" href="Home.html">
+        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+            </a>
+          </div>
+<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html" data-page="dashboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary-light to-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-0 right-0 w-3 h-3 bg-white/30 rounded-full blur-sm animate-pulse"></div>
+</a>
+<div class="relative group">
+<button class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Features</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</span>
+</button>
+
+<!-- Features Dropdown -->
+<div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+<div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
+</div>
+<div class="p-2">
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📚</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📝</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🏥</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📄</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
+</div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🦷</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray diagnostic training</p>
+</div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🧠</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<a class="nav-link active px-6 py-3 text-sm font-semibold text-white bg-primary rounded-full shadow-lg shadow-primary/30 transition-all duration-500 relative group overflow-hidden" href="community.html" data-page="community">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">groups</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Community</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="leaderboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">emoji_events</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="chatbot">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<!-- Dark Mode Toggle -->
+<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
+</button>
+<div class="relative">
+<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
+</button>
+<div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
+</div>
+<div class="max-h-64 overflow-y-auto">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now available for practice.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has been updated with new materials.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="p-3 border-t border-border-color dark:border-dark-border-color">
+<button class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
+</div>
+</div>
+</div>
+<div class="relative">
+<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></button>
+<div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></div>
+      <div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">john.doe@email.com</p>
+</div>
+      </div>
+    </div>
+    <div class="py-2">
+<a href="Profile.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">person</span>
+<span class="text-sm font-medium">My Profile</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span class="text-sm font-medium">Progress Report</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">bookmark</span>
+<span class="text-sm font-medium">Saved Items</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="text-sm font-medium">Help & Support</span>
+</a>
+</div>
+<div class="border-t border-border-color dark:border-dark-border-color py-2">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="text-sm font-medium">Sign Out</span>
+</a>
+</div>
+</div>
+    </div>
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+  </div>
+</div>
+</div>
+</header>
+
+<!-- Mobile Sidebar Menu -->
+<div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+<div id="mobileSidebarPanel" class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
+<div class="flex flex-col h-full">
+<div class="p-6 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
+<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4">
+<nav class="space-y-2">
+<a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Dashboard</span>
+</a>
+<div class="pt-2">
+<p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI Features</p>
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📚</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized schedules</p></div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📝</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice exams</p></div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🏥</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Cases</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Real scenarios</p></div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📄</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p></div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🦷</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray training</p></div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🧠</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Case analysis</p></div>
+</a>
+</div>
+<div class="border-t border-border-color dark:border-dark-border-color my-4"></div>
+<a href="community.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Community</span>
+</a>
+<a href="leaderboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">emoji_events</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Leaderboard</span>
+</a>
+<a href="chatbot.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Chatbot</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-border-color dark:border-dark-border-color">
+<a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-semibold">Logout</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<h2 class="text-4xl font-extrabold text-text-primary dark:text-dark-text-primary mb-8 tracking-tight">Community Discussion</h2>
+<div class="max-w-2xl mx-auto">
+<div class="space-y-8">
+    <!-- Post Composer -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
+<div class="flex gap-3 items-start">
+<img alt="User" class="w-10 h-10 rounded-full object-cover flex-shrink-0" src="https://randomuser.me/api/portraits/men/32.jpg" />
+      <form class="flex-1" enctype="multipart/form-data">
+<textarea id="composer-textarea" class="w-full border-none focus:ring-0 resize-none text-text-primary dark:text-dark-text-primary text-sm placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary bg-transparent mb-3 transition-all duration-300" rows="2" placeholder="What's on your mind?" style="min-height:3rem;overflow:hidden;"></textarea>
+
+<!-- File Preview Area -->
+<div id="filePreview" class="hidden mb-3 p-3 rounded-xl bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-semibold text-text-primary dark:text-dark-text-primary">Attached Files:</span>
+<button type="button" id="clearFiles" class="text-xs text-red-500 hover:text-red-700 font-medium">Clear All</button>
+</div>
+<div id="fileList" class="space-y-2"></div>
+</div>
+
+<div class="flex justify-between w-full gap-3 items-center border-t border-border-color dark:border-dark-border-color pt-3">
+<div class="flex gap-2 flex-wrap">
+<label for="photo-upload" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-background dark:bg-dark-background text-text-secondary dark:text-dark-text-secondary text-xs font-medium hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-base text-primary">image</span>
+<span>Photo</span>
+</label>
+<input id="photo-upload" type="file" class="hidden" accept="image/*" multiple />
+
+<label for="video-upload" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-background dark:bg-dark-background text-text-secondary dark:text-dark-text-secondary text-xs font-medium hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-base text-primary">videocam</span>
+<span>Video</span>
+</label>
+<input id="video-upload" type="file" class="hidden" accept="video/*" multiple />
+
+<label for="pdf-upload" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-background dark:bg-dark-background text-text-secondary dark:text-dark-text-secondary text-xs font-medium hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-base text-primary">picture_as_pdf</span>
+<span>PDF</span>
+</label>
+<input id="pdf-upload" type="file" class="hidden" accept=".pdf" multiple />
+
+<label for="doc-upload" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-background dark:bg-dark-background text-text-secondary dark:text-dark-text-secondary text-xs font-medium hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-base text-primary">description</span>
+<span>Document</span>
+          </label>
+<input id="doc-upload" type="file" class="hidden" accept=".doc,.docx,.txt" multiple />
+</div>
+<button type="submit" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-all duration-300">
+            <span class="material-symbols-outlined text-base">send</span>
+            Post
+          </button>
+        </div>
+      </form>
+</div>
+    </div>
+    <script>
+    // File upload functionality
+    let uploadedFiles = [];
+    
+    function updateFilePreview() {
+      const filePreview = document.getElementById('filePreview');
+      const fileList = document.getElementById('fileList');
+      
+      if (uploadedFiles.length > 0) {
+        filePreview.classList.remove('hidden');
+        fileList.innerHTML = uploadedFiles.map((file, index) => {
+          let icon = 'insert_drive_file';
+          let color = 'text-gray-500';
+          
+          if (file.type.startsWith('image/')) {
+            icon = 'image';
+            color = 'text-green-500';
+          } else if (file.type.startsWith('video/')) {
+            icon = 'videocam';
+            color = 'text-blue-500';
+          } else if (file.type === 'application/pdf') {
+            icon = 'picture_as_pdf';
+            color = 'text-red-500';
+          } else if (file.type.includes('word') || file.type.includes('document')) {
+            icon = 'description';
+            color = 'text-blue-600';
+          }
+          
+          return `
+            <div class="flex items-center justify-between p-2 rounded-lg bg-card dark:bg-dark-card">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm ${color}">${icon}</span>
+                <span class="text-xs text-text-primary dark:text-dark-text-primary font-medium">${file.name}</span>
+                <span class="text-xs text-text-secondary dark:text-dark-text-secondary">(${(file.size / 1024).toFixed(1)} KB)</span>
+              </div>
+              <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700">
+                <span class="material-symbols-outlined text-sm">close</span>
+              </button>
+            </div>
+          `;
+        }).join('');
+        } else {
+        filePreview.classList.add('hidden');
+      }
+    }
+    
+    function removeFile(index) {
+      uploadedFiles.splice(index, 1);
+      updateFilePreview();
+    }
+    
+    function handleFileUpload(input) {
+      if (input.files.length > 0) {
+        Array.from(input.files).forEach(file => {
+          uploadedFiles.push(file);
+        });
+        updateFilePreview();
+        input.value = ''; // Reset input
+      }
+    }
+    
+    // Attach event listeners
+    document.getElementById('photo-upload').addEventListener('change', function() {
+      handleFileUpload(this);
+    });
+    
+    document.getElementById('video-upload').addEventListener('change', function() {
+      handleFileUpload(this);
+    });
+    
+    document.getElementById('pdf-upload').addEventListener('change', function() {
+      handleFileUpload(this);
+    });
+    
+    document.getElementById('doc-upload').addEventListener('change', function() {
+      handleFileUpload(this);
+    });
+    
+    document.getElementById('clearFiles').addEventListener('click', function() {
+      uploadedFiles = [];
+      updateFilePreview();
+    });
+    
+    // Toggle Like
+    function toggleLike(button) {
+      const likeCount = button.querySelector('.like-count');
+      const currentCount = parseInt(likeCount.textContent);
+      const icon = button.querySelector('.material-symbols-outlined');
+      
+      if (button.classList.contains('liked')) {
+        button.classList.remove('liked', 'text-primary');
+        likeCount.textContent = currentCount - 1;
+        icon.style.fontVariationSettings = "'FILL' 0";
+      } else {
+        button.classList.add('liked', 'text-primary');
+        likeCount.textContent = currentCount + 1;
+        icon.style.fontVariationSettings = "'FILL' 1";
+      }
+    }
+    
+    // Toggle Comment Like
+    function toggleCommentLike(button) {
+      const likeCount = button.querySelector('.like-count');
+      const currentCount = parseInt(likeCount.textContent);
+      const icon = button.querySelector('.material-symbols-outlined');
+      
+      if (button.classList.contains('liked')) {
+        button.classList.remove('liked', 'text-primary');
+        likeCount.textContent = currentCount - 1;
+        icon.style.fontVariationSettings = "'FILL' 0";
+        } else {
+        button.classList.add('liked', 'text-primary');
+        likeCount.textContent = currentCount + 1;
+        icon.style.fontVariationSettings = "'FILL' 1";
+      }
+    }
+    
+    // Toggle Reply Input
+    function toggleReply(commentId) {
+      const replySection = document.getElementById('reply-' + commentId);
+      replySection.classList.toggle('hidden');
+      if (!replySection.classList.contains('hidden')) {
+        replySection.querySelector('input').focus();
+      }
+    }
+    
+    // Sample likes data
+    const likesData = {
+      post1: [
+        { name: 'Dr. John Smith', image: 'https://randomuser.me/api/portraits/men/1.jpg', role: 'Periodontist', id: 'U-DENT-10245', level: 'Level 5 - Expert' },
+        { name: 'Dr. Lisa Wong', image: 'https://randomuser.me/api/portraits/women/2.jpg', role: 'Orthodontist', id: 'U-DENT-10892', level: 'Level 4 - Advanced' },
+        { name: 'Dr. Mike Taylor', image: 'https://randomuser.me/api/portraits/men/3.jpg', role: 'Endodontist', id: 'U-DENT-11456', level: 'Level 6 - Master' },
+        { name: 'Dr. Anna Brown', image: 'https://randomuser.me/api/portraits/women/4.jpg', role: 'Prosthodontist', id: 'U-DENT-10673', level: 'Level 3 - Intermediate' },
+        { name: 'Dr. Tom Harris', image: 'https://randomuser.me/api/portraits/men/6.jpg', role: 'Oral Surgeon', id: 'U-DENT-12098', level: 'Level 7 - Legend' }
+      ],
+      post2: [
+        { name: 'Dr. Amanda Green', image: 'https://randomuser.me/api/portraits/women/10.jpg', role: 'Pediatric Dentist', id: 'U-DENT-10334', level: 'Level 4 - Advanced' },
+        { name: 'Dr. Robert Chen', image: 'https://randomuser.me/api/portraits/men/12.jpg', role: 'General Dentist', id: 'U-DENT-11789', level: 'Level 3 - Intermediate' },
+        { name: 'Dr. Sarah Kim', image: 'https://randomuser.me/api/portraits/women/14.jpg', role: 'Cosmetic Dentist', id: 'U-DENT-10556', level: 'Level 5 - Expert' }
+      ],
+      post3: [
+        { name: 'Dr. Maria Garcia', image: 'https://randomuser.me/api/portraits/women/15.jpg', role: 'Orthodontist', id: 'U-DENT-11234', level: 'Level 6 - Master' },
+        { name: 'Dr. James Wilson', image: 'https://randomuser.me/api/portraits/men/20.jpg', role: 'Periodontist', id: 'U-DENT-10987', level: 'Level 4 - Advanced' },
+        { name: 'Dr. Patricia Lee', image: 'https://randomuser.me/api/portraits/women/25.jpg', role: 'Endodontist', id: 'U-DENT-12456', level: 'Level 5 - Expert' }
+      ]
+    };
+    
+    // Sample comments data with full user info
+    const commentsData = {
+      post1: [
+        {
+          user: 'Dr. Mark Anderson',
+          image: 'https://randomuser.me/api/portraits/men/5.jpg',
+          text: 'Have you considered a combination of scaling, root planing, and possibly surgical intervention?',
+          likes: 3,
+          time: '1 hour ago',
+          id: 'U-DENT-10567',
+          level: 'Level 6 - Master'
+        },
+        {
+          user: 'Dr. Jennifer Lee',
+          image: 'https://randomuser.me/api/portraits/women/8.jpg',
+          text: "Great case! I'd also recommend involving a periodontist for comprehensive treatment planning.",
+          likes: 5,
+          time: '30 min ago',
+          id: 'U-DENT-11890',
+          level: 'Level 5 - Expert'
+        }
+      ],
+      post2: [],
+      post3: []
+    };
+    
+    // Open Likes Modal
+    function openLikesModal(postId) {
+      const modal = document.getElementById('likesModal');
+      const content = document.getElementById('likesModalContent');
+      const likes = likesData[postId] || [];
+      
+      content.innerHTML = likes.map((user, index) => `
+        <div onclick="showUserInfo('${postId}', ${index})" class="flex items-center gap-3 p-3 rounded-xl hover:bg-background dark:hover:bg-dark-background transition-colors cursor-pointer group">
+          <img src="${user.image}" class="w-10 h-10 rounded-full" />
+          <span class="text-sm text-text-primary dark:text-dark-text-primary font-medium group-hover:text-primary transition-colors">${user.name}</span>
+          <span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary ml-auto opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+        </div>
+      `).join('');
+      
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Close Likes Modal
+    function closeLikesModal() {
+      document.getElementById('likesModal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Show User Info
+    function showUserInfo(postId, userIndex) {
+      const user = likesData[postId][userIndex];
+      const modal = document.getElementById('userInfoModal');
+      
+      // Update user info
+      document.getElementById('userInfoAvatar').src = user.image;
+      document.getElementById('userInfoName').textContent = user.name;
+      document.getElementById('userInfoId').textContent = user.id;
+      document.getElementById('userInfoLevel').textContent = user.level;
+      
+      // Show modal with animation
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.querySelector('div').classList.remove('scale-95');
+        modal.querySelector('div').classList.add('scale-100');
+      }, 10);
+    }
+    
+    // Close User Info Modal
+    function closeUserInfoModal() {
+      const modal = document.getElementById('userInfoModal');
+      modal.querySelector('div').classList.remove('scale-100');
+      modal.querySelector('div').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+    
+    // Show Comment User Info
+    function showCommentUserInfo(postId, commentIndex) {
+      const comment = commentsData[postId][commentIndex];
+      const modal = document.getElementById('userInfoModal');
+      
+      // Update user info from comment data
+      document.getElementById('userInfoAvatar').src = comment.image;
+      document.getElementById('userInfoName').textContent = comment.user;
+      document.getElementById('userInfoId').textContent = comment.id;
+      document.getElementById('userInfoLevel').textContent = comment.level;
+      
+      // Show modal with animation
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.querySelector('div').classList.remove('scale-95');
+        modal.querySelector('div').classList.add('scale-100');
+      }, 10);
+    }
+    
+    // Post authors data
+    const postAuthors = {
+      author1: {
+        name: 'Dr. Emily Carter',
+        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCkPQ_esLk8kw4T6Y2ZjTYEWqtcEgQAt3D1T3jKt-tAcx5Dv7J2PEPg3Kb2FB4yuFx05KhIfs5RGhVtm5LHIFOt5Qyw5eDM2DgY06kBMwcv0oIAL6sxfR60xTEoakWpq87vqHRypgT3K4TRL1gTferezy8VCl-WvvWLOK4faHJFsJRFZ34Uwz9UCMWCaytntQP7U6-nd2nzd7sIPCDrip2tK-s6QkzVsMPPUPSFhTRhr9THNj0O2Y5nTJZIWk9t_2IMFMZcyxkf8k6f',
+        id: 'U-DENT-11234',
+        level: 'Level 6 - Master'
+      },
+      author2: {
+        name: 'Dr. David Lee',
+        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDoFloEAtTb7T_2Hmz9mEPmk2LD1wpliFrMM9gpYkRKj2WT3VPbujXprjG_i1lJSksdPDsT0XrpQ4BlDvPz--cZvKgYmOI7x70bNLVgT3rMWTusKRxs_Nnj4NGdP4gnNxrIDZjiNTFYrkUo_a-3x26-EMAPYvebm90CrQTfa4HQ5XCUWXZEOfHahjwc9m4TQunRMRyhh9qqiOEKQs2L6YaPT7XgFq_soPGtHH_gMR5Qj4kfHKch8w6eRR0aEAh4MDjhZXzdjn5FxSaa',
+        id: 'U-DENT-10789',
+        level: 'Level 5 - Expert'
+      },
+      author3: {
+        name: 'Dr. Sarah Johnson',
+        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAAkX5kcQBHWhpFxl7ctja81v5w4jOA_CYAs7l51fMOGheVVhHvnYZ_7oQ-py3qvT8buAD7oxB74qLikSeOIZ8s5a3sv_Etq3QTIJtzT6SejT4odh53XshWkdSYWBBQTPcnkxAAjAFFn7kG9cmcNfeXxSBVGIlpLNbaSXCZSKNpmexRo_Ez_qVLdaL7gbibPFp7nmEi12rYkP7EVFpjjhtamPPlU8b3LMdVI9AxJUvhBZd7WgVL1v8twA6tMLfRr0R6GP3tXFDCJa9J',
+        id: 'U-DENT-12456',
+        level: 'Level 7 - Legend'
+      }
+    };
+    
+    // Show Post Author Info
+    function showPostAuthorInfo(authorId) {
+      const author = postAuthors[authorId];
+      const modal = document.getElementById('userInfoModal');
+      
+      // Update user info
+      document.getElementById('userInfoAvatar').src = author.image;
+      document.getElementById('userInfoName').textContent = author.name;
+      document.getElementById('userInfoId').textContent = author.id;
+      document.getElementById('userInfoLevel').textContent = author.level;
+      
+      // Show modal with animation
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.querySelector('div').classList.remove('scale-95');
+        modal.querySelector('div').classList.add('scale-100');
+      }, 10);
+    }
+    
+    // Open Comments Modal
+    let currentPostId = null;
+    
+    function openCommentsModal(postId, count) {
+      currentPostId = postId;
+      const modal = document.getElementById('commentsModal');
+      const content = document.getElementById('commentsModalContent');
+      const countSpan = document.getElementById('commentsCount');
+      const comments = commentsData[postId] || [];
+      
+      countSpan.textContent = `(${count})`;
+      
+      content.innerHTML = comments.map((comment, index) => `
+        <div class="mb-4">
+          <div class="flex gap-3">
+            <img src="${comment.image}" onclick="showCommentUserInfo('${postId}', ${index})" class="w-8 h-8 rounded-full flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" />
+            <div class="flex-1">
+              <div class="bg-background dark:bg-dark-background rounded-xl p-3">
+                <p onclick="showCommentUserInfo('${postId}', ${index})" class="text-xs font-semibold text-text-primary dark:text-dark-text-primary mb-1 cursor-pointer hover:text-primary transition-colors">${comment.user}</p>
+                <p class="text-xs text-text-secondary dark:text-dark-text-secondary">${comment.text}</p>
+              </div>
+              <div class="flex items-center gap-4 mt-2 ml-3">
+                <button onclick="toggleCommentLike(this)" class="text-xs text-text-secondary dark:text-dark-text-secondary hover:text-primary transition-colors flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">thumb_up</span>
+                  <span class="like-count">${comment.likes}</span>
+                </button>
+                <button onclick="toggleReply('modal-comment-${index}')" class="text-xs text-text-secondary dark:text-dark-text-secondary hover:text-primary transition-colors">Reply</button>
+                <span class="text-xs text-text-secondary dark:text-dark-text-secondary">${comment.time}</span>
+              </div>
+              
+              <!-- Reply Input -->
+              <div id="reply-modal-comment-${index}" class="hidden mt-3 flex items-center gap-2">
+                <input class="flex-1 border-none focus:ring-0 text-xs bg-card dark:bg-dark-card text-text-primary dark:text-dark-text-primary rounded-full px-3 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary border border-border-color dark:border-dark-border-color" placeholder="Write a reply..." />
+                <button type="button" class="flex items-center justify-center rounded-full bg-primary text-white w-7 h-7 hover:bg-primary-dark transition-colors">
+                  <span class="material-symbols-outlined text-sm">send</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('') || '<p class="text-center text-text-secondary dark:text-dark-text-secondary text-sm py-8">No comments yet. Be the first to comment!</p>';
+      
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Close Comments Modal
+    function closeCommentsModal() {
+      document.getElementById('commentsModal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      currentPostId = null;
+    }
+    
+    // Add Comment
+    function addComment() {
+      const input = document.getElementById('newCommentInput');
+      const text = input.value.trim();
+      
+      if (text && currentPostId) {
+        const newComment = {
+          user: 'John Doe',
+          image: 'https://randomuser.me/api/portraits/men/32.jpg',
+          text: text,
+          likes: 0,
+          time: 'Just now'
+        };
+        
+        commentsData[currentPostId] = commentsData[currentPostId] || [];
+        commentsData[currentPostId].push(newComment);
+        
+        input.value = '';
+        
+        // Refresh modal
+        const count = commentsData[currentPostId].length;
+        openCommentsModal(currentPostId, count);
+      }
+    }
+    
+    // Close modals on background click
+    document.getElementById('likesModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLikesModal();
+      }
+    });
+    
+    document.getElementById('commentsModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeCommentsModal();
+      }
+    });
+    
+    // Close modals on background click
+    document.getElementById('userInfoModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeUserInfoModal();
+      }
+    });
+    
+    // Close modals on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLikesModal();
+        closeCommentsModal();
+        closeUserInfoModal();
+      }
+    });
+
+    // Auto-resize textarea with animation
+    const composerTextarea = document.getElementById('composer-textarea');
+    if (composerTextarea) {
+      const minHeight = '2.5rem';
+      composerTextarea.addEventListener('input', function() {
+        this.style.height = minHeight; // Always reset to min height first
+        if (this.value.trim() === '') {
+          this.style.height = minHeight;
+        } else {
+          this.style.height = (this.scrollHeight) + 'px';
+        }
+      });
+      // Optional: Animate on page load if there's pre-filled text
+      window.addEventListener('DOMContentLoaded', function() {
+        composerTextarea.style.height = minHeight;
+        if (composerTextarea.value.trim() !== '') {
+          composerTextarea.style.height = (composerTextarea.scrollHeight) + 'px';
+        }
+      });
+    }
+    </script>
+    <!-- Feed -->
+    <div class="space-y-8">
+      <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
+        <div class="flex gap-4 items-start">
+        <img alt="Dr. Emily Carter" onclick="showPostAuthorInfo('author1')" class="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkPQ_esLk8kw4T6Y2ZjTYEWqtcEgQAt3D1T3jKt-tAcx5Dv7J2PEPg3Kb2FB4yuFx05KhIfs5RGhVtm5LHIFOt5Qyw5eDM2DgY06kBMwcv0oIAL6sxfR60xTEoakWpq87vqHRypgT3K4TRL1gTferezy8VCl-WvvWLOK4faHJFsJRFZ34Uwz9UCMWCaytntQP7U6-nd2nzd7sIPCDrip2tK-s6QkzVsMPPUPSFhTRhr9THNj0O2Y5nTJZIWk9t_2IMFMZcyxkf8k6f"/>
+        <div class="flex-1">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal">
+                <span onclick="showPostAuthorInfo('author1')" class="font-semibold text-text-primary dark:text-dark-text-primary cursor-pointer hover:text-primary transition-colors">Dr. Emily Carter</span>
+                <span class="mx-1 text-text-secondary dark:text-dark-text-secondary">·</span>
+                <span class="text-text-secondary dark:text-dark-text-secondary font-normal">2 hours ago</span>
+              </p>
+            </div>
+          </div>
+          <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-normal leading-relaxed mb-3">
+            I'm currently working on a challenging case involving a patient with advanced periodontitis. The patient has significant bone loss and mobility in several teeth. I'm considering various treatment options...
+          </p>
+          
+          <!-- Like and Comment Actions -->
+          <div class="flex items-center gap-6 text-text-secondary dark:text-dark-text-secondary mb-4">
+            <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
+              <span class="material-symbols-outlined text-lg">thumb_up</span>
+              <span class="like-count">12</span>
+            </button>
+            <button onclick="openCommentsModal('post1', 5)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
+              <span class="material-symbols-outlined text-lg">chat_bubble</span>
+              <span>5</span>
+            </button>
+            <button onclick="openLikesModal('post1')" class="text-xs hover:text-primary transition-colors">
+              View Likes
+            </button>
+          </div>
+          
+          <!-- Quick Comment Input -->
+          <div class="border-t border-border-color dark:border-dark-border-color pt-3">
+            <div class="flex items-center gap-2">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full flex-shrink-0" />
+              <input class="flex-1 border-none focus:ring-0 text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
+              <button type="button" class="flex items-center justify-center rounded-full bg-primary text-white w-9 h-9 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-md">
+                <span class="material-symbols-outlined text-lg">send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
+        <div class="flex gap-4 items-start">
+        <img alt="Dr. David Lee" onclick="showPostAuthorInfo('author2')" class="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoFloEAtTb7T_2Hmz9mEPmk2LD1wpliFrMM9gpYkRKj2WT3VPbujXprjG_i1lJSksdPDsT0XrpQ4BlDvPz--cZvKgYmOI7x70bNLVgT3rMWTusKRxs_Nnj4NGdP4gnNxrIDZjiNTFYrkUo_a-3x26-EMAPYvebm90CrQTfa4HQ5XCUWXZEOfHahjwc9m4TQunRMRyhh9qqiOEKQs2L6YaPT7XgFq_soPGtHH_gMR5Qj4kfHKch8w6eRR0aEAh4MDjhZXzdjn5FxSaa"/>
+        <div class="flex-1">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal">
+                <span onclick="showPostAuthorInfo('author2')" class="font-semibold text-text-primary dark:text-dark-text-primary cursor-pointer hover:text-primary transition-colors">Dr. David Lee</span>
+                <span class="mx-1 text-text-secondary dark:text-dark-text-secondary">·</span>
+                <span class="text-text-secondary dark:text-dark-text-secondary font-normal">1 day ago</span>
+              </p>
+            </div>
+          </div>
+          <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-normal leading-relaxed mb-3">
+            I'm looking to enhance my skills in pediatric dentistry. What are some essential techniques and best practices for treating young patients? Any recommendations for resources or courses...
+          </p>
+          
+          <!-- Like and Comment Actions -->
+          <div class="flex items-center gap-6 text-text-secondary dark:text-dark-text-secondary mb-4">
+            <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
+              <span class="material-symbols-outlined text-lg">thumb_up</span>
+              <span class="like-count">28</span>
+            </button>
+            <button onclick="openCommentsModal('post2', 15)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
+              <span class="material-symbols-outlined text-lg">chat_bubble</span>
+              <span>15</span>
+            </button>
+            <button onclick="openLikesModal('post2')" class="text-xs hover:text-primary transition-colors">
+              View Likes
+            </button>
+          </div>
+          
+          <!-- Quick Comment Input -->
+          <div class="border-t border-border-color dark:border-dark-border-color pt-3">
+            <div class="flex items-center gap-2">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full flex-shrink-0" />
+              <input class="flex-1 border-none focus:ring-0 text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
+              <button type="button" class="flex items-center justify-center rounded-full bg-primary text-white w-9 h-9 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-md">
+                <span class="material-symbols-outlined text-lg">send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
+        <div class="flex gap-4 items-start">
+        <img alt="Dr. Sarah Johnson" onclick="showPostAuthorInfo('author3')" class="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAkX5kcQBHWhpFxl7ctja81v5w4jOA_CYAs7l51fMOGheVVhHvnYZ_7oQ-py3qvT8buAD7oxB74qLikSeOIZ8s5a3sv_Etq3QTIJtzT6SejT4odh53XshWkdSYWBBQTPcnkxAAjAFFn7kG9cmcNfeXxSBVGIlpLNbaSXCZSKNpmexRo_Ez_qVLdaL7gbibPFp7nmEi12rYkP7EVFpjjhtamPPlU8b3LMdVI9AxJUvhBZd7WgVL1v8twA6tMLfRr0R6GP3tXFDCJa9J"/>
+        <div class="flex-1">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal">
+                <span onclick="showPostAuthorInfo('author3')" class="font-semibold text-text-primary dark:text-dark-text-primary cursor-pointer hover:text-primary transition-colors">Dr. Sarah Johnson</span>
+                <span class="mx-1 text-text-secondary dark:text-dark-text-secondary">·</span>
+                <span class="text-text-secondary dark:text-dark-text-secondary font-normal">3 days ago</span>
+              </p>
+            </div>
+          </div>
+          <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-normal leading-relaxed mb-3">
+            I'm seeking advice on effectively managing dental anxiety in patients. What strategies do you use to help patients feel more comfortable during procedures? Any tips on creating a calming environment...
+          </p>
+          
+          <!-- Like and Comment Actions -->
+          <div class="flex items-center gap-6 text-text-secondary dark:text-dark-text-secondary mb-4">
+            <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
+              <span class="material-symbols-outlined text-lg">thumb_up</span>
+              <span class="like-count">42</span>
+            </button>
+            <button onclick="openCommentsModal('post3', 23)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
+              <span class="material-symbols-outlined text-lg">chat_bubble</span>
+              <span>23</span>
+            </button>
+            <button onclick="openLikesModal('post3')" class="text-xs hover:text-primary transition-colors">
+              View Likes
+            </button>
+          </div>
+          
+          <!-- Quick Comment Input -->
+          <div class="border-t border-border-color dark:border-dark-border-color pt-3">
+            <div class="flex items-center gap-2">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full flex-shrink-0" />
+              <input class="flex-1 border-none focus:ring-0 text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
+              <button type="button" class="flex items-center justify-center rounded-full bg-primary text-white w-9 h-9 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-md">
+                <span class="material-symbols-outlined text-lg">send</span>
+              </button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Likes Modal -->
+<div id="likesModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+  <div class="bg-card dark:bg-dark-card rounded-2xl shadow-2xl max-w-md w-full max-h-[80vh] overflow-hidden">
+    <div class="flex items-center justify-between p-6 border-b border-border-color dark:border-dark-border-color">
+      <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">favorite</span>
+        Likes
+      </h3>
+      <button onclick="closeLikesModal()" class="text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="likesModalContent" class="p-6 overflow-y-auto max-h-96">
+      <!-- Content will be loaded dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- User Info Modal -->
+<div id="userInfoModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+  <div class="bg-card dark:bg-dark-card rounded-2xl shadow-2xl max-w-sm w-full overflow-hidden transform transition-all duration-300 scale-95">
+    <!-- Cover Banner -->
+    <div class="relative h-24 bg-gradient-to-br from-primary via-primary-dark to-purple-500 overflow-hidden">
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
+      <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16 blur-2xl"></div>
+      <button onclick="closeUserInfoModal()" class="absolute top-3 right-3 text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-300 hover:rotate-90">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    
+    <div class="px-6 pb-6">
+      <!-- Profile Image -->
+      <div class="flex flex-col items-center -mt-12">
+        <div class="relative">
+          <img id="userInfoAvatar" src="" class="w-24 h-24 rounded-full border-4 border-card dark:border-dark-card shadow-2xl" />
+          <div class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 rounded-full border-3 border-card dark:border-dark-card"></div>
+        </div>
+        
+        <!-- Name -->
+        <h3 id="userInfoName" class="text-xl font-bold text-text-primary dark:text-dark-text-primary mt-4 text-center"></h3>
+        
+        <!-- Info Cards -->
+        <div class="w-full space-y-3 mt-5">
+          <!-- User ID -->
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-background dark:bg-dark-background">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-primary text-lg">fingerprint</span>
+            </div>
+            <div class="flex-1">
+              <p class="text-xs text-text-secondary dark:text-dark-text-secondary">User ID</p>
+              <p id="userInfoId" class="text-sm font-bold text-text-primary dark:text-dark-text-primary">U-DENT-12345</p>
+            </div>
+          </div>
+          
+          <!-- Level -->
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-background dark:bg-dark-background">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-primary text-lg">school</span>
+            </div>
+            <div class="flex-1">
+              <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Level</p>
+              <p id="userInfoLevel" class="text-sm font-bold text-primary">Level 5 - Expert</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comments Modal -->
+<div id="commentsModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+  <div class="bg-card dark:bg-dark-card rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-border-color dark:border-dark-border-color">
+      <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">chat_bubble</span>
+        Comments <span id="commentsCount" class="text-sm text-text-secondary dark:text-dark-text-secondary font-normal"></span>
+      </h3>
+      <button onclick="closeCommentsModal()" class="text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+  </div>
+    <div id="commentsModalContent" class="p-6 overflow-y-auto flex-1">
+      <!-- Content will be loaded dynamically -->
+</div>
+    <div class="p-6 border-t border-border-color dark:border-dark-border-color">
+      <div class="flex items-center gap-2">
+        <input id="newCommentInput" class="flex-1 border-none focus:ring-2 focus:ring-primary text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-3 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
+        <button type="button" onclick="addComment()" class="flex items-center justify-center rounded-full bg-primary text-white w-10 h-10 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-lg">
+          <span class="material-symbols-outlined text-xl">send</span>
+        </button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<script src="../js/community.js"></script>
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body></html>
+</div>
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body></html>
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body></html>

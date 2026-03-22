@@ -1,0 +1,151 @@
+
+        .font-display {
+            font-family: 'Manrope', sans-serif;
+        }
+        
+        .quote-fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+        
+        #refreshQuoteBtn .material-symbols-outlined {
+            transition: transform 0.5s ease;
+        }
+        
+        .quote-glow {
+            animation: quoteGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes quoteGlow {
+            0%, 100% {
+                text-shadow: 0 0 5px rgba(91, 203, 167, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(91, 203, 167, 0.6);
+            }
+        }
+        
+        .particle-float {
+            animation: particleFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(180deg);
+            }
+        }
+        
+        .wisdom-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(91, 203, 167, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        .morphing-shape {
+            animation: morphing 8s ease-in-out infinite;
+        }
+        
+        @keyframes morphing {
+            0%, 100% {
+                border-radius: 50% 50% 50% 50%;
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                border-radius: 60% 40% 60% 40%;
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% {
+                border-radius: 40% 60% 40% 60%;
+                transform: rotate(180deg) scale(0.9);
+            }
+            75% {
+                border-radius: 50% 50% 30% 70%;
+                transform: rotate(270deg) scale(1.05);
+            }
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(91, 203, 167, 0.3), 0 0 20px rgba(91, 203, 167, 0.2), 0 0 30px rgba(91, 203, 167, 0.1);
+        }
+        
+        .floating-wisdom {
+            animation: floatingWisdom 6s ease-in-out infinite;
+        }
+        
+        @keyframes floatingWisdom {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+            66% {
+                transform: translateY(-5px) rotate(-1deg);
+            }
+        }
+        
+        .pulse-ring {
+            animation: pulseRing 2s ease-out infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+    

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dentor - AI Diagnosis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5bcba7",
+              "primary-light": "#7ad9b8",
+              "primary-dark": "#3db896",
+              "background": "#f6f8f7",
+              "dark-background": "#0f1f1b",
+              "text-primary": "#000000",
+              "dark-text-primary": "#ffffff",
+              "text-secondary": "#4b5563",
+              "dark-text-secondary": "#b0b9c3",
+              "border-color": "#e5e7eb",
+              "dark-border-color": "#374151",
+              "card": "#ffffff",
+              "dark-card": "#1a2c26",
+              "input-bg": "#f3f4f6",
+              "dark-input-bg": "#1f3a34",
+              "foreground": "#ffffff",
+              "dark-foreground": "#1a2c26",
+              "muted": "#9ca3af",
+              "dark-muted": "#6b7280",
+            },
+            fontFamily: {
+              "display": ["Manrope", "Interstate", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "13": "3.25rem",
+              "15": "3.75rem",
+              "128": "32rem"
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" }
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" }
+              }
+            },
+            boxShadow: {
+              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
+              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
+              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
+            }
+          },
+        },
+      }
+</script>
+
+<link rel="stylesheet" href="../css/aIdiagnosis.css">
+</head>
+<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
+<div class="flex flex-col min-h-screen">
+
+<!-- Header -->
+<header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-4">
+    <a class="flex items-center" href="Home.html">
+        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+    </a>
+</div>
+<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
+</span>
+</a>
+<div class="relative group">
+<button class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Features</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</span>
+</button>
+
+<!-- Features Dropdown -->
+<div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+<div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
+</div>
+<div class="p-2">
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📚</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📝</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🏥</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📄</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
+</div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🦷</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray diagnostic training</p>
+</div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🧠</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="community.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">groups</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Community</span>
+</span>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="leaderboard.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">emoji_events</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
+</span>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">smart_toy</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
+</span>
+</a>
+</nav>
+<div class="flex items-center gap-2">
+<!-- Dark Mode Toggle -->
+<button id="darkModeToggle" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">dark_mode</span>
+</button>
+
+<!-- Notifications -->
+<div class="relative">
+<button id="notificationBtn" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">notifications</span>
+<span class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+
+<!-- Notification Dropdown -->
+<div id="notificationDropdown" class="dropdown absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
+</div>
+<div class="max-h-96 overflow-y-auto">
+<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Diagnosis Completed</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">AI diagnosis ready for review</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 hours ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-blue-500">info</span>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Case Uploaded</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Patient data successfully uploaded</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">5 hours ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-yellow-500">star</span>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Treatment Plan Created</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Recommended treatment available</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 day ago</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-border-color dark:border-dark-border-color text-center">
+<a href="#" class="text-sm text-primary hover:text-primary-dark font-semibold">View All</a>
+</div>
+</div>
+</div>
+
+<!-- Profile -->
+<div class="relative">
+<button id="profileBtn" class="flex items-center gap-2 p-2 pr-3 rounded-full hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 group">
+<img src="https://ui-avatars.com/api/?name=John+Doe&background=5BCBA7&color=fff" alt="Profile" class="w-8 h-8 rounded-full">
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary text-sm transition-colors duration-300">expand_more</span>
+</button>
+
+<!-- Profile Dropdown -->
+<div id="profileDropdown" class="dropdown absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center gap-3">
+<img src="https://ui-avatars.com/api/?name=John+Doe&background=5BCBA7&color=fff" alt="Profile" class="w-12 h-12 rounded-full">
+<div>
+<p class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</p>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">john.doe@example.com</p>
+</div>
+</div>
+</div>
+<div class="p-2">
+<a href="profile.html" class="flex items-center gap-3 px-4 py-2 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-colors">
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">person</span>
+<span class="text-sm">My Profile</span>
+</a>
+<a href="settings.html" class="flex items-center gap-3 px-4 py-2 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-colors">
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a href="help.html" class="flex items-center gap-3 px-4 py-2 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-colors">
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">help</span>
+<span class="text-sm">Help Center</span>
+</a>
+</div>
+<div class="p-2 border-t border-border-color dark:border-dark-border-color">
+<a href="login.html" class="flex items-center gap-3 px-4 py-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-semibold">Logout</span>
+</a>
+</div>
+</div>
+</div>
+
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+
+<!-- Mobile Sidebar Menu -->
+<div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+<div id="mobileSidebarPanel" class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
+<div class="flex flex-col h-full">
+<!-- Mobile Menu Header -->
+<div class="p-6 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
+<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+
+<!-- Mobile Menu Content -->
+<div class="flex-1 overflow-y-auto p-4">
+<nav class="space-y-2">
+<a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Dashboard</span>
+</a>
+
+<!-- Features Section -->
+<div class="pt-2">
+<p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI Features</p>
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📚</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📝</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🏥</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Cases</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Real scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📄</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p>
+</div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🦷</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray training</p>
+</div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🧠</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Case analysis</p>
+</div>
+</a>
+</div>
+
+<div class="border-t border-border-color dark:border-dark-border-color my-4"></div>
+
+<a href="community.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Community</span>
+</a>
+<a href="leaderboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">emoji_events</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Leaderboard</span>
+</a>
+<a href="chatbot.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Chatbot</span>
+</a>
+</nav>
+</div>
+
+<!-- Mobile Menu Footer -->
+<div class="p-4 border-t border-border-color dark:border-dark-border-color">
+<a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-semibold">Logout</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Main Content -->
+<main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+<!-- Page Header -->
+<div class="text-center mb-8 fade-in">
+<div class="flex items-center justify-center gap-3 mb-4">
+<span class="text-6xl animate-pulse">🧠</span>
+<h1 class="text-4xl md:text-5xl font-bold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</h1>
+</div>
+<p class="text-lg text-text-secondary dark:text-dark-text-secondary">Upload patient data for AI-powered diagnosis and treatment recommendations</p>
+</div>
+
+<!-- Progress Steps -->
+<div class="mb-10">
+<div class="max-w-3xl mx-auto">
+<div class="flex items-center justify-between">
+<div id="stepIndicator1" class="flex flex-col items-center flex-1">
+<div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg mb-2 text-2xl">
+📤
+</div>
+<span class="text-sm font-semibold text-primary">Upload Files</span>
+</div>
+<div class="flex-1 h-1 bg-border-color dark:bg-dark-border-color mx-4 mt-[-20px]">
+<div id="progressLine1" class="h-full bg-primary transition-all duration-500" style="width: 0%"></div>
+</div>
+<div id="stepIndicator2" class="flex flex-col items-center flex-1">
+<div class="w-12 h-12 rounded-full bg-border-color dark:bg-dark-border-color text-text-secondary dark:text-dark-text-secondary flex items-center justify-center font-bold mb-2 text-2xl">
+🔬
+</div>
+<span class="text-sm font-semibold text-text-secondary dark:text-dark-text-secondary">Analyze</span>
+</div>
+<div class="flex-1 h-1 bg-border-color dark:bg-dark-border-color mx-4 mt-[-20px]">
+<div id="progressLine2" class="h-full bg-primary transition-all duration-500" style="width: 0%"></div>
+</div>
+<div id="stepIndicator3" class="flex flex-col items-center flex-1">
+<div class="w-12 h-12 rounded-full bg-border-color dark:bg-dark-border-color text-text-secondary dark:text-dark-text-secondary flex items-center justify-center font-bold mb-2 text-2xl">
+✅
+</div>
+<span class="text-sm font-semibold text-text-secondary dark:text-dark-text-secondary">Results</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+<!-- Main Content Area -->
+<div class="lg:col-span-2">
+
+<!-- Step 1: Upload Files -->
+<div id="step1" class="step-content active space-y-6">
+
+<!-- Patient Information -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-lg border border-border-color dark:border-dark-border-color p-6 slide-in">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span>
+<span>Patient Information</span>
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">
+Full Name <span class="text-red-500">*</span>
+</label>
+<input type="text" id="patientName" placeholder="Enter patient name" class="w-full px-4 py-2.5 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all text-text-primary dark:text-dark-text-primary">
+</div>
+<div>
+<label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">
+Age <span class="text-red-500">*</span>
+</label>
+<input type="number" id="patientAge" placeholder="Age" class="w-full px-4 py-2.5 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all text-text-primary dark:text-dark-text-primary">
+</div>
+<div>
+<label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">Gender</label>
+<select id="patientGender" class="w-full px-4 py-2.5 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all text-text-primary dark:text-dark-text-primary">
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">Case ID</label>
+<input type="text" id="caseId" readonly class="w-full px-4 py-2.5 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-xl text-text-primary dark:text-dark-text-primary" value="DX-2024-001">
+</div>
+</div>
+</div>
+
+<!-- File Uploads -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-lg border border-border-color dark:border-dark-border-color p-6">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">folder_open</span>
+<span>Upload Medical Files</span>
+</h2>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">All three file types are required for comprehensive AI diagnosis</p>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-background dark:bg-dark-background rounded-full">
+<span class="material-symbols-outlined text-primary text-sm">insert_drive_file</span>
+<span id="totalFilesCount" class="text-sm font-bold text-text-primary dark:text-dark-text-primary">0/3</span>
+<span class="text-xs text-text-secondary dark:text-dark-text-secondary">uploaded</span>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+<!-- X-Ray Upload -->
+<div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border-2 border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300">
+<div class="text-center mb-3">
+<div class="w-12 h-12 bg-blue-600 dark:bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined text-white text-2xl">radiology</span>
+</div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-1">X-Ray Images</h3>
+<span class="text-xs px-3 py-1 bg-blue-600 dark:bg-blue-500 text-white rounded-full font-bold">Required</span>
+</div>
+<div id="xrayDropZone" class="border-2 border-dashed border-blue-400 dark:border-blue-600 rounded-xl p-4 text-center bg-white dark:bg-dark-card transition-all duration-300 hover:border-blue-600 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/10 cursor-pointer group">
+<input type="file" id="xrayInput" accept="image/*,.dcm" class="hidden">
+<div id="xrayPrompt">
+<div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-2xl">add_photo_alternate</span>
+</div>
+<p class="text-sm font-bold text-text-primary dark:text-dark-text-primary mb-1">Click or drag</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">PNG, JPG, DICOM</p>
+</div>
+<div id="xrayPreview" class="hidden text-left"></div>
+</div>
+</div>
+
+<!-- Lab Results Upload -->
+<div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl border-2 border-purple-200 dark:border-purple-800 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300">
+<div class="text-center mb-3">
+<div class="w-12 h-12 bg-purple-600 dark:bg-purple-500 rounded-xl flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined text-white text-2xl">science</span>
+</div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-1">Lab Results</h3>
+<span class="text-xs px-3 py-1 bg-purple-600 dark:bg-purple-500 text-white rounded-full font-bold">Required</span>
+</div>
+<div id="labDropZone" class="border-2 border-dashed border-purple-400 dark:border-purple-600 rounded-xl p-4 text-center bg-white dark:bg-dark-card transition-all duration-300 hover:border-purple-600 dark:hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/10 cursor-pointer group">
+<input type="file" id="labInput" accept=".pdf,.doc,.docx,image/*" class="hidden">
+<div id="labPrompt">
+<div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-400 text-2xl">description</span>
+</div>
+<p class="text-sm font-bold text-text-primary dark:text-dark-text-primary mb-1">Click or drag</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">PDF, DOC, Image</p>
+</div>
+<div id="labPreview" class="hidden text-left"></div>
+</div>
+</div>
+
+<!-- Medical History Upload -->
+<div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border-2 border-green-200 dark:border-green-800 hover:border-green-400 dark:hover:border-green-600 transition-all duration-300">
+<div class="text-center mb-3">
+<div class="w-12 h-12 bg-green-600 dark:bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined text-white text-2xl">history_edu</span>
+</div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-1">Medical History</h3>
+<span class="text-xs px-3 py-1 bg-green-600 dark:bg-green-500 text-white rounded-full font-bold">Required</span>
+</div>
+<div id="historyDropZone" class="border-2 border-dashed border-green-400 dark:border-green-600 rounded-xl p-4 text-center bg-white dark:bg-dark-card transition-all duration-300 hover:border-green-600 dark:hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-900/10 cursor-pointer group">
+<input type="file" id="historyInput" accept=".pdf,.doc,.docx,.txt" class="hidden">
+<div id="historyPrompt">
+<div class="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400 text-2xl">note_add</span>
+</div>
+<p class="text-sm font-bold text-text-primary dark:text-dark-text-primary mb-1">Click or drag</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">PDF, DOC, TXT</p>
+</div>
+<div id="historyPreview" class="hidden text-left"></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- Continue Button -->
+<button onclick="startAnalysis()" id="continueBtn" class="w-full bg-primary hover:bg-primary-dark text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+<span>Continue to Analysis</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+
+</div>
+
+<!-- Step 2: Analysis -->
+<div id="step2" class="step-content">
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-lg border border-border-color dark:border-dark-border-color p-12 text-center">
+<div class="flex flex-col items-center gap-6">
+<div class="w-24 h-24 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+<div>
+<h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Analyzing Medical Data</h2>
+<p class="text-text-secondary dark:text-dark-text-secondary mb-4">Our AI is processing your files with advanced algorithms</p>
+<p id="analysisStatus" class="text-sm font-bold text-primary">Initializing...</p>
+</div>
+<div class="w-full max-w-lg">
+<div class="bg-border-color dark:bg-dark-border-color rounded-full h-3 overflow-hidden">
+<div id="analysisProgress" class="bg-primary h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+</div>
+<p id="analysisPercent" class="text-sm text-text-secondary dark:text-dark-text-secondary mt-2">0% Complete</p>
+</div>
+
+<!-- Live Metrics -->
+<div class="grid grid-cols-3 gap-4 w-full max-w-lg mt-6">
+<div class="p-4 bg-background dark:bg-dark-background rounded-xl">
+<div id="filesAnalyzed" class="text-3xl font-bold text-primary mb-1">0</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Files Analyzed</div>
+</div>
+<div class="p-4 bg-background dark:bg-dark-background rounded-xl">
+<div id="patternsFound" class="text-3xl font-bold text-primary mb-1">0</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Patterns Found</div>
+                           </div>
+<div class="p-4 bg-background dark:bg-dark-background rounded-xl">
+<div id="confidenceScore" class="text-3xl font-bold text-primary mb-1">0%</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Confidence</div>
+                           </div>
+                           </div>
+</div>
+</div>
+</div>
+
+<!-- Step 3: Results -->
+<div id="step3" class="step-content space-y-6">
+
+<!-- Primary Diagnosis -->
+<div class="bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl shadow-lg p-8">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-6xl">✅</span>
+<div>
+<h2 class="text-2xl font-bold">Diagnosis Complete</h2>
+<p class="text-sm opacity-90">AI Analysis Completed Successfully</p>
+</div>
+</div>
+<div class="bg-white/10 rounded-xl p-6 mt-6">
+<p class="text-sm opacity-90 mb-2">Primary Diagnosis</p>
+<h3 class="text-3xl font-bold mb-4">Moderate Periodontitis</h3>
+<p class="text-sm opacity-95 leading-relaxed">Affecting lower molars with evidence of bone loss and pocket formation around the affected teeth. Professional intervention and improved oral hygiene practices are required.</p>
+<div class="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/20">
+<div>
+<div class="text-3xl font-bold">87%</div>
+<div class="text-xs opacity-90">Confidence</div>
+</div>
+<div>
+<div class="text-3xl font-bold">Moderate</div>
+<div class="text-xs opacity-90">Severity</div>
+</div>
+<div>
+<div class="text-3xl font-bold">Yes</div>
+<div class="text-xs opacity-90">Treatment Needed</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Detailed Analysis -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-lg border border-border-color dark:border-dark-border-color p-6">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span>Detailed Analysis</span>
+</h2>
+
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 bg-background dark:bg-dark-background rounded-xl">
+<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-2xl">radiology</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-2 flex items-center gap-2">
+X-Ray Analysis
+<span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">Analyzed</span>
+</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Detected bone loss around lower molars with visible pocket formation. Radiographic evidence indicates moderate periodontal disease progression with compromised bone support.</p>
+</div>
+</div>
+
+<div class="flex items-start gap-4 p-4 bg-background dark:bg-dark-background rounded-xl">
+<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-400 text-2xl">science</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-2 flex items-center gap-2">
+Lab Results
+<span class="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">Analyzed</span>
+</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Elevated inflammatory markers consistent with active periodontal infection. White blood cell count slightly elevated indicating immune system response to bacterial presence.</p>
+</div>
+</div>
+
+<div class="flex items-start gap-4 p-4 bg-background dark:bg-dark-background rounded-xl">
+<div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400 text-2xl">history_edu</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-2 flex items-center gap-2">
+Patient History
+<span class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full">Analyzed</span>
+</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Irregular dental visits over past 3 years. No previous periodontal treatment. Risk factors include smoking history and family history of periodontal disease.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Treatment Plan -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-lg border border-border-color dark:border-dark-border-color p-6">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_hospital</span>
+<span>Recommended Treatment Plan</span>
+</h2>
+
+<div class="space-y-4">
+<!-- Immediate -->
+<div class="p-5 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-600 rounded-xl">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400 text-2xl">priority_high</span>
+<div class="flex-1">
+<h3 class="font-bold text-red-900 dark:text-red-300 mb-3">Immediate Action (Within 1 Week)</h3>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-red-800 dark:text-red-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Schedule professional scaling and root planing</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-red-800 dark:text-red-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Begin prescribed antibiotic treatment</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-red-800 dark:text-red-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Start antimicrobial mouthwash (twice daily)</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Short-term -->
+<div class="p-5 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-600 rounded-xl">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-2xl">event</span>
+<div class="flex-1">
+<h3 class="font-bold text-blue-900 dark:text-blue-300 mb-3">Short-term Care (1-3 Months)</h3>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-blue-800 dark:text-blue-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Brush with soft-bristled toothbrush 2x daily</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-blue-800 dark:text-blue-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Floss daily using proper technique</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-blue-800 dark:text-blue-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Follow-up examination in 6 weeks</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-blue-800 dark:text-blue-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Monitor pocket depth reduction</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Long-term -->
+<div class="p-5 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 dark:border-green-600 rounded-xl">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400 text-2xl">health_and_safety</span>
+<div class="flex-1">
+<h3 class="font-bold text-green-900 dark:text-green-300 mb-3">Long-term Maintenance</h3>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-green-800 dark:text-green-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Professional cleaning every 3-4 months</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-green-800 dark:text-green-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Annual periodontal assessment</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-green-800 dark:text-green-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Lifestyle modifications (smoking cessation, diet)</span>
+</li>
+<li class="flex items-center gap-2 text-sm text-green-800 dark:text-green-300">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Maintain excellent oral hygiene routine</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-4">
+<button onclick="downloadReport()" class="flex-1 bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">download</span>
+<span>Download Report</span>
+</button>
+<button onclick="shareResults()" class="flex-1 bg-card dark:bg-dark-card hover:bg-background dark:hover:bg-dark-background border border-border-color dark:border-dark-border-color font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">share</span>
+<span>Share Results</span>
+</button>
+<button onclick="newDiagnosis()" class="flex-1 bg-card dark:bg-dark-card hover:bg-background dark:hover:bg-dark-background border border-border-color dark:border-dark-border-color font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">refresh</span>
+<span>New Case</span>
+                    </button>
+</div>
+
+</div>
+
+</div>
+
+<!-- Sidebar -->
+<aside class="lg:col-span-1">
+
+<!-- AI Features (Sticky) -->
+<div class="sticky top-24 space-y-6">
+<div class="bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl shadow-lg p-6">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="text-2xl">⭐</span>
+<span>AI Capabilities</span>
+</h3>
+<ul class="space-y-3">
+<li class="flex items-start gap-2">
+<span class="text-sm mt-0.5">✓</span>
+<span class="text-sm opacity-95">Deep learning pattern recognition</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-sm mt-0.5">✓</span>
+<span class="text-sm opacity-95">Multi-modal data fusion</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-sm mt-0.5">✓</span>
+<span class="text-sm opacity-95">Evidence-based recommendations</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-sm mt-0.5">✓</span>
+<span class="text-sm opacity-95">Real-time processing</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-sm mt-0.5">✓</span>
+<span class="text-sm opacity-95">99.2% diagnostic accuracy</span>
+</li>
+</ul>
+<div class="mt-4 pt-4 border-t border-white/20 text-center">
+<div class="text-3xl font-bold mb-1">24/7</div>
+<div class="text-xs opacity-90">Available Support</div>
+</div>
+</div>
+
+<!-- Help Card -->
+<div class="mt-6">
+<div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6">
+<h3 class="text-lg font-bold text-blue-900 dark:text-blue-300 mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined">tips_and_updates</span>
+<span>Pro Tip</span>
+</h3>
+<p class="text-sm text-blue-800 dark:text-blue-300 mb-3">Upload high-quality X-rays for more accurate diagnosis. Multiple views improve analysis accuracy.</p>
+<ul class="space-y-2 text-sm text-blue-800 dark:text-blue-300">
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+<span>Clear, high-resolution images</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+<span>Multiple radiographic views</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+<span>Recent lab results (< 30 days)</span>
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+<!-- JavaScript -->
+
+<script src="../js/aIdiagnosis.js"></script>
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body>
+</html>

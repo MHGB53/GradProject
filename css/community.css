@@ -1,0 +1,111 @@
+
+      :root {
+        --primary-50: #f0fdfa;
+        --primary-100: #ccfbf1;
+        --primary-200: #99f6e4;
+        --primary-300: #5eead4;
+        --primary-400: #2dd4bf;
+        --primary-500: #14b8a6;
+        --primary-600: #0d9488;
+        --primary-700: #0f766e;
+        --primary-800: #115e59;
+        --primary-900: #134e4a;
+        --primary-950: #042f2e;
+        --secondary-50: #f8fafc;
+        --secondary-100: #f1f5f9;
+        --secondary-200: #e2e8f0;
+        --secondary-300: #cbd5e1;
+        --secondary-400: #94a3b8;
+        --secondary-500: #64748b;
+        --secondary-600: #475569;
+        --secondary-700: #334155;
+        --secondary-800: #1e293b;
+        --secondary-900: #0f172a;
+        --secondary-950: #020617;
+        --accent-color: #66CDAA;
+      }
+      .hover-accent:hover {
+      color: var(--accent-color);
+      transition: color 0.3s ease;
+    }
+    .feature-link {
+      position: relative;
+      transition: color 0.2s;
+    }
+    .feature-link-text {
+      position: relative;
+      display: inline-block;
+    }
+    .feature-link-text::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.2s;
+    }
+    .feature-link:hover .feature-link-text::after {
+      width: 100%;
+    }
+    .feature-dialog {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: -2.2rem;
+      transform: translateX(-50%);
+      background: white;
+      color: #134e4a;
+      border: 1px solid var(--accent-color);
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    
+    [class*="dark"] .feature-dialog {
+      background: #1a2c26;
+      color: #ffffff;
+      border-color: #5bcba7;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .feature-link:hover .feature-dialog {
+      display: block;
+    }
+    .feature-link {
+      position: relative;
+      transition: color 0.2s;
+    }
+    .feature-link-text {
+      position: relative;
+      display: inline-block;
+    }
+    .feature-link-text::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.2s;
+    }
+    .feature-link:hover .feature-link-text::after {
+      width: 100%;
+    }
+    
+
+    html.dark {
+        color-scheme: dark;
+    }
+    
+    .dark .feature-dialog {
+        background-color: #1a2c26;
+        color: #ffffff;
+        border-color: #5bcba7;
+    }
+    

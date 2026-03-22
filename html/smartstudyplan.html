@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dentor - Smart Study Plan</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5bcba7",
+              "primary-light": "#7ad9b8",
+              "primary-dark": "#3db896",
+              "background": "#f6f8f7",
+              "dark-background": "#0f1f1b",
+              "text-primary": "#000000",
+              "dark-text-primary": "#ffffff",
+              "text-secondary": "#4b5563",
+              "dark-text-secondary": "#b0b9c3",
+              "border-color": "#e5e7eb",
+              "dark-border-color": "#374151",
+              "card": "#ffffff",
+              "dark-card": "#1a2c26",
+              "input-bg": "#f3f4f6",
+              "dark-input-bg": "#1f3a34",
+              "foreground": "#ffffff",
+              "dark-foreground": "#1a2c26",
+              "muted": "#9ca3af",
+              "dark-muted": "#6b7280",
+            },
+            fontFamily: {
+              "display": ["Manrope", "Interstate", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "13": "3.25rem",
+              "15": "3.75rem",
+              "128": "32rem"
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" }
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" }
+              }
+            },
+            boxShadow: {
+              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
+              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
+              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
+            }
+          },
+        },
+      }
+</script>
+
+<link rel="stylesheet" href="../css/smartstudyplan.css">
+</head>
+<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
+<div class="flex flex-col min-h-screen">
+<header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-4">
+    <a class="flex items-center" href="Home.html">
+        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+      </a>
+</div>
+<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html" data-page="dashboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary-light to-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-0 right-0 w-3 h-3 bg-white/30 rounded-full blur-sm animate-pulse"></div>
+</a>
+<div class="relative group">
+<button class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Features</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</span>
+</button>
+
+<!-- Features Dropdown -->
+<div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+<div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
+</div>
+<div class="p-2">
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📚</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📝</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🏥</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📄</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
+</div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🦷</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray diagnostic training</p>
+</div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🧠</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="community.html" data-page="community">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">groups</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Community</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="leaderboard.html" data-page="leaderboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">emoji_events</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html" data-page="chatbot">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<!-- Dark Mode Toggle -->
+<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
+</button>
+<div class="relative">
+<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
+</button>
+<div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
+</div>
+<div class="max-h-64 overflow-y-auto">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now available for practice.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has been updated with new materials.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-border-color dark:border-dark-border-color">
+<button class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
+</div>
+</div>
+</div>
+<div class="relative">
+<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></button>
+<div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></div>
+<div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">john.doe@email.com</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a href="Profile.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">person</span>
+<span class="text-sm font-medium">My Profile</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span class="text-sm font-medium">Progress Report</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">bookmark</span>
+<span class="text-sm font-medium">Saved Items</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="text-sm font-medium">Help & Support</span>
+</a>
+</div>
+<div class="border-t border-border-color dark:border-dark-border-color py-2">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="text-sm font-medium">Sign Out</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+
+<!-- Mobile Sidebar Menu -->
+<div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+<div id="mobileSidebarPanel" class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
+<div class="flex flex-col h-full">
+<!-- Mobile Menu Header -->
+<div class="p-6 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
+<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+
+<!-- Mobile Menu Content -->
+<div class="flex-1 overflow-y-auto p-4">
+<nav class="space-y-2">
+<a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Dashboard</span>
+</a>
+
+<!-- Features Section -->
+<div class="pt-2">
+<p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI Features</p>
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📚</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📝</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🏥</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Cases</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Real scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📄</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p>
+</div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🦷</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray training</p>
+</div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🧠</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Case analysis</p>
+</div>
+</a>
+</div>
+
+<div class="border-t border-border-color dark:border-dark-border-color my-4"></div>
+
+<a href="community.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Community</span>
+</a>
+<a href="leaderboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">emoji_events</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Leaderboard</span>
+</a>
+<a href="chatbot.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Chatbot</span>
+</a>
+</nav>
+</div>
+
+<!-- Mobile Menu Footer -->
+<div class="p-4 border-t border-border-color dark:border-dark-border-color">
+<a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-semibold">Logout</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<main class="flex-1 px-4 py-8 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-7xl">
+<div class="mb-12 text-center">
+<h1 class="text-4xl font-extrabold tracking-tight text-text-primary dark:text-dark-text-primary sm:text-5xl lg:text-6xl">
+              Your AI-Powered <span class="text-primary">Smart Study Plan</span>
+</h1>
+<p class="mx-auto mt-6 max-w-2xl text-lg text-text-secondary dark:text-dark-text-secondary">
+              Generate a personalized weekly study schedule with our AI. Assess your proficiency in each subject to tailor the plan perfectly to your needs and goals.
+            </p>
+</div>
+<div class="mb-12 rounded-xl border border-border-color bg-card p-8 shadow-subtle dark:border-dark-border-color dark:bg-dark-card fade-in">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">Self-Assessment</h3>
+<div class="flex items-center gap-2 text-sm text-text-secondary dark:text-dark-text-secondary">
+<span class="material-symbols-outlined text-lg">info</span>
+<span>Rate your proficiency (1-5)</span>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+<div class="slide-in">
+<div class="flex items-center justify-between mb-2">
+<label class="flex items-center gap-2 text-sm font-medium leading-6 text-text-primary dark:text-dark-text-primary" for="anatomy-slider">
+<span class="material-symbols-outlined text-primary">science</span>
+Anatomy
+</label>
+<span id="anatomy-value" class="text-sm font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">3</span>
+</div>
+<input class="h-2 w-full cursor-pointer appearance-none rounded-full bg-primary/20 accent-primary dark:bg-primary/30" id="anatomy-slider" max="5" min="1" type="range" value="3"/>
+<div class="flex justify-between text-xs text-text-secondary dark:text-dark-text-secondary mt-1">
+<span>Beginner</span>
+<span>Expert</span>
+</div>
+</div>
+<div class="slide-in" style="animation-delay: 0.1s;">
+<div class="flex items-center justify-between mb-2">
+<label class="flex items-center gap-2 text-sm font-medium leading-6 text-text-primary dark:text-dark-text-primary" for="radiology-slider">
+<span class="material-symbols-outlined text-yellow-600">medical_services</span>
+Radiology
+</label>
+<span id="radiology-value" class="text-sm font-bold text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30 px-2 py-1 rounded-full">3</span>
+</div>
+<input class="h-2 w-full cursor-pointer appearance-none rounded-full bg-yellow-400/20 accent-yellow-600 dark:bg-yellow-400/30" id="radiology-slider" max="5" min="1" type="range" value="3"/>
+<div class="flex justify-between text-xs text-text-secondary dark:text-dark-text-secondary mt-1">
+<span>Beginner</span>
+<span>Expert</span>
+</div>
+</div>
+<div class="slide-in" style="animation-delay: 0.2s;">
+<div class="flex items-center justify-between mb-2">
+<label class="flex items-center gap-2 text-sm font-medium leading-6 text-text-primary dark:text-dark-text-primary" for="pathology-slider">
+<span class="material-symbols-outlined text-red-600">biotech</span>
+Pathology
+</label>
+<span id="pathology-value" class="text-sm font-bold text-red-600 bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded-full">3</span>
+</div>
+<input class="h-2 w-full cursor-pointer appearance-none rounded-full bg-red-400/20 accent-red-600 dark:bg-red-400/30" id="pathology-slider" max="5" min="1" type="range" value="3"/>
+<div class="flex justify-between text-xs text-text-secondary dark:text-dark-text-secondary mt-1">
+<span>Beginner</span>
+<span>Expert</span>
+</div>
+</div>
+<div class="slide-in" style="animation-delay: 0.3s;">
+<div class="flex items-center justify-between mb-2">
+<label class="flex items-center gap-2 text-sm font-medium leading-6 text-text-primary dark:text-dark-text-primary" for="pharmacology-slider">
+<span class="material-symbols-outlined text-blue-600">medication</span>
+Pharmacology
+</label>
+<span id="pharmacology-value" class="text-sm font-bold text-blue-600 bg-blue-100 dark:bg-blue-900/30 px-2 py-1 rounded-full">3</span>
+</div>
+<input class="h-2 w-full cursor-pointer appearance-none rounded-full bg-blue-400/20 accent-blue-600 dark:bg-blue-400/30" id="pharmacology-slider" max="5" min="1" type="range" value="3"/>
+<div class="flex justify-between text-xs text-text-secondary dark:text-dark-text-secondary mt-1">
+<span>Beginner</span>
+<span>Expert</span>
+</div>
+</div>
+</div>
+<div class="mt-8 flex flex-col items-center gap-4">
+<button id="generatePlanBtn" class="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-105 hover:bg-primary-dark active:scale-95">
+<span id="generateIcon" class="material-symbols-outlined">auto_awesome</span>
+<span id="generateText" class="truncate">Generate Plan</span>
+</button>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary text-center">
+Click to generate your personalized study schedule based on your assessment
+</p>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+<div class="lg:col-span-2 fade-in" style="animation-delay: 0.2s;">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
+<h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+AI-Generated Weekly Schedule
+</h3>
+<div class="flex items-center gap-2 text-sm bg-primary/10 dark:bg-primary/20 px-3 py-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-lg">schedule</span>
+<span class="text-text-secondary dark:text-dark-text-secondary">Total: <span class="font-bold text-primary">15 hrs</span></span>
+</div>
+</div>
+
+<!-- Subject Filter Pills -->
+<div class="flex flex-wrap gap-2 mb-4">
+<button class="subject-filter active flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all bg-primary/20 text-primary-dark dark:bg-primary/30 dark:text-primary border-2 border-primary" data-subject="all">
+<span class="material-symbols-outlined text-sm">apps</span>
+All Subjects
+</button>
+<button class="subject-filter flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all bg-primary/10 text-primary-dark dark:bg-primary/20 dark:text-primary border-2 border-transparent hover:border-primary" data-subject="anatomy">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+Anatomy
+</button>
+<button class="subject-filter flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all bg-yellow-400/10 text-yellow-800 dark:bg-yellow-400/20 dark:text-yellow-200 border-2 border-transparent hover:border-yellow-600" data-subject="radiology">
+<span class="w-2 h-2 rounded-full bg-yellow-600"></span>
+Radiology
+</button>
+<button class="subject-filter flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all bg-red-400/10 text-red-800 dark:bg-red-400/20 dark:text-red-200 border-2 border-transparent hover:border-red-600" data-subject="pathology">
+<span class="w-2 h-2 rounded-full bg-red-600"></span>
+Pathology
+</button>
+<button class="subject-filter flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all bg-blue-400/10 text-blue-800 dark:bg-blue-400/20 dark:text-blue-200 border-2 border-transparent hover:border-blue-600" data-subject="pharmacology">
+<span class="w-2 h-2 rounded-full bg-blue-600"></span>
+Pharmacology
+</button>
+</div>
+
+<div class="overflow-hidden rounded-xl border border-border-color bg-card shadow-subtle dark:border-dark-border-color dark:bg-dark-card">
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-border-color dark:divide-dark-border-color">
+<thead class="bg-background dark:bg-dark-background">
+<tr>
+<th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary sm:pl-6" scope="col">Time</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary" scope="col">Sunday</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary" scope="col">Monday</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary" scope="col">Tuesday</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary" scope="col">Wednesday</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary" scope="col">Thursday</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary" scope="col">Friday</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-text-primary dark:text-dark-text-primary" scope="col">Saturday</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-color dark:divide-dark-border-color">
+<!-- 12 PM Row -->
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+12 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30" colspan="5">
+<div class="text-center text-xs">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="anatomy" data-time="12 PM" data-day="Friday">
+<span class="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary-dark dark:bg-primary/30 dark:text-primary transition-all hover:scale-105 hover:shadow-md">Anatomy</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Anatomy Session</div>
+<div class="text-gray-300">Friday, 12:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="12 PM" data-day="Saturday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+</tr>
+
+<!-- 1 PM Row -->
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+1 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30" colspan="5">
+<div class="text-center text-xs">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="radiology" data-time="1 PM" data-day="Friday">
+<span class="inline-block rounded-full bg-yellow-400/20 px-3 py-1 text-xs font-semibold text-yellow-800 dark:bg-yellow-400/30 dark:text-yellow-200 transition-all hover:scale-105 hover:shadow-md">Radiology</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Radiology Session</div>
+<div class="text-gray-300">Friday, 1:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="pathology" data-time="1 PM" data-day="Saturday">
+<span class="inline-block rounded-full bg-red-400/20 px-3 py-1 text-xs font-semibold text-red-800 dark:bg-red-400/30 dark:text-red-200 transition-all hover:scale-105 hover:shadow-md">Pathology</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Pathology Session</div>
+<div class="text-gray-300">Saturday, 1:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+</tr>
+
+<!-- 2 PM Row -->
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+2 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30" colspan="5">
+<div class="text-center text-xs">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="2 PM" data-day="Friday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="2 PM" data-day="Saturday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+</tr>
+
+<!-- 3 PM Row -->
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+3 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30" colspan="5">
+<div class="text-center text-xs">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="3 PM" data-day="Friday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="3 PM" data-day="Saturday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+</tr>
+
+<!-- 4 PM Row -->
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+4 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30" colspan="5">
+<div class="text-center text-xs">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="4 PM" data-day="Friday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="4 PM" data-day="Saturday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+</tr>
+
+<!-- 5 PM Row -->
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+5 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="anatomy" data-time="5 PM" data-day="Sunday">
+<span class="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary-dark dark:bg-primary/30 dark:text-primary transition-all hover:scale-105 hover:shadow-md">Anatomy</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Anatomy Session</div>
+<div class="text-gray-300">Sunday, 5:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="radiology" data-time="5 PM" data-day="Monday">
+<span class="inline-block rounded-full bg-yellow-400/20 px-3 py-1 text-xs font-semibold text-yellow-800 dark:bg-yellow-400/30 dark:text-yellow-200 transition-all hover:scale-105 hover:shadow-md">Radiology</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Radiology Session</div>
+<div class="text-gray-300">Monday, 5:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="pathology" data-time="5 PM" data-day="Tuesday">
+<span class="inline-block rounded-full bg-red-400/20 px-3 py-1 text-xs font-semibold text-red-800 dark:bg-red-400/30 dark:text-red-200 transition-all hover:scale-105 hover:shadow-md">Pathology</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Pathology Session</div>
+<div class="text-gray-300">Tuesday, 5:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="pharmacology" data-time="5 PM" data-day="Wednesday">
+<span class="inline-block rounded-full bg-blue-400/20 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-400/30 dark:text-blue-200 transition-all hover:scale-105 hover:shadow-md">Pharmacology</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Pharmacology Session</div>
+<div class="text-gray-300">Wednesday, 5:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="anatomy" data-time="5 PM" data-day="Thursday">
+<span class="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary-dark dark:bg-primary/30 dark:text-primary transition-all hover:scale-105 hover:shadow-md">Anatomy</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Anatomy Session</div>
+<div class="text-gray-300">Thursday, 5:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="5 PM" data-day="Friday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="5 PM" data-day="Saturday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+</tr>
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+6 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary-dark dark:bg-primary/30 dark:text-primary transition-transform hover:scale-105">Anatomy</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-yellow-400/20 px-3 py-1 text-xs font-semibold text-yellow-800 dark:bg-yellow-400/30 dark:text-yellow-200 transition-transform hover:scale-105">Radiology</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-red-400/20 px-3 py-1 text-xs font-semibold text-red-800 dark:bg-red-400/30 dark:text-red-200 transition-transform hover:scale-105">Pathology</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-blue-400/20 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-400/30 dark:text-blue-200 transition-transform hover:scale-105">Pharmacology</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary-dark dark:bg-primary/30 dark:text-primary transition-transform hover:scale-105">Anatomy</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="6 PM" data-day="Friday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="6 PM" data-day="Saturday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+</tr>
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+7 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary-dark dark:bg-primary/30 dark:text-primary transition-transform hover:scale-105">Anatomy</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-yellow-400/20 px-3 py-1 text-xs font-semibold text-yellow-800 dark:bg-yellow-400/30 dark:text-yellow-200 transition-transform hover:scale-105">Radiology</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-red-400/20 px-3 py-1 text-xs font-semibold text-red-800 dark:bg-red-400/30 dark:text-red-200 transition-transform hover:scale-105">Pathology</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-blue-400/20 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-400/30 dark:text-blue-200 transition-transform hover:scale-105">Pharmacology</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer"><span class="inline-block rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary-dark dark:bg-primary/30 dark:text-primary transition-transform hover:scale-105">Anatomy</span></td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="7 PM" data-day="Friday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="7 PM" data-day="Saturday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+</tr>
+<tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-text-secondary dark:text-dark-text-secondary sm:pl-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">schedule</span>
+8 PM
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="8 PM" data-day="Sunday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="8 PM" data-day="Monday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="8 PM" data-day="Tuesday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="8 PM" data-day="Wednesday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary" data-time="8 PM" data-day="Thursday">
+<div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">—</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="radiology" data-time="8 PM" data-day="Friday">
+<span class="inline-block rounded-full bg-yellow-400/20 px-3 py-1 text-xs font-semibold text-yellow-800 dark:bg-yellow-400/30 dark:text-yellow-200 transition-all hover:scale-105 hover:shadow-md">Radiology</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Radiology Session</div>
+<div class="text-gray-300">Friday, 8:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group" data-subject="pathology" data-time="8 PM" data-day="Saturday">
+<span class="inline-block rounded-full bg-red-400/20 px-3 py-1 text-xs font-semibold text-red-800 dark:bg-red-400/30 dark:text-red-200 transition-all hover:scale-105 hover:shadow-md">Pathology</span>
+<div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl">
+<div class="font-bold mb-1">Pathology Session</div>
+<div class="text-gray-300">Saturday, 8:00 PM</div>
+<div class="text-gray-300 mt-1">Duration: 1 hour</div>
+<div class="text-green-400 text-xs mt-1 flex items-center gap-1">
+<span>✓</span> Click to mark complete
+</div>
+<div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Schedule Summary Statistics -->
+<div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-background/50 dark:bg-dark-background/50 rounded-xl">
+<div class="text-center">
+<div class="flex items-center justify-center gap-2 mb-1">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-semibold text-text-primary dark:text-dark-text-primary">Anatomy</span>
+</div>
+<div class="text-xl font-bold text-primary">9 hrs</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">60% time</div>
+</div>
+<div class="text-center">
+<div class="flex items-center justify-center gap-2 mb-1">
+<span class="w-3 h-3 rounded-full bg-yellow-600"></span>
+<span class="text-xs font-semibold text-text-primary dark:text-dark-text-primary">Radiology</span>
+</div>
+<div class="text-xl font-bold text-yellow-600">4 hrs</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">27% time</div>
+</div>
+<div class="text-center">
+<div class="flex items-center justify-center gap-2 mb-1">
+<span class="w-3 h-3 rounded-full bg-red-600"></span>
+<span class="text-xs font-semibold text-text-primary dark:text-dark-text-primary">Pathology</span>
+</div>
+<div class="text-xl font-bold text-red-600">1 hr</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">7% time</div>
+</div>
+<div class="text-center">
+<div class="flex items-center justify-center gap-2 mb-1">
+<span class="w-3 h-3 rounded-full bg-blue-600"></span>
+<span class="text-xs font-semibold text-text-primary dark:text-dark-text-primary">Pharmacology</span>
+</div>
+<div class="text-xl font-bold text-blue-600">1 hr</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">7% time</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1 fade-in" style="animation-delay: 0.4s;">
+<div class="sticky top-28 space-y-6">
+<!-- AI Insights Card -->
+<div class="rounded-xl border border-border-color bg-card p-6 shadow-subtle dark:border-dark-border-color dark:bg-dark-card">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-2xl text-primary">psychology</span>
+<h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">AI Insights</h3>
+</div>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-6">Based on your self-assessment, the AI has prioritized Pharmacology and Radiology, allocating more study time to these subjects. Consider focusing on Pathology to improve your understanding.</p>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded-lg bg-primary/5 dark:bg-primary/10">
+<span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Focus Areas</span>
+<span class="text-xs font-bold text-primary">2 subjects</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-background dark:bg-dark-background">
+<span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Study Days</span>
+<span class="text-xs font-bold text-primary">5 days/week</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-primary/5 dark:bg-primary/10">
+<span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Efficiency</span>
+<span class="text-xs font-bold text-primary">Optimized</span>
+</div>
+</div>
+</div>
+
+<!-- Quick Stats Card -->
+<div class="rounded-xl border border-border-color bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 p-6 shadow-subtle dark:border-dark-border-color">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-xl text-primary">trending_up</span>
+<h4 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Progress Potential</h4>
+</div>
+<div class="text-center">
+<div class="text-4xl font-extrabold text-primary mb-2">+35%</div>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Expected improvement with this plan</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script src="../js/smartstudyplan.js"></script>
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body></html>

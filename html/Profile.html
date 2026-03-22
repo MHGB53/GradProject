@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>Dentor - User Profile</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5bcba7",
+              "primary-light": "#7ad9b8",
+              "primary-dark": "#3db896",
+              "background": "#f6f8f7",
+              "dark-background": "#0f1f1b",
+              "text-primary": "#000000",
+              "dark-text-primary": "#ffffff",
+              "text-secondary": "#4b5563",
+              "dark-text-secondary": "#b0b9c3",
+              "border-color": "#e5e7eb",
+              "dark-border-color": "#374151",
+              "card": "#ffffff",
+              "dark-card": "#1a2c26",
+              "input-bg": "#f3f4f6",
+              "dark-input-bg": "#1f3a34",
+              "foreground": "#ffffff",
+              "dark-foreground": "#1a2c26",
+              "muted": "#9ca3af",
+              "dark-muted": "#6b7280",
+            },
+            fontFamily: {
+              "display": ["Manrope", "Interstate", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "13": "3.25rem",
+              "15": "3.75rem",
+              "128": "32rem"
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" }
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" }
+              }
+            },
+            boxShadow: {
+              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
+              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
+              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
+            }
+          },
+        },
+      }
+</script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+</head>
+<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
+<div class="flex min-h-screen w-full flex-col">
+<header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-4">
+    <a class="flex items-center" href="Home.html">
+        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+      </a>
+</div>
+<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+<a class="nav-link active px-6 py-3 text-sm font-semibold text-white bg-primary rounded-full shadow-lg shadow-primary/30 transition-all duration-500 relative group overflow-hidden" href="#" data-page="dashboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary-light to-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-0 right-0 w-3 h-3 bg-white/30 rounded-full blur-sm animate-pulse"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="features">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Features</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="community">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">groups</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Community</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="leaderboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">emoji_events</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="#" data-page="chatbot">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<!-- Dark Mode Toggle -->
+<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
+</button>
+<div class="relative">
+<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
+</button>
+<div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
+</div>
+<div class="max-h-64 overflow-y-auto">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now available for practice.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has been updated with new materials.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Assignment Reminder</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Periodontics case study assignment due tomorrow.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">3 hours ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Achievement Unlocked</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">You've completed 10 quizzes this week! Great job!</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Yesterday</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-border-color dark:border-dark-border-color">
+<button class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
+</div>
+</div>
+</div>
+<div class="relative">
+<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></button>
+<div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></div>
+<div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">john.doe@email.com</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">person</span>
+<span class="text-sm font-medium">My Profile</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span class="text-sm font-medium">Progress Report</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">bookmark</span>
+<span class="text-sm font-medium">Saved Items</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="text-sm font-medium">Help & Support</span>
+</a>
+</div>
+<div class="border-t border-border-color dark:border-dark-border-color py-2">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="text-sm font-medium">Sign Out</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<h2 class="text-4xl font-extrabold text-text-primary dark:text-dark-text-primary mb-8 tracking-tight text-center">My Profile</h2>
+<div class="grid grid-cols-12 gap-8 max-w-5xl mx-auto">
+<div class="col-span-12 lg:col-span-12 space-y-8">
+<!-- Profile Header Card -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-8 hover:shadow-lg transition-shadow duration-300">
+<div class="flex flex-col lg:flex-row items-center gap-8">
+<div class="flex-shrink-0">
+<div class="group relative">
+<div class="h-32 w-32 rounded-full bg-cover bg-center bg-no-repeat shadow-lg border-4 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJZrFGpVBzV4cM_-cunL23HDrL3iRmEvUbkHtBw8ZT8zQMPDEcxFsGSAUGCA6PWIf3dLDuu_AZAS9ayFw5Z0bXEsyhjnnldRQ9WGRzVrvLDSx3uY-iscvfttL-Hx6SDl0OsLTDlIx_lAaZ44vEg4e-yDgb8Avkf_6qDHYuYVNQlhqswQJJLemoyiG9umk6Y7wEwmLdQAl0xClM88AzzzTBeaUBITEr6ruqKinYi7zUU6DXLQOMzn_lYCD3RZH_zc56gfsnUqB_QA");'></div>
+<button class="absolute inset-0 flex items-center justify-center rounded-full bg-black/60 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:opacity-100 backdrop-blur-sm">
+<span class="material-symbols-outlined text-2xl">photo_camera</span>
+</button>
+</div>
+</div>
+<div class="flex-grow text-center lg:text-left">
+<h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Sophia Clark</h3>
+<p class="text-lg text-text-secondary dark:text-dark-text-secondary flex items-center justify-center lg:justify-start gap-2 mb-4">
+<span class="material-symbols-outlined text-sm">email</span>
+sophia.clark@university.edu
+</p>
+<div class="flex flex-wrap gap-2 justify-center lg:justify-start mb-4">
+<span class="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2 text-sm font-bold text-primary">
+<span class="material-symbols-outlined text-lg">school</span>
+Level 3 – Advanced
+</span>
+<span class="inline-flex items-center gap-2 rounded-full bg-green-100 dark:bg-green-900/30 px-4 py-2 text-sm font-bold text-green-700 dark:text-green-400">
+<span class="material-symbols-outlined text-lg">verified</span>
+Verified Student
+</span>
+</div>
+<div class="text-sm text-text-secondary dark:text-dark-text-secondary">
+Student ID: U-DENT-12345
+</div>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Account Information Card -->
+<div class="rounded-2xl bg-card p-8 shadow-subtle dark:bg-dark-card hover:shadow-lg transition-shadow duration-300">
+<h3 class="mb-6 text-xl font-bold text-text-primary dark:text-dark-text-primary text-center">Account Information</h3>
+<div class="space-y-4">
+<div>
+<label class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Full Name</label>
+<p class="mt-1 text-base text-text-primary dark:text-dark-text-primary">Sophia Clark</p>
+</div>
+<div>
+<label class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">University Email</label>
+<p class="mt-1 text-base text-text-primary dark:text-dark-text-primary">sophia.clark@university.edu</p>
+</div>
+<div>
+<label class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Student ID</label>
+<p class="mt-1 text-base text-text-primary dark:text-dark-text-primary">U-DENT-12345</p>
+</div>
+<div>
+<label class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Current Level</label>
+<p class="mt-1 text-base text-text-primary dark:text-dark-text-primary">Level 3 – Advanced</p>
+</div>
+</div>
+</div>
+
+<!-- Security Settings Card -->
+<div class="rounded-2xl bg-card p-8 shadow-subtle dark:bg-dark-card hover:shadow-lg transition-shadow duration-300">
+<h3 class="mb-6 text-xl font-bold text-text-primary dark:text-dark-text-primary text-center">Security Settings</h3>
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary" for="current-password">Current Password</label>
+<input class="form-input mt-1 block w-full rounded-xl border-border-color bg-background py-3 px-4 text-text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 dark:border-dark-border-color dark:bg-dark-card/50 dark:text-dark-text-primary dark:placeholder-dark-text-secondary" id="current-password" placeholder="Enter current password" type="password"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary" for="new-password">New Password</label>
+<input class="form-input mt-1 block w-full rounded-xl border-border-color bg-background py-3 px-4 text-text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 dark:border-dark-border-color dark:bg-dark-card/50 dark:text-dark-text-primary dark:placeholder-dark-text-secondary" id="new-password" placeholder="Enter new password" type="password"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary" for="confirm-password">Confirm New Password</label>
+<input class="form-input mt-1 block w-full rounded-xl border-border-color bg-background py-3 px-4 text-text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 dark:border-dark-border-color dark:bg-dark-card/50 dark:text-dark-text-primary dark:placeholder-dark-text-secondary" id="confirm-password" placeholder="Confirm new password" type="password"/>
+</div>
+<div class="flex justify-end">
+<button class="rounded-xl bg-primary px-6 py-3 text-sm font-bold text-white shadow-md transition-colors hover:bg-[#4cc39f]" type="submit">
+                        Update
+                      </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script src="../js/Profile.js"></script>
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body></html>

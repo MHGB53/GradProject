@@ -1,0 +1,58 @@
+
+    body {
+        font-family: 'Manrope', sans-serif;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .slide-in {
+        animation: slideIn 0.6s ease-out;
+    }
+
+    /* Dropdown */
+    .dropdown {
+        display: none;
+    }
+
+    .dropdown.active {
+        display: block;
+        animation: fadeIn 0.2s ease-out;
+    }
+
+    /* Staggered animations */
+    .case-card {
+        animation: fadeIn 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    .case-card:nth-child(1) { animation-delay: 0.05s; }
+    .case-card:nth-child(2) { animation-delay: 0.1s; }
+    .case-card:nth-child(3) { animation-delay: 0.15s; }
+    .case-card:nth-child(4) { animation-delay: 0.2s; }
+    .case-card:nth-child(5) { animation-delay: 0.25s; }
+    .case-card:nth-child(6) { animation-delay: 0.3s; }
+  

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dentor - AI Exam Generator</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5bcba7",
+              "primary-light": "#7ad9b8",
+              "primary-dark": "#3db896",
+              "background": "#f6f8f7",
+              "dark-background": "#0f1f1b",
+              "text-primary": "#000000",
+              "dark-text-primary": "#ffffff",
+              "text-secondary": "#4b5563",
+              "dark-text-secondary": "#b0b9c3",
+              "border-color": "#e5e7eb",
+              "dark-border-color": "#374151",
+              "card": "#ffffff",
+              "dark-card": "#1a2c26",
+              "input-bg": "#f3f4f6",
+              "dark-input-bg": "#1f3a34",
+              "foreground": "#ffffff",
+              "dark-foreground": "#1a2c26",
+              "muted": "#9ca3af",
+              "dark-muted": "#6b7280",
+            },
+            fontFamily: {
+              "display": ["Manrope", "Interstate", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "13": "3.25rem",
+              "15": "3.75rem",
+              "128": "32rem"
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" }
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" }
+              }
+            },
+            boxShadow: {
+              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
+              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
+              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
+            }
+          },
+        },
+      }
+</script>
+
+<link rel="stylesheet" href="../css/examgen.css">
+</head>
+<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
+<div class="flex flex-col min-h-screen">
+<header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-4">
+    <a class="flex items-center" href="Home.html">
+        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+      </a>
+</div>
+<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html" data-page="dashboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary-light to-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-0 right-0 w-3 h-3 bg-white/30 rounded-full blur-sm animate-pulse"></div>
+</a>
+<div class="relative group">
+<button class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Features</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</span>
+</button>
+
+<!-- Features Dropdown -->
+<div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+<div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
+</div>
+<div class="p-2">
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📚</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📝</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🏥</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📄</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
+</div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🦷</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray diagnostic training</p>
+</div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🧠</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="community.html" data-page="community">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">groups</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Community</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="leaderboard.html" data-page="leaderboard">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">emoji_events</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html" data-page="chatbot">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<!-- Dark Mode Toggle -->
+<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
+</button>
+<div class="relative">
+<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
+</button>
+<div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
+</div>
+<div class="max-h-64 overflow-y-auto">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Exam Generated</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your Anatomy exam is ready for review.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has been updated with new materials.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-border-color dark:border-dark-border-color">
+<button class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
+</div>
+</div>
+</div>
+<div class="relative">
+<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></button>
+<div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></div>
+<div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">john.doe@email.com</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a href="Profile.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">person</span>
+<span class="text-sm font-medium">My Profile</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span class="text-sm font-medium">Progress Report</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">bookmark</span>
+<span class="text-sm font-medium">Saved Items</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="text-sm font-medium">Help & Support</span>
+</a>
+</div>
+<div class="border-t border-border-color dark:border-dark-border-color py-2">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="text-sm font-medium">Sign Out</span>
+</a>
+</div>
+</div>
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+<!-- Mobile Sidebar Menu -->
+<div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+<div id="mobileSidebarPanel" class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
+<div class="flex flex-col h-full">
+<div class="p-6 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
+<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4">
+<nav class="space-y-2">
+<a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Dashboard</span>
+</a>
+<div class="pt-2">
+<p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI Features</p>
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📚</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized schedules</p></div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📝</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice exams</p></div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🏥</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Cases</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Real scenarios</p></div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📄</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p></div>
+</a>
+<a href="aIradiologyquestiongenerator.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🦷</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Radiology Questions</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray training</p></div>
+</a>
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🧠</span>
+<div><p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Case analysis</p></div>
+</a>
+</div>
+<div class="border-t border-border-color dark:border-dark-border-color my-4"></div>
+<a href="community.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Community</span>
+</a>
+<a href="leaderboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">emoji_events</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Leaderboard</span>
+</a>
+<a href="chatbot.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Chatbot</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-border-color dark:border-dark-border-color">
+<a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-semibold">Logout</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<main class="container mx-auto px-6 lg:px-10 py-12 flex-grow">
+<div class="text-center mb-12 fade-in">
+<h2 class="text-4xl md:text-5xl font-extrabold text-text-primary dark:text-dark-text-primary flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-5xl text-primary">quiz</span>
+AI Exam Generator
+</h2>
+<p class="mt-4 text-lg text-text-secondary dark:text-dark-text-secondary">Create smart, adaptive quizzes tailored to your study progress.</p>
+</div>
+
+<!-- Grid Layout with Sidebar -->
+<div class="grid lg:grid-cols-4 gap-8 mb-12">
+<!-- Sidebar -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Quick Stats Card -->
+<div class="bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-2xl p-6 border border-border-color dark:border-dark-border-color slide-in">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<h4 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Quick Stats</h4>
+</div>
+<div class="space-y-4">
+<div class="text-center p-4 bg-card dark:bg-dark-card rounded-lg">
+<div class="text-3xl font-bold text-primary mb-1">12</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Exams Created</div>
+</div>
+<div class="text-center p-4 bg-card dark:bg-dark-card rounded-lg">
+<div class="text-3xl font-bold text-primary mb-1">85%</div>
+<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Avg Score</div>
+</div>
+</div>
+</div>
+
+<!-- Tips Card -->
+<div class="bg-primary-light dark:bg-primary/20 rounded-2xl p-6 slide-in" style="animation-delay: 0.1s;">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-2xl text-primary">tips_and_updates</span>
+<div>
+<h4 class="font-bold text-text-primary dark:text-dark-text-primary mb-2">Pro Tip</h4>
+<p class="text-sm text-primary-dark dark:text-primary-light/90">Mix different question types for comprehensive exam preparation. Include case studies to test application knowledge!</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Main Content -->
+<div class="lg:col-span-3">
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-8 mb-8 fade-in">
+<h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">settings</span>
+Exam Configuration
+</h3>
+
+<div class="space-y-8">
+<!-- Subject and Lectures Selection -->
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary mb-2 flex items-center gap-2" for="subject">
+<span class="material-symbols-outlined text-sm">book</span>
+Subject
+</label>
+<select class="w-full bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition text-text-primary dark:text-dark-text-primary" id="subject">
+<option value="">Select a subject</option>
+<option value="anatomy">Anatomy</option>
+<option value="pharmacology">Pharmacology</option>
+<option value="pathology">Pathology</option>
+<option value="radiology">Radiology</option>
+</select>
+</div>
+
+<!-- Lectures Selection -->
+<div id="lecturesSection" class="hidden">
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">list</span>
+Select Lectures to Include
+<span class="text-xs text-text-secondary dark:text-dark-text-secondary font-normal ml-auto">(<span id="selectedCount">0</span> selected)</span>
+</label>
+<div class="bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg p-4 max-h-80 overflow-y-auto">
+<div class="flex items-center gap-3 p-3 mb-3 rounded-lg bg-primary/10 border border-primary">
+<input class="h-5 w-5 rounded border-border-color dark:border-dark-border-color text-primary focus:ring-primary" id="selectAll" type="checkbox"/>
+<label class="text-sm font-semibold text-primary cursor-pointer flex-1" for="selectAll">Select All Lectures</label>
+</div>
+<div id="lecturesList" class="space-y-2">
+<!-- Lectures will be populated here dynamically -->
+</div>
+</div>
+</div>
+</div>
+
+<!-- Difficulty and Question Count -->
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">speed</span>
+Difficulty Level
+</label>
+<div class="grid grid-cols-3 gap-2 rounded-lg bg-background dark:bg-dark-background p-1 border border-border-color dark:border-dark-border-color">
+<button class="difficulty-btn px-4 py-2 text-sm rounded-md text-text-secondary dark:text-dark-text-secondary hover:bg-primary/10 transition-all duration-200" data-level="beginner">Beginner</button>
+<button class="difficulty-btn px-4 py-2 text-sm rounded-md bg-primary text-white font-semibold shadow-sm" data-level="intermediate">Intermediate</button>
+<button class="difficulty-btn px-4 py-2 text-sm rounded-md text-text-secondary dark:text-dark-text-secondary hover:bg-primary/10 transition-all duration-200" data-level="advanced">Advanced</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary mb-2 flex items-center gap-2" for="questions">
+<span class="material-symbols-outlined text-sm">numbers</span>
+Number of Questions
+</label>
+<div class="flex items-center gap-4">
+<input class="flex-1 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition text-text-primary dark:text-dark-text-primary" id="questions" max="50" min="5" type="number" value="10"/>
+<span class="text-sm text-text-secondary dark:text-dark-text-secondary whitespace-nowrap">(5-50)</span>
+</div>
+<input type="range" min="5" max="50" value="10" id="questionSlider" class="w-full mt-2">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-text-secondary dark:text-dark-text-secondary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">checklist</span>
+Question Types
+</label>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-4 rounded-lg bg-background dark:bg-dark-background border-2 border-primary hover:shadow-md transition-all duration-200">
+<input checked="" class="h-5 w-5 rounded border-border-color dark:border-dark-border-color text-primary focus:ring-primary" id="mcq" type="checkbox"/>
+<span class="material-symbols-outlined text-primary">radio_button_checked</span>
+<label class="text-sm font-medium text-text-primary dark:text-dark-text-primary cursor-pointer flex-1" for="mcq">Multiple Choice</label>
+<span class="text-xs text-text-secondary dark:text-dark-text-secondary bg-primary/10 px-2 py-1 rounded-full">Popular</span>
+</div>
+<div class="flex items-center gap-3 p-4 rounded-lg bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color hover:border-primary hover:shadow-md transition-all duration-200">
+<input class="h-5 w-5 rounded border-border-color dark:border-dark-border-color text-primary focus:ring-primary" id="tf" type="checkbox"/>
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">check_circle</span>
+<label class="text-sm font-medium text-text-primary dark:text-dark-text-primary cursor-pointer flex-1" for="tf">True / False</label>
+</div>
+<div class="flex items-center gap-3 p-4 rounded-lg bg-background dark:bg-dark-background border-2 border-primary hover:shadow-md transition-all duration-200">
+<input checked="" class="h-5 w-5 rounded border-border-color dark:border-dark-border-color text-primary focus:ring-primary" id="short-answer" type="checkbox"/>
+<span class="material-symbols-outlined text-primary">edit_note</span>
+<label class="text-sm font-medium text-text-primary dark:text-dark-text-primary cursor-pointer flex-1" for="short-answer">Short Answer</label>
+</div>
+<div class="flex items-center gap-3 p-4 rounded-lg bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color hover:border-primary hover:shadow-md transition-all duration-200">
+<input class="h-5 w-5 rounded border-border-color dark:border-dark-border-color text-primary focus:ring-primary" id="image-based" type="checkbox"/>
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">image</span>
+<label class="text-sm font-medium text-text-primary dark:text-dark-text-primary cursor-pointer flex-1" for="image-based">Image-Based</label>
+<span class="text-xs text-text-secondary dark:text-dark-text-secondary bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 px-2 py-1 rounded-full">Advanced</span>
+</div>
+<div class="flex items-center gap-3 p-4 rounded-lg bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color hover:border-primary hover:shadow-md transition-all duration-200">
+<input class="h-5 w-5 rounded border-border-color dark:border-dark-border-color text-primary focus:ring-primary" id="case-study" type="checkbox"/>
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">clinical_notes</span>
+<label class="text-sm font-medium text-text-primary dark:text-dark-text-primary cursor-pointer flex-1" for="case-study">Case Study</label>
+<span class="text-xs text-text-secondary dark:text-dark-text-secondary bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-2 py-1 rounded-full">Pro</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-10 pt-8 border-t border-border-color dark:border-dark-border-color">
+<button id="generateBtn" class="w-full flex items-center justify-center gap-3 py-4 px-6 rounded-xl bg-primary text-white font-bold text-lg hover:bg-primary-dark transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span id="btnText">Generate Exam</span>
+</button>
+<p class="text-center text-xs text-text-secondary dark:text-dark-text-secondary mt-3">AI will create personalized questions based on your preferences</p>
+</div>
+</div>
+
+<!-- Recent Exams Section -->
+<div class="mb-12">
+<h3 class="text-2xl font-bold mb-6 text-center text-text-primary dark:text-dark-text-primary">Recent Exams</h3>
+<div class="grid md:grid-cols-2 gap-6">
+<!-- Recent Exam 1 -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 border border-border-color dark:border-dark-border-color hover:border-primary transition-all">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
+<span class="material-symbols-outlined text-2xl text-primary">quiz</span>
+</span>
+<div>
+<h4 class="font-bold text-text-primary dark:text-dark-text-primary">Anatomy Exam</h4>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intermediate • 10 Questions</p>
+</div>
+</div>
+<span class="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">85%</span>
+</div>
+<div class="flex items-center justify-between text-xs text-text-secondary dark:text-dark-text-secondary">
+<span>Completed 2 days ago</span>
+<button class="text-primary hover:underline font-semibold">View Results</button>
+</div>
+</div>
+
+<!-- Recent Exam 2 -->
+<div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 border border-border-color dark:border-dark-border-color hover:border-primary transition-all">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30">
+<span class="material-symbols-outlined text-2xl text-blue-600 dark:text-blue-400">quiz</span>
+</span>
+<div>
+<h4 class="font-bold text-text-primary dark:text-dark-text-primary">Pharmacology Exam</h4>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Advanced • 15 Questions</p>
+</div>
+</div>
+<span class="text-xs font-semibold px-3 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">72%</span>
+</div>
+<div class="flex items-center justify-between text-xs text-text-secondary dark:text-dark-text-secondary">
+<span>Completed 5 days ago</span>
+<button class="text-primary hover:underline font-semibold">View Results</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+© 2024 Dentor. All rights reserved. Master your dental studies.
+</div>
+</footer>
+</div>
+
+<script src="../js/examgen.js"></script>
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body></html>

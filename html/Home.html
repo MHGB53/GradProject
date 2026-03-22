@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<title>Dentor - The Next Generation Dental Student Helper</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5bcba7",
+              "primary-light": "#7ad9b8",
+              "primary-dark": "#3db896",
+              "background": "#f6f8f7",
+              "dark-background": "#0f1f1b",
+              "text-primary": "#000000",
+              "dark-text-primary": "#ffffff",
+              "text-secondary": "#4b5563",
+              "dark-text-secondary": "#b0b9c3",
+              "border-color": "#e5e7eb",
+              "dark-border-color": "#374151",
+              "card": "#ffffff",
+              "dark-card": "#1a2c26",
+              "input-bg": "#f3f4f6",
+              "dark-input-bg": "#1f3a34",
+              "foreground": "#ffffff",
+              "dark-foreground": "#1a2c26",
+              "muted": "#9ca3af",
+              "dark-muted": "#6b7280",
+            },
+            fontFamily: {
+              "display": ["Manrope", "Interstate", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "13": "3.25rem",
+              "15": "3.75rem",
+              "128": "32rem"
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" }
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" }
+              }
+            },
+            boxShadow: {
+              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
+              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
+              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
+            }
+          },
+        },
+      }
+</script>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="relative w-full overflow-x-hidden">
+<header class="absolute top-0 left-0 z-10 w-full px-4 py-0 sm:px-6 lg:px-8 -mt-32">
+<div class="container mx-auto">
+<div class="flex items-center justify-between pt-4">
+<a class="flex items-center" href="#">
+  <img src="../assets/Logo.png" id="logoImage" alt="Dentor Logo" class="h-80 w-auto">
+</a>
+<div class="flex-1 flex justify-center">
+<nav class="hidden md:flex items-center space-x-12 -ml-40">
+<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold" href="#">Features</a>
+<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold" href="#">Why Dentor</a>
+<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold" href="#">About us</a>
+</nav>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded-full transition-all duration-300">
+          Login
+        </button>
+</div>
+</div>
+</header>
+<main>
+<section class="relative min-h-screen flex items-center justify-center text-center text-white p-4">
+<div class="absolute inset-0 bg-gradient-to-br from-[#1e0c3b] via-[#161022] to-[#0b1b2e] z-0"></div>
+<div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCisq9zorbk5Q-QIArxewrwcuMIONyF3qjcp_kWE0kLTUbEXo2FVrg8chYfegUkqzGJVXIQO-C7GFjhSIohvIc5SnUWzr7obaeOhvI4lp3oOcJVt065-KDlHXRg2-Hq4PteZyAlqAl6qqJ2q7y7ac5AtARw09sEGE-PCQ_7YiWfq4tRjs5jA9vtqKbd64LOaZUFsmkAMpSuGlNs9dSMqfi-al15hoYlPJitRDjI7R_YV9Cn3hPF7LJPr1wjp-fhdi3gxM4Kcg65fQ');"></div>
+<div class="absolute inset-0 bg-black/30"></div>
+<div class="relative z-10 flex flex-col items-center space-y-8 max-w-4xl mx-auto">
+<div class="p-4 bg-primary/20 border border-primary/50 rounded-full text-sm">
+<span class="font-bold">New:</span> AI-powered diagnostics now available!
+          </div>
+<h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
+            Dentor – The Next Generation Dental Student Helper
+          </h1>
+<p class="text-lg md:text-xl text-white/80 max-w-2xl">
+            AI-powered platform that makes studying dentistry easier, smarter, and more interactive.
+          </p>
+<div class="flex items-center space-x-4">
+<button class="bg-primary hover:bg-primary/90 text-white font-bold text-lg py-4 px-8 rounded-full transition-all duration-300 shadow-lg shadow-primary/30">
+              Get Started
+            </button>
+<button class="border-2 border-white/50 hover:border-white text-white font-bold text-lg py-4 px-8 rounded-full transition-colors">
+              Learn More
+            </button>
+</div>
+</div>
+</section>
+<section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 relative overflow-hidden">
+<!-- Background Decorations -->
+<div class="absolute top-0 left-0 w-full h-full opacity-5">
+<div class="absolute top-20 left-10 w-32 h-32 bg-primary rounded-full blur-3xl"></div>
+<div class="absolute bottom-20 right-10 w-40 h-40 bg-primary-light rounded-full blur-3xl"></div>
+<div class="absolute top-1/2 left-1/3 w-24 h-24 bg-primary-dark rounded-full blur-2xl"></div>
+</div>
+
+<div class="container mx-auto relative z-10">
+<div class="text-center mb-20">
+<h2 class="text-4xl sm:text-5xl font-bold tracking-tighter text-slate-900 dark:text-white mb-6">Discover Our Features</h2>
+<p class="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Everything you need to excel in your dental studies, all in one place.</p>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Feature 1: AI Radiology -->
+<div class="group h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-3 hover:scale-[1.02] relative overflow-hidden h-full flex flex-col backdrop-blur-sm">
+<!-- Animated background gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Floating elements -->
+<div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<!-- Enhanced icon container -->
+<div class="relative mb-6">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-5 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-lg">radiology</span>
+</div>
+<div class="absolute -top-2 -right-2 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">AI Radiology Diagnosis</h3>
+<p class="text-slate-600 dark:text-slate-400 flex-1 leading-relaxed">Get instant AI-powered insights on radiology images with 98% accuracy and detailed explanations.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Feature 2: Smart Testing -->
+<div class="group h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-3 hover:scale-[1.02] relative overflow-hidden h-full flex flex-col backdrop-blur-sm">
+<!-- Animated background gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Floating elements -->
+<div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<!-- Enhanced icon container -->
+<div class="relative mb-6">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-5 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-lg">quiz</span>
+</div>
+<div class="absolute -top-2 -right-2 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">Quizzes &amp; Smart Testing</h3>
+<p class="text-slate-600 dark:text-slate-400 flex-1 leading-relaxed">Test your knowledge with interactive quizzes and adaptive testing that adjusts to your learning pace.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Feature 3: Chatbot -->
+<div class="group h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-3 hover:scale-[1.02] relative overflow-hidden h-full flex flex-col backdrop-blur-sm">
+<!-- Animated background gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Floating elements -->
+<div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<!-- Enhanced icon container -->
+<div class="relative mb-6">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-5 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-lg">chat</span>
+</div>
+<div class="absolute -top-2 -right-2 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">Chatbot</h3>
+<p class="text-slate-600 dark:text-slate-400 flex-1 leading-relaxed">Access an intelligent chatbot with detailed explanations and personalized learning assistance.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Feature 4: Study Planner -->
+<div class="group h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-3 hover:scale-[1.02] relative overflow-hidden h-full flex flex-col backdrop-blur-sm">
+<!-- Animated background gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Floating elements -->
+<div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<!-- Enhanced icon container -->
+<div class="relative mb-6">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-5 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-lg">edit_calendar</span>
+</div>
+<div class="absolute -top-2 -right-2 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">Study Planner</h3>
+<p class="text-slate-600 dark:text-slate-400 flex-1 leading-relaxed">Plan your studies effectively with our intuitive study planner that adapts to your schedule and goals.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Feature 5: Student Community -->
+<div class="group h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-3 hover:scale-[1.02] relative overflow-hidden h-full flex flex-col backdrop-blur-sm">
+<!-- Animated background gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Floating elements -->
+<div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<!-- Enhanced icon container -->
+<div class="relative mb-6">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-5 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-lg">groups</span>
+</div>
+<div class="absolute -top-2 -right-2 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">Student Community</h3>
+<p class="text-slate-600 dark:text-slate-400 flex-1 leading-relaxed">Connect with fellow dental students and share knowledge in our vibrant learning community.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Feature 6: Interactive Case Studies -->
+<div class="group h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-3 hover:scale-[1.02] relative overflow-hidden h-full flex flex-col backdrop-blur-sm">
+<!-- Animated background gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Floating elements -->
+<div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<!-- Enhanced icon container -->
+<div class="relative mb-6">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-5 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-lg">school</span>
+</div>
+<div class="absolute -top-2 -right-2 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">Interactive Case Studies</h3>
+<p class="text-slate-600 dark:text-slate-400 flex-1 leading-relaxed">Learn from real-world scenarios with our interactive case studies and practical simulations.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 relative overflow-hidden">
+<!-- Background Pattern -->
+<div class="absolute inset-0 opacity-30">
+<div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #5BCBA7 1px, transparent 0); background-size: 40px 40px;"></div>
+</div>
+
+<div class="container mx-auto relative z-10">
+<div class="text-center mb-20">
+<h2 class="text-4xl sm:text-5xl font-bold tracking-tighter text-slate-900 dark:text-white mb-6">Why Choose Dentor?</h2>
+<p class="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">We're building the future of dental education, one feature at a time.</p>
+</div>
+
+<!-- Cards Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group relative h-full">
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl border border-slate-200 dark:border-slate-700 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/30 h-full flex flex-col">
+<div class="relative overflow-hidden rounded-2xl mb-8 aspect-video">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('../assets/photo.avif');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="bg-white/90 backdrop-blur-sm rounded-xl p-4">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">psychology</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900">AI Technology</h4>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-primary transition-colors">Save study time with AI assistance.</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed flex-1">Our AI-powered tools help you study more efficiently, identifying your weak spots and suggesting relevant materials, saving you valuable time.</p>
+</div>
+</div>
+</div>
+
+<!-- Card 2 -->
+<div class="group relative h-full">
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl border border-slate-200 dark:border-slate-700 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/30 h-full flex flex-col">
+<div class="relative overflow-hidden rounded-2xl mb-8 aspect-video">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('../assets/photo1.jpg');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="bg-white/90 backdrop-blur-sm rounded-xl p-4">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">psychology_alt</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900">Interactive Learning</h4>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-primary transition-colors">Interactive and engaging learning.</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed flex-1">Experience a new level of interactive learning with our engaging quizzes, 3D models, and collaborative study tools.</p>
+</div>
+</div>
+</div>
+
+<!-- Card 3 -->
+<div class="group relative h-full">
+<div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl border border-slate-200 dark:border-slate-700 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/30 h-full flex flex-col">
+<div class="relative overflow-hidden rounded-2xl mb-8 aspect-video">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBO2r0P7Gtg7NmixKLJ2AMoHTJI2rVjl2PKrLZbdiczoqTmandruN-zhXSFSAn4zVruXRiz2U7Hvz4T4TYfTNlEOaHQbtoV_LkwNrStO2u210jlNY5Ntbj7O22xAZWGkwDaIZDIAhHfbYCpcBWsBWb6dWXiIRi0VHAmKArlzeivOF7PIUXgxRh67q9--sq6ykAlgSVub5nB_uuEB3FaLi4MIrH20SZBS_XMuwhb4nZkfoit_aZL5bWE1W8hcrU7w1XzFpLNv1Y-Cw');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="bg-white/90 backdrop-blur-sm rounded-xl p-4">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">school</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900">Complete Platform</h4>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-primary transition-colors">All-in-one platform for dentistry students.</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed flex-1">Access all the resources you need in one place, from AI diagnosis and question banks to community support and study planning.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- About Us Section -->
+<section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
+<!-- Background Decorations -->
+<div class="absolute inset-0 opacity-5">
+<div class="absolute top-20 left-10 w-40 h-40 bg-primary rounded-full blur-3xl"></div>
+<div class="absolute bottom-20 right-10 w-32 h-32 bg-primary-light rounded-full blur-3xl"></div>
+<div class="absolute top-1/2 left-1/3 w-24 h-24 bg-primary-dark rounded-full blur-2xl"></div>
+<div class="absolute top-1/4 right-1/4 w-16 h-16 bg-primary rounded-full blur-xl"></div>
+</div>
+
+<div class="container mx-auto relative z-10">
+<div class="text-center mb-24">
+<div class="inline-block px-6 py-3 bg-primary/10 rounded-full mb-6">
+<span class="text-primary font-semibold text-sm uppercase tracking-wider">About Us</span>
+</div>
+<h2 class="text-5xl sm:text-6xl font-bold tracking-tighter text-slate-900 dark:text-white mb-8">About Dentor</h2>
+<p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed">We're revolutionizing dental education through cutting-edge AI technology and innovative learning solutions that empower the next generation of dental professionals.</p>
+</div>
+
+<!-- Mission Section -->
+<div class="mb-32">
+<div class="max-w-5xl mx-auto">
+<div class="relative">
+<div class="absolute -top-8 -left-8 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+<div class="absolute -bottom-8 -right-8 w-24 h-24 bg-primary-light/10 rounded-full blur-xl"></div>
+<div class="relative bg-white dark:bg-slate-800 p-16 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 text-center">
+<h3 class="text-5xl sm:text-6xl font-bold text-slate-900 dark:text-white mb-12 relative">
+Our Mission
+<div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-2 bg-gradient-to-r from-primary to-primary-dark rounded-full"></div>
+</h3>
+<div class="space-y-8 max-w-4xl mx-auto">
+<p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed">
+At <span class="font-bold text-primary text-2xl sm:text-3xl">Dentor</span>, we believe that every dental student deserves access to the most advanced educational tools and resources. Our mission is to democratize dental education by providing AI-powered learning solutions that help students excel in their studies and prepare for successful careers in dentistry.
+</p>
+<p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed">
+We combine the latest in artificial intelligence, machine learning, and educational technology to create an immersive learning experience that adapts to each student's unique needs and learning style.
+</p>
+<div class="mt-12">
+<div class="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full border border-primary/20">
+<span class="material-symbols-outlined text-primary text-2xl">rocket_launch</span>
+<span class="text-lg font-semibold text-primary">Transforming Dental Education</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Team Section -->
+<div class="text-center mb-24">
+<div class="inline-block px-6 py-3 bg-primary/10 rounded-full mb-8">
+<span class="text-primary font-semibold text-sm uppercase tracking-wider">Leadership</span>
+</div>
+<h3 class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-6">Meet Our Team</h3>
+<p class="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed mb-16">Our diverse team of experts in AI, education, and dentistry is dedicated to transforming how students learn.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Team Member 1 -->
+<div class="group relative h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/40 h-full flex flex-col">
+<div class="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<div class="relative mb-6">
+<div class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-2xl mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-white text-4xl">psychology</span>
+</div>
+<div class="absolute -top-1 -right-1 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Dr. Sarah Chen</h4>
+<p class="text-primary font-semibold mb-4 text-lg">Chief AI Officer</p>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed flex-1">Former MIT researcher with 15+ years in AI and machine learning, specializing in educational technology.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Team Member 2 -->
+<div class="group relative h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/40 h-full flex flex-col">
+<div class="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<div class="relative mb-6">
+<div class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-2xl mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-white text-4xl">medical_services</span>
+</div>
+<div class="absolute -top-1 -right-1 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Dr. Michael Rodriguez</h4>
+<p class="text-primary font-semibold mb-4 text-lg">Chief Dental Officer</p>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed flex-1">Board-certified oral surgeon and former Harvard Dental faculty with expertise in dental education.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Team Member 3 -->
+<div class="group relative h-full">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/40 h-full flex flex-col">
+<div class="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+<div class="relative z-10 flex-1 flex flex-col">
+<div class="relative mb-6">
+<div class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-2xl mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-white text-4xl">engineering</span>
+</div>
+<div class="absolute -top-1 -right-1 w-6 h-6 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<div class="flex-1 flex flex-col">
+<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Alex Thompson</h4>
+<p class="text-primary font-semibold mb-4 text-lg">Lead Developer</p>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed flex-1">Full-stack developer with expertise in AI integration and user experience design for educational platforms.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Values Section -->
+<div class="text-center mb-16">
+<div class="inline-block px-6 py-3 bg-primary/10 rounded-full mb-8">
+<span class="text-primary font-semibold text-sm uppercase tracking-wider">Our Values</span>
+</div>
+<h3 class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-16">What Drives Us</h3>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Value 1 -->
+<div class="group relative">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-10 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 hover:border-primary/40">
+<div class="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="relative z-10">
+<div class="relative mb-8">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-6 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-6xl text-primary drop-shadow-lg">lightbulb</span>
+</div>
+<div class="absolute -top-2 -right-2 w-8 h-8 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<h4 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 group-hover:text-primary transition-colors duration-300">Innovation</h4>
+<p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">We constantly push the boundaries of what's possible in dental education, leveraging the latest AI and technology breakthroughs to create revolutionary learning experiences.</p>
+</div>
+</div>
+</div>
+
+<!-- Value 2 -->
+<div class="group relative">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-10 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 hover:border-primary/40">
+<div class="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="relative z-10">
+<div class="relative mb-8">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-6 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-6xl text-primary drop-shadow-lg">favorite</span>
+</div>
+<div class="absolute -top-2 -right-2 w-8 h-8 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<h4 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 group-hover:text-primary transition-colors duration-300">Student Success</h4>
+<p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">Every feature we build is designed with one goal in mind: helping dental students succeed in their studies and future careers through personalized, effective learning.</p>
+</div>
+</div>
+</div>
+
+<!-- Value 3 -->
+<div class="group relative">
+<div class="bg-gradient-to-br from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 p-10 rounded-3xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 hover:border-primary/40">
+<div class="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="relative z-10">
+<div class="relative mb-8">
+<div class="bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-6 rounded-3xl inline-block group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+<span class="material-symbols-outlined text-6xl text-primary drop-shadow-lg">groups</span>
+</div>
+<div class="absolute -top-2 -right-2 w-8 h-8 bg-primary/80 rounded-full animate-pulse"></div>
+</div>
+<h4 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 group-hover:text-primary transition-colors duration-300">Collaboration</h4>
+<p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">We believe in the power of community and collaboration, fostering connections between students, educators, and industry professionals worldwide.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="relative py-20 sm:py-32 px-4 sm:px-6 lg:px-8">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary to-[#2a75d2] opacity-90 dark:opacity-100"></div>
+<div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCisq9zorbk5Q-QIArxewrwcuMIONyF3qjcp_kWE0kLTUbEXo2FVrg8chYfegUkqzGJVXIQO-C7GFjhSIohvIc5SnUWzr7obaeOhvI4lp3oOcJVt065-KDlHXRg2-Hq4PteZyAlqAl6qqJ2q7y7ac5AtARw09sEGE-PCQ_7YiWfq4tRjs5jA9vtqKbd64LOaZUFsmkAMpSuGlNs9dSMqfi-al15hoYlPJitRDjI7R_YV9Cn3hPF7LJPr1wjp-fhdi3gxM4Kcg65fQ');"></div>
+<div class="relative z-10 container mx-auto text-center">
+<h2 class="text-4xl sm:text-5xl font-bold tracking-tighter text-white">Join the future of dental education.</h2>
+<p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto">Start your free trial today and see how Dentor can transform your studies.</p>
+<div class="mt-8">
+<button class="bg-white hover:bg-slate-100 text-primary font-bold text-lg py-4 px-8 rounded-full transition-all duration-300 shadow-lg">
+              Login
+            </button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-background-light dark:bg-background-dark py-12 px-4 sm:px-6 lg:px-8">
+<div class="container mx-auto text-center text-slate-500 dark:text-slate-400">
+<p>© 2024 Dentor. All rights reserved.</p>
+<div class="mt-4 flex justify-center space-x-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</div>
+
+<script>
+
+// Logo mode switching
+document.addEventListener('DOMContentLoaded', function() {
+    const logoImage = document.getElementById('logoImage');
+    if (!logoImage) return;
+    
+    const lightLogo = '../assets/Logo.png';
+    const darkLogo = '../assets/Logo0.png';
+    
+    // Set initial logo based on current dark mode state
+    const isDark = document.documentElement.classList.contains('dark');
+    logoImage.src = isDark ? darkLogo : lightLogo;
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+</script>
+</body></html>
