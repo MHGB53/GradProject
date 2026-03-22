@@ -1,5 +1,4 @@
 
-
 // Mobile Menu
 function initializeMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -7,70 +6,83 @@ function initializeMobileMenu() {
     const mobileSidebarPanel = document.getElementById('mobileSidebarPanel');
     const closeMobileMenu = document.getElementById('closeMobileMenu');
     
-    mobileMenuBtn?.addEventListener('click', () => {
-        mobileSidebar.classList.remove('hidden');
-        setTimeout(() => {
-            mobileSidebarPanel.classList.remove('-translate-x-full');
-        }, 10);
-    });
-    
-    const closeSidebar = () => {
-        mobileSidebarPanel.classList.add('-translate-x-full');
-        setTimeout(() => {
-            mobileSidebar.classList.add('hidden');
-        }, 300);
-    };
-    
-    closeMobileMenu?.addEventListener('click', closeSidebar);
-    mobileSidebar?.addEventListener('click', (e) => {
-        if (e.target === mobileSidebar) {
-            closeSidebar();
+    if (mobileMenuBtn && mobileSidebar && mobileSidebarPanel) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileSidebar.classList.remove('hidden');
+            setTimeout(() => {
+                mobileSidebarPanel.classList.remove('-translate-x-full');
+            }, 10);
+        });
+        
+        const closeSidebar = () => {
+            mobileSidebarPanel.classList.add('-translate-x-full');
+            setTimeout(() => {
+                mobileSidebar.classList.add('hidden');
+            }, 300);
+        };
+        
+        if (closeMobileMenu) {
+            closeMobileMenu.addEventListener('click', closeSidebar);
         }
-    });
+        
+        mobileSidebar.addEventListener('click', (e) => {
+            if (e.target === mobileSidebar) {
+                closeSidebar();
+            }
+        });
+    }
 }
 
-// Dark Mode Toggle - Copied from working dashboard.js
+// Dark Mode Toggle
 function initializeDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const darkModeIcon = document.getElementById('darkModeIcon');
     const logoImage = document.getElementById('logoImage');
     const htmlElement = document.documentElement;
     
-    // Return early if elements don't exist
-    if (!darkModeToggle || !darkModeIcon || !logoImage) {
-        console.warn('Dark mode elements not found');
-        return;
-    }
-    
     // Logo paths
     const lightLogo = '../assets/Logo.png';
     const darkLogo = '../assets/Logo0.png';
     
     // Check for saved preference or default to light mode
-    const currentMode = localStorage.getItem('darkMode') || 'light';
-    if (currentMode === 'dark') {
+    // Using 'theme' key to match other pages
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    // Set initial state
+    if (currentTheme === 'dark') {
         htmlElement.classList.add('dark');
-        darkModeIcon.textContent = 'dark_mode';
-        logoImage.src = darkLogo;
+        if (darkModeIcon) darkModeIcon.textContent = 'dark_mode';
+        if (logoImage) logoImage.src = darkLogo;
+    } else {
+        htmlElement.classList.remove('dark'); // Ensure correct state
+        if (darkModeIcon) darkModeIcon.textContent = 'light_mode';
+        if (logoImage) logoImage.src = lightLogo;
     }
     
-    darkModeToggle.addEventListener('click', function() {
-        htmlElement.classList.toggle('dark');
-        const isDark = htmlElement.classList.contains('dark');
-        
-        // Update icon
-        darkModeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
-        
-        // Update logo with fade effect
-        logoImage.style.opacity = '0';
-        setTimeout(() => {
-            logoImage.src = isDark ? darkLogo : lightLogo;
-            logoImage.style.opacity = '1';
-        }, 150);
-        
-        // Save preference
-        localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
-    });
+    // Toggle event listener
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            htmlElement.classList.toggle('dark');
+            const isDark = htmlElement.classList.contains('dark');
+            
+            // Update icon
+            if (darkModeIcon) {
+                darkModeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
+            }
+            
+            // Update logo with fade effect
+            if (logoImage) {
+                logoImage.style.opacity = '0';
+                setTimeout(() => {
+                    logoImage.src = isDark ? darkLogo : lightLogo;
+                    logoImage.style.opacity = '1';
+                }, 150);
+            }
+            
+            // Save preference
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
 }
 
 // Initialize navigation with active states
@@ -132,109 +144,143 @@ function hideCurrentPageFromDropdown() {
     
     dropdownLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
+        // Hide the link directly, not parent container which might be shared
         if (linkHref === currentPage) {
-            link.parentElement.style.display = 'none';
+            link.style.display = 'none';
         } else {
-            link.parentElement.style.display = '';
+            link.style.display = '';
         }
     });
 }
 
-// Notification and Profile dropdown functionality
-document.addEventListener('DOMContentLoaded', function() {
-    initializeMobileMenu();
-    
-    const notificationBtn = document.getElementById('notificationBtn');
-    const notificationDropdown = document.getElementById('notificationDropdown');
-    const profileBtn = document.getElementById('profileBtn');
-    const profileDropdown = document.getElementById('profileDropdown');
-    
-    // Initialize dark mode
-    initializeDarkMode();
-    
-    // Initialize navigation
-    initializeNavigation();
-    
-    // Hide current page from Features dropdown
-    hideCurrentPageFromDropdown();
-    
-    // Only set up notification/profile handlers if elements exist
-    if (notificationBtn && notificationDropdown) {
-        // Toggle notification dropdown
-        notificationBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            notificationDropdown.classList.toggle('hidden');
-            if (profileDropdown) {
-                profileDropdown.classList.add('hidden'); // Close profile dropdown
-            }
+// Main initialization
+function initCommunity() {
+    try {
+        console.log("Community JS Initializing...");
+        initializeMobileMenu();
+        initializeDarkMode();
+        initializeNavigation();
+        hideCurrentPageFromDropdown();
+        
+        // Notification and Profile dropdowns
+        const notificationBtn = document.getElementById('notificationBtn');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        console.log("Elements found:", {
+            notificationBtn: !!notificationBtn,
+            notificationDropdown: !!notificationDropdown,
+            profileBtn: !!profileBtn,
+            profileDropdown: !!profileDropdown
         });
-    }
-    
-    if (profileBtn && profileDropdown) {
-        // Toggle profile dropdown
-        profileBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profileDropdown.classList.toggle('hidden');
-            if (notificationDropdown) {
-                notificationDropdown.classList.add('hidden'); // Close notification dropdown
-            }
-        });
-    }
-    
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(e) {
+
         if (notificationBtn && notificationDropdown) {
-            if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
-                notificationDropdown.classList.add('hidden');
-            }
+            notificationBtn.addEventListener('click', function(e) {
+                console.log("Notification button clicked");
+                e.preventDefault(); // Prevent default button behavior
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('hidden');
+                if (profileDropdown) {
+                    profileDropdown.classList.add('hidden');
+                }
+            });
         }
+        
         if (profileBtn && profileDropdown) {
-            if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-                profileDropdown.classList.add('hidden');
-            }
+            profileBtn.addEventListener('click', function(e) {
+                console.log("Profile button clicked");
+                e.preventDefault();
+                e.stopPropagation();
+                profileDropdown.classList.toggle('hidden');
+                if (notificationDropdown) {
+                    notificationDropdown.classList.add('hidden');
+                }
+            });
         }
-    });
-    
-    // Close dropdowns when pressing Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            if (notificationDropdown) {
-                notificationDropdown.classList.add('hidden');
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (notificationBtn && notificationDropdown) {
+                if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+                    notificationDropdown.classList.add('hidden');
+                }
             }
-            if (profileDropdown) {
-                profileDropdown.classList.add('hidden');
+            if (profileBtn && profileDropdown) {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.add('hidden');
+                }
             }
+        });
+        
+        // Close dropdowns when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (notificationDropdown) notificationDropdown.classList.add('hidden');
+                if (profileDropdown) profileDropdown.classList.add('hidden');
+            }
+        });
+
+        // File Upload
+        const clearFilesBtn = document.getElementById('clearFiles');
+        if (clearFilesBtn) {
+            clearFilesBtn.addEventListener('click', function() {
+                uploadedFiles = [];
+                updateFilePreview();
+            });
         }
-    });
+        
+        // Setup file inputs if they exist
+        ['photo-upload', 'video-upload', 'pdf-upload', 'doc-upload'].forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('change', function() {
+                    handleFileUpload(this);
+                });
+            }
+        });
+    } catch (error) {
+        console.error("Error in community.js initialization:", error);
+    }
+}
+
+// Check if DOM is already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCommunity);
+} else {
+    initCommunity();
+}
+
+// ===== FILE UPLOAD FUNCTIONALITY =====
+let uploadedFiles = [];
+
+function updateFilePreview() {
+    const filePreview = document.getElementById('filePreview');
+    const fileList = document.getElementById('fileList');
     
-    // ===== FILE UPLOAD FUNCTIONALITY =====
-    let uploadedFiles = [];
+    if (!filePreview || !fileList) return;
     
-    function updateFilePreview() {
-      const filePreview = document.getElementById('filePreview');
-      const fileList = document.getElementById('fileList');
-      
-      if (uploadedFiles.length > 0) {
+    if (uploadedFiles.length > 0) {
         filePreview.classList.remove('hidden');
         fileList.innerHTML = uploadedFiles.map((file, index) => {
-          let icon = 'insert_drive_file';
-          let color = 'text-gray-500';
-          
-          if (file.type.startsWith('image/')) {
-            icon = 'image';
-            color = 'text-green-500';
-          } else if (file.type.startsWith('video/')) {
-            icon = 'videocam';
-            color = 'text-blue-500';
-          } else if (file.type === 'application/pdf') {
-            icon = 'picture_as_pdf';
-            color = 'text-red-500';
-          } else if (file.type.includes('word') || file.type.includes('document')) {
-            icon = 'description';
-            color = 'text-blue-600';
-          }
-          
-          return `
+            let icon = 'insert_drive_file';
+            let color = 'text-gray-500';
+            
+            if (file.type.startsWith('image/')) {
+                icon = 'image';
+                color = 'text-green-500';
+            } else if (file.type.startsWith('video/')) {
+                icon = 'videocam';
+                color = 'text-blue-500';
+            } else if (file.type === 'application/pdf') {
+                icon = 'picture_as_pdf';
+                color = 'text-red-500';
+            } else if (file.type.includes('word') || file.type.includes('document')) {
+                icon = 'description';
+                color = 'text-blue-600';
+            }
+            
+            return `
             <div class="flex items-center justify-between p-2 rounded-lg bg-card dark:bg-dark-card">
               <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-sm ${color}">${icon}</span>
@@ -245,283 +291,257 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="material-symbols-outlined text-sm">close</span>
               </button>
             </div>
-          `;
+            `;
         }).join('');
-        } else {
+    } else {
         filePreview.classList.add('hidden');
-      }
     }
-    
-    function removeFile(index) {
-      uploadedFiles.splice(index, 1);
-      updateFilePreview();
-    }
-    
-    function handleFileUpload(input) {
-      if (input.files.length > 0) {
+}
+
+function removeFile(index) {
+    uploadedFiles.splice(index, 1);
+    updateFilePreview();
+}
+
+function handleFileUpload(input) {
+    if (input.files.length > 0) {
         Array.from(input.files).forEach(file => {
-          uploadedFiles.push(file);
+            uploadedFiles.push(file);
         });
         updateFilePreview();
         input.value = ''; // Reset input
-      }
     }
-    
-    // Attach event listeners
-    const photoUpload = document.getElementById('photo-upload');
-    const videoUpload = document.getElementById('video-upload');
-    const pdfUpload = document.getElementById('pdf-upload');
-    const docUpload = document.getElementById('doc-upload');
-    const clearFilesBtn = document.getElementById('clearFiles');
-    
-    if (photoUpload) {
-      photoUpload.addEventListener('change', function() {
-        handleFileUpload(this);
-      });
-    }
-    
-    if (videoUpload) {
-      videoUpload.addEventListener('change', function() {
-        handleFileUpload(this);
-      });
-    }
-    
-    if (pdfUpload) {
-      pdfUpload.addEventListener('change', function() {
-        handleFileUpload(this);
-      });
-    }
-    
-    if (docUpload) {
-      docUpload.addEventListener('change', function() {
-        handleFileUpload(this);
-      });
-    }
-    
-    if (clearFilesBtn) {
-      clearFilesBtn.addEventListener('click', function() {
-        uploadedFiles = [];
-        updateFilePreview();
-      });
-    }
-});
+}
 
 // Toggle Like
 function toggleLike(button) {
-      const likeCount = button.querySelector('.like-count');
-      const currentCount = parseInt(likeCount.textContent);
-      const icon = button.querySelector('.material-symbols-outlined');
-      
-      if (button.classList.contains('liked')) {
+    const likeCount = button.querySelector('.like-count');
+    const currentCount = parseInt(likeCount.textContent);
+    const icon = button.querySelector('.material-symbols-outlined');
+    
+    if (button.classList.contains('liked')) {
         button.classList.remove('liked', 'text-primary');
         likeCount.textContent = currentCount - 1;
         icon.style.fontVariationSettings = "'FILL' 0";
-      } else {
+    } else {
         button.classList.add('liked', 'text-primary');
         likeCount.textContent = currentCount + 1;
         icon.style.fontVariationSettings = "'FILL' 1";
-      }
     }
+}
+
+// Toggle Comment Like
+function toggleCommentLike(button) {
+    const likeCount = button.querySelector('.like-count');
+    const currentCount = parseInt(likeCount.textContent);
+    const icon = button.querySelector('.material-symbols-outlined');
     
-    // Toggle Comment Like
-    function toggleCommentLike(button) {
-      const likeCount = button.querySelector('.like-count');
-      const currentCount = parseInt(likeCount.textContent);
-      const icon = button.querySelector('.material-symbols-outlined');
-      
-      if (button.classList.contains('liked')) {
+    if (button.classList.contains('liked')) {
         button.classList.remove('liked', 'text-primary');
         likeCount.textContent = currentCount - 1;
         icon.style.fontVariationSettings = "'FILL' 0";
-        } else {
+    } else {
         button.classList.add('liked', 'text-primary');
         likeCount.textContent = currentCount + 1;
         icon.style.fontVariationSettings = "'FILL' 1";
-      }
     }
-    
-    // Toggle Reply Input
-    function toggleReply(commentId) {
-      const replySection = document.getElementById('reply-' + commentId);
-      replySection.classList.toggle('hidden');
-      if (!replySection.classList.contains('hidden')) {
-        replySection.querySelector('input').focus();
-      }
+}
+
+// Toggle Reply Input
+function toggleReply(commentId) {
+    const replySection = document.getElementById('reply-' + commentId);
+    if (!replySection) return;
+    replySection.classList.toggle('hidden');
+    if (!replySection.classList.contains('hidden')) {
+        const input = replySection.querySelector('input');
+        if (input) input.focus();
     }
-    
-    // Sample likes data
-    const likesData = {
-      post1: [
+}
+
+// Sample likes data
+const likesData = {
+    post1: [
         { name: 'Dr. John Smith', image: 'https://randomuser.me/api/portraits/men/1.jpg', role: 'Periodontist', id: 'U-DENT-10245', level: 'Level 5 - Expert' },
         { name: 'Dr. Lisa Wong', image: 'https://randomuser.me/api/portraits/women/2.jpg', role: 'Orthodontist', id: 'U-DENT-10892', level: 'Level 4 - Advanced' },
         { name: 'Dr. Mike Taylor', image: 'https://randomuser.me/api/portraits/men/3.jpg', role: 'Endodontist', id: 'U-DENT-11456', level: 'Level 6 - Master' },
         { name: 'Dr. Anna Brown', image: 'https://randomuser.me/api/portraits/women/4.jpg', role: 'Prosthodontist', id: 'U-DENT-10673', level: 'Level 3 - Intermediate' },
         { name: 'Dr. Tom Harris', image: 'https://randomuser.me/api/portraits/men/6.jpg', role: 'Oral Surgeon', id: 'U-DENT-12098', level: 'Level 7 - Legend' }
-      ],
-      post2: [
+    ],
+    post2: [
         { name: 'Dr. Amanda Green', image: 'https://randomuser.me/api/portraits/women/10.jpg', role: 'Pediatric Dentist', id: 'U-DENT-10334', level: 'Level 4 - Advanced' },
         { name: 'Dr. Robert Chen', image: 'https://randomuser.me/api/portraits/men/12.jpg', role: 'General Dentist', id: 'U-DENT-11789', level: 'Level 3 - Intermediate' },
         { name: 'Dr. Sarah Kim', image: 'https://randomuser.me/api/portraits/women/14.jpg', role: 'Cosmetic Dentist', id: 'U-DENT-10556', level: 'Level 5 - Expert' }
-      ],
-      post3: [
+    ],
+    post3: [
         { name: 'Dr. Maria Garcia', image: 'https://randomuser.me/api/portraits/women/15.jpg', role: 'Orthodontist', id: 'U-DENT-11234', level: 'Level 6 - Master' },
         { name: 'Dr. James Wilson', image: 'https://randomuser.me/api/portraits/men/20.jpg', role: 'Periodontist', id: 'U-DENT-10987', level: 'Level 4 - Advanced' },
         { name: 'Dr. Patricia Lee', image: 'https://randomuser.me/api/portraits/women/25.jpg', role: 'Endodontist', id: 'U-DENT-12456', level: 'Level 5 - Expert' }
-      ]
-    };
-    
-    // Sample comments data with full user info
-    const commentsData = {
-      post1: [
+    ]
+};
+
+// Sample comments data with full user info
+const commentsData = {
+    post1: [
         {
-          user: 'Dr. Mark Anderson',
-          image: 'https://randomuser.me/api/portraits/men/5.jpg',
-          text: 'Have you considered a combination of scaling, root planing, and possibly surgical intervention?',
-          likes: 3,
-          time: '1 hour ago',
-          id: 'U-DENT-10567',
-          level: 'Level 6 - Master'
+            user: 'Dr. Mark Anderson',
+            image: 'https://randomuser.me/api/portraits/men/5.jpg',
+            text: 'Have you considered a combination of scaling, root planing, and possibly surgical intervention?',
+            likes: 3,
+            time: '1 hour ago',
+            id: 'U-DENT-10567',
+            level: 'Level 6 - Master'
         },
         {
-          user: 'Dr. Jennifer Lee',
-          image: 'https://randomuser.me/api/portraits/women/8.jpg',
-          text: "Great case! I'd also recommend involving a periodontist for comprehensive treatment planning.",
-          likes: 5,
-          time: '30 min ago',
-          id: 'U-DENT-11890',
-          level: 'Level 5 - Expert'
+            user: 'Dr. Jennifer Lee',
+            image: 'https://randomuser.me/api/portraits/women/8.jpg',
+            text: "Great case! I'd also recommend involving a periodontist for comprehensive treatment planning.",
+            likes: 5,
+            time: '30 min ago',
+            id: 'U-DENT-11890',
+            level: 'Level 5 - Expert'
         }
-      ],
-      post2: [],
-      post3: []
-    };
+    ],
+    post2: [],
+    post3: []
+};
+
+// Open Likes Modal
+function openLikesModal(postId) {
+    const modal = document.getElementById('likesModal');
+    const content = document.getElementById('likesModalContent');
+    const likes = likesData[postId] || [];
     
-    // Open Likes Modal
-    function openLikesModal(postId) {
-      const modal = document.getElementById('likesModal');
-      const content = document.getElementById('likesModalContent');
-      const likes = likesData[postId] || [];
-      
-      content.innerHTML = likes.map((user, index) => `
+    content.innerHTML = likes.map((user, index) => `
         <div onclick="showUserInfo('${postId}', ${index})" class="flex items-center gap-3 p-3 rounded-xl hover:bg-background dark:hover:bg-dark-background transition-colors cursor-pointer group">
           <img src="${user.image}" class="w-10 h-10 rounded-full" />
           <span class="text-sm text-text-primary dark:text-dark-text-primary font-medium group-hover:text-primary transition-colors">${user.name}</span>
           <span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary ml-auto opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
         </div>
-      `).join('');
-      
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
+    `).join('');
     
-    // Close Likes Modal
-    function closeLikesModal() {
-      document.getElementById('likesModal').classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close Likes Modal
+function closeLikesModal() {
+    const modal = document.getElementById('likesModal');
+    if (modal) modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Show User Info
+function showUserInfo(postId, userIndex) {
+    const user = likesData[postId][userIndex];
+    const modal = document.getElementById('userInfoModal');
+    if (!modal) return;
+
+    // Update user info
+    document.getElementById('userInfoAvatar').src = user.image;
+    document.getElementById('userInfoName').textContent = user.name;
+    document.getElementById('userInfoId').textContent = user.id;
+    document.getElementById('userInfoLevel').textContent = user.level;
     
-    // Show User Info
-    function showUserInfo(postId, userIndex) {
-      const user = likesData[postId][userIndex];
-      const modal = document.getElementById('userInfoModal');
-      
-      // Update user info
-      document.getElementById('userInfoAvatar').src = user.image;
-      document.getElementById('userInfoName').textContent = user.name;
-      document.getElementById('userInfoId').textContent = user.id;
-      document.getElementById('userInfoLevel').textContent = user.level;
-      
-      // Show modal with animation
-      modal.classList.remove('hidden');
-      setTimeout(() => {
+    // Show modal with animation
+    modal.classList.remove('hidden');
+    setTimeout(() => {
         modal.querySelector('div').classList.remove('scale-95');
         modal.querySelector('div').classList.add('scale-100');
-      }, 10);
-    }
+    }, 10);
+}
+
+// Close User Info Modal
+function closeUserInfoModal() {
+    const modal = document.getElementById('userInfoModal');
+    if (!modal) return;
     
-    // Close User Info Modal
-    function closeUserInfoModal() {
-      const modal = document.getElementById('userInfoModal');
-      modal.querySelector('div').classList.remove('scale-100');
-      modal.querySelector('div').classList.add('scale-95');
-      setTimeout(() => {
+    const content = modal.querySelector('div');
+    if (content) {
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+    }
+    setTimeout(() => {
         modal.classList.add('hidden');
-      }, 200);
-    }
+    }, 200);
+}
+
+// Show Comment User Info
+function showCommentUserInfo(postId, commentIndex) {
+    const comment = commentsData[postId][commentIndex];
+    const modal = document.getElementById('userInfoModal');
+    if (!modal) return;
     
-    // Show Comment User Info
-    function showCommentUserInfo(postId, commentIndex) {
-      const comment = commentsData[postId][commentIndex];
-      const modal = document.getElementById('userInfoModal');
-      
-      // Update user info from comment data
-      document.getElementById('userInfoAvatar').src = comment.image;
-      document.getElementById('userInfoName').textContent = comment.user;
-      document.getElementById('userInfoId').textContent = comment.id;
-      document.getElementById('userInfoLevel').textContent = comment.level;
-      
-      // Show modal with animation
-      modal.classList.remove('hidden');
-      setTimeout(() => {
+    // Update user info from comment data
+    document.getElementById('userInfoAvatar').src = comment.image;
+    document.getElementById('userInfoName').textContent = comment.user;
+    document.getElementById('userInfoId').textContent = comment.id;
+    document.getElementById('userInfoLevel').textContent = comment.level;
+    
+    // Show modal with animation
+    modal.classList.remove('hidden');
+    setTimeout(() => {
         modal.querySelector('div').classList.remove('scale-95');
         modal.querySelector('div').classList.add('scale-100');
-      }, 10);
-    }
-    
-    // Post authors data
-    const postAuthors = {
-      author1: {
+    }, 10);
+}
+
+// Post authors data
+const postAuthors = {
+    author1: {
         name: 'Dr. Emily Carter',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCkPQ_esLk8kw4T6Y2ZjTYEWqtcEgQAt3D1T3jKt-tAcx5Dv7J2PEPg3Kb2FB4yuFx05KhIfs5RGhVtm5LHIFOt5Qyw5eDM2DgY06kBMwcv0oIAL6sxfR60xTEoakWpq87vqHRypgT3K4TRL1gTferezy8VCl-WvvWLOK4faHJFsJRFZ34Uwz9UCMWCaytntQP7U6-nd2nzd7sIPCDrip2tK-s6QkzVsMPPUPSFhTRhr9THNj0O2Y5nTJZIWk9t_2IMFMZcyxkf8k6f',
         id: 'U-DENT-11234',
         level: 'Level 6 - Master'
-      },
-      author2: {
+    },
+    author2: {
         name: 'Dr. David Lee',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDoFloEAtTb7T_2Hmz9mEPmk2LD1wpliFrMM9gpYkRKj2WT3VPbujXprjG_i1lJSksdPDsT0XrpQ4BlDvPz--cZvKgYmOI7x70bNLVgT3rMWTusKRxs_Nnj4NGdP4gnNxrIDZjiNTFYrkUo_a-3x26-EMAPYvebm90CrQTfa4HQ5XCUWXZEOfHahjwc9m4TQunRMRyhh9qqiOEKQs2L6YaPT7XgFq_soPGtHH_gMR5Qj4kfHKch8w6eRR0aEAh4MDjhZXzdjn5FxSaa',
         id: 'U-DENT-10789',
         level: 'Level 5 - Expert'
-      },
-      author3: {
+    },
+    author3: {
         name: 'Dr. Sarah Johnson',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAAkX5kcQBHWhpFxl7ctja81v5w4jOA_CYAs7l51fMOGheVVhHvnYZ_7oQ-py3qvT8buAD7oxB74qLikSeOIZ8s5a3sv_Etq3QTIJtzT6SejT4odh53XshWkdSYWBBQTPcnkxAAjAFFn7kG9cmcNfeXxSBVGIlpLNbaSXCZSKNpmexRo_Ez_qVLdaL7gbibPFp7nmEi12rYkP7EVFpjjhtamPPlU8b3LMdVI9AxJUvhBZd7WgVL1v8twA6tMLfRr0R6GP3tXFDCJa9J',
         id: 'U-DENT-12456',
         level: 'Level 7 - Legend'
-      }
-    };
+    }
+};
+
+// Show Post Author Info
+function showPostAuthorInfo(authorId) {
+    const author = postAuthors[authorId];
+    const modal = document.getElementById('userInfoModal');
+    if (!modal) return;
     
-    // Show Post Author Info
-    function showPostAuthorInfo(authorId) {
-      const author = postAuthors[authorId];
-      const modal = document.getElementById('userInfoModal');
-      
-      // Update user info
-      document.getElementById('userInfoAvatar').src = author.image;
-      document.getElementById('userInfoName').textContent = author.name;
-      document.getElementById('userInfoId').textContent = author.id;
-      document.getElementById('userInfoLevel').textContent = author.level;
-      
-      // Show modal with animation
-      modal.classList.remove('hidden');
-      setTimeout(() => {
+    // Update user info
+    document.getElementById('userInfoAvatar').src = author.image;
+    document.getElementById('userInfoName').textContent = author.name;
+    document.getElementById('userInfoId').textContent = author.id;
+    document.getElementById('userInfoLevel').textContent = author.level;
+    
+    // Show modal with animation
+    modal.classList.remove('hidden');
+    setTimeout(() => {
         modal.querySelector('div').classList.remove('scale-95');
         modal.querySelector('div').classList.add('scale-100');
-      }, 10);
-    }
+    }, 10);
+}
+
+// Open Comments Modal
+let currentPostId = null;
+
+function openCommentsModal(postId, count) {
+    currentPostId = postId;
+    const modal = document.getElementById('commentsModal');
+    if (!modal) return;
+
+    const content = document.getElementById('commentsModalContent');
+    const countSpan = document.getElementById('commentsCount');
+    const comments = commentsData[postId] || [];
     
-    // Open Comments Modal
-    let currentPostId = null;
+    countSpan.textContent = `(${count})`;
     
-    function openCommentsModal(postId, count) {
-      currentPostId = postId;
-      const modal = document.getElementById('commentsModal');
-      const content = document.getElementById('commentsModalContent');
-      const countSpan = document.getElementById('commentsCount');
-      const comments = commentsData[postId] || [];
-      
-      countSpan.textContent = `(${count})`;
-      
-      content.innerHTML = comments.map((comment, index) => `
+    content.innerHTML = comments.map((comment, index) => `
         <div class="mb-4">
           <div class="flex gap-3">
             <img src="${comment.image}" onclick="showCommentUserInfo('${postId}', ${index})" class="w-8 h-8 rounded-full flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" />
@@ -549,31 +569,33 @@ function toggleLike(button) {
             </div>
           </div>
         </div>
-      `).join('') || '<p class="text-center text-text-secondary dark:text-dark-text-secondary text-sm py-8">No comments yet. Be the first to comment!</p>';
-      
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
+    `).join('') || '<p class="text-center text-text-secondary dark:text-dark-text-secondary text-sm py-8">No comments yet. Be the first to comment!</p>';
     
-    // Close Comments Modal
-    function closeCommentsModal() {
-      document.getElementById('commentsModal').classList.add('hidden');
-      document.body.style.overflow = 'auto';
-      currentPostId = null;
-    }
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close Comments Modal
+function closeCommentsModal() {
+    const modal = document.getElementById('commentsModal');
+    if (modal) modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    currentPostId = null;
+}
+
+// Add Comment
+function addComment() {
+    const input = document.getElementById('newCommentInput');
+    if (!input) return;
+    const text = input.value.trim();
     
-    // Add Comment
-    function addComment() {
-      const input = document.getElementById('newCommentInput');
-      const text = input.value.trim();
-      
-      if (text && currentPostId) {
+    if (text && currentPostId) {
         const newComment = {
-          user: 'John Doe',
-          image: 'https://randomuser.me/api/portraits/men/32.jpg',
-          text: text,
-          likes: 0,
-          time: 'Just now'
+            user: 'John Doe',
+            image: 'https://randomuser.me/api/portraits/men/32.jpg',
+            text: text,
+            likes: 0,
+            time: 'Just now'
         };
         
         commentsData[currentPostId] = commentsData[currentPostId] || [];
@@ -584,55 +606,56 @@ function toggleLike(button) {
         // Refresh modal
         const count = commentsData[currentPostId].length;
         openCommentsModal(currentPostId, count);
-      }
     }
-    
-    // Close modals on background click
-    document.getElementById('likesModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeLikesModal();
-      }
-    });
-    
-    document.getElementById('commentsModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeCommentsModal();
-      }
-    });
-    
-    // Close modals on background click
-    document.getElementById('userInfoModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeUserInfoModal();
-      }
-    });
-    
-    // Close modals on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeLikesModal();
-        closeCommentsModal();
-        closeUserInfoModal();
-      }
-    });
+}
 
-    // Auto-resize textarea with animation
-    const composerTextarea = document.getElementById('composer-textarea');
-    if (composerTextarea) {
-      const minHeight = '2.5rem';
-      composerTextarea.addEventListener('input', function() {
-        this.style.height = minHeight; // Always reset to min height first
-        if (this.value.trim() === '') {
-          this.style.height = minHeight;
-        } else {
-          this.style.height = (this.scrollHeight) + 'px';
-        }
-      });
-      // Optional: Animate on page load if there's pre-filled text
-      window.addEventListener('DOMContentLoaded', function() {
+// Global Event Listeners for Modals (to avoid requiring DOMContentLoaded for these)
+const likesModal = document.getElementById('likesModal');
+if (likesModal) {
+    likesModal.addEventListener('click', function(e) {
+        if (e.target === this) closeLikesModal();
+    });
+}
+
+const commentsModal = document.getElementById('commentsModal');
+if (commentsModal) {
+    commentsModal.addEventListener('click', function(e) {
+        if (e.target === this) closeCommentsModal();
+    });
+}
+
+const userInfoModal = document.getElementById('userInfoModal');
+if (userInfoModal) {
+    userInfoModal.addEventListener('click', function(e) {
+        if (e.target === this) closeUserInfoModal();
+    });
+}
+
+// Auto-resize textarea with animation
+const composerTextarea = document.getElementById('composer-textarea');
+if (composerTextarea) {
+  const minHeight = '2.5rem';
+  composerTextarea.addEventListener('input', function() {
+    this.style.height = minHeight; // Always reset to min height first
+    if (this.value.trim() === '') {
+      this.style.height = minHeight;
+    } else {
+      this.style.height = (this.scrollHeight) + 'px';
+    }
+  });
+
+  if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
         composerTextarea.style.height = minHeight;
         if (composerTextarea.value.trim() !== '') {
           composerTextarea.style.height = (composerTextarea.scrollHeight) + 'px';
         }
       });
+  } else {
+    // Already loaded
+    composerTextarea.style.height = minHeight;
+    if (composerTextarea.value.trim() !== '') {
+      composerTextarea.style.height = (composerTextarea.scrollHeight) + 'px';
     }
+  }
+}

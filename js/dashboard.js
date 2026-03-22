@@ -190,25 +190,60 @@ function initializeQuoteRefresh() {
 function animateProgressCircle() {
     const progressCircle = document.getElementById('progressCircle');
     const progressPercentage = document.getElementById('progressPercentage');
-    const targetPercentage = 85;
-    const circumference = 2 * Math.PI * 45; // radius = 45
-    const targetOffset = circumference - (targetPercentage / 100) * circumference;
     
-    // Animate the percentage counter
-    let currentPercentage = 0;
-    const counterInterval = setInterval(() => {
-        currentPercentage += 1;
-        progressPercentage.textContent = currentPercentage + '%';
-        
-        if (currentPercentage >= targetPercentage) {
-            clearInterval(counterInterval);
-        }
-    }, 25);
+    if (!progressCircle || !progressPercentage) return;
+
+    // Use Intersection Observer to start animation when visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const targetPercentage = 85;
+                const circumference = 2 * Math.PI * 45; // radius = 45
+                
+                // Calculate the offset based on percentage
+                // stroke-dasharray is circumference (approx 283)
+                // 0% -> offset = circumference
+                // 100% -> offset = 0
+                // 85% -> offset = circumference * (1 - 0.85)
+                const targetOffset = circumference - (targetPercentage / 100) * circumference;
+                
+                // Animate the percentage counter
+                let currentPercentage = 0;
+                const duration = 2000; // 2 seconds, matching circle transition
+                const stepTime = Math.abs(Math.floor(duration / targetPercentage));
+                
+                const counterInterval = setInterval(() => {
+                    currentPercentage += 1;
+                    progressPercentage.textContent = currentPercentage + '%';
+                    
+                    if (currentPercentage >= targetPercentage) {
+                        clearInterval(counterInterval);
+                    }
+                }, stepTime);
+                
+                // Animate the circle stroke
+                // Ensure initial state is set
+                progressCircle.style.strokeDashoffset = circumference;
+                
+                // Trigger animation in next frame
+                setTimeout(() => {
+                    progressCircle.style.strokeDashoffset = targetOffset;
+                }, 50);
+                
+                // Stop observing after animation starts
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 }); // Start when 20% of the element is visible
     
-    // Animate the circle
-    setTimeout(() => {
-        progressCircle.style.strokeDashoffset = targetOffset;
-    }, 100);
+    // Observe the container of the progress chart
+    const container = progressCircle.closest('.relative');
+    if (container) {
+        observer.observe(container);
+    } else {
+        // Fallback if container not found
+        observer.observe(progressCircle);
+    }
 }
 
 // Initialize navigation with active states
