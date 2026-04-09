@@ -72,7 +72,7 @@
         <div class="flex items-center justify-between h-20">
           <div class="flex items-center gap-4">
             <a class="flex items-center -ml-20" href="dashboard.html">
-              <img id="logoImage" src="assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+              <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
             </a>
           </div>
           <nav class="hidden md:flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
@@ -655,6 +655,33 @@
           profileDropdown.classList.add('hidden');
         }
       });
+
+      // Logo mode switching with MutationObserver
+      const logoImage = document.getElementById('logoImage');
+      if (logoImage) {
+          const lightLogo = '../assets/Logo.png';
+          const darkLogo = '../assets/Logo0.png';
+          
+          // Set initial logo based on current dark mode state
+          const isDark = document.documentElement.classList.contains('dark');
+          logoImage.src = isDark ? darkLogo : lightLogo;
+          
+          // Watch for dark mode changes
+          const observer = new MutationObserver(function(mutations) {
+              mutations.forEach(function(mutation) {
+                  if (mutation.attributeName === 'class') {
+                      const isDarkMode = document.documentElement.classList.contains('dark');
+                      logoImage.style.opacity = '0';
+                      setTimeout(() => {
+                          logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                          logoImage.style.opacity = '1';
+                      }, 150);
+                  }
+              });
+          });
+          
+          observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      }
     });
   </script>
 </body>
