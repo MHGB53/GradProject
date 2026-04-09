@@ -1,0 +1,58 @@
+/* 3D Models Custom Styles */
+
+.font-display {
+  font-family: 'Manrope', sans-serif;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.model-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.model-icon {
+  transition: all 0.3s ease;
+}
+
+.model-card:hover .model-icon {
+  transform: scale(1.1);
+}
+
+/* 3D Viewer Placeholder */
+.viewer-placeholder {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+  border: 1px dashed #cbd5e0;
+}
+
+.dark .viewer-placeholder {
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  border: 1px dashed #4a5568;
+}
+
+/* Add spin animation for rotate button */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear;
+}
