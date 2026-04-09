@@ -14,15 +14,15 @@
               "primary-light": "#7ad9b8",
               "primary-dark": "#3db896",
               "background": "#f6f8f7",
-              "dark-background": "#0f1f1b",
+              "dark-background": "#111827",
               "text-primary": "#000000",
-              "dark-text-primary": "#ffffff",
+              "dark-text-primary": "#F9FAFB",
               "text-secondary": "#4b5563",
-              "dark-text-secondary": "#b0b9c3",
+              "dark-text-secondary": "#9CA3AF",
               "border-color": "#e5e7eb",
               "dark-border-color": "#374151",
               "card": "#ffffff",
-              "dark-card": "#1a2c26",
+              "dark-card": "#1F2937",
               "input-bg": "#f3f4f6",
               "dark-input-bg": "#1f3a34",
               "foreground": "#ffffff",
@@ -84,9 +84,9 @@
 </a>
 <div class="flex-1 flex justify-center">
 <nav class="hidden md:flex items-center space-x-12 -ml-40">
-<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold" href="#">Features</a>
-<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold" href="#">Why Dentor</a>
-<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold" href="#">About us</a>
+<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold cursor-pointer" onclick="document.getElementById('discover-features').scrollIntoView({ behavior: 'smooth' })">Features</a>
+<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold cursor-pointer" onclick="document.getElementById('why-dentor').scrollIntoView({ behavior: 'smooth' })">Why Dentor</a>
+<a class="text-white/80 hover:text-white transition-colors text-lg font-semibold cursor-pointer" onclick="document.getElementById('about-us').scrollIntoView({ behavior: 'smooth' })">About us</a>
 </nav>
 </div>
 <a href="Login.html" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 inline-block">
@@ -281,7 +281,7 @@
 </div>
 </div>
 </section>
-<section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 relative overflow-hidden">
+<section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 relative overflow-hidden" id="why-dentor">
 <!-- Background Pattern -->
 <div class="absolute inset-0 opacity-30">
 <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #5BCBA7 1px, transparent 0); background-size: 40px 40px;"></div>
@@ -372,7 +372,7 @@
 </section>
 
 <!-- About Us Section -->
-<section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
+<section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden" id="about-us">
 <!-- Background Decorations -->
 <div class="absolute inset-0 opacity-5">
 <div class="absolute top-20 left-10 w-40 h-40 bg-primary rounded-full blur-3xl"></div>
