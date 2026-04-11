@@ -164,6 +164,15 @@
 <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
 </div>
 </a>
+<a href="3dmodels.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🦷</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">3D Models</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Interactive dental anatomy</p>
+</div>
+</a>
 </div>
 </div>
 </div>
@@ -261,7 +270,7 @@
 </a>
 </div>
 <div class="border-t border-border-color dark:border-dark-border-color py-2">
-<a href="#" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<a href="Login.html" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
 <span class="material-symbols-outlined text-lg">logout</span>
 <span class="text-sm font-medium">Sign Out</span>
 </a>
@@ -938,6 +947,38 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});
+
+// Notification and Profile Dropdown Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationDropdown = document.getElementById('notificationDropdown');
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    // Notification button toggle
+    if (notificationBtn && notificationDropdown) {
+        notificationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('hidden');
+            if (profileDropdown) profileDropdown.classList.add('hidden');
+        });
+    }
+
+    // Profile button toggle
+    if (profileBtn && profileDropdown) {
+        profileBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+            if (notificationDropdown) notificationDropdown.classList.add('hidden');
+        });
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function() {
+        if (notificationDropdown) notificationDropdown.classList.add('hidden');
+        if (profileDropdown) profileDropdown.classList.add('hidden');
+    });
 });
 
 </script>
