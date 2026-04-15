@@ -56,39 +56,27 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeDiagnosisSelection();
 });
 
-// Dark Mode
+// Dark Mode - Using Global ThemeManager
 function initializeDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const darkModeIcon = document.getElementById('darkModeIcon');
     const logoImage = document.getElementById('logoImage');
-    const html = document.documentElement;
     
     const lightLogo = 'assets/Logo.png';
     const darkLogo = 'assets/Logo0.png';
     
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    
-    if (currentTheme === 'dark') {
-        html.classList.add('dark');
-        darkModeIcon.textContent = 'light_mode';
-        logoImage.src = darkLogo;
-    } else {
-        logoImage.src = lightLogo;
-    }
-    
-    if (darkModeToggle) {
+    if (darkModeToggle && logoImage) {
+        // Set initial logo based on current theme
+        const currentTheme = ThemeManager.getCurrentTheme();
+        logoImage.src = currentTheme === 'dark' ? darkLogo : lightLogo;
+        
+        // Update logo when theme toggle is clicked
         darkModeToggle.addEventListener('click', function() {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                darkModeIcon.textContent = 'dark_mode';
-                logoImage.src = lightLogo;
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                darkModeIcon.textContent = 'light_mode';
-                logoImage.src = darkLogo;
-            }
+            // Toggle and get new theme
+            const newTheme = ThemeManager.toggleTheme();
+            
+            // Update logo
+            logoImage.src = newTheme === 'dark' ? darkLogo : lightLogo;
         });
     }
 }

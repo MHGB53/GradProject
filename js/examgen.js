@@ -29,44 +29,34 @@ function initializeMobileMenu() {
     });
 }
 
-// Dark Mode Toggle
+// Dark Mode Toggle - Using Global ThemeManager
 function initializeDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const darkModeIcon = document.getElementById('darkModeIcon');
     const logoImage = document.getElementById('logoImage');
-    const htmlElement = document.documentElement;
     
     // Logo paths
     const lightLogo = 'assets/Logo.png';
     const darkLogo = 'assets/Logo0.png';
     
-    // Check for saved user preference
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    
-    if (currentTheme === 'dark') {
-        htmlElement.classList.add('dark');
-        darkModeIcon.textContent = 'dark_mode';
-        logoImage.src = darkLogo;
-    } else {
-        htmlElement.classList.remove('dark');
-        darkModeIcon.textContent = 'light_mode';
-        logoImage.src = lightLogo;
+    if (darkModeToggle && logoImage) {
+        // Set initial logo based on current theme
+        const currentTheme = ThemeManager.getCurrentTheme();
+        logoImage.src = currentTheme === 'dark' ? darkLogo : lightLogo;
+        
+        // Update logo when theme toggle is clicked
+        darkModeToggle.addEventListener('click', function() {
+            // Toggle and get new theme
+            const newTheme = ThemeManager.toggleTheme();
+            
+            // Update logo with fade effect
+            logoImage.style.opacity = '0';
+            setTimeout(() => {
+                logoImage.src = newTheme === 'dark' ? darkLogo : lightLogo;
+                logoImage.style.opacity = '1';
+            }, 150);
+        });
     }
-    
-    darkModeToggle.addEventListener('click', function() {
-        htmlElement.classList.toggle('dark');
-        
-        const newTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
-        
-        if (newTheme === 'dark') {
-            darkModeIcon.textContent = 'dark_mode';
-            logoImage.src = darkLogo;
-        } else {
-            darkModeIcon.textContent = 'light_mode';
-            logoImage.src = lightLogo;
-        }
-    });
 }
 
 // Navigation Active State

@@ -1,19 +1,12 @@
 // AI Models Page Functionality
 
-// Dark Mode Toggle
+// Dark Mode Toggle - Using Global ThemeManager
 const darkModeToggle = document.getElementById('darkModeToggle');
 const darkModeIcon = document.getElementById('darkModeIcon');
 
 if (darkModeToggle) {
-  darkModeToggle.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
-    darkModeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
-  });
-
-  // Set initial icon based on saved preference
-  const currentMode = localStorage.getItem('darkMode') || 'light';
-  darkModeIcon.textContent = currentMode === 'dark' ? 'dark_mode' : 'light_mode';
+  // Use global ThemeManager for theme toggling
+  ThemeManager.initThemeToggle('#darkModeToggle', '#darkModeIcon');
 }
 
 // Notification Button

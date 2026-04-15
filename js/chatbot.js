@@ -1,41 +1,33 @@
 
 
-// Dark Mode Toggle
+// Dark Mode Toggle - Using Global ThemeManager
 function initializeDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const darkModeIcon = document.getElementById('darkModeIcon');
     const logoImage = document.getElementById('logoImage');
-    const htmlElement = document.documentElement;
     
     // Logo paths
     const lightLogo = 'assets/Logo.png';
     const darkLogo = 'assets/Logo0.png';
     
-    // Check for saved preference or default to light mode
-    const currentMode = localStorage.getItem('darkMode') || 'light';
-    if (currentMode === 'dark') {
-        htmlElement.classList.add('dark');
-        darkModeIcon.textContent = 'dark_mode';
-        logoImage.src = darkLogo;
+    if (darkModeToggle) {
+        // Update logo when theme toggle is clicked
+        darkModeToggle.addEventListener('click', function() {
+            // Let ThemeManager handle the toggle and localStorage
+            const newTheme = ThemeManager.toggleTheme();
+            
+            // Update logo with fade effect
+            logoImage.style.opacity = '0';
+            setTimeout(() => {
+                logoImage.src = newTheme === 'dark' ? darkLogo : lightLogo;
+                logoImage.style.opacity = '1';
+            }, 150);
+        });
+        
+        // Set initial logo based on current theme
+        const currentTheme = ThemeManager.getCurrentTheme();
+        logoImage.src = currentTheme === 'dark' ? darkLogo : lightLogo;
     }
-    
-    darkModeToggle.addEventListener('click', function() {
-        htmlElement.classList.toggle('dark');
-        const isDark = htmlElement.classList.contains('dark');
-        
-        // Update icon
-        darkModeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
-        
-        // Update logo with fade effect
-        logoImage.style.opacity = '0';
-        setTimeout(() => {
-            logoImage.src = isDark ? darkLogo : lightLogo;
-            logoImage.style.opacity = '1';
-        }, 150);
-        
-        // Save preference
-        localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
-    });
 }
 
 // Initialize navigation with active states

@@ -36,30 +36,32 @@ function initializeMobileMenu() {
     });
 }
 
-// Dark Mode
+// Dark Mode - Using Global ThemeManager
 function initializeDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const darkModeIcon = document.getElementById('darkModeIcon');
-    const html = document.documentElement;
     const logoImg = document.getElementById('logoImage');
     
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    if (currentTheme === 'dark') {
-        html.classList.add('dark');
-        if (darkModeIcon) darkModeIcon.textContent = 'dark_mode';
-        if (logoImg) logoImg.src = 'assets/Logo0.png';
-    } else {
-        if (darkModeIcon) darkModeIcon.textContent = 'light_mode';
-        if (logoImg) logoImg.src = 'assets/Logo.png';
+    if (logoImg) {
+        // Set initial logo based on current theme
+        const currentTheme = ThemeManager.getCurrentTheme();
+        logoImg.src = currentTheme === 'dark' ? 'assets/Logo0.png' : 'assets/Logo.png';
     }
 
-    darkModeToggle.addEventListener('click', () => {
-        html.classList.toggle('dark');
-        const isDark = html.classList.contains('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        if (darkModeIcon) darkModeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
-        if (logoImg) logoImg.src = isDark ? 'assets/Logo0.png' : 'assets/Logo.png';
-    });
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            // Toggle using ThemeManager
+            const newTheme = ThemeManager.toggleTheme();
+            
+            // Update logo
+            if (logoImg) {
+                logoImg.src = newTheme === 'dark' ? 'assets/Logo0.png' : 'assets/Logo.png';
+            }
+            if (darkModeIcon) {
+                darkModeIcon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+            }
+        });
+    }
 }
 
 // Dropdowns
