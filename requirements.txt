@@ -1,0 +1,20 @@
+# Dentor Backend Requirements
+# Install with: pip install -r requirements.txt
+
+# ── Core Framework ──
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+
+# ── SQL Server ──
+sqlalchemy==2.0.36
+pyodbc==5.2.0
+
+# ── Auth / Security ──
+bcrypt==4.3.0
+python-jose[cryptography]==3.3.0
+
+# ── Validation ──
+pydantic[email]==2.10.3
+
+# ── Environment variables ──
+python-dotenv==1.0.1

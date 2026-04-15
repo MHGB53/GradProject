@@ -1,10 +1,10 @@
 // Global Theme Manager - Apply theme immediately on page load
 // This must be loaded in the <head> before other scripts
 
-(function() {
+(function () {
   // Get saved theme preference or use light as default
   const savedTheme = localStorage.getItem('theme') || 'light';
-  
+
   // Apply theme immediately to avoid flash
   if (savedTheme === 'dark') {
     document.documentElement.classList.add('dark');
@@ -62,7 +62,6 @@ const ThemeManager = {
     }
   },
 
-  // Update icon based on current theme
   updateThemeIcon(iconElement) {
     if (iconElement) {
       const currentTheme = this.getCurrentTheme();

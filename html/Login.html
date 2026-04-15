@@ -26,6 +26,7 @@
       }
 </script>
 <script src="../js/themeManager.js"></script>
+<script src="../js/tokengaurd.js"></script>
 <link rel="stylesheet" href="../css/Login.css">
 
 </head>
@@ -39,7 +40,7 @@
 <h2 class="text-center text-3xl font-bold text-gray-900 dark:text-white">Welcome to Dentor</h2>
 <p class="text-center text-gray-600 dark:text-gray-400">Your dental student helper platform</p>
 </div>
-<form class="space-y-6">
+<form id="loginForm" class="space-y-6">
   <div>
   <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="username">Username</label>
   <div class="mt-1">
@@ -50,7 +51,7 @@
   <div class="flex items-center justify-between">
   <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="password">Password</label>
   <div class="text-sm">
-  <a class="font-medium text-primary hover:text-primary/80" href="#">Forgot Password?</a>
+  <a class="font-medium text-primary hover:text-primary/80" href="Forget_password_1.html">Forgot Password?</a>
   </div>
   </div>
         <div class="mt-1 relative">
@@ -63,11 +64,14 @@
           </button>
         </div>
           </div>
+    <!-- Error message banner -->
+    <div id="errorMessage" class="hidden text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg px-4 py-3 text-center"></div>
+
     <div>
-      <button class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-black bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark" type="submit">
-                              Login
-                          </button>
-      </div>
+      <button id="loginBtn" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-black bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark disabled:opacity-60 disabled:cursor-not-allowed transition-opacity" type="submit">
+        Login
+      </button>
+    </div>
 </div>
 </form>
 
