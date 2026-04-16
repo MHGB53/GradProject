@@ -35,8 +35,9 @@ class LoginRequest(BaseModel):
         "json_schema_extra": {
             "example": {
                 
-                "password": "SecurePass123",
-                "username": "dental_student"
+            "username": "dental_student",
+            "password": "SecurePass123"
+                
             }
         }
     }
