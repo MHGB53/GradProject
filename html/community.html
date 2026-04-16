@@ -391,8 +391,8 @@
     <!-- Post Composer -->
 <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
 <div class="flex gap-3 items-start">
-<img alt="User" class="w-10 h-10 rounded-full object-cover flex-shrink-0" src="https://randomuser.me/api/portraits/men/32.jpg" />
-      <form class="flex-1" enctype="multipart/form-data">
+<div class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center flex-shrink-0 text-sm" id="composerAvatar">?</div>
+      <form id="postComposer" class="flex-1" enctype="multipart/form-data">
 <textarea id="composer-textarea" class="w-full border-none focus:ring-0 resize-none text-text-primary dark:text-dark-text-primary text-sm placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary bg-transparent mb-3 transition-all duration-300" rows="2" placeholder="What's on your mind?" style="min-height:3rem;overflow:hidden;"></textarea>
 
 <!-- File Preview Area -->
@@ -430,7 +430,7 @@
           </label>
 <input id="doc-upload" type="file" class="hidden" accept=".doc,.docx,.txt" multiple />
 </div>
-<button type="submit" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-all duration-300">
+<button type="submit" data-post-submit class="flex items-center gap-2 px-5 py-2 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-all duration-300">
             <span class="material-symbols-outlined text-base">send</span>
             Post
           </button>
@@ -438,144 +438,16 @@
       </form>
 </div>
     </div>
-    <!-- Feed -->
-    <div class="space-y-8">
-      <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
-        <div class="flex gap-4 items-start">
-        <img alt="Dr. Emily Carter" onclick="showPostAuthorInfo('author1')" class="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkPQ_esLk8kw4T6Y2ZjTYEWqtcEgQAt3D1T3jKt-tAcx5Dv7J2PEPg3Kb2FB4yuFx05KhIfs5RGhVtm5LHIFOt5Qyw5eDM2DgY06kBMwcv0oIAL6sxfR60xTEoakWpq87vqHRypgT3K4TRL1gTferezy8VCl-WvvWLOK4faHJFsJRFZ34Uwz9UCMWCaytntQP7U6-nd2nzd7sIPCDrip2tK-s6QkzVsMPPUPSFhTRhr9THNj0O2Y5nTJZIWk9t_2IMFMZcyxkf8k6f"/>
-        <div class="flex-1">
-          <div class="flex items-center justify-between mb-2">
-            <div>
-              <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal">
-                <span onclick="showPostAuthorInfo('author1')" class="font-semibold text-text-primary dark:text-dark-text-primary cursor-pointer hover:text-primary transition-colors">Dr. Emily Carter</span>
-                <span class="mx-1 text-text-secondary dark:text-dark-text-secondary">·</span>
-                <span class="text-text-secondary dark:text-dark-text-secondary font-normal">2 hours ago</span>
-              </p>
-            </div>
-          </div>
-          <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-normal leading-relaxed mb-3">
-            I'm currently working on a challenging case involving a patient with advanced periodontitis. The patient has significant bone loss and mobility in several teeth. I'm considering various treatment options...
-          </p>
-          
-          <!-- Like and Comment Actions -->
-          <div class="flex items-center gap-6 text-text-secondary dark:text-dark-text-secondary mb-4">
-            <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
-              <span class="material-symbols-outlined text-lg">thumb_up</span>
-              <span class="like-count">12</span>
-            </button>
-            <button onclick="openCommentsModal('post1', 5)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
-              <span class="material-symbols-outlined text-lg">chat_bubble</span>
-              <span>5</span>
-            </button>
-            <button onclick="openLikesModal('post1')" class="text-xs hover:text-primary transition-colors">
-              View Likes
-            </button>
-          </div>
-          
-          <!-- Quick Comment Input -->
-          <div class="border-t border-border-color dark:border-dark-border-color pt-3">
-            <div class="flex items-center gap-2">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full flex-shrink-0" />
-              <input class="flex-1 border-none focus:ring-0 text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
-              <button type="button" class="flex items-center justify-center rounded-full bg-primary text-white w-9 h-9 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-md">
-                <span class="material-symbols-outlined text-lg">send</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
-      <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
-        <div class="flex gap-4 items-start">
-        <img alt="Dr. David Lee" onclick="showPostAuthorInfo('author2')" class="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoFloEAtTb7T_2Hmz9mEPmk2LD1wpliFrMM9gpYkRKj2WT3VPbujXprjG_i1lJSksdPDsT0XrpQ4BlDvPz--cZvKgYmOI7x70bNLVgT3rMWTusKRxs_Nnj4NGdP4gnNxrIDZjiNTFYrkUo_a-3x26-EMAPYvebm90CrQTfa4HQ5XCUWXZEOfHahjwc9m4TQunRMRyhh9qqiOEKQs2L6YaPT7XgFq_soPGtHH_gMR5Qj4kfHKch8w6eRR0aEAh4MDjhZXzdjn5FxSaa"/>
-        <div class="flex-1">
-          <div class="flex items-center justify-between mb-2">
-            <div>
-              <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal">
-                <span onclick="showPostAuthorInfo('author2')" class="font-semibold text-text-primary dark:text-dark-text-primary cursor-pointer hover:text-primary transition-colors">Dr. David Lee</span>
-                <span class="mx-1 text-text-secondary dark:text-dark-text-secondary">·</span>
-                <span class="text-text-secondary dark:text-dark-text-secondary font-normal">1 day ago</span>
-              </p>
-            </div>
-          </div>
-          <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-normal leading-relaxed mb-3">
-            I'm looking to enhance my skills in pediatric dentistry. What are some essential techniques and best practices for treating young patients? Any recommendations for resources or courses...
-          </p>
-          
-          <!-- Like and Comment Actions -->
-          <div class="flex items-center gap-6 text-text-secondary dark:text-dark-text-secondary mb-4">
-            <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
-              <span class="material-symbols-outlined text-lg">thumb_up</span>
-              <span class="like-count">28</span>
-            </button>
-            <button onclick="openCommentsModal('post2', 15)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
-              <span class="material-symbols-outlined text-lg">chat_bubble</span>
-              <span>15</span>
-            </button>
-            <button onclick="openLikesModal('post2')" class="text-xs hover:text-primary transition-colors">
-              View Likes
-            </button>
-          </div>
-          
-          <!-- Quick Comment Input -->
-          <div class="border-t border-border-color dark:border-dark-border-color pt-3">
-            <div class="flex items-center gap-2">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full flex-shrink-0" />
-              <input class="flex-1 border-none focus:ring-0 text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
-              <button type="button" class="flex items-center justify-center rounded-full bg-primary text-white w-9 h-9 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-md">
-                <span class="material-symbols-outlined text-lg">send</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 hover:shadow-lg transition-shadow duration-300">
-        <div class="flex gap-4 items-start">
-        <img alt="Dr. Sarah Johnson" onclick="showPostAuthorInfo('author3')" class="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAkX5kcQBHWhpFxl7ctja81v5w4jOA_CYAs7l51fMOGheVVhHvnYZ_7oQ-py3qvT8buAD7oxB74qLikSeOIZ8s5a3sv_Etq3QTIJtzT6SejT4odh53XshWkdSYWBBQTPcnkxAAjAFFn7kG9cmcNfeXxSBVGIlpLNbaSXCZSKNpmexRo_Ez_qVLdaL7gbibPFp7nmEi12rYkP7EVFpjjhtamPPlU8b3LMdVI9AxJUvhBZd7WgVL1v8twA6tMLfRr0R6GP3tXFDCJa9J"/>
-        <div class="flex-1">
-          <div class="flex items-center justify-between mb-2">
-            <div>
-              <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal">
-                <span onclick="showPostAuthorInfo('author3')" class="font-semibold text-text-primary dark:text-dark-text-primary cursor-pointer hover:text-primary transition-colors">Dr. Sarah Johnson</span>
-                <span class="mx-1 text-text-secondary dark:text-dark-text-secondary">·</span>
-                <span class="text-text-secondary dark:text-dark-text-secondary font-normal">3 days ago</span>
-              </p>
-            </div>
-          </div>
-          <p class="text-text-secondary dark:text-dark-text-secondary text-sm font-normal leading-relaxed mb-3">
-            I'm seeking advice on effectively managing dental anxiety in patients. What strategies do you use to help patients feel more comfortable during procedures? Any tips on creating a calming environment...
-          </p>
-          
-          <!-- Like and Comment Actions -->
-          <div class="flex items-center gap-6 text-text-secondary dark:text-dark-text-secondary mb-4">
-            <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
-              <span class="material-symbols-outlined text-lg">thumb_up</span>
-              <span class="like-count">42</span>
-            </button>
-            <button onclick="openCommentsModal('post3', 23)" class="flex items-center gap-1.5 hover:text-primary transition-colors text-sm">
-              <span class="material-symbols-outlined text-lg">chat_bubble</span>
-              <span>23</span>
-            </button>
-            <button onclick="openLikesModal('post3')" class="text-xs hover:text-primary transition-colors">
-              View Likes
-            </button>
-          </div>
-          
-          <!-- Quick Comment Input -->
-          <div class="border-t border-border-color dark:border-dark-border-color pt-3">
-            <div class="flex items-center gap-2">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full flex-shrink-0" />
-              <input class="flex-1 border-none focus:ring-0 text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
-              <button type="button" class="flex items-center justify-center rounded-full bg-primary text-white w-9 h-9 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-md">
-                <span class="material-symbols-outlined text-lg">send</span>
-              </button>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Dynamic Feed (populated by community.js) -->
+    <div id="postsFeed" class="space-y-6">
+      <!-- Posts are injected here by loadPosts() -->
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-6 hidden" id="loadMoreBtn">
+      <button class="px-8 py-3 rounded-full bg-primary/10 text-primary font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+        Load more posts
+      </button>
     </div>
   </div>
 </main>
@@ -673,7 +545,6 @@
           <span class="material-symbols-outlined text-xl">send</span>
         </button>
 </div>
-<script src="../js/community.js"></script>
 <script>
 
 // Logo mode switching with MutationObserver
@@ -706,5 +577,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+<script src="../js/community.js"></script>
 </body>
 </html>

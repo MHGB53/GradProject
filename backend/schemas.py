@@ -3,7 +3,7 @@ Pydantic schemas for request/response validation.
 """
 
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 
@@ -34,16 +34,14 @@ class LoginRequest(BaseModel):
     model_config = {
         "json_schema_extra": {
             "example": {
-                
-            "username": "dental_student",
-            "password": "SecurePass123"
-                
+                "username": "dental_student",
+                "password": "SecurePass123"
             }
         }
     }
 
 
-# ──────────────────────────── Response Schemas ────────────────────────────
+# ──────────────────────────── Auth Response Schemas ────────────────────────────
 
 class UserOut(BaseModel):
     id: int
@@ -64,3 +62,62 @@ class TokenResponse(BaseModel):
 
 class MessageResponse(BaseModel):
     message: str
+
+
+# ──────────────────────────── Community Schemas ────────────────────────────
+
+class AttachmentOut(BaseModel):
+    id: int
+    file_name: str
+    file_type: str       # image | video | pdf | doc
+    mime_type: Optional[str]
+    url: str             # full URL to download/view the file
+
+    model_config = {"from_attributes": True}
+
+
+class AuthorOut(BaseModel):
+    id: int
+    username: str
+    full_name: Optional[str]
+
+    model_config = {"from_attributes": True}
+
+
+class PostOut(BaseModel):
+    id: int
+    content: Optional[str]
+    author: AuthorOut
+    like_count: int
+    comment_count: int
+    liked_by_me: bool
+    attachments: List[AttachmentOut]
+    created_at: Optional[datetime]
+
+    model_config = {"from_attributes": True}
+
+
+class CommentOut(BaseModel):
+    id: int
+    content: str
+    author: AuthorOut
+    created_at: Optional[datetime]
+
+    model_config = {"from_attributes": True}
+
+
+class LikerOut(BaseModel):
+    id: int
+    username: str
+    full_name: Optional[str]
+    liked_at: Optional[datetime]
+
+    model_config = {"from_attributes": True}
+
+
+class PaginatedPostsOut(BaseModel):
+    posts: List[PostOut]
+    total: int
+    page: int
+    page_size: int
+    has_more: bool

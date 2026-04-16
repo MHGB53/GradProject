@@ -16,5 +16,8 @@ python-jose[cryptography]==3.3.0
 # ── Validation ──
 pydantic[email]==2.10.3
 
+# ── File Uploads ──
+python-multipart==0.0.26
+
 # ── Environment variables ──
 python-dotenv==1.0.1

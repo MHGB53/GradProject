@@ -2,21 +2,26 @@
 Dentor FastAPI Application Entry Point
 """
 
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from .database import engine, test_connection
 from . import models
-from .routers import auth
+from .routers import auth, community
 
 
 # ──────────────────────────── Lifespan (startup / shutdown) ────────────────────────────
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: verify SQL Server connection and create tables
+    # Startup: verify SQL Server connection and create / migrate tables
     test_connection()
     models.Base.metadata.create_all(bind=engine)
+    # Ensure upload directory exists
+    upload_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads", "community")
+    os.makedirs(upload_dir, exist_ok=True)
     yield
     # Shutdown: nothing special needed
 
@@ -32,7 +37,6 @@ app = FastAPI(
 )
 
 # ──────────────────────────── CORS ────────────────────────────
-# Allows the frontend (running from file:// or a local server) to call the API.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],          # Restrict to your domain in production
@@ -41,15 +45,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ──────────────────────────── Static Files (uploaded media) ────────────────────────────
+uploads_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads")
+os.makedirs(uploads_dir, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
+
 # ──────────────────────────── Routers ────────────────────────────
 app.include_router(auth.router)
+app.include_router(community.router)
 
 
 # ──────────────────────────── Root ────────────────────────────
 @app.get("/", tags=["Health"])
 def root():
     return {
-        "message": "Dentor API is running \u2705",
+        "message": "Dentor API is running ✅",
         "docs": "/docs",
         "version": "1.0.0",
     }
