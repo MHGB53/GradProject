@@ -16,7 +16,7 @@ async function runAuthGuard() {
                 // Call backend logout endpoint if a token exists
                 if (token) {
                     try {
-                        await fetch('http://127.0.0.1:8003/api/auth/logout', {
+                        await fetch('http://localhost:8000/api/auth/logout', {
                             method: 'POST',
                             headers: { 'Authorization': `Bearer ${token}` },
                             // Keepalive ensures the request finishes even if the page redirects quickly
@@ -53,7 +53,7 @@ async function runAuthGuard() {
 
         // Validate token with backend
         try {
-            const res = await fetch('http://127.0.0.1:8003/api/auth/me', {
+            const res = await fetch('http://localhost:8000/api/auth/me', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 

@@ -74,6 +74,31 @@ if (mobileMenuBtn && mobileSidebar) {
 
 // 3D Model Selection
 function selectModel(modelId, title, description) {
-  console.log('Model selected:', {modelId, title, description});
-  // Add your 3D model viewer integration here
+  // 1. Update text labels inside the viewer panel
+  const nameEl = document.getElementById('modelName');
+  const descEl = document.getElementById('modelDescription');
+  if (nameEl) nameEl.textContent = title;
+  if (descEl) descEl.textContent = description;
+
+  // 2. Update the header description line in the Model Viewer card
+  const viewerDesc = document.getElementById('viewerDescription');
+  if (viewerDesc) viewerDesc.textContent = 'Interactive 3D visualization of ' + title.toLowerCase();
+
+  // 3. Swap the <model-viewer> src to load the selected .glb file
+  const viewer = document.getElementById('dentalModelViewer');
+  if (viewer) {
+    viewer.src = '../assets/models/' + modelId + '.glb';
+  }
+
+  // 4. Smooth-scroll down to the viewer section
+  const viewerSection = document.getElementById('modelViewer');
+  if (viewerSection) {
+    viewerSection.scrollIntoView({ behavior: 'smooth' });
+
+    // 5. Pulse a green ring around the viewer as visual feedback
+    viewerSection.classList.add('ring-2', 'ring-primary', 'rounded-2xl');
+    setTimeout(() => {
+      viewerSection.classList.remove('ring-2', 'ring-primary');
+    }, 2000);
+  }
 }

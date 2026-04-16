@@ -378,110 +378,218 @@
             <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Interactive 3D Dental Anatomy</h2>
             <p class="text-text-secondary dark:text-dark-text-secondary">Explore detailed 3D models of dental structures for enhanced learning</p>
           </div>
-          
+
           <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <!-- Tooth Anatomy Model -->
+
+              <!-- Articular Disc TMJ -->
+              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-start gap-4">
+                  <div class="model-icon w-14 h-14 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">🦷</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Articular Disc (TMJ)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Temporomandibular joint disc anatomy and articulation</p>
+                    <button onclick="selectModel('articular_disc_tmj', 'Articular Disc (TMJ)', 'Detailed 3D model of the temporomandibular joint articular disc showing its shape, attachments, and relationship to the condyle and fossa.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upper Left Lateral Incisor -->
               <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
                   <div class="model-icon w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Tooth Anatomy</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Detailed 3D model showing all layers of tooth structure</p>
-                    <button onclick="selectModel('tooth-anatomy', 'Tooth Anatomy', 'Detailed 3D model showing all layers of tooth structure including enamel, dentin, pulp, and root structure')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
-                      View Model
-                      <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Upper Left Lateral Incisor (#22)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Maxillary lateral incisor morphology and root form</p>
+                    <button onclick="selectModel('dente_22_-_upper_left_lateral_incisor_id_22e', 'Upper Left Lateral Incisor (#22)', 'Maxillary left lateral incisor (FDI #22) showing crown morphology, cingulum, and single root with typical curvature.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
                 </div>
               </div>
-              
-              <!-- Jaw Structure Model -->
+
+              <!-- Lower Left First Molar -->
               <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
                   <div class="model-icon w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <span class="text-2xl">🦴</span>
+                    <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Jaw Structure</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Complete mandible and maxilla with articulation points</p>
-                    <button onclick="selectModel('jaw-structure', 'Jaw Structure', 'Complete 3D model of mandible and maxilla with temporomandibular joint articulation points and muscle attachment sites')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
-                      View Model
-                      <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lower Left First Molar (#36)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mandibular first molar with 5 cusps and bifurcated roots</p>
+                    <button onclick="selectModel('dente_36_-_lower_left_first_molar_id_36d', 'Lower Left First Molar (#36)', 'Mandibular left first molar (FDI #36) showing 5 cusps, mesial and distal roots, and multi-canal root anatomy.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
                 </div>
               </div>
-              
-              <!-- Root Canal System -->
+
+              <!-- Lower Left Second Molar -->
               <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
                   <div class="model-icon w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <span class="text-2xl">🔍</span>
+                    <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Root Canal System</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Detailed visualization of root canal anatomy and variations</p>
-                    <button onclick="selectModel('root-canal', 'Root Canal System', 'Detailed 3D visualization of root canal anatomy including main canals, lateral canals, and apical delta variations')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
-                      View Model
-                      <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lower Left Second Molar (#37)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mandibular second molar with 4 cusps and root anatomy</p>
+                    <button onclick="selectModel('dente_37_-_lower_left_second_molar_id_37a', 'Lower Left Second Molar (#37)', 'Mandibular left second molar (FDI #37) showing 4-cusp pattern and mesial/distal root configuration.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
                 </div>
               </div>
-              
-              <!-- Periodontal Structures -->
+
+              <!-- Head & Neck Anatomy -->
               <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
                   <div class="model-icon w-14 h-14 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <span class="text-2xl">🪥</span>
+                    <span class="text-2xl">🧠</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Periodontal Structures</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Gingiva, periodontal ligament, and alveolar bone</p>
-                    <button onclick="selectModel('periodontal', 'Periodontal Structures', '3D model showing gingiva, periodontal ligament, alveolar bone, and cementum relationships')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
-                      View Model
-                      <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Head &amp; Neck Anatomy</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Full craniofacial and cervical structures for dentistry</p>
+                    <button onclick="selectModel('head_and_neck_anatomy_for_dentistry', 'Head &amp; Neck Anatomy', 'Comprehensive 3D model of head and neck anatomy relevant to dentistry, including nerves, vessels, muscles, and glands.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
                 </div>
               </div>
-              
-              <!-- Dental Implants -->
+
+              <!-- Lateral Pterygoids -->
               <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <span class="text-2xl">⚙️</span>
+                  <div class="model-icon w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">💪</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Dental Implants</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Implant components and osseointegration process</p>
-                    <button onclick="selectModel('implants', 'Dental Implants', '3D model of implant components including fixture, abutment, and crown with osseointegration process visualization')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
-                      View Model
-                      <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lateral Pterygoid Muscles</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Key muscles of mastication and jaw movement</p>
+                    <button onclick="selectModel('lateral_pterygoids', 'Lateral Pterygoid Muscles', '3D model of the superior and inferior heads of the lateral pterygoid muscle showing their origins, insertions, and role in jaw function.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
                 </div>
               </div>
-              
-              <!-- Orthodontic Models -->
+
+              <!-- Mandible -->
               <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <span class="text-2xl">✨</span>
+                  <div class="model-icon w-14 h-14 bg-gray-100 dark:bg-gray-700/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">🦴</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Orthodontic Models</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Braces, aligners, and tooth movement mechanics</p>
-                    <button onclick="selectModel('orthodontic', 'Orthodontic Models', '3D models showing braces, aligners, and biomechanics of tooth movement with force vectors')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
-                      View Model
-                      <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandible</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Complete lower jaw bone with dental sockets</p>
+                    <button onclick="selectModel('mandible', 'Mandible', 'Full 3D model of the mandible showing the body, ramus, condylar and coronoid processes, and mandibular canal.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
                 </div>
               </div>
+
+              <!-- Mandibular First Premolar -->
+              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-start gap-4">
+                  <div class="model-icon w-14 h-14 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">🦷</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular First Premolar</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Two-cusp premolar with prominent buccal cusp</p>
+                    <button onclick="selectModel('mandibular_first_premolar', 'Mandibular First Premolar', 'Mandibular first premolar showing its distinctive buccal and lingual cusps with single root and canal system.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mandibular Left Central Incisor -->
+              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-start gap-4">
+                  <div class="model-icon w-14 h-14 bg-cyan-100 dark:bg-cyan-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">🦷</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Left Central Incisor</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Smallest and most symmetrical tooth in the arch</p>
+                    <button onclick="selectModel('mandibular_left_central_incisor', 'Mandibular Left Central Incisor', 'Mandibular left central incisor — the smallest tooth in the mouth, with a symmetrical crown and narrow single root.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mandibular Left Second Premolar -->
+              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-start gap-4">
+                  <div class="model-icon w-14 h-14 bg-lime-100 dark:bg-lime-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">🦷</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Left Second Premolar</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Three-cusp Y-pattern variant with well-developed lingual</p>
+                    <button onclick="selectModel('mandibular_left_second_premolar', 'Mandibular Left Second Premolar', 'Mandibular left second premolar with 3-cusp (Y-type) pattern showing buccal, mesiolingual, and distolingual cusps.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mandibular Third Molar -->
+              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-start gap-4">
+                  <div class="model-icon w-14 h-14 bg-rose-100 dark:bg-rose-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">🦷</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Third Molar (Wisdom)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Wisdom tooth with variable anatomy and fused roots</p>
+                    <button onclick="selectModel('mandibular_third_molar', 'Mandibular Third Molar (Wisdom)', 'Mandibular third molar showing its variable crown morphology, fused roots, and complex root canal system — key for extraction planning.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Maxillary Canine -->
+              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-start gap-4">
+                  <div class="model-icon w-14 h-14 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">🦷</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Maxillary Canine</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Longest tooth with the longest single root</p>
+                    <button onclick="selectModel('maxillary_canine', 'Maxillary Canine', 'Maxillary canine — the longest tooth in the mouth, with a prominent cusp and the longest root of any tooth in the dentition.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sagittal Cut of Cranium & Mandible -->
+              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-start gap-4">
+                  <div class="model-icon w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-2xl">💀</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Sagittal Cut — Cranium &amp; Mandible</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mid-sagittal section showing internal skull and jaw</p>
+                    <button onclick="selectModel('sagittal_cut_of_the_human_cranium_and_mandible_2', 'Sagittal Cut — Cranium &amp; Mandible', 'Mid-sagittal section through the human skull and mandible revealing internal bony architecture, nasal cavity, and dental relationships.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                      View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -494,25 +602,44 @@
           </div>
           
           <div class="p-6">
-            <div id="viewerContent" class="flex flex-col items-center justify-center py-12 viewer-placeholder rounded-xl">
-              <div id="modelIcon" class="text-5xl mb-4">🦷</div>
-              <h3 id="modelName" class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">3D Dental Model Viewer</h3>
-              <p id="modelDescription" class="text-text-secondary dark:text-dark-text-secondary text-center max-w-md mb-6">
-                Select a dental model from above to explore detailed 3D visualizations with rotation, zoom, and annotation features.
-              </p>
-              <div class="flex gap-3">
-                <button class="px-4 py-2 bg-primary text-white rounded-lg font-medium text-sm hover:bg-primary-dark transition-colors" onclick="rotateModel()">
-                  <span class="material-symbols-outlined align-middle mr-1">rotate_left</span>
-                  Rotate
-                </button>
-                <button class="px-4 py-2 bg-primary text-white rounded-lg font-medium text-sm hover:bg-primary-dark transition-colors" onclick="zoomIn()">
-                  <span class="material-symbols-outlined align-middle mr-1">zoom_in</span>
-                  Zoom In
-                </button>
-                <button class="px-4 py-2 bg-primary text-white rounded-lg font-medium text-sm hover:bg-primary-dark transition-colors" onclick="zoomOut()">
-                  <span class="material-symbols-outlined align-middle mr-1">zoom_out</span>
-                  Zoom Out
-                </button>
+            <div id="viewerContent" class="rounded-xl overflow-hidden border border-border-color dark:border-dark-border-color bg-gray-50 dark:bg-dark-background">
+              <!-- Model info bar -->
+              <div class="flex items-center gap-3 px-5 py-3 border-b border-border-color dark:border-dark-border-color">
+                <span class="material-symbols-outlined text-primary">view_in_ar</span>
+                <div>
+                  <h3 id="modelName" class="text-base font-bold text-text-primary dark:text-dark-text-primary leading-tight">3D Dental Model Viewer</h3>
+                  <p id="modelDescription" class="text-xs text-text-secondary dark:text-dark-text-secondary">
+                    Select a dental model above — then drag to rotate, scroll to zoom.
+                  </p>
+                </div>
+              </div>
+              <!-- model-viewer -->
+              <model-viewer
+                id="dentalModelViewer"
+                src="../assets/models/mandibular_left_central_incisor.glb"
+                alt="Interactive 3D Dental Model"
+                auto-rotate
+                camera-controls
+                style="width: 100%; height: 500px; background: transparent;"
+                loading="eager"
+                shadow-intensity="1"
+                environment-image="neutral"
+                exposure="1"
+              >
+                <!-- Fallback slot shown while loading -->
+                <div slot="progress-bar" style="display:none"></div>
+                <div slot="poster" class="flex items-center justify-center w-full h-full">
+                  <div class="text-center">
+                    <div class="text-5xl mb-3">🦷</div>
+                    <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Loading 3D model…</p>
+                  </div>
+                </div>
+              </model-viewer>
+              <!-- Hint bar -->
+              <div class="flex items-center justify-center gap-6 px-5 py-3 border-t border-border-color dark:border-dark-border-color text-xs text-text-secondary dark:text-dark-text-secondary">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">mouse</span> Drag to rotate</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">pinch</span> Pinch / scroll to zoom</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">pan_tool</span> Right-drag to pan</span>
               </div>
             </div>
           </div>
@@ -674,89 +801,31 @@
       });
     });
 
-    // Add this function to handle model selection
-    function selectModel(modelId, name, description) {
-      // Update the model viewer content
-      document.getElementById('modelName').textContent = name;
+    // ── 3D Model Selection ──────────────────────────────────────────────────────
+    function selectModel(modelId, title, description) {
+      // 1. Update text labels
+      document.getElementById('modelName').textContent = title;
       document.getElementById('modelDescription').textContent = description;
-      
-      // Set appropriate icon based on model
-      const icons = {
-        'tooth-anatomy': '🦷',
-        'jaw-structure': '🦴',
-        'root-canal': '🔍',
-        'periodontal': '🪥',
-        'implants': '⚙️',
-        'orthodontic': '✨'
-      };
-      
-      document.getElementById('modelIcon').textContent = icons[modelId] || '🦷';
-      
-      // Update viewer description
-      document.getElementById('viewerDescription').textContent = 'Interactive 3D visualization of ' + name.toLowerCase();
-      
-      // Scroll to the model viewer section
+
+      // 2. Update viewer description in the header
+      const viewerDesc = document.getElementById('viewerDescription');
+      if (viewerDesc) viewerDesc.textContent = 'Interactive 3D visualization of ' + title.toLowerCase();
+
+      // 3. Swap the model-viewer src to load the new .glb file
+      const viewer = document.getElementById('dentalModelViewer');
+      if (viewer) {
+        viewer.src = '../assets/models/' + modelId + '.glb';
+      }
+
+      // 4. Smooth scroll to the viewer section
       const viewerSection = document.getElementById('modelViewer');
       viewerSection.scrollIntoView({ behavior: 'smooth' });
-      
-      // Add visual feedback
+
+      // 5. Visual ring feedback
       viewerSection.classList.add('ring-2', 'ring-primary', 'rounded-2xl');
       setTimeout(() => {
         viewerSection.classList.remove('ring-2', 'ring-primary');
       }, 2000);
-    }
-
-    // Add visual feedback function for buttons
-    function animateButton(button) {
-      button.classList.add('scale-95', 'opacity-90');
-      setTimeout(() => {
-        button.classList.remove('scale-95', 'opacity-90');
-      }, 150);
-    }
-
-    // Add rotate functionality
-    function rotateModel() {
-      const button = event.currentTarget;
-      animateButton(button);
-      
-      // Add rotation animation to the model icon
-      const modelIcon = document.getElementById('modelIcon');
-      modelIcon.classList.add('animate-spin');
-      setTimeout(() => {
-        modelIcon.classList.remove('animate-spin');
-      }, 1000);
-      
-      console.log('Rotate model clicked');
-    }
-
-    // Add zoom in functionality
-    function zoomIn() {
-      const button = event.currentTarget;
-      animateButton(button);
-      
-      // Add zoom effect to the model icon
-      const modelIcon = document.getElementById('modelIcon');
-      modelIcon.classList.add('scale-125');
-      setTimeout(() => {
-        modelIcon.classList.remove('scale-125');
-      }, 300);
-      
-      console.log('Zoom in clicked');
-    }
-
-    // Add zoom out functionality
-    function zoomOut() {
-      const button = event.currentTarget;
-      animateButton(button);
-      
-      // Add zoom out effect to the model icon
-      const modelIcon = document.getElementById('modelIcon');
-      modelIcon.classList.add('scale-75');
-      setTimeout(() => {
-        modelIcon.classList.remove('scale-75');
-      }, 300);
-      
-      console.log('Zoom out clicked');
     }
 
     // Logo mode switching with MutationObserver
@@ -788,5 +857,8 @@
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     });
   </script>
+  <script src="../js/3dmodels.js"></script>
+  <!-- Google model-viewer web component - loaded as ES module after all page scripts -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 </body>
 </html>
