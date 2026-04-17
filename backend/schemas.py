@@ -69,7 +69,8 @@ class UserOut(BaseModel):
     id: int
     username: str
     email: str
-    full_name: Optional[str]
+    full_name: Optional[str] = None
+    profile_photo: Optional[str] = None
     is_active: bool
     created_at: Optional[datetime]
 
@@ -102,6 +103,7 @@ class AuthorOut(BaseModel):
     id: int
     username: str
     full_name: Optional[str]
+    profile_photo: Optional[str] = None
 
     model_config = {"from_attributes": True}
 
@@ -132,6 +134,7 @@ class LikerOut(BaseModel):
     id: int
     username: str
     full_name: Optional[str]
+    profile_photo: Optional[str] = None
     liked_at: Optional[datetime]
 
     model_config = {"from_attributes": True}

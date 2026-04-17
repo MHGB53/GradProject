@@ -271,5 +271,108 @@ function initChangePasswordLogic() {
     }
 }
 
+// Populate user data from localStorage
+function populateUserData() {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+        try {
+            const user = JSON.parse(userStr);
+            const nameToDisplay = user.full_name || user.username || 'Dental Student';
+            const emailToDisplay = user.email || '';
+
+            // Update Dropdown
+            const dropdownName = document.getElementById('dropdown-name');
+            const dropdownEmail = document.getElementById('dropdown-email');
+            if (dropdownName) dropdownName.textContent = nameToDisplay;
+            if (dropdownEmail) dropdownEmail.textContent = emailToDisplay;
+
+            // Update Main Profile Header
+            const profileName = document.getElementById('profile-name');
+            const profileEmail = document.getElementById('profile-email');
+            if (profileName) profileName.textContent = nameToDisplay;
+            if (profileEmail) profileEmail.textContent = emailToDisplay;
+
+            // Update Account Information Card
+            const accountName = document.getElementById('account-name');
+            const accountEmail = document.getElementById('account-email');
+            if (accountName) accountName.textContent = nameToDisplay;
+            if (accountEmail) accountEmail.textContent = emailToDisplay;
+
+        } catch (e) {
+            console.error('Error parsing user data:', e);
+        }
+    }
+}
+
+// Profile Photo Upload Logic
+function initProfilePhotoUpload() {
+    const uploadInput = document.getElementById('profile-upload');
+    const uploadBtn = document.getElementById('upload-avatar-btn');
+    
+    // Trigger file chooser when button overlay is clicked
+    if (uploadBtn && uploadInput) {
+        uploadBtn.addEventListener('click', () => {
+            uploadInput.click();
+        });
+        
+        uploadInput.addEventListener('change', async function(e) {
+            if (!this.files || this.files.length === 0) return;
+            const file = this.files[0];
+            
+            if (!file.type.startsWith('image/')) {
+                alert('Please upload a valid image file.');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const token = localStorage.getItem('access_token');
+            if (!token) return;
+            
+            const heroAvatar = document.getElementById('hero-avatar');
+            const originalBg = heroAvatar.style.backgroundImage;
+            heroAvatar.style.opacity = '0.5';
+            
+            try {
+                const response = await fetch('/api/auth/upload-photo', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('user', JSON.stringify(data));
+                    
+                    const newUrl = `url('${data.profile_photo}')`;
+                    heroAvatar.style.backgroundImage = newUrl;
+                    
+                    const profileBtn = document.getElementById('profileBtn');
+                    if (profileBtn) profileBtn.style.backgroundImage = newUrl;
+                    
+                    const dropdown = document.getElementById('profileDropdown');
+                    if (dropdown) {
+                        const ddImg = dropdown.querySelector('.rounded-full.bg-cover');
+                        if (ddImg) ddImg.style.backgroundImage = newUrl;
+                    }
+                } else {
+                    const errInfo = await response.json();
+                    alert(errInfo.detail || 'Upload failed.');
+                    heroAvatar.style.backgroundImage = originalBg;
+                }
+            } catch (err) {
+                console.error('Network error during upload:', err);
+                alert('Network error during upload.');
+                heroAvatar.style.backgroundImage = originalBg;
+            } finally {
+                heroAvatar.style.opacity = '1';
+            }
+        });
+    }
+}
+
 // Execute immediately
 initChangePasswordLogic();
+initProfilePhotoUpload();
+document.addEventListener('DOMContentLoaded', populateUserData);

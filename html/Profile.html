@@ -71,7 +71,7 @@
       }
 </script>
 <script src="../js/themeManager.js"></script>
-<script src="../js/tokengaurd.js"></script>
+<script src="../js/tokengaurd.js?v=999"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
@@ -261,20 +261,24 @@
 </div>
 </div>
 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
-<button onclick="window.location.href='notification.html'" class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
-</div>
-</div>
-</div>
+<!-- Notification & Profile -->
+<div class="flex items-center gap-4 border-l border-border-color dark:border-dark-border-color pl-4">
+<button class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1 right-1 w-2.5 h-2.5 bg-accent-coral rounded-full border-2 border-background dark:border-dark-background"></span>
+</button>
 <div class="relative">
-<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></button>
+<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("../assets/default photo.png");'></button>
+
+<!-- Profile Dropdown -->
 <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2tWFL9GUqbRAsXDeqUPNBw5aNnU2_b5Yp4AvrRLhimZdtkiooewUSKY243mUEuWCkeqZpSeFc1sGLKVI7ktEovSPuPXHNnVlgw90aZsi3UGMsaJM15qfEA2Cqq5nIM0kN40WAGc1ymC9BR2t1PbcDRehwOBo9pnHtZFa1M1IwvHu8BegPsUPM5COqM0U64xQzcqxc880Wyi6W10hLlslny9wB3DsyLSn0atnyINuXZjacaR3yMNQQPHtyJNZy1xbu-mn_f81mow");'></div>
+<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("../assets/default photo.png");'></div>
 <div>
-<h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
+<h3 id="dropdown-name" class="font-bold text-text-primary dark:text-dark-text-primary"></h3>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">john.doe@email.com</p>
+<p id="dropdown-email" class="text-xs text-text-secondary dark:text-dark-text-secondary"></p>
 </div>
 </div>
 </div>
@@ -312,18 +316,19 @@
 <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-8 hover:shadow-lg transition-shadow duration-300">
 <div class="flex flex-col lg:flex-row items-center gap-8">
 <div class="flex-shrink-0">
-<div class="group relative">
-<div class="h-32 w-32 rounded-full bg-cover bg-center bg-no-repeat shadow-lg border-4 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJZrFGpVBzV4cM_-cunL23HDrL3iRmEvUbkHtBw8ZT8zQMPDEcxFsGSAUGCA6PWIf3dLDuu_AZAS9ayFw5Z0bXEsyhjnnldRQ9WGRzVrvLDSx3uY-iscvfttL-Hx6SDl0OsLTDlIx_lAaZ44vEg4e-yDgb8Avkf_6qDHYuYVNQlhqswQJJLemoyiG9umk6Y7wEwmLdQAl0xClM88AzzzTBeaUBITEr6ruqKinYi7zUU6DXLQOMzn_lYCD3RZH_zc56gfsnUqB_QA");'></div>
-<button class="absolute inset-0 flex items-center justify-center rounded-full bg-black/60 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:opacity-100 backdrop-blur-sm">
+<div class="group relative" id="avatar-container">
+<div id="hero-avatar" class="h-32 w-32 rounded-full bg-cover bg-center bg-no-repeat shadow-lg border-4 border-primary/20" style='background-image: url("../assets/default photo.png");'></div>
+<button id="upload-avatar-btn" class="absolute inset-0 flex items-center justify-center rounded-full bg-black/60 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:opacity-100 backdrop-blur-sm cursor-pointer">
 <span class="material-symbols-outlined text-2xl">photo_camera</span>
 </button>
+<input type="file" id="profile-upload" class="hidden" accept="image/*">
 </div>
 </div>
 <div class="flex-grow text-center lg:text-left">
-<h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Sophia Clark</h3>
+<h3 id="profile-name" class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2"></h3>
 <p class="text-lg text-text-secondary dark:text-dark-text-secondary flex items-center justify-center lg:justify-start gap-2 mb-4">
 <span class="material-symbols-outlined text-sm">email</span>
-sophia.clark@university.edu
+<span id="profile-email"></span>
 </p>
 <div class="flex flex-wrap gap-2 justify-center lg:justify-start mb-4">
 <span class="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2 text-sm font-bold text-primary">
@@ -349,11 +354,11 @@ Student ID: U-DENT-12345
 <div class="space-y-4">
 <div>
 <label class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Full Name</label>
-<p class="mt-1 text-base text-text-primary dark:text-dark-text-primary">Sophia Clark</p>
+<p id="account-name" class="mt-1 text-base text-text-primary dark:text-dark-text-primary"></p>
 </div>
 <div>
 <label class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">University Email</label>
-<p class="mt-1 text-base text-text-primary dark:text-dark-text-primary">sophia.clark@university.edu</p>
+<p id="account-email" class="mt-1 text-base text-text-primary dark:text-dark-text-primary"></p>
 </div>
 <div>
 <label class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Student ID</label>
@@ -396,7 +401,7 @@ Student ID: U-DENT-12345
 </main>
 </div>
 
-<script src="../js/Profile.js?v=2"></script>
+<script src="../js/Profile.js?v=999"></script>
 <script>
 
 // Logo mode switching

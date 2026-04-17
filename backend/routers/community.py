@@ -89,6 +89,7 @@ def _build_post_out(post: Post, current_user_id: int, base_url: str) -> PostOut:
             id=post.author.id,
             username=post.author.username,
             full_name=post.author.full_name,
+            profile_photo=post.author.profile_photo,
         ),
         like_count=len(post.likes),
         comment_count=len(post.comments),
@@ -261,7 +262,13 @@ def get_likes(
         raise HTTPException(status_code=404, detail="Post not found.")
 
     return [
-        LikerOut(id=like.user.id, username=like.user.username, full_name=like.user.full_name, liked_at=like.created_at)
+        LikerOut(
+            id=like.user.id, 
+            username=like.user.username, 
+            full_name=like.user.full_name, 
+            profile_photo=like.user.profile_photo,
+            liked_at=like.created_at
+        )
         for like in post.likes
     ]
 
@@ -281,7 +288,12 @@ def get_comments(
         CommentOut(
             id=c.id,
             content=c.content,
-            author=AuthorOut(id=c.author.id, username=c.author.username, full_name=c.author.full_name),
+            author=AuthorOut(
+                id=c.author.id, 
+                username=c.author.username, 
+                full_name=c.author.full_name,
+                profile_photo=c.author.profile_photo
+            ),
             created_at=c.created_at,
         )
         for c in sorted(post.comments, key=lambda x: x.created_at or 0)
@@ -317,6 +329,7 @@ def add_comment(
             id=current_user.id,
             username=current_user.username,
             full_name=current_user.full_name,
+            profile_photo=current_user.profile_photo,
         ),
         created_at=comment.created_at,
     )

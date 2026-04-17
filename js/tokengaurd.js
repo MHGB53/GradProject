@@ -62,6 +62,47 @@ async function runAuthGuard() {
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('user');
                 window.location.replace('Login.html');
+            } else if (res.ok) {
+                // Sync user data dynamically from server to ensure it is never outdated
+                const user = await res.json();
+                localStorage.setItem('user', JSON.stringify(user));
+                
+                // --- Avatar specific logic ---
+                const photoUrl = user.profile_photo || '../assets/default photo.png';
+                const profileBtn = document.getElementById('profileBtn');
+                if (profileBtn) {
+                    profileBtn.style.backgroundImage = `url('${photoUrl}')`;
+                }
+                const heroAvatar = document.getElementById('hero-avatar');
+                if (heroAvatar) {
+                    heroAvatar.style.backgroundImage = `url('${photoUrl}')`;
+                }
+                const composerAvatar = document.getElementById('composerAvatar');
+                if (composerAvatar) {
+                    composerAvatar.style.backgroundImage = `url('${photoUrl}')`;
+                    composerAvatar.classList.remove('bg-primary/20', 'text-primary', 'font-bold');
+                    // Add background cover attributes
+                    composerAvatar.classList.add('bg-cover', 'bg-center', 'border-2', 'border-primary');
+                    composerAvatar.textContent = '';
+                }
+
+                // Safely update the dropdown right away
+                const dropdown = document.getElementById('profileDropdown');
+                if (dropdown) {
+                    const dropdownImg = dropdown.querySelector('.rounded-full.bg-cover');
+                    if (dropdownImg) dropdownImg.style.backgroundImage = `url('${photoUrl}')`;
+
+                    const nameToDisplay = user.full_name || user.username || 'Dental Student';
+                    const emailToDisplay = user.email || '';
+
+                    const nameEl = dropdown.querySelector('h3');
+                    if (nameEl) nameEl.textContent = nameToDisplay;
+
+                    const emailEls = dropdown.querySelectorAll('p');
+                    if (emailEls.length > 1) {
+                        emailEls[1].textContent = emailToDisplay;
+                    }
+                }
             }
         } catch (err) {
             console.error('Auth verification failed', err);
@@ -70,7 +111,9 @@ async function runAuthGuard() {
 }
 
 // Run on initial load
-document.addEventListener('DOMContentLoaded', runAuthGuard);
+document.addEventListener('DOMContentLoaded', () => {
+    runAuthGuard();
+});
 
 // Run whenever the page is shown (specifically catches the "Back" button in Chrome / BFCache)
 window.addEventListener('pageshow', (event) => {

@@ -9,12 +9,13 @@ Endpoints:
 """
 
 import os
+import uuid
 import resend
 import random
 import string
 from datetime import datetime, timedelta
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
@@ -316,13 +317,61 @@ def change_password(
     if not verify_password(payload.current_password, current_user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Incorrect current password."
+            detail="Incorrect current password"
         )
-
+    
     current_user.hashed_password = hash_password(payload.new_password)
     db.commit()
+    db.refresh(current_user)
+    
+    return MessageResponse(message="Password changed successfully")
 
-    return MessageResponse(message="Password changed successfully.")
+@router.post("/upload-photo", response_model=UserOut)
+async def upload_profile_photo(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Upload a profile photo. Replaces any existing photo.
+    """
+    if not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="File must be an image.")
+
+    file_extension = file.filename.split('.')[-1] if '.' in file.filename else 'png'
+    new_filename = f"{uuid.uuid4().hex}.{file_extension}"
+    
+    profiles_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "uploads", "profiles")
+    os.makedirs(profiles_dir, exist_ok=True)
+    
+    file_path = os.path.join(profiles_dir, new_filename)
+    
+    # Save the file
+    try:
+        content = await file.read()
+        with open(file_path, "wb") as buffer:
+            buffer.write(content)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save file: {e}")
+        
+    # Relative path to serve to frontend
+    static_url = f"/uploads/profiles/{new_filename}"
+    
+    # Delete old profile photo if it exists to cleanly save space
+    if current_user.profile_photo and current_user.profile_photo.startswith("/uploads/profiles/"):
+        old_file_name = current_user.profile_photo.split("/")[-1]
+        old_file_path = os.path.join(profiles_dir, old_file_name)
+        if os.path.exists(old_file_path):
+            try:
+                os.remove(old_file_path)
+            except Exception:
+                pass
+                
+    current_user.profile_photo = static_url
+    db.commit()
+    db.refresh(current_user)
+    
+    return UserOut.model_validate(current_user)
 
 
 @router.get(

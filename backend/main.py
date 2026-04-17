@@ -20,9 +20,11 @@ async def lifespan(app: FastAPI):
     # Startup: verify SQL Server connection and create / migrate tables
     test_connection()
     models.Base.metadata.create_all(bind=engine)
-    # Ensure upload directory exists
+    # Ensure upload directories exist
     upload_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads", "community")
+    profiles_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads", "profiles")
     os.makedirs(upload_dir, exist_ok=True)
+    os.makedirs(profiles_dir, exist_ok=True)
     yield
     # Shutdown: nothing special needed
 

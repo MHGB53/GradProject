@@ -66,10 +66,8 @@ function avatarInitials(author) {
 }
 
 function avatarHtml(author, size = 'w-10 h-10') {
-    const initials = avatarInitials(author);
-    return `<div class="${size} rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center flex-shrink-0 text-sm">
-                ${initials}
-            </div>`;
+    const photoUrl = author.profile_photo || '../assets/default photo.png';
+    return `<div class="${size} rounded-full bg-cover bg-center border-2 border-primary flex-shrink-0 shadow-sm" style="background-image: url('${photoUrl}')"></div>`;
 }
 
 // ──────────────────────────── State ────────────────────────────
@@ -204,7 +202,7 @@ function renderPostCard(post) {
                 <!-- Quick Comment Input -->
                 <div class="border-t border-border-color dark:border-dark-border-color pt-3">
                     <div class="flex items-center gap-2">
-                        ${avatarHtml({username: 'Me'}, 'w-8 h-8')}
+                        ${avatarHtml(JSON.parse(localStorage.getItem('user') || '{"username": "Me"}'), 'w-8 h-8')}
                         <input id="quick-comment-${post.id}"
                             class="flex-1 border-none focus:ring-0 text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-2 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary"
                             placeholder="Write a comment..."
