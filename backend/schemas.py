@@ -41,6 +41,28 @@ class LoginRequest(BaseModel):
     }
 
 
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr = Field(..., description="User's registered email address")
+
+class VerifyOTPRequest(BaseModel):
+    email: EmailStr = Field(..., description="User's email address")
+    otp: str = Field(..., min_length=6, max_length=6, description="6-digit OTP code")
+
+class ResetPasswordRequest(BaseModel):
+    email: EmailStr = Field(..., description="User's email address")
+    new_password: str = Field(..., min_length=8, description="New password (min 8 characters)")
+    reset_token: str = Field(..., description="Valid reset token")
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str = Field(..., description="The user's current password")
+    new_password: str = Field(..., min_length=8, description="New password (min 8 characters)")
+
+class VerifyOTPResponse(BaseModel):
+    message: str
+    reset_token: str
+
+
+
 # ──────────────────────────── Auth Response Schemas ────────────────────────────
 
 class UserOut(BaseModel):

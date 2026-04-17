@@ -41,6 +41,17 @@ class User(Base):
         return f"<User id={self.id} username={self.username}>"
 
 
+class PasswordReset(Base):
+    __tablename__ = "password_resets"
+
+    id          = Column(Integer, primary_key=True, index=True)
+    email       = Column(String(255), nullable=False, index=True)
+    otp         = Column(String(10), nullable=False)
+    reset_token = Column(String(255), nullable=True, index=True)
+    expires_at  = Column(DateTime(timezone=True), nullable=False)
+    created_at  = Column(DateTime(timezone=True), server_default=func.now())
+
+
 # ──────────────────────────── Community ────────────────────────────
 
 class Post(Base):

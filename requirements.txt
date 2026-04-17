@@ -21,3 +21,4 @@ python-multipart==0.0.26
 
 # ── Environment variables ──
 python-dotenv==1.0.1
+resend==2.6.0

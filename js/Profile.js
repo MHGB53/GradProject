@@ -177,3 +177,99 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Change Password Logic
+function initChangePasswordLogic() {
+    const changePasswordForm = document.getElementById('change-password-form');
+    if (changePasswordForm) {
+        changePasswordForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const securityMessage = document.getElementById('security-message');
+            const submitBtn = changePasswordForm.querySelector('button[type="submit"]');
+
+            securityMessage.classList.add('hidden');
+            securityMessage.classList.remove('text-red-500', 'text-green-500');
+
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                securityMessage.textContent = 'Please fill out all password fields.';
+                securityMessage.classList.add('text-red-500');
+                securityMessage.classList.remove('hidden');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                securityMessage.textContent = 'New password must be at least 8 characters long.';
+                securityMessage.classList.add('text-red-500');
+                securityMessage.classList.remove('hidden');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                securityMessage.textContent = 'New passwords do not match.';
+                securityMessage.classList.add('text-red-500');
+                securityMessage.classList.remove('hidden');
+                return;
+            }
+
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                securityMessage.textContent = 'Authentication token missing. Please log in again.';
+                securityMessage.classList.add('text-red-500');
+                securityMessage.classList.remove('hidden');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Updating...';
+
+            try {
+                const response = await fetch('/api/auth/change-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        current_password: currentPassword,
+                        new_password: newPassword
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    securityMessage.textContent = 'Password successfully updated! Redirecting to login...';
+                    securityMessage.classList.add('text-green-500');
+                    securityMessage.classList.remove('hidden');
+                    
+                    // Log out user
+                    localStorage.removeItem('access_token');
+                    localStorage.removeItem('user');
+                    setTimeout(() => {
+                        window.location.href = 'Login.html';
+                    }, 2000);
+                } else {
+                    securityMessage.textContent = data.detail || 'Failed to update password.';
+                    securityMessage.classList.add('text-red-500');
+                    securityMessage.classList.remove('hidden');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Update';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                securityMessage.textContent = 'A network error occurred. Please try again.';
+                securityMessage.classList.add('text-red-500');
+                securityMessage.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Update';
+            }
+        });
+    }
+}
+
+// Execute immediately
+initChangePasswordLogic();
