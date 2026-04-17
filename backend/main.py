@@ -11,7 +11,7 @@ from fastapi.responses import RedirectResponse
 
 from .database import engine, test_connection
 from . import models
-from .routers import auth, community
+from .routers import auth, community, chatbot
 
 
 # ──────────────────────────── Lifespan (startup / shutdown) ────────────────────────────
@@ -65,6 +65,7 @@ app.mount("/assets", StaticFiles(directory=os.path.join(ROOT_DIR, "assets")), na
 # ──────────────────────────── Routers ────────────────────────────
 app.include_router(auth.router)
 app.include_router(community.router)
+app.include_router(chatbot.router)
 
 
 # ──────────────────────────── Root → Login page ────────────────────────────

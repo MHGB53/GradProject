@@ -447,21 +447,22 @@
 <main class="flex-grow flex flex-col">
 <div class="w-full max-w-4xl mx-auto flex flex-col flex-grow p-6">
 <!-- Chat Messages Area -->
-<div id="chatArea" class="flex-grow space-y-6 overflow-y-auto custom-scrollbar mb-6">
-<!-- Messages will appear here -->
+<div id="chatArea" class="flex-grow space-y-6 overflow-y-auto custom-scrollbar mb-6" style="scroll-behavior:smooth;">
+<!-- Messages injected by chatbot.js -- welcome message shown on load -->
 </div>
 
 <!-- Input Area -->
 <div class="border-t border-border-color dark:border-dark-border-color pt-4">
 <div class="relative bg-card dark:bg-dark-card rounded-2xl shadow-lg border border-border-color dark:border-dark-border-color focus-within:border-primary transition-all duration-300">
 <div class="flex items-center gap-3 p-3">
-<input 
+<input
   id="messageInput"
-  type="text" 
-  class="flex-1 bg-transparent border-none focus:ring-0 text-sm text-text-primary dark:text-dark-text-primary placeholder-text-secondary dark:placeholder-dark-text-secondary outline-none px-2" 
-  placeholder="Type your message here..."
+  type="text"
+  autocomplete="off"
+  class="flex-1 bg-transparent border-none focus:ring-0 text-sm text-text-primary dark:text-dark-text-primary placeholder-text-secondary dark:placeholder-dark-text-secondary outline-none px-2"
+  placeholder="اسأل Dentor أي سؤال في طب الأسنان… / Ask Dentor anything dental…"
 />
-<button id="sendButton" class="bg-primary hover:bg-primary-dark rounded-xl p-3 flex items-center justify-center transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg">
+<button id="sendButton" aria-label="Send message" class="bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed rounded-xl p-3 flex items-center justify-center transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg">
 <span class="material-symbols-outlined text-white">send</span>
 </button>
 </div>

@@ -99,18 +99,18 @@ function initializeDropdowns() {
     notificationBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         notificationDropdown.classList.toggle('active');
-        profileDropdown.classList.remove('active');
+        profileDropdown.classList.add('hidden');
     });
 
     profileBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        profileDropdown.classList.toggle('active');
+        profileDropdown.classList.toggle('hidden');
         notificationDropdown.classList.remove('active');
     });
 
     document.addEventListener('click', () => {
         notificationDropdown.classList.remove('active');
-        profileDropdown.classList.remove('active');
+        profileDropdown.classList.add('hidden');
     });
 }
 
