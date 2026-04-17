@@ -15,6 +15,7 @@ function initializeDarkMode() {
         darkModeToggle.addEventListener('click', function() {
             // Let ThemeManager handle the toggle and localStorage
             const newTheme = ThemeManager.toggleTheme();
+            if (darkModeIcon) darkModeIcon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
             
             // Update logo with fade effect
             logoImage.style.opacity = '0';
@@ -27,6 +28,7 @@ function initializeDarkMode() {
         // Set initial logo based on current theme
         const currentTheme = ThemeManager.getCurrentTheme();
         logoImage.src = currentTheme === 'dark' ? darkLogo : lightLogo;
+        if (darkModeIcon) darkModeIcon.textContent = currentTheme === 'dark' ? 'dark_mode' : 'light_mode';
     }
 }
 

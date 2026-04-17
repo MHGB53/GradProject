@@ -12,7 +12,7 @@ function initializeDarkMode() {
     const darkLogo = 'assets/Logo0.png';
     
     // Check for saved preference or default to light mode
-    const currentMode = localStorage.getItem('darkMode') || 'light';
+    const currentMode = localStorage.getItem('theme') || 'light';
     if (currentMode === 'dark') {
         htmlElement.classList.add('dark');
         darkModeIcon.textContent = 'dark_mode';
@@ -34,7 +34,7 @@ function initializeDarkMode() {
         }, 150);
         
         // Save preference
-        localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 }
 

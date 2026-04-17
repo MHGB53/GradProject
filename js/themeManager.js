@@ -65,7 +65,8 @@ const ThemeManager = {
   updateThemeIcon(iconElement) {
     if (iconElement) {
       const currentTheme = this.getCurrentTheme();
-      iconElement.textContent = currentTheme === 'dark' ? 'light_mode' : 'dark_mode';
+      // display the icon representing the CURRENT mode as requested by user
+      iconElement.textContent = currentTheme === 'dark' ? 'dark_mode' : 'light_mode';
     }
   }
 };

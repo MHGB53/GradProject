@@ -102,3 +102,40 @@ function selectModel(modelId, title, description) {
     }, 2000);
   }
 }
+
+// Escape key for dropdowns
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (notificationDropdown) notificationDropdown.classList.add('hidden');
+    if (profileDropdown) profileDropdown.classList.add('hidden');
+  }
+});
+
+// Logo mode switching with MutationObserver
+document.addEventListener('DOMContentLoaded', function() {
+  const logoImage = document.getElementById('logoImage');
+  if (!logoImage) return;
+
+  const lightLogo = '../assets/Logo.png';
+  const darkLogo = '../assets/Logo0.png';
+
+  // Set initial logo
+  const isDark = document.documentElement.classList.contains('dark');
+  logoImage.src = isDark ? darkLogo : lightLogo;
+
+  // Watch for dark mode changes
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.attributeName === 'class') {
+        const isDarkMode = document.documentElement.classList.contains('dark');
+        logoImage.style.opacity = '0';
+        setTimeout(() => {
+          logoImage.src = isDarkMode ? darkLogo : lightLogo;
+          logoImage.style.opacity = '1';
+        }, 150);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+});

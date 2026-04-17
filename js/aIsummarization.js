@@ -14,11 +14,13 @@ function initializeDarkMode() {
         // Set initial logo based on current theme
         const currentTheme = ThemeManager.getCurrentTheme();
         logoImage.src = currentTheme === 'dark' ? darkLogo : lightLogo;
+        if (darkModeIcon) darkModeIcon.textContent = currentTheme === 'dark' ? 'dark_mode' : 'light_mode';
         
         // Update logo when theme toggle is clicked
         darkModeToggle.addEventListener('click', function() {
             // Toggle and get new theme
             const newTheme = ThemeManager.toggleTheme();
+            if (darkModeIcon) darkModeIcon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
             
             // Update logo with fade effect
             logoImage.style.opacity = '0';

@@ -46,6 +46,9 @@ function initializeDarkMode() {
         // Set initial logo based on current theme
         const currentTheme = ThemeManager.getCurrentTheme();
         logoImg.src = currentTheme === 'dark' ? 'assets/Logo0.png' : 'assets/Logo.png';
+        if (darkModeIcon) {
+            darkModeIcon.textContent = currentTheme === 'dark' ? 'dark_mode' : 'light_mode';
+        }
     }
 
     if (darkModeToggle) {

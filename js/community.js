@@ -348,8 +348,6 @@ async function submitPost(e) {
 // ──────────────────────────── Delete Post ────────────────────────────
 
 async function deletePost(postId) {
-    if (!confirm('Delete this post? This cannot be undone.')) return;
-
     try {
         const res = await fetch(`${API_BASE}/api/community/posts/${postId}`, {
             method: 'DELETE',
@@ -366,7 +364,7 @@ async function deletePost(postId) {
             setTimeout(() => card.remove(), 300);
         }
     } catch (err) {
-        alert('Could not delete post: ' + err.message);
+        console.error('Could not delete post:', err);
     }
 }
 
@@ -584,7 +582,6 @@ async function quickComment(postId) {
 // ──────────────────────────── Delete Comment ────────────────────────────
 
 async function deleteComment(commentId, postId) {
-    if (!confirm('Delete this comment?')) return;
     try {
         const res = await fetch(`${API_BASE}/api/community/comments/${commentId}`, {
             method: 'DELETE',
@@ -597,7 +594,7 @@ async function deleteComment(commentId, postId) {
         const countEl = document.querySelector(`#post-card-${postId} .comment-count`);
         if (countEl) countEl.textContent = Math.max(0, parseInt(countEl.textContent) - 1);
     } catch (err) {
-        alert('Could not delete comment: ' + err.message);
+        console.error('Could not delete comment:', err);
     }
 }
 

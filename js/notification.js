@@ -7,12 +7,12 @@ const darkModeIcon = document.getElementById('darkModeIcon');
 if (darkModeToggle) {
   darkModeToggle.addEventListener('click', () => {
     const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
     darkModeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
   });
 
   // Set initial icon based on saved preference
-  const currentMode = localStorage.getItem('darkMode') || 'light';
+  const currentMode = localStorage.getItem('theme') || 'light';
   darkModeIcon.textContent = currentMode === 'dark' ? 'dark_mode' : 'light_mode';
 }
 
