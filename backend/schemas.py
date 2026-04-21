@@ -146,3 +146,33 @@ class PaginatedPostsOut(BaseModel):
     page: int
     page_size: int
     has_more: bool
+
+# ──────────────────────────── Chatbot Schemas ────────────────────────────
+
+class ChatSessionOut(BaseModel):
+    id: int
+    user_id: int
+    title: str = "New Chat"
+    created_at: Optional[datetime]
+
+    model_config = {"from_attributes": True}
+
+
+class ChatMessageOut(BaseModel):
+    id: int
+    session_id: int
+    role: str
+    content: str
+    created_at: Optional[datetime]
+
+    model_config = {"from_attributes": True}
+
+
+class ChatRequest(BaseModel):
+    message: str
+    session_id: Optional[int] = None
+
+
+class ChatResponse(BaseModel):
+    reply: str
+    session_id: int

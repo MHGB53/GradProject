@@ -3,23 +3,27 @@ Dentor Chatbot Router
 Exposes POST /api/chat — wraps Gemini 2.5 Flash with the Dentor system-prompt
 so the AI answers only dental questions.
 
-Uses the new `google-genai` SDK (google.genai), the replacement for the
-now-retired `google-generativeai` package.
+Uses the new `google-genai` SDK (google.genai).
 """
 
 import os
-from typing import Any
+from typing import Any, List
 
 from dotenv import load_dotenv
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from sqlalchemy.orm import Session
 from google import genai
 from google.genai import types
-from pydantic import BaseModel
 
-# Load .env from the project root (two levels above this file)
+from ..database import get_db
+from ..routers.auth import get_current_user
+from ..models import User, ChatSession, ChatMessage
+from .. import schemas
+
+# Load .env from the project root
 load_dotenv()
 
-router = APIRouter(prefix="/api", tags=["Chatbot"])
+router = APIRouter(prefix="/api/chat", tags=["Chatbot"])
 
 # ──────────────────────────── System Prompt ────────────────────────────
 SYSTEM_PROMPT = """أنت طبيب أسنان خبير اسمك "Dentor".
@@ -28,28 +32,56 @@ SYSTEM_PROMPT = """أنت طبيب أسنان خبير اسمك "Dentor".
 يُقبل السؤال باللغة العربية أو الإنجليزية ويُرد بنفس اللغة."""
 
 
-# ──────────────────────────── Pydantic Models ────────────────────────────
-class HistoryEntry(BaseModel):
-    role: str        # "user" | "assistant"
-    content: str
+# ──────────────────────────── Session Endpoints ────────────────────────────
+
+@router.get("/sessions", response_model=List[schemas.ChatSessionOut])
+def get_sessions(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Return all chat sessions for the current user, newest first."""
+    sessions = db.query(ChatSession).filter(ChatSession.user_id == current_user.id).order_by(ChatSession.created_at.desc()).all()
+    return sessions
+
+@router.post("/session", response_model=schemas.ChatSessionOut)
+def create_session(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Create a new chat session."""
+    new_session = ChatSession(user_id=current_user.id)
+    db.add(new_session)
+    db.commit()
+    db.refresh(new_session)
+    return new_session
+
+@router.get("/session/{session_id}/messages", response_model=List[schemas.ChatMessageOut])
+def get_session_messages(session_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Return all messages for a specific session."""
+    session = db.query(ChatSession).filter(ChatSession.id == session_id, ChatSession.user_id == current_user.id).first()
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    messages = db.query(ChatMessage).filter(ChatMessage.session_id == session_id).order_by(ChatMessage.created_at.asc()).all()
+    return messages
+
+@router.delete("/session/{session_id}")
+def delete_session(session_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Delete a chat session and all its messages."""
+    session = db.query(ChatSession).filter(ChatSession.id == session_id, ChatSession.user_id == current_user.id).first()
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    db.delete(session)
+    db.commit()
+    return {"message": "Session deleted"}
 
 
-class ChatRequest(BaseModel):
-    message: str
-    history: list[HistoryEntry] = []
+# ──────────────────────────── Chat Endpoint ────────────────────────────
 
-
-class ChatResponse(BaseModel):
-    reply: str
-
-
-# ──────────────────────────── Endpoint ────────────────────────────
-@router.post("/chat", response_model=ChatResponse)
-async def chat(payload: ChatRequest) -> Any:
+@router.post("", response_model=schemas.ChatResponse)
+async def chat(
+    payload: schemas.ChatRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+) -> Any:
     """
     Accepts a user message + conversation history, forwards them to
     Gemini 2.5 Flash with the Dentor system-prompt injected, and returns
-    the model's reply.
+    the model's reply. Saves messages to the DB if session_id is provided.
     """
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
@@ -58,10 +90,25 @@ async def chat(payload: ChatRequest) -> Any:
             detail="GEMINI_API_KEY is not set. Add it to your .env file.",
         )
 
-    # Build the conversational turns for the new SDK
-    # Convert our history (role: user/assistant) into google.genai Content objects
-    contents: list[types.Content] = []
+    # Validate session if provided
+    session = None
+    if payload.session_id:
+        session = db.query(ChatSession).filter(ChatSession.id == payload.session_id, ChatSession.user_id == current_user.id).first()
+        if not session:
+            raise HTTPException(status_code=404, detail="Session not found")
+        
+        # Save user message
+        user_msg = ChatMessage(session_id=session.id, role="user", content=payload.message)
+        db.add(user_msg)
+        
+        # Update title if it's the first message
+        if session.title == "New Chat":
+            session.title = payload.message[:30] + ("..." if len(payload.message) > 30 else "")
+            
+        db.commit()
 
+    # Build the conversational turns
+    contents: list[types.Content] = []
     for entry in payload.history:
         sdk_role = "user" if entry.role == "user" else "model"
         contents.append(
@@ -71,7 +118,7 @@ async def chat(payload: ChatRequest) -> Any:
             )
         )
 
-    # Append the current user message
+    # Append current user message
     contents.append(
         types.Content(
             role="user",
@@ -90,7 +137,14 @@ async def chat(payload: ChatRequest) -> Any:
             ),
         )
         reply = response.text.strip() if response.text else "لم أتلقَّ ردًا من الخادم."
-        return ChatResponse(reply=reply)
+        
+        # Save AI message
+        if session:
+            ai_msg = ChatMessage(session_id=session.id, role="assistant", content=reply)
+            db.add(ai_msg)
+            db.commit()
+
+        return schemas.ChatResponse(reply=reply, session_id=session.id if session else -1)
 
     except Exception as exc:
         raise HTTPException(

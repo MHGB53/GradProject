@@ -75,8 +75,8 @@
 <script src="../js/tokengaurd.js?v=999"></script>
 <link rel="stylesheet" href="../css/chatbot.css">
 </head>
-<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
-<div class="flex flex-col min-h-screen">
+<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300 overflow-hidden h-screen">
+<div class="flex flex-col h-full">
 <header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-20">
@@ -362,7 +362,7 @@
 </div>
 </div>
 
-<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="flex flex-1 overflow-hidden">
 <aside class="w-80 bg-card dark:bg-dark-card border-r border-border-color dark:border-dark-border-color flex flex-col shrink-0 transition-all duration-300">
 <!-- Sidebar Header -->
 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
@@ -373,105 +373,59 @@
 </div>
 
 <!-- Chat History -->
-<div class="flex-grow overflow-y-auto px-4 space-y-1">
-<!-- Today -->
-<div class="mb-4">
-<h3 class="text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2 px-2">Today</h3>
-<a class="group block p-3 rounded-lg bg-primary/10 dark:bg-primary/20 hover:bg-primary/20 dark:hover:bg-primary/30 transition-all duration-200 relative" href="#">
-<div class="flex items-start justify-between gap-2">
-<div class="flex-1 min-w-0">
-<p class="font-semibold text-sm text-primary dark:text-primary-light truncate">Amalgam vs. Composite</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1 truncate">Of course, Sophia! Amalgam fillings...</p>
-</div>
-<button class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-white/10 transition-all">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">more_vert</span>
-</button>
-</div>
-<span class="text-xs text-text-secondary dark:text-dark-text-secondary mt-2 block">10:30 AM</span>
-</a>
-</div>
-
-<!-- Yesterday -->
-<div class="mb-4">
-<h3 class="text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2 px-2">Yesterday</h3>
-<a class="group block p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all duration-200 relative" href="#">
-<div class="flex items-start justify-between gap-2">
-<div class="flex-1 min-w-0">
-<p class="font-semibold text-sm text-text-primary dark:text-dark-text-primary truncate">Dental Radiography</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1 truncate">Can you explain the principles...</p>
-</div>
-<button class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">more_vert</span>
-</button>
-</div>
-</a>
-</div>
-
-<!-- Previous 7 Days -->
-<div class="mb-4">
-<h3 class="text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2 px-2">Previous 7 Days</h3>
-<a class="group block p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all duration-200 relative" href="#">
-<div class="flex items-start justify-between gap-2">
-<div class="flex-1 min-w-0">
-<p class="font-semibold text-sm text-text-primary dark:text-dark-text-primary truncate">Periodontal Disease</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1 truncate">What are the main stages...</p>
-</div>
-<button class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">more_vert</span>
-</button>
-</div>
-</a>
-<a class="group block p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all duration-200 relative" href="#">
-<div class="flex items-start justify-between gap-2">
-<div class="flex-1 min-w-0">
-<p class="font-semibold text-sm text-text-primary dark:text-dark-text-primary truncate">Root Canal Procedure</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1 truncate">Explain endodontic treatment...</p>
-</div>
-<button class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">more_vert</span>
-</button>
-</div>
-</a>
-</div>
+<div id="chatHistoryList" class="flex-grow overflow-y-auto px-4 py-4 space-y-2 custom-scrollbar">
+    <!-- Sessions will be injected here by JS -->
 </div>
 
 <!-- Sidebar Footer -->
 <div class="p-4 border-t border-border-color dark:border-dark-border-color">
 <button class="w-full flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors text-text-primary dark:text-dark-text-primary">
-<span class="material-symbols-outlined text-lg">delete_sweep</span>
-<span class="text-sm font-medium">Clear conversations</span>
+<span class="material-symbols-outlined text-lg">delete</span>
+<span class="text-sm font-medium">Delete chat</span>
 </button>
 </div>
 </aside>
-<div class="flex flex-col flex-grow">
-<main class="flex-grow flex flex-col">
-<div class="w-full max-w-4xl mx-auto flex flex-col flex-grow p-6">
+
+<main class="flex-1 flex flex-col relative bg-background dark:bg-dark-background">
 <!-- Chat Messages Area -->
-<div id="chatArea" class="flex-grow space-y-6 overflow-y-auto custom-scrollbar mb-6" style="scroll-behavior:smooth;">
-<!-- Messages injected by chatbot.js -- welcome message shown on load -->
+<div id="chatBox" class="flex-1 overflow-y-auto p-4 sm:p-8 space-y-6 custom-scrollbar pb-32">
+<!-- Messages injected by chatbot.js -->
 </div>
 
 <!-- Input Area -->
-<div class="border-t border-border-color dark:border-dark-border-color pt-4">
-<div class="relative bg-card dark:bg-dark-card rounded-2xl shadow-lg border border-border-color dark:border-dark-border-color focus-within:border-primary transition-all duration-300">
-<div class="flex items-center gap-3 p-3">
+<div id="chatInput" class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background dark:from-dark-background via-background/90 dark:via-dark-background/90 to-transparent">
+<div class="max-w-4xl mx-auto bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color focus-within:border-primary transition-all duration-300 flex items-center p-2">
 <input
   id="messageInput"
   type="text"
   autocomplete="off"
-  class="flex-1 bg-transparent border-none focus:ring-0 text-sm text-text-primary dark:text-dark-text-primary placeholder-text-secondary dark:placeholder-dark-text-secondary outline-none px-2"
+  class="flex-1 bg-transparent border-none focus:ring-0 text-sm text-text-primary dark:text-dark-text-primary placeholder-text-secondary dark:placeholder-dark-text-secondary outline-none px-4 py-2"
   placeholder="اسأل Dentor أي سؤال في طب الأسنان… / Ask Dentor anything dental…"
 />
-<button id="sendButton" aria-label="Send message" class="bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed rounded-xl p-3 flex items-center justify-center transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg">
-<span class="material-symbols-outlined text-white">send</span>
+<button id="sendButton" aria-label="Send message" class="bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed rounded-xl w-10 h-10 flex items-center justify-center transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-md shrink-0">
+<span class="material-symbols-outlined text-white text-lg">send</span>
 </button>
-</div>
-</div>
-</div>
 </div>
 </div>
 </main>
 </div>
+</div>
+</div>
+
+<!-- Custom Delete Chat Modal -->
+<div id="deleteChatModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+  <div id="deleteChatModalContent" class="bg-[#1e1e20] text-gray-200 rounded-[28px] p-6 max-w-[360px] w-[90%] shadow-2xl transform scale-95 transition-transform duration-300 border border-white/5">
+    <h3 class="text-[22px] font-normal mb-3 text-[#e3e3e3]">Delete chat?</h3>
+    <p class="text-[14px] text-[#c4c7c5] leading-relaxed mb-4">
+      This will delete prompts, responses, and feedback from your Dentor Apps Activity, plus any content you created.
+    </p>
+    <a href="#" class="text-[#a8c7fa] hover:text-[#d3e3fd] text-[14px] font-medium mb-6 inline-block transition-colors">Learn more</a>
+    
+    <div class="flex justify-end gap-1 mt-2">
+      <button id="cancelDeleteBtn" class="px-6 py-2.5 rounded-full text-[14px] font-medium text-[#a8c7fa] hover:bg-[#a8c7fa]/10 transition-colors">Cancel</button>
+      <button id="confirmDeleteBtn" class="px-6 py-2.5 rounded-full text-[14px] font-medium text-[#a8c7fa] hover:bg-[#a8c7fa]/10 transition-colors">Delete</button>
+    </div>
+  </div>
 </div>
 
 <script src="../js/chatbot.js"></script>

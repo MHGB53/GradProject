@@ -120,3 +120,28 @@ class PostComment(Base):
 
     post   = relationship("Post", back_populates="comments")
     author = relationship("User", back_populates="comments")
+
+# ──────────────────────────── Chatbot ────────────────────────────
+
+class ChatSession(Base):
+    __tablename__ = "chat_sessions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String(100), default="New Chat", nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    messages = relationship("ChatMessage", back_populates="session", cascade="all, delete-orphan")
+    user = relationship("User")
+
+
+class ChatMessage(Base):
+    __tablename__ = "chat_messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    session_id = Column(Integer, ForeignKey("chat_sessions.id", ondelete="CASCADE"), nullable=False, index=True)
+    role = Column(String(50), nullable=False) # "user" or "assistant"
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    session = relationship("ChatSession", back_populates="messages")
