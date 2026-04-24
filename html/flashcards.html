@@ -358,14 +358,7 @@
 </div>
 </div>
 
-<main class="container mx-auto px-6 lg:px-10 py-12 flex-grow">
-<div class="text-center mb-12 fade-in">
-<h2 class="text-4xl font-bold text-text-primary dark:text-dark-text-primary flex items-center justify-center gap-3">
-<span class="material-symbols-outlined text-4xl text-primary">style</span>
-Your Flash Cards
-</h2>
-<p class="mt-2 text-text-secondary dark:text-dark-text-secondary">Create and review personalized cards to master your dental topics.</p>
-</div>
+<main class="container mx-auto px-6 lg:px-10 py-6 flex-grow">
 
 <div class="grid lg:grid-cols-4 gap-8">
 <!-- Sidebar -->
@@ -410,27 +403,7 @@ Category
 </form>
 </div>
 
-<!-- Statistics Card -->
-<div class="bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-2xl p-6 border border-border-color dark:border-dark-border-color fade-in" style="animation-delay: 0.1s;">
-<div class="flex items-center gap-2 mb-4">
-<span class="material-symbols-outlined text-primary">analytics</span>
-<h4 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Your Progress</h4>
-</div>
-<div class="space-y-4">
-<div class="text-center p-4 bg-card dark:bg-dark-card rounded-lg">
-<div id="totalCards" class="text-3xl font-bold text-primary mb-1">0</div>
-<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Total Cards</div>
-</div>
-<div class="text-center p-4 bg-card dark:bg-dark-card rounded-lg">
-<div id="masteredCards" class="text-3xl font-bold text-primary mb-1">0</div>
-<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Mastered</div>
-</div>
-<div class="text-center p-4 bg-card dark:bg-dark-card rounded-lg">
-<div id="successRate" class="text-3xl font-bold text-primary mb-1">0%</div>
-<div class="text-xs text-text-secondary dark:text-dark-text-secondary">Success Rate</div>
-</div>
-</div>
-</div>
+
 
 <!-- Tips Card -->
 <div class="bg-primary-light dark:bg-primary/20 rounded-2xl p-6 fade-in" style="animation-delay: 0.2s;">
@@ -446,252 +419,17 @@ Category
 </div>
 <div class="lg:col-span-3">
 <!-- Page Header -->
-<div class="mb-6">
-<h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">My Flash Cards</h3>
-<p class="text-text-secondary dark:text-dark-text-secondary mt-1">Click cards to reveal descriptions</p>
+<div class="mb-8 fade-in">
+<h2 class="text-3xl font-bold text-text-primary dark:text-dark-text-primary flex items-center gap-3">
+<span class="material-symbols-outlined text-3xl text-primary">style</span>
+Your Flash Cards
+</h2>
+<p class="text-text-secondary dark:text-dark-text-secondary mt-2">Create and review personalized cards to master your dental topics. Click cards to reveal descriptions.</p>
 </div>
 
 <!-- Cards Grid -->
 <div id="cardsContainer" class="grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-<!-- Card 1 -->
-<div class="flashcard aspect-[3/2] perspective-[1000px] card-flip fade-in" data-category="pathology" data-mastered="true" style="animation-delay: 0.1s;">
-<div class="relative w-full h-full duration-500 transform-style-preserve-3d transition-transform card-inner">
-<!-- Front -->
-<div class="absolute w-full h-full bg-card dark:bg-dark-card rounded-2xl p-5 flex flex-col justify-between shadow-subtle border-2 border-border-color dark:border-dark-border-color backface-hidden hover:border-primary transition-colors">
-<div>
-<div class="flex items-center justify-between mb-3">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">Pathology</span>
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">check_circle</span>
-Mastered
-</span>
-</div>
-<p class="font-bold text-xl text-text-primary dark:text-dark-text-primary mt-2">Dental Caries</p>
-</div>
-<div class="flex justify-between items-end">
-<span class="text-xs text-text-secondary dark:text-dark-text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">touch_app</span>
-Click to flip
-</span>
-<div class="flex gap-1">
-<button class="p-1.5 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors" onclick="event.stopPropagation(); openEditModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">edit</span>
-</button>
-<button class="p-1.5 rounded-full hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors" onclick="event.stopPropagation(); openDeleteModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-red-500">delete</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Back -->
-<div class="absolute w-full h-full bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 flex flex-col shadow-subtle border-2 border-primary backface-hidden card-back">
-<div class="flex items-center justify-between mb-4">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-white/20">Description</span>
-<button class="text-white/80 hover:text-white transition-colors" onclick="event.stopPropagation(); this.closest('.flashcard').classList.toggle('card-flipped')">
-<span class="material-symbols-outlined text-sm">close</span>
-</button>
-</div>
-<div class="flex-1 flex items-center justify-center">
-<p class="text-sm text-center leading-relaxed">Tooth decay caused by acid production from bacteria (like Streptococcus mutans) metabolizing dietary sugars. This process demineralizes enamel and leads to cavity formation.</p>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Card 2 -->
-<div class="flashcard aspect-[3/2] perspective-[1000px] card-flip fade-in" data-category="anatomy" data-mastered="false" style="animation-delay: 0.2s;">
-<div class="relative w-full h-full duration-500 transform-style-preserve-3d transition-transform card-inner">
-<div class="absolute w-full h-full bg-card dark:bg-dark-card rounded-2xl p-5 flex flex-col justify-between shadow-subtle border-2 border-border-color dark:border-dark-border-color backface-hidden hover:border-primary transition-colors">
-<div>
-<div class="flex items-center justify-between mb-3">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-primary/20 dark:bg-primary/30 text-primary">Anatomy</span>
-</div>
-<p class="font-bold text-xl text-text-primary dark:text-dark-text-primary mt-2">Malocclusion</p>
-</div>
-<div class="flex justify-between items-end">
-<span class="text-xs text-text-secondary dark:text-dark-text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">touch_app</span>
-Click to flip
-</span>
-<div class="flex gap-1">
-<button class="p-1.5 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors" onclick="event.stopPropagation(); openEditModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">edit</span>
-</button>
-<button class="p-1.5 rounded-full hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors" onclick="event.stopPropagation(); openDeleteModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-red-500">delete</span>
-</button>
-</div>
-</div>
-</div>
-<div class="absolute w-full h-full bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 flex flex-col shadow-subtle border-2 border-primary backface-hidden card-back">
-<div class="flex items-center justify-between mb-4">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-white/20">Description</span>
-<button class="text-white/80 hover:text-white transition-colors" onclick="event.stopPropagation(); this.closest('.flashcard').classList.toggle('card-flipped')">
-<span class="material-symbols-outlined text-sm">close</span>
-</button>
-</div>
-<div class="flex-1 flex items-center justify-center">
-<p class="text-sm text-center leading-relaxed">Misalignment or incorrect relation between the teeth of the two dental arches when they approach each other. Can affect bite function, appearance, and oral health.</p>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Card 3 -->
-<div class="flashcard aspect-[3/2] perspective-[1000px] card-flip fade-in" data-category="anatomy" data-mastered="false" style="animation-delay: 0.3s;">
-<div class="relative w-full h-full duration-500 transform-style-preserve-3d transition-transform card-inner">
-<div class="absolute w-full h-full bg-card dark:bg-dark-card rounded-2xl p-5 flex flex-col justify-between shadow-subtle border-2 border-border-color dark:border-dark-border-color backface-hidden hover:border-primary transition-colors">
-<div>
-<div class="flex items-center justify-between mb-3">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-primary/20 dark:bg-primary/30 text-primary">Anatomy</span>
-</div>
-<p class="font-bold text-xl text-text-primary dark:text-dark-text-primary mt-2">Salivary Glands</p>
-</div>
-<div class="flex justify-between items-end">
-<span class="text-xs text-text-secondary dark:text-dark-text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">touch_app</span>
-Click to flip
-</span>
-<div class="flex gap-1">
-<button class="p-1.5 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors" onclick="event.stopPropagation(); openEditModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">edit</span>
-</button>
-<button class="p-1.5 rounded-full hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors" onclick="event.stopPropagation(); openDeleteModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-red-500">delete</span>
-</button>
-</div>
-</div>
-</div>
-<div class="absolute w-full h-full bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 flex flex-col shadow-subtle border-2 border-primary backface-hidden card-back">
-<div class="flex items-center justify-between mb-4">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-white/20">Description</span>
-<button class="text-white/80 hover:text-white transition-colors" onclick="event.stopPropagation(); this.closest('.flashcard').classList.toggle('card-flipped')">
-<span class="material-symbols-outlined text-sm">close</span>
-</button>
-</div>
-<div class="flex-1 flex items-center justify-center">
-<p class="text-sm text-center leading-relaxed">Three major glands that produce saliva: Parotid, Submandibular, and Sublingual glands. They help with digestion, protection, and maintaining oral health.</p>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Card 4 -->
-<div class="flashcard aspect-[3/2] perspective-[1000px] card-flip fade-in" data-category="pharmacology" data-mastered="false" style="animation-delay: 0.4s;">
-<div class="relative w-full h-full duration-500 transform-style-preserve-3d transition-transform card-inner">
-<div class="absolute w-full h-full bg-card dark:bg-dark-card rounded-2xl p-5 flex flex-col justify-between shadow-subtle border-2 border-border-color dark:border-dark-border-color backface-hidden hover:border-primary transition-colors">
-<div>
-<div class="flex items-center justify-between mb-3">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">Pharmacology</span>
-</div>
-<p class="font-bold text-xl text-text-primary dark:text-dark-text-primary mt-2">Chlorhexidine</p>
-</div>
-<div class="flex justify-between items-end">
-<span class="text-xs text-text-secondary dark:text-dark-text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">touch_app</span>
-Click to flip
-</span>
-<div class="flex gap-1">
-<button class="p-1.5 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors" onclick="event.stopPropagation(); openEditModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">edit</span>
-</button>
-<button class="p-1.5 rounded-full hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors">
-<span class="material-symbols-outlined text-sm text-red-500">delete</span>
-                        </button>
-</div>
-</div>
-</div>
-<div class="absolute w-full h-full bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 flex flex-col shadow-subtle border-2 border-primary backface-hidden card-back">
-<div class="flex items-center justify-between mb-4">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-white/20">Description</span>
-<button class="text-white/80 hover:text-white transition-colors" onclick="event.stopPropagation(); this.closest('.flashcard').classList.toggle('card-flipped')">
-<span class="material-symbols-outlined text-sm">close</span>
-</button>
-</div>
-<div class="flex-1 flex items-center justify-center">
-<p class="text-sm text-center leading-relaxed">Antiseptic and antimicrobial agent commonly used in mouthwashes and oral rinses for reducing plaque, gingivitis, and oral bacteria.</p>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Card 5 -->
-<div class="flashcard aspect-[3/2] perspective-[1000px] card-flip fade-in" data-category="radiology" data-mastered="false" style="animation-delay: 0.5s;">
-<div class="relative w-full h-full duration-500 transform-style-preserve-3d transition-transform card-inner">
-<div class="absolute w-full h-full bg-card dark:bg-dark-card rounded-2xl p-5 flex flex-col justify-between shadow-subtle border-2 border-border-color dark:border-dark-border-color backface-hidden hover:border-primary transition-colors">
-<div>
-<div class="flex items-center justify-between mb-3">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">Radiology</span>
-</div>
-<p class="font-bold text-xl text-text-primary dark:text-dark-text-primary mt-2">Panoramic Radiograph</p>
-</div>
-<div class="flex justify-between items-end">
-<span class="text-xs text-text-secondary dark:text-dark-text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">touch_app</span>
-Click to flip
-</span>
-<div class="flex gap-1">
-<button class="p-1.5 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors" onclick="event.stopPropagation(); openEditModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">edit</span>
-</button>
-<button class="p-1.5 rounded-full hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors" onclick="event.stopPropagation(); openDeleteModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-red-500">delete</span>
-</button>
-</div>
-</div>
-</div>
-<div class="absolute w-full h-full bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 flex flex-col shadow-subtle border-2 border-primary backface-hidden card-back">
-<div class="flex items-center justify-between mb-4">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-white/20">Description</span>
-<button class="text-white/80 hover:text-white transition-colors" onclick="event.stopPropagation(); this.closest('.flashcard').classList.toggle('card-flipped')">
-<span class="material-symbols-outlined text-sm">close</span>
-</button>
-</div>
-<div class="flex-1 flex items-center justify-center">
-<p class="text-sm text-center leading-relaxed">A comprehensive dental X-ray that captures the entire oral cavity in a single image, showing all teeth, maxilla, mandible, and surrounding structures.</p>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Card 6 -->
-<div class="flashcard aspect-[3/2] perspective-[1000px] card-flip fade-in" data-category="anatomy" data-mastered="false" style="animation-delay: 0.6s;">
-<div class="relative w-full h-full duration-500 transform-style-preserve-3d transition-transform card-inner">
-<div class="absolute w-full h-full bg-card dark:bg-dark-card rounded-2xl p-5 flex flex-col justify-between shadow-subtle border-2 border-border-color dark:border-dark-border-color backface-hidden hover:border-primary transition-colors">
-<div>
-<div class="flex items-center justify-between mb-3">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-primary/20 dark:bg-primary/30 text-primary">Anatomy</span>
-</div>
-<p class="font-bold text-xl text-text-primary dark:text-dark-text-primary mt-2">Tooth Enamel</p>
-</div>
-<div class="flex justify-between items-end">
-<span class="text-xs text-text-secondary dark:text-dark-text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">touch_app</span>
-Click to flip
-</span>
-<div class="flex gap-1">
-<button class="p-1.5 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors" onclick="event.stopPropagation(); openEditModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-text-secondary dark:text-dark-text-secondary">edit</span>
-</button>
-<button class="p-1.5 rounded-full hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors" onclick="event.stopPropagation(); openDeleteModal(this.closest('.flashcard'))">
-<span class="material-symbols-outlined text-sm text-red-500">delete</span>
-</button>
-</div>
-</div>
-</div>
-<div class="absolute w-full h-full bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 flex flex-col shadow-subtle border-2 border-primary backface-hidden card-back">
-<div class="flex items-center justify-between mb-4">
-<span class="text-xs font-semibold px-2 py-1 rounded-full bg-white/20">Description</span>
-<button class="text-white/80 hover:text-white transition-colors" onclick="event.stopPropagation(); this.closest('.flashcard').classList.toggle('card-flipped')">
-<span class="material-symbols-outlined text-sm">close</span>
-</button>
-</div>
-<div class="flex-1 flex items-center justify-center">
-<p class="text-sm text-center leading-relaxed">The hardest substance in the human body, composed of 96% hydroxyapatite crystals. It protects the tooth from wear and provides resistance to acid attacks.</p>
-</div>
-</div>
-</div>
-</div>
+    <!-- Flashcards will be injected here by JS -->
 </div>
 </div>
 </div>
@@ -783,7 +521,7 @@ Save Changes
 </footer>
 </div>
 
-<script src="../js/flashcards.js"></script>
+<script src="../js/flashcards.js?v=2"></script>
 <script>
 
 // Logo mode switching

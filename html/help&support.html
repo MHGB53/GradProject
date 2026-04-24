@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -53,17 +54,17 @@
     }
   </script>
   <script src="../js/themeManager.js"></script>
-<script src="../js/tokengaurd.js?v=999"></script>
+  <script src="../js/tokengaurd.js?v=999"></script>
   <!-- Apply dark mode immediately to prevent flash of light mode -->
   <script>
-    (function () {
-      // Check for saved preference or default to light mode
-      // Also check for old 'theme' key for backward compatibility
-      const currentMode = localStorage.getItem('theme') || 'light';
-      if (currentMode === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-    })();
+      (function () {
+        // Check for saved preference or default to light mode
+        // Also check for old 'theme' key for backward compatibility
+        const currentMode = localStorage.getItem('theme') || 'light';
+        if (currentMode === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      })();
   </script>
   <style>
     .font-display {
@@ -82,7 +83,8 @@
             <div class="relative inline-flex items-center -ml-20">
               <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo"
                 class="h-80 w-auto transition-opacity duration-300">
-              <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
+              <a href="Home.html"
+                style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
             </div>
           </div>
           <nav class="hidden md:flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
@@ -114,57 +116,70 @@
               <!-- Features Dropdown -->
               <div
                 class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+                <div
+                  class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
                   <h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
                 </div>
                 <div class="p-2">
                   <a href="smartstudyplan.html"
                     class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div
+                      class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">📚</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan
+                      </p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules
+                      </p>
                     </div>
                   </a>
                   <a href="examgen.html"
                     class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div
+                      class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">📝</span>
                     </div>
                     <div class="flex-1">
                       <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams
+                      </p>
                     </div>
                   </a>
                   <a href="clinicalcaselibrary.html"
                     class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div
+                      class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">🏥</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case
+                        Simulator</p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios
+                      </p>
                     </div>
                   </a>
                   <a href="aIsummarization.html"
                     class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div
+                      class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">📄</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization
+                      </p>
                       <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
                     </div>
                   </a>
                   <a href="aIradiologyquestiongenerator.html"
                     class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div
+                      class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">🦷</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology Questions</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Radiology
+                        Questions</p>
                       <p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray diagnostic training</p>
                     </div>
                   </a>
@@ -173,20 +188,24 @@
                     <div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">🧠</span>
                     </div>
-                  
+
 
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis
+                      </p>
                       <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
                     </div>
                   </a>
-                  <a href="3dmodels.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <a href="3dmodels.html"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+                    <div
+                      class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">🦷</span>
                     </div>
                     <div class="flex-1">
                       <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">3D Models</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Interactive dental anatomy</p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Interactive dental anatomy
+                      </p>
                     </div>
                   </a>
                 </div>
@@ -237,21 +256,18 @@
           </nav>
           <div class="flex items-center gap-4">
             <!-- Dark Mode Toggle -->
-            <button
-              id="darkModeToggle"
+            <button id="darkModeToggle"
               class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
               <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
             </button>
             <div class="relative">
-              <button
-                id="notificationBtn"
+              <button id="notificationBtn"
                 class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
                 <span class="material-symbols-outlined">notifications</span>
                 <span
                   class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
               </button>
-              <div
-                id="notificationDropdown"
+              <div id="notificationDropdown"
                 class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
                 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
                   <h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
@@ -262,8 +278,10 @@
                     <div class="flex items-start gap-3">
                       <div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
                       <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now
+                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz
+                          Available</p>
+                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is
+                          now
                           available for practice.</p>
                         <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
                       </div>
@@ -274,8 +292,10 @@
                     <div class="flex items-start gap-3">
                       <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
                       <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has
+                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update
+                        </p>
+                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan
+                          has
                           been updated with new materials.</p>
                         <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
                       </div>
@@ -284,18 +304,17 @@
                 </div>
                 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
                   <a href="notification.html"
-                    class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2 block">View All
+                    class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2 block">View
+                    All
                     Notifications</a>
                 </div>
               </div>
             </div>
             <div class="relative">
-              <button
-                id="profileBtn"
+              <button id="profileBtn"
                 class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300"
                 style='background-image: url("../assets/default photo.png");'></button>
-              <div
-                id="profileDropdown"
+              <div id="profileDropdown"
                 class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
                 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
                   <div class="flex items-center gap-3">
@@ -332,8 +351,7 @@
               </div>
             </div>
             <!-- Mobile Menu Button -->
-            <button
-              id="mobileMenuBtn"
+            <button id="mobileMenuBtn"
               class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
               <span class="material-symbols-outlined">menu</span>
             </button>
@@ -344,15 +362,13 @@
 
     <!-- Mobile Sidebar Menu -->
     <div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
-      <div
-        id="mobileSidebarPanel"
+      <div id="mobileSidebarPanel"
         class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
         <div class="flex flex-col h-full">
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
             <div class="flex items-center justify-between">
               <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-              <button
-                id="closeMobileMenu"
+              <button id="closeMobileMenu"
                 class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined">close</span>
               </button>
@@ -404,7 +420,8 @@
                   class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">🦷</span>
                   <div>
-                    <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Radiology Questions</p>
+                    <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Radiology Questions
+                    </p>
                     <p class="text-xs text-text-secondary dark:text-dark-text-secondary">X-ray training</p>
                   </div>
                 </a>
@@ -461,20 +478,25 @@
           <h1 class="text-3xl font-extrabold text-text-primary dark:text-dark-text-primary">Help & Support</h1>
         </div>
 
-        <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden">
+        <div
+          class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden">
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
             <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">How can we help you?</h2>
-            <p class="text-text-secondary dark:text-dark-text-secondary">Submit a complaint or get help with using Dentor</p>
+            <p class="text-text-secondary dark:text-dark-text-secondary">Submit a complaint or get help with using
+              Dentor</p>
           </div>
-          
+
           <div class="p-6">
             <!-- Message Container -->
             <div id="messageContainer" class="hidden mb-6 p-4 rounded-lg"></div>
-            
+
             <form id="supportForm">
               <div class="mb-6">
-                <label for="complaintType" class="block text-sm font-medium text-text-primary dark:text-dark-text-primary mb-2">Complaint Type</label>
-                <select id="complaintType" class="w-full px-4 py-3 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary transition-colors">
+                <label for="complaintType"
+                  class="block text-sm font-medium text-text-primary dark:text-dark-text-primary mb-2">Complaint
+                  Type</label>
+                <select id="complaintType"
+                  class="w-full px-4 py-3 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary transition-colors">
                   <option value="">Select a complaint type</option>
                   <option value="technical">Technical Issue</option>
                   <option value="content">Content Related</option>
@@ -484,56 +506,70 @@
                   <option value="other">Other</option>
                 </select>
               </div>
-              
+
               <div class="mb-6">
-                <label for="subject" class="block text-sm font-medium text-text-primary dark:text-dark-text-primary mb-2">Subject</label>
-                <input type="text" id="subject" class="w-full px-4 py-3 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary transition-colors" placeholder="Briefly describe your issue">
+                <label for="subject"
+                  class="block text-sm font-medium text-text-primary dark:text-dark-text-primary mb-2">Subject</label>
+                <input type="text" id="subject"
+                  class="w-full px-4 py-3 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary transition-colors"
+                  placeholder="Briefly describe your issue">
               </div>
-              
+
               <div class="mb-6">
-                <label for="description" class="block text-sm font-medium text-text-primary dark:text-dark-text-primary mb-2">Description</label>
-                <textarea id="description" rows="6" class="w-full px-4 py-3 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary transition-colors" placeholder="Please provide detailed information about your issue"></textarea>
+                <label for="description"
+                  class="block text-sm font-medium text-text-primary dark:text-dark-text-primary mb-2">Description</label>
+                <textarea id="description" rows="6"
+                  class="w-full px-4 py-3 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary transition-colors"
+                  placeholder="Please provide detailed information about your issue"></textarea>
               </div>
-              
-              <div class="mb-6">
-                <label for="email" class="block text-sm font-medium text-text-primary dark:text-dark-text-primary mb-2">Email Address</label>
-                <input type="email" id="email" class="w-full px-4 py-3 bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary transition-colors" placeholder="your.email@example.com">
-              </div>
-              
+
+
               <div class="flex items-center mb-6">
-                <input id="urgent" type="checkbox" class="w-4 h-4 text-primary bg-background dark:bg-dark-background border-border-color dark:border-dark-border-color rounded focus:ring-primary focus:ring-2">
-                <label for="urgent" class="ml-2 text-sm font-medium text-text-primary dark:text-dark-text-primary">This is an urgent matter</label>
+                <input id="urgent" type="checkbox"
+                  class="w-4 h-4 text-primary bg-background dark:bg-dark-background border-border-color dark:border-dark-border-color rounded focus:ring-primary focus:ring-2">
+                <label for="urgent" class="ml-2 text-sm font-medium text-text-primary dark:text-dark-text-primary">This
+                  is an urgent matter</label>
               </div>
-              
+
               <div class="flex justify-end">
-                <button type="submit" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-full transition-colors shadow-md hover:shadow-lg">
+                <button type="submit"
+                  class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-full transition-colors shadow-md hover:shadow-lg">
                   Submit Complaint
                 </button>
               </div>
             </form>
           </div>
         </div>
-        
-        <div class="mt-8 bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden">
+
+        <div
+          class="mt-8 bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden">
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
-            <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Frequently Asked Questions</h2>
+            <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Frequently Asked Questions
+            </h2>
             <p class="text-text-secondary dark:text-dark-text-secondary">Find answers to common questions</p>
           </div>
-          
+
           <div class="divide-y divide-border-color dark:divide-dark-border-color">
             <div class="p-6">
-              <h3 class="font-semibold text-text-primary dark:text-dark-text-primary mb-2">How do I reset my password?</h3>
-              <p class="text-text-secondary dark:text-dark-text-secondary">You can reset your password by clicking on the "Forgot Password" link on the login page and following the instructions sent to your email.</p>
+              <h3 class="font-semibold text-text-primary dark:text-dark-text-primary mb-2">How do I reset my password?
+              </h3>
+              <p class="text-text-secondary dark:text-dark-text-secondary">You can reset your password by clicking on
+                the "Forgot Password" link on the login page and following the instructions sent to your email.</p>
             </div>
-            
+
             <div class="p-6">
-              <h3 class="font-semibold text-text-primary dark:text-dark-text-primary mb-2">How do I access my study materials?</h3>
-              <p class="text-text-secondary dark:text-dark-text-secondary">All study materials are available through the "Smart Study Plan" feature on your dashboard. You can also access specific materials through the "Features" menu.</p>
+              <h3 class="font-semibold text-text-primary dark:text-dark-text-primary mb-2">How do I access my study
+                materials?</h3>
+              <p class="text-text-secondary dark:text-dark-text-secondary">All study materials are available through the
+                "Smart Study Plan" feature on your dashboard. You can also access specific materials through the
+                "Features" menu.</p>
             </div>
-            
+
             <div class="p-6">
-              <h3 class="font-semibold text-text-primary dark:text-dark-text-primary mb-2">How do I track my progress?</h3>
-              <p class="text-text-secondary dark:text-dark-text-secondary">Your progress is automatically tracked in the system. You can view detailed analytics on your dashboard and in the leaderboard section.</p>
+              <h3 class="font-semibold text-text-primary dark:text-dark-text-primary mb-2">How do I track my progress?
+              </h3>
+              <p class="text-text-secondary dark:text-dark-text-secondary">Your progress is automatically tracked in the
+                system. You can view detailed analytics on your dashboard and in the leaderboard section.</p>
             </div>
           </div>
         </div>
@@ -658,67 +694,100 @@
           profileDropdown.classList.add('hidden');
         }
       });
-      
+
       // Handle form submission
       const supportForm = document.getElementById('supportForm');
       if (supportForm) {
-        supportForm.addEventListener('submit', function(e) {
+        supportForm.addEventListener('submit', async function (e) {
           e.preventDefault();
-          
+
           // Get form values
           const complaintType = document.getElementById('complaintType').value;
           const subject = document.getElementById('subject').value;
           const description = document.getElementById('description').value;
-          const email = document.getElementById('email').value;
-          
+          const urgent = document.getElementById('urgent').checked;
+
           // Get message container
           const messageContainer = document.getElementById('messageContainer');
-          
+
           // Simple validation
-          if (!complaintType || !subject || !description || !email) {
+          if (!complaintType || !subject || !description) {
             // Show error message with theme matching the page
             messageContainer.className = 'mb-6 p-4 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800';
             messageContainer.innerHTML = '<p class="text-red-700 dark:text-red-300 font-medium">Please fill in all required fields.</p>';
             messageContainer.classList.remove('hidden');
             return;
           }
-          
-          // In a real application, you would send this data to a server
-          // For now, we'll just show a success message
-          messageContainer.className = 'mb-6 p-4 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800';
-          messageContainer.innerHTML = '<p class="text-green-700 dark:text-green-300 font-medium">Successful Submission</p>';
-          messageContainer.classList.remove('hidden');
-          
-          // Reset form
-          supportForm.reset();
+
+          const submitBtn = supportForm.querySelector('button[type="submit"]');
+          const originalBtnText = submitBtn.innerHTML;
+          submitBtn.innerHTML = 'Sending...';
+          submitBtn.disabled = true;
+
+          try {
+            const token = localStorage.getItem('access_token');
+            const response = await fetch('http://localhost:8000/api/support/complaints', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                complaint_type: complaintType,
+                subject: subject,
+                description: description,
+                urgent: urgent
+              })
+            });
+
+            if (!response.ok) {
+              throw new Error('Failed to submit complaint');
+            }
+
+            // Show a success message
+            messageContainer.className = 'mb-6 p-4 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800';
+            messageContainer.innerHTML = '<p class="text-green-700 dark:text-green-300 font-medium">Complaint submitted successfully! We will get back to you shortly.</p>';
+            messageContainer.classList.remove('hidden');
+
+            // Reset form
+            supportForm.reset();
+          } catch (error) {
+            console.error('Error submitting complaint:', error);
+            messageContainer.className = 'mb-6 p-4 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800';
+            messageContainer.innerHTML = '<p class="text-red-700 dark:text-red-300 font-medium">An error occurred while submitting your complaint. Please try again later.</p>';
+            messageContainer.classList.remove('hidden');
+          } finally {
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+          }
         });
       }
 
       // Logo mode switching with MutationObserver
       const logoImage = document.getElementById('logoImage');
       if (logoImage) {
-          const lightLogo = '../assets/Logo.png';
-          const darkLogo = '../assets/Logo0.png';
-          
-          // Set initial logo based on current dark mode state
-          const isDark = document.documentElement.classList.contains('dark');
-          logoImage.src = isDark ? darkLogo : lightLogo;
-          
-          // Watch for dark mode changes
-          const observer = new MutationObserver(function(mutations) {
-              mutations.forEach(function(mutation) {
-                  if (mutation.attributeName === 'class') {
-                      const isDarkMode = document.documentElement.classList.contains('dark');
-                      logoImage.style.opacity = '0';
-                      setTimeout(() => {
-                          logoImage.src = isDarkMode ? darkLogo : lightLogo;
-                          logoImage.style.opacity = '1';
-                      }, 150);
-                  }
-              });
+        const lightLogo = '../assets/Logo.png';
+        const darkLogo = '../assets/Logo0.png';
+
+        // Set initial logo based on current dark mode state
+        const isDark = document.documentElement.classList.contains('dark');
+        logoImage.src = isDark ? darkLogo : lightLogo;
+
+        // Watch for dark mode changes
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (mutation.attributeName === 'class') {
+              const isDarkMode = document.documentElement.classList.contains('dark');
+              logoImage.style.opacity = '0';
+              setTimeout(() => {
+                logoImage.src = isDarkMode ? darkLogo : lightLogo;
+                logoImage.style.opacity = '1';
+              }, 150);
+            }
           });
-          
-          observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        });
+
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
       }
     });
   </script>

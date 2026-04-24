@@ -1,4 +1,39 @@
+// Auth helpers
+const getToken = () => localStorage.getItem('access_token');
+const getAuthHeaders = () => {
+    const token = getToken();
+    if (!token) {
+        window.location.href = 'Login.html';
+        return {};
+    }
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+};
 
+async function loadFlashcards() {
+    try {
+        const response = await fetch('http://localhost:8000/api/flashcards', {
+            headers: getAuthHeaders()
+        });
+        if (!response.ok) throw new Error('Failed to fetch flashcards');
+        const flashcards = await response.json();
+        
+        const container = document.getElementById('cardsContainer');
+        container.innerHTML = '';
+        
+        flashcards.forEach(card => {
+            const cardEl = createFlashcard(card.topic, card.description, card.category, card.id, card.is_mastered);
+            container.appendChild(cardEl);
+        });
+        
+        initializeCardFlip();
+    } catch (error) {
+        console.error('Error loading flashcards:', error);
+        showNotification('Failed to load flashcards', 'error');
+    }
+}
 
 // Dark Mode Toggle
 function initializeDarkMode() {
@@ -98,7 +133,7 @@ function initializeCardForm() {
     const categorySelect = document.getElementById('category');
     const cardsContainer = document.getElementById('cardsContainer');
     
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const topic = frontInput.value.trim();
@@ -110,28 +145,41 @@ function initializeCardForm() {
             return;
         }
         
-        // Create new card
-        const newCard = createFlashcard(topic, description, category);
-        cardsContainer.insertBefore(newCard, cardsContainer.firstChild);
-        
-        // Clear form
-        frontInput.value = '';
-        backInput.value = '';
-        categorySelect.selectedIndex = 0;
-        
-        // Update statistics
-        updateStatistics();
-        
-        // Re-initialize flip for new card
-        initializeCardFlip();
-        
-        // Show success message
-        showNotification('Flashcard created successfully!', 'success');
+        try {
+            const response = await fetch('http://localhost:8000/api/flashcards', {
+                method: 'POST',
+                headers: getAuthHeaders(),
+                body: JSON.stringify({
+                    topic, description, category, is_mastered: false
+                })
+            });
+            
+            if (!response.ok) throw new Error('Failed to create flashcard');
+            const newCardData = await response.json();
+            
+            // Create new card
+            const newCard = createFlashcard(newCardData.topic, newCardData.description, newCardData.category, newCardData.id, newCardData.is_mastered);
+            cardsContainer.insertBefore(newCard, cardsContainer.firstChild);
+            
+            // Clear form
+            frontInput.value = '';
+            backInput.value = '';
+            categorySelect.selectedIndex = 0;
+            
+            // Re-initialize flip for new card
+            initializeCardFlip();
+            
+            // Show success message
+            showNotification('Flashcard created successfully!', 'success');
+        } catch (error) {
+            console.error('Error creating card:', error);
+            showNotification('Failed to create flashcard', 'error');
+        }
     });
 }
 
 // Create flashcard element
-function createFlashcard(topic, description, category) {
+function createFlashcard(topic, description, category, id, isMastered = false) {
     const categoryColors = {
         'Anatomy': { bg: 'bg-primary/20 dark:bg-primary/30', text: 'text-primary' },
         'Pathology': { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-600 dark:text-red-400' },
@@ -144,7 +192,10 @@ function createFlashcard(topic, description, category) {
     const cardDiv = document.createElement('div');
     cardDiv.className = 'flashcard aspect-[3/2] perspective-[1000px] card-flip fade-in';
     cardDiv.setAttribute('data-category', category.toLowerCase());
-    cardDiv.setAttribute('data-mastered', 'false');
+    cardDiv.setAttribute('data-mastered', isMastered ? 'true' : 'false');
+    if (id) {
+        cardDiv.setAttribute('data-id', id);
+    }
     
     cardDiv.innerHTML = `
         <div class="relative w-full h-full duration-500 transform-style-preserve-3d transition-transform card-inner">
@@ -217,17 +268,7 @@ function initializeCardFlip() {
     });
 }
 
-// Update statistics
-function updateStatistics() {
-    const cards = document.querySelectorAll('.flashcard');
-    const totalCards = cards.length;
-    const masteredCards = Array.from(cards).filter(card => card.getAttribute('data-mastered') === 'true').length;
-    const successRate = totalCards > 0 ? Math.round((masteredCards / totalCards) * 100) : 0;
-    
-    document.getElementById('totalCards').textContent = totalCards;
-    document.getElementById('masteredCards').textContent = masteredCards;
-    document.getElementById('successRate').textContent = successRate + '%';
-}
+
 
 // Open delete modal
 let cardToDelete = null;
@@ -246,12 +287,26 @@ function closeDeleteModal() {
 }
 
 // Confirm delete
-function confirmDelete() {
+async function confirmDelete() {
     if (cardToDelete) {
-        cardToDelete.remove();
-        updateStatistics();
-        showNotification('Card deleted successfully', 'info');
-        closeDeleteModal();
+        const id = cardToDelete.getAttribute('data-id');
+        try {
+            if (id) {
+                const response = await fetch(`http://localhost:8000/api/flashcards/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+                
+                if (!response.ok) throw new Error('Failed to delete flashcard');
+            }
+            
+            cardToDelete.remove();
+            showNotification('Card deleted successfully', 'info');
+            closeDeleteModal();
+        } catch (error) {
+            console.error('Error deleting card:', error);
+            showNotification('Failed to delete flashcard', 'error');
+        }
     }
 }
 
@@ -288,7 +343,7 @@ function closeEditModal() {
 function initializeEditCardForm() {
     const form = document.getElementById('editCardForm');
     
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const topic = document.getElementById('editTopic').value.trim();
@@ -304,39 +359,58 @@ function initializeEditCardForm() {
         const modal = document.getElementById('editModal');
         const cardIndex = parseInt(modal.dataset.cardElement);
         const cardElement = document.querySelectorAll('.flashcard')[cardIndex];
+        const id = cardElement.getAttribute('data-id');
+        const isMastered = cardElement.getAttribute('data-mastered') === 'true';
         
-        // Update category
-        const categoryLower = category.toLowerCase();
-        cardElement.setAttribute('data-category', categoryLower);
-        
-        // Update topic
-        const topicElement = cardElement.querySelector('.font-bold.text-xl');
-        topicElement.textContent = topic;
-        
-        // Update description
-        const descriptionElement = cardElement.querySelector('.card-back .text-sm.text-center');
-        descriptionElement.textContent = description;
-        
-        // Update category badge
-        const categoryBadge = cardElement.querySelector('.text-xs.font-semibold.px-2');
-        categoryBadge.textContent = category;
-        
-        // Update category colors
-        const categoryColors = {
-            'Anatomy': { bg: 'bg-primary/20 dark:bg-primary/30', text: 'text-primary' },
-            'Pathology': { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-600 dark:text-red-400' },
-            'Pharmacology': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-600 dark:text-blue-400' },
-            'Radiology': { bg: 'bg-yellow-100 dark:bg-yellow-900/30', text: 'text-yellow-600 dark:text-yellow-400' }
-        };
-        
-        const colors = categoryColors[category] || categoryColors['Anatomy'];
-        categoryBadge.className = `text-xs font-semibold px-2 py-1 rounded-full ${colors.bg} ${colors.text}`;
-        
-        // Close modal
-        closeEditModal();
-        
-        // Show success message
-        showNotification('Card updated successfully!', 'success');
+        try {
+            if (id) {
+                const response = await fetch(`http://localhost:8000/api/flashcards/${id}`, {
+                    method: 'PUT',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify({
+                        topic, description, category, is_mastered: isMastered
+                    })
+                });
+                
+                if (!response.ok) throw new Error('Failed to update flashcard');
+            }
+            
+            // Update category
+            const categoryLower = category.toLowerCase();
+            cardElement.setAttribute('data-category', categoryLower);
+            
+            // Update topic
+            const topicElement = cardElement.querySelector('.font-bold.text-xl');
+            topicElement.textContent = topic;
+            
+            // Update description
+            const descriptionElement = cardElement.querySelector('.card-back .text-sm.text-center');
+            descriptionElement.textContent = description;
+            
+            // Update category badge
+            const categoryBadge = cardElement.querySelector('.text-xs.font-semibold.px-2');
+            categoryBadge.textContent = category;
+            
+            // Update category colors
+            const categoryColors = {
+                'Anatomy': { bg: 'bg-primary/20 dark:bg-primary/30', text: 'text-primary' },
+                'Pathology': { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-600 dark:text-red-400' },
+                'Pharmacology': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-600 dark:text-blue-400' },
+                'Radiology': { bg: 'bg-yellow-100 dark:bg-yellow-900/30', text: 'text-yellow-600 dark:text-yellow-400' }
+            };
+            
+            const colors = categoryColors[category] || categoryColors['Anatomy'];
+            categoryBadge.className = `text-xs font-semibold px-2 py-1 rounded-full ${colors.bg} ${colors.text}`;
+            
+            // Close modal
+            closeEditModal();
+            
+            // Show success message
+            showNotification('Card updated successfully!', 'success');
+        } catch (error) {
+            console.error('Error updating card:', error);
+            showNotification('Failed to update flashcard', 'error');
+        }
     });
 }
 
@@ -458,11 +532,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize edit card form
     initializeEditCardForm();
     
-    // Initialize card flip
-    initializeCardFlip();
-    
-    // Update statistics on page load
-    updateStatistics();
+    // Load flashcards from backend
+    loadFlashcards();
     
     // Toggle notification dropdown
     notificationBtn.addEventListener('click', function(e) {

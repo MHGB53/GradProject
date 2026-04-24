@@ -168,11 +168,62 @@ class ChatMessageOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class ChatHistoryEntry(BaseModel):
+    role: str
+    content: str
+
 class ChatRequest(BaseModel):
     message: str
     session_id: Optional[int] = None
+    history: List[ChatHistoryEntry] = []
 
 
 class ChatResponse(BaseModel):
     reply: str
     session_id: int
+
+
+# ──────────────────────────── Flashcard Schemas ────────────────────────────
+
+class FlashcardBase(BaseModel):
+    topic: str = Field(..., description="The front of the flashcard")
+    description: str = Field(..., description="The back of the flashcard")
+    category: str = Field(..., description="E.g., Anatomy, Pathology")
+    is_mastered: bool = False
+
+class FlashcardCreate(FlashcardBase):
+    pass
+
+class FlashcardUpdate(BaseModel):
+    topic: Optional[str] = None
+    description: Optional[str] = None
+    category: Optional[str] = None
+    is_mastered: Optional[bool] = None
+
+class FlashcardOut(FlashcardBase):
+    id: int
+    user_id: int
+    created_at: Optional[datetime]
+
+    model_config = {"from_attributes": True}
+
+
+# ──────────────────────────── Support & Complaints ────────────────────────────
+
+class ComplaintCreate(BaseModel):
+    complaint_type: str = Field(..., description="Type of complaint")
+    subject: str = Field(..., description="Subject of the complaint")
+    description: str = Field(..., description="Details")
+    urgent: bool = False
+
+class ComplaintResponse(BaseModel):
+    id: int
+    complaint_type: str
+    subject: str
+    description: str
+    email: EmailStr
+    urgent: bool
+    status: str
+    created_at: Optional[datetime]
+
+    model_config = {"from_attributes": True}
