@@ -214,7 +214,7 @@ function initializeChat() {
     });
 
     // ── Load Sessions ────────────────────────────────────────────
-    window.switchSession = async function(sessionId) {
+    window.switchSession = async function (sessionId) {
         if (currentSessionId === sessionId) return;
         currentSessionId = sessionId;
         await loadSessionMessages(sessionId);
@@ -242,7 +242,7 @@ function initializeChat() {
                 sessions.forEach(session => {
                     const isActive = session.id === currentSessionId;
                     const dateObj = new Date(session.created_at);
-                    const timeString = dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    const timeString = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                     const dateString = dateObj.toLocaleDateString();
 
                     const html = `
@@ -380,7 +380,7 @@ function initializeChat() {
         });
 
         cancelDeleteBtn?.addEventListener('click', hideDeleteModal);
-        
+
         // Close if clicking outside the modal content
         deleteModal.addEventListener('click', (e) => {
             if (e.target === deleteModal) hideDeleteModal();

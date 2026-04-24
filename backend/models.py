@@ -34,9 +34,10 @@ class User(Base):
     updated_at      = Column(DateTime(timezone=True), onupdate=func.now())
 
     # Relationships
-    posts    = relationship("Post",        back_populates="author", cascade="all, delete-orphan")
-    likes    = relationship("PostLike",    back_populates="user",   cascade="all, delete-orphan")
-    comments = relationship("PostComment", back_populates="author", cascade="all, delete-orphan")
+    posts        = relationship("Post",          back_populates="author", cascade="all, delete-orphan")
+    likes        = relationship("PostLike",      back_populates="user",   cascade="all, delete-orphan")
+    comments     = relationship("PostComment",   back_populates="author", cascade="all, delete-orphan")
+    study_plans  = relationship("StudyPlan",     back_populates="user",   cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<User id={self.id} username={self.username}>"
@@ -174,3 +175,47 @@ class Complaint(Base):
     urgent = Column(Boolean, default=False)
     status = Column(String(50), default="pending")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+# ──────────────────────────── Smart Study Plan ────────────────────────────
+
+class StudyPlan(Base):
+    """
+    One active study plan per user (overwritten on re-generation).
+    Stores the high-level settings used when the plan was generated.
+    """
+    __tablename__ = "study_plans"
+
+    id           = Column(Integer, primary_key=True, index=True)
+    # NO ACTION avoids SQL Server multiple-cascade-path error
+    user_id      = Column(Integer, ForeignKey("users.id", ondelete="NO ACTION"), nullable=False, index=True)
+    level        = Column(String(50),  nullable=False)   # e.g. "Level 3"
+    semester     = Column(String(50),  nullable=False)   # e.g. "Semester 6"
+    weekly_hours = Column(Integer,     nullable=False, default=20)
+    start_time   = Column(String(10),  nullable=False, default="09:00")  # "HH:MM"
+    total_hours  = Column(Integer,     nullable=False, default=0)
+    study_days   = Column(Integer,     nullable=False, default=0)
+    created_at   = Column(DateTime(timezone=True), server_default=func.now())
+
+    user    = relationship("User",           back_populates="study_plans")
+    entries = relationship("StudyPlanEntry", back_populates="plan", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f"<StudyPlan id={self.id} user_id={self.user_id} level={self.level}>"
+
+
+class StudyPlanEntry(Base):
+    """One scheduled session (subject on a specific day/time) inside a StudyPlan."""
+    __tablename__ = "study_plan_entries"
+
+    id           = Column(Integer, primary_key=True, index=True)
+    plan_id      = Column(Integer, ForeignKey("study_plans.id", ondelete="CASCADE"), nullable=False, index=True)
+    day_of_week  = Column(String(20),  nullable=False)   # e.g. "Monday"
+    subject_name = Column(String(255), nullable=False)
+    hours        = Column(Integer,     nullable=False, default=1)  # stored as minutes for precision
+    from_time    = Column(String(20),  nullable=False)   # e.g. "09:00 AM"
+    to_time      = Column(String(20),  nullable=False)   # e.g. "10:30 AM"
+
+    plan = relationship("StudyPlan", back_populates="entries")
+
+    def __repr__(self):
+        return f"<StudyPlanEntry id={self.id} plan_id={self.plan_id} day={self.day_of_week} subject={self.subject_name}>"
