@@ -573,12 +573,81 @@ function initializeScheduleCells() {
         const badge = this.querySelector("span");
         if (badge) { badge.style.animation = "pulse 0.5s ease-in-out"; setTimeout(() => badge.style.animation = "", 500); }
       }
+
+      // Check if every session is now marked done
+      checkAllCompleted();
     });
 
     // Tooltip on hover
     cell.addEventListener("mouseenter", () => cell.querySelector(".schedule-tooltip")?.classList.remove("hidden"));
     cell.addEventListener("mouseleave", () => cell.querySelector(".schedule-tooltip")?.classList.add("hidden"));
   });
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Completion check – show banner when all sessions are marked
+// ─────────────────────────────────────────────────────────────
+function checkAllCompleted() {
+  const banner = document.getElementById("completionBanner");
+  if (!banner) return;
+
+  const allCells       = document.querySelectorAll(".schedule-cell[data-subject]");
+  const completedCells = document.querySelectorAll(".schedule-cell[data-subject].schedule-completed");
+
+  // Must have at least one session and every one must be completed
+  const allDone = allCells.length > 0 && allCells.length === completedCells.length;
+
+  if (allDone) {
+    banner.classList.remove("hidden");
+    // Smooth scroll so the user actually sees the banner
+    banner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  } else {
+    banner.classList.add("hidden");
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+//  Create New Plan – reset results and return to form
+// ─────────────────────────────────────────────────────────────
+function createNewPlan() {
+  // 1. Hide the completion banner
+  document.getElementById("completionBanner")?.classList.add("hidden");
+
+  // 2. Hide the entire results section and clear table content
+  const sec = document.getElementById("resultsSection");
+  if (sec) {
+    sec.classList.add("hidden");
+    sec.classList.remove("fade-in");
+  }
+
+  const thead = document.getElementById("scheduleHead");
+  const tbody = document.getElementById("scheduleBody");
+  if (thead) thead.innerHTML = "";
+  if (tbody) tbody.innerHTML = "";
+
+  // Reset summary cards and filter pills back to defaults
+  const summaryCards = document.getElementById("summaryCards");
+  if (summaryCards) summaryCards.innerHTML = "";
+
+  const filterPills = document.getElementById("filterPills");
+  if (filterPills) filterPills.innerHTML = `
+    <button class="subject-filter active flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold
+      transition-all bg-primary/20 text-primary-dark dark:text-primary border-2 border-primary" data-subject="all">
+      <span class="material-symbols-outlined text-sm">apps</span>All Subjects
+    </button>`;
+
+  // Reset total-hours badge
+  const badge = document.getElementById("totalHoursBadge");
+  if (badge) badge.textContent = "— hrs";
+
+  // Reset insight sidebar
+  const focusAreas = document.getElementById("insightFocusAreas");
+  const studyDaysEl = document.getElementById("insightStudyDays");
+  if (focusAreas) focusAreas.textContent = "— subjects";
+  if (studyDaysEl) studyDaysEl.textContent = "— days/week";
+
+  // 3. Scroll smoothly back up to the form
+  document.querySelector(".mb-8.rounded-xl.border")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -614,4 +683,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Generate Plan button
   document.getElementById("generatePlanBtn")?.addEventListener("click", generatePlan);
+
+  // Create New Plan button
+  document.getElementById("createNewPlanBtn")?.addEventListener("click", createNewPlan);
 });

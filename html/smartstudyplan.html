@@ -636,6 +636,27 @@
                 </button>
               </div>
 
+              <!-- ── Completion Banner (hidden until all sessions marked done) ── -->
+              <div id="completionBanner"
+                class="hidden mb-4 rounded-xl border border-primary/40 bg-primary/10 dark:bg-primary/15 dark:border-primary/30 px-6 py-4 flex items-start gap-4 shadow-sm">
+                <span class="material-symbols-outlined text-2xl text-primary mt-0.5 flex-shrink-0">verified</span>
+                <div>
+                  <p class="text-sm font-bold text-primary mb-0.5">All Sessions Completed</p>
+                  <p class="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed">
+                    Outstanding work. You have successfully completed all your scheduled study sessions for this plan.
+                    Keep up the discipline and consistency.
+                  </p>
+                </div>
+              </div>
+
+              <!-- ── Create New Plan button ── -->
+              <div class="flex justify-end mb-4">
+                <button id="createNewPlanBtn"
+                  class="flex items-center gap-2 rounded-lg border-2 border-primary px-5 py-2 text-sm font-bold text-primary bg-transparent hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm">
+                  <span class="material-symbols-outlined text-base">refresh</span>
+                  Create New Plan
+                </button>
+              </div>
 
               <div
                 class="overflow-hidden rounded-xl border border-border-color bg-card shadow-subtle dark:border-dark-border-color dark:bg-dark-card">
