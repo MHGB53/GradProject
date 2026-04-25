@@ -214,6 +214,7 @@ class StudyPlanEntry(Base):
     hours        = Column(Integer,     nullable=False, default=1)  # stored as minutes for precision
     from_time    = Column(String(20),  nullable=False)   # e.g. "09:00 AM"
     to_time      = Column(String(20),  nullable=False)   # e.g. "10:30 AM"
+    is_completed = Column(Boolean,     default=False)
 
     plan = relationship("StudyPlan", back_populates="entries")
 

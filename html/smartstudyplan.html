@@ -504,7 +504,7 @@
               </label>
               <select id="levelSelect"
                 class="w-full rounded-lg border border-border-color dark:border-dark-border-color bg-input-bg dark:bg-dark-input-bg text-text-primary dark:text-dark-text-primary px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                <option disabled selected>Loading…</option>
+
               </select>
             </div>
             <!-- Semester -->
@@ -518,13 +518,37 @@
             </div>
             <!-- Start Time -->
             <div>
-              <label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2"
-                for="startTimeInput">
+              <label class="block text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">
                 <span class="material-symbols-outlined text-sm text-primary align-middle">schedule</span> Daily Start
                 Time
               </label>
-              <input type="time" id="startTimeInput" value="09:00"
-                class="w-full rounded-lg border border-border-color dark:border-dark-border-color bg-input-bg dark:bg-dark-input-bg text-text-primary dark:text-dark-text-primary px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <!-- Hidden native input kept for JS compatibility -->
+              <input type="hidden" id="startTimeInput" value="09:00">
+              <!-- Custom themed time picker -->
+              <div class="custom-time-picker" id="customTimePicker">
+                <span class="material-symbols-outlined ctp-icon">schedule</span>
+                <select id="ctpHour" class="ctp-select">
+                  <option value="01">01</option><option value="02">02</option>
+                  <option value="03">03</option><option value="04">04</option>
+                  <option value="05">05</option><option value="06">06</option>
+                  <option value="07">07</option><option value="08">08</option>
+                  <option value="09" selected>09</option><option value="10">10</option>
+                  <option value="11">11</option><option value="12">12</option>
+                </select>
+                <span class="ctp-colon">:</span>
+                <select id="ctpMinute" class="ctp-select">
+                  <option value="00" selected>00</option><option value="05">05</option>
+                  <option value="10">10</option><option value="15">15</option>
+                  <option value="20">20</option><option value="25">25</option>
+                  <option value="30">30</option><option value="35">35</option>
+                  <option value="40">40</option><option value="45">45</option>
+                  <option value="50">50</option><option value="55">55</option>
+                </select>
+                <select id="ctpAmPm" class="ctp-select ctp-ampm">
+                  <option value="AM" selected>AM</option>
+                  <option value="PM">PM</option>
+                </select>
+              </div>
             </div>
             <!-- Break -->
             <div>
@@ -554,21 +578,35 @@
               <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary mb-2">
                 <span class="material-symbols-outlined text-sm text-primary align-middle">weekend</span> Days Off
               </p>
-              <div class="flex flex-wrap gap-2">
-                <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="checkbox"
-                    class="dayoff-cb accent-primary" value="Monday"> Mon</label>
-                <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="checkbox"
-                    class="dayoff-cb accent-primary" value="Tuesday"> Tue</label>
-                <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="checkbox"
-                    class="dayoff-cb accent-primary" value="Wednesday"> Wed</label>
-                <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="checkbox"
-                    class="dayoff-cb accent-primary" value="Thursday"> Thu</label>
-                <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="checkbox"
-                    class="dayoff-cb accent-primary" value="Friday"> Fri</label>
-                <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="checkbox"
-                    class="dayoff-cb accent-primary" value="Saturday"> Sat</label>
-                <label class="flex items-center gap-1 text-xs cursor-pointer"><input type="checkbox"
-                    class="dayoff-cb accent-primary" value="Sunday"> Sun</label>
+              <div class="flex flex-wrap gap-2" id="daysOffContainer">
+                <label class="dayoff-label" id="dayoff-mon">
+                  <input type="checkbox" class="dayoff-cb" value="Monday">
+                  <span class="day-dot"></span>Mon
+                </label>
+                <label class="dayoff-label" id="dayoff-tue">
+                  <input type="checkbox" class="dayoff-cb" value="Tuesday">
+                  <span class="day-dot"></span>Tue
+                </label>
+                <label class="dayoff-label" id="dayoff-wed">
+                  <input type="checkbox" class="dayoff-cb" value="Wednesday">
+                  <span class="day-dot"></span>Wed
+                </label>
+                <label class="dayoff-label" id="dayoff-thu">
+                  <input type="checkbox" class="dayoff-cb" value="Thursday">
+                  <span class="day-dot"></span>Thu
+                </label>
+                <label class="dayoff-label" id="dayoff-fri">
+                  <input type="checkbox" class="dayoff-cb" value="Friday">
+                  <span class="day-dot"></span>Fri
+                </label>
+                <label class="dayoff-label" id="dayoff-sat">
+                  <input type="checkbox" class="dayoff-cb" value="Saturday">
+                  <span class="day-dot"></span>Sat
+                </label>
+                <label class="dayoff-label" id="dayoff-sun">
+                  <input type="checkbox" class="dayoff-cb" value="Sunday">
+                  <span class="day-dot"></span>Sun
+                </label>
               </div>
             </div>
           </div>
@@ -603,12 +641,60 @@
           </div>
         </div>
 
-        <!-- Weekly Hours slider live value script -->
+        <!-- Weekly Hours slider + Day-off pills + Custom time picker sync -->
         <script>
           document.addEventListener('DOMContentLoaded', () => {
+            // ── Range slider live label ──────────────────────────
             const sl = document.getElementById('weeklyHoursInput');
             const lbl = document.getElementById('weeklyHoursVal');
             sl?.addEventListener('input', () => lbl.textContent = sl.value);
+
+            // ── Custom time picker → hidden input sync ───────────
+            const ctpHour  = document.getElementById('ctpHour');
+            const ctpMin   = document.getElementById('ctpMinute');
+            const ctpAmPm  = document.getElementById('ctpAmPm');
+            const hidden   = document.getElementById('startTimeInput');
+
+            function syncTimeInput() {
+              let h = parseInt(ctpHour.value, 10);
+              const m = ctpMin.value;
+              const ap = ctpAmPm.value;
+              if (ap === 'PM' && h !== 12) h += 12;
+              if (ap === 'AM' && h === 12) h = 0;
+              hidden.value = `${String(h).padStart(2,'0')}:${m}`;
+            }
+
+            ctpHour?.addEventListener('change', syncTimeInput);
+            ctpMin?.addEventListener('change', syncTimeInput);
+            ctpAmPm?.addEventListener('change', syncTimeInput);
+            syncTimeInput(); // set initial value
+
+            // Expose a helper so JS (loadSavedPlan) can restore the picker
+            window.restoreTimePicker = function(val) {
+              // val is like "09:00" (24-hr)
+              if (!val || !ctpHour || !ctpMin || !ctpAmPm) return;
+              const [hStr, mStr] = val.split(':');
+              let h = parseInt(hStr, 10);
+              const ap = h >= 12 ? 'PM' : 'AM';
+              if (h === 0) h = 12;
+              else if (h > 12) h -= 12;
+              ctpHour.value = String(h).padStart(2,'0');
+              ctpMin.value  = mStr;
+              ctpAmPm.value = ap;
+              syncTimeInput();
+            };
+
+            // ── Pill-style day-off checkboxes ────────────────────
+            document.querySelectorAll('.dayoff-label').forEach(label => {
+              const cb = label.querySelector('input[type="checkbox"]');
+              if (cb && cb.checked) label.classList.add('checked');
+              label.addEventListener('click', () => {
+                setTimeout(() => {
+                  if (cb && cb.checked) label.classList.add('checked');
+                  else label.classList.remove('checked');
+                }, 0);
+              });
+            });
           });
         </script>
         <!-- ══════════════ RESULTS SECTION (hidden until plan generated) ══════════════ -->

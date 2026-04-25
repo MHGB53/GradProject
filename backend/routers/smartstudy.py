@@ -365,6 +365,7 @@ class SaveEntryIn(BaseModel):
     hours: float
     from_time: str
     to_time: str
+    is_completed: bool = False
 
 
 class SavePlanRequest(BaseModel):
@@ -384,11 +385,13 @@ class SavePlanRequest(BaseModel):
 
 
 class SavedEntryOut(BaseModel):
+    id:        int
     day:       str
     subject:   str
     hours:     float
     from_time: str
     to_time:   str
+    is_completed: bool
 
     model_config = {"from_attributes": True}
 
@@ -450,6 +453,7 @@ def save_plan(
             hours        = int(round(entry.hours * 100)),   # store as centihours for precision
             from_time    = entry.from_time,
             to_time      = entry.to_time,
+            is_completed = entry.is_completed,
         ))
 
     db.commit()
@@ -498,15 +502,37 @@ def get_saved_plan(
 
 # ──────────────────────────── Internal helper ─────────────────────────────────
 
+@router.put("/entry/{entry_id}/toggle")
+def toggle_entry_completion(
+    entry_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Toggles the completion status of a specific study plan entry."""
+    entry = db.query(StudyPlanEntry).join(StudyPlan).filter(
+        StudyPlanEntry.id == entry_id,
+        StudyPlan.user_id == current_user.id
+    ).first()
+    
+    if not entry:
+        raise HTTPException(status_code=404, detail="Entry not found or access denied.")
+        
+    entry.is_completed = not entry.is_completed
+    db.commit()
+    
+    return {"message": "Toggled successfully", "is_completed": entry.is_completed}
+
 def _plan_to_out(plan: StudyPlan, summary: List[SubjectSummary]) -> SavedPlanOut:
     """Convert a StudyPlan ORM object + summary list into SavedPlanOut."""
     schedule_out = [
         SavedEntryOut(
+            id        = e.id,
             day       = e.day_of_week,
             subject   = e.subject_name,
             hours     = round(e.hours / 100.0, 2),
             from_time = e.from_time,
             to_time   = e.to_time,
+            is_completed = e.is_completed,
         )
         for e in plan.entries
     ]

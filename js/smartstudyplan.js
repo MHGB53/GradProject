@@ -403,7 +403,13 @@ async function loadSavedPlan() {
 
     // Start time & weekly hours
     const startEl = document.getElementById("startTimeInput");
-    if (startEl && data.start_time) startEl.value = data.start_time;
+    if (startEl && data.start_time) {
+      startEl.value = data.start_time;
+      // Also update the custom picker UI
+      if (typeof window.restoreTimePicker === 'function') {
+        window.restoreTimePicker(data.start_time);
+      }
+    }
 
     const hoursEl = document.getElementById("weeklyHoursInput");
     const hoursLbl = document.getElementById("weeklyHoursVal");
@@ -467,14 +473,16 @@ function renderScheduleTable(schedule, totalHours) {
       const ci    = subjectColorMap[entry.subject] ?? 0;
       const color = PALETTE[ci % PALETTE.length];
       const slug  = entry.subject.replace(/[^a-zA-Z0-9]/g,"_").toLowerCase();
-      return `<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm cursor-pointer relative group"
-                  data-subject="${slug}" data-time="${slot}" data-day="${day}">
+      const completedClass = entry.is_completed ? "schedule-completed" : "";
+      
+      return `<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm cursor-pointer relative group ${completedClass}"
+                  data-subject="${slug}" data-time="${slot}" data-day="${day}" data-entry-id="${entry.id || ''}">
         <span class="inline-block rounded-full ${color.bg} px-3 py-1 text-xs font-semibold ${color.text} transition-all hover:scale-105 hover:shadow-md">${entry.subject}</span>
         <div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl pointer-events-none">
           <div class="font-bold mb-1">${entry.subject}</div>
           <div class="text-gray-300">${day}, ${entry.from_time} – ${entry.to_time}</div>
           <div class="text-gray-300 mt-1">Duration: ${entry.hours} hrs</div>
-          <div class="text-green-400 mt-1 flex items-center gap-1">✓ Click to mark complete</div>
+          <div class="text-green-400 mt-1 flex items-center gap-1">✓ Click to toggle completion</div>
           <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
         </div>
       </td>`;
@@ -563,16 +571,37 @@ function initializeSubjectFilters() {
 // ─────────────────────────────────────────────────────────────
 function initializeScheduleCells() {
   document.querySelectorAll(".schedule-cell[data-subject]").forEach(cell => {
-    cell.addEventListener("click", function() {
+    cell.addEventListener("click", async function() {
       const isCompleted = this.classList.contains("schedule-completed");
-      this.classList.toggle("schedule-completed", !isCompleted);
+      const entryId = this.getAttribute("data-entry-id");
       const subName = this.querySelector("span")?.textContent || "Subject";
-      showNotification(isCompleted ? `${subName} marked incomplete` : `${subName} completed! ✓`, isCompleted ? "info" : "success");
-
+      
+      // Optimistic UI update
+      this.classList.toggle("schedule-completed", !isCompleted);
+      
       if (!isCompleted) {
         const badge = this.querySelector("span");
         if (badge) { badge.style.animation = "pulse 0.5s ease-in-out"; setTimeout(() => badge.style.animation = "", 500); }
       }
+      
+      // Send to server if we have an ID
+      if (entryId) {
+          try {
+              const res = await fetch(`${API_BASE}/entry/${entryId}/toggle`, {
+                  method: "PUT",
+                  headers: getAuthHeaders()
+              });
+              if (!res.ok) throw new Error("Failed to toggle completion");
+          } catch (e) {
+              console.error(e);
+              // Revert UI on failure
+              this.classList.toggle("schedule-completed", isCompleted);
+              showNotification(`Failed to save progress for ${subName}`, "error");
+              return;
+          }
+      }
+
+      showNotification(!isCompleted ? `${subName} completed! ✓` : `${subName} marked incomplete`, !isCompleted ? "success" : "info");
 
       // Check if every session is now marked done
       checkAllCompleted();

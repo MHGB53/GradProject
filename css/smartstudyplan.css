@@ -1,130 +1,351 @@
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-        
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        .slide-in {
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        .schedule-cell:hover {
-            background-color: rgba(91, 203, 167, 0.05);
-            transition: background-color 0.3s ease;
-        }
-        
-        .loading-spinner {
-            animation: spin 1s linear infinite;
-        }
-        
-        /* Range slider styling */
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #5BCBA7;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-            box-shadow: 0 4px 8px rgba(91, 203, 167, 0.4);
-        }
-        
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #5BCBA7;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        input[type="range"]::-moz-range-thumb:hover {
-            transform: scale(1.2);
-            box-shadow: 0 4px 8px rgba(91, 203, 167, 0.4);
-        }
-        
-        /* Subject Filter Buttons */
-        .subject-filter.active {
-            transform: scale(1.05);
-        }
-        
-        /* Schedule Tooltips */
-        .schedule-cell:hover .schedule-tooltip {
-            display: block;
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        /* Hidden schedule rows for filtering */
-        .schedule-row-hidden {
-            display: none;
-        }
-        
-        /* Completed schedule cells */
-        .schedule-completed {
-            opacity: 0.6;
-            position: relative;
-        }
-        
-        .schedule-completed::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: #10B981;
-            font-weight: bold;
-            pointer-events: none;
-        }
-        
-        .schedule-completed span {
-            text-decoration: line-through;
-        }
-    
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+.schedule-cell:hover {
+    background-color: rgba(91, 203, 167, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* ── Range slider styling ─────────────────────────────────── */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #5BCBA7 0%, rgba(91,203,167,0.2) 0%);
+    outline: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #7ad9b8, #3db896);
+    border: 2px solid rgba(91,203,167,0.5);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(91, 203, 167, 0.45), 0 2px 6px rgba(0,0,0,0.3);
+    transition: all 0.25s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 18px rgba(91, 203, 167, 0.65), 0 4px 10px rgba(0,0,0,0.35);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #7ad9b8, #3db896);
+    border: 2px solid rgba(91,203,167,0.5);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(91, 203, 167, 0.45), 0 2px 6px rgba(0,0,0,0.3);
+    transition: all 0.25s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 18px rgba(91, 203, 167, 0.65), 0 4px 10px rgba(0,0,0,0.35);
+}
+
+/* ── Custom Time Picker ───────────────────────────────────── */
+.custom-time-picker {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(31, 58, 52, 0.9) 0%, rgba(17, 38, 33, 0.95) 100%);
+    border: 1.5px solid rgba(91, 203, 167, 0.35);
+    border-radius: 0.625rem;
+    padding: 0.4rem 0.65rem;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.3), 0 0 0 0 rgba(91,203,167,0);
+    transition: border-color 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+}
+
+.custom-time-picker:hover {
+    border-color: rgba(91, 203, 167, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.25), 0 0 14px rgba(91,203,167,0.15);
+}
+
+.custom-time-picker:focus-within {
+    border-color: #5BCBA7;
+    box-shadow: 0 0 0 3px rgba(91,203,167,0.2), inset 0 1px 4px rgba(0,0,0,0.2);
+}
+
+/* Light mode override */
+html:not(.dark) .custom-time-picker {
+    background: linear-gradient(135deg, #edfaf4 0%, #d8f5ea 100%);
+    border-color: rgba(91, 203, 167, 0.4);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.ctp-icon {
+    font-size: 16px !important;
+    color: #5BCBA7;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.custom-time-picker:hover .ctp-icon {
+    transform: rotate(20deg) scale(1.1);
+}
+
+.ctp-colon {
+    color: #5BCBA7;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0 1px;
+    user-select: none;
+}
+
+.ctp-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #5BCBA7;
+    font-weight: 700;
+    font-size: 0.875rem;
+    font-family: inherit;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    padding: 2px 2px;
+    text-align: center;
+    min-width: 28px;
+    transition: color 0.2s;
+}
+
+.ctp-select:focus {
+    color: #7ad9b8;
+}
+
+.ctp-select option {
+    background: #1a2c26;
+    color: #e2f8f0;
+    font-weight: 600;
+}
+
+html:not(.dark) .ctp-select {
+    color: #1a7a5a;
+}
+
+html:not(.dark) .ctp-select option {
+    background: #edfaf4;
+    color: #1a7a5a;
+}
+
+html:not(.dark) .ctp-colon {
+    color: #1a7a5a;
+}
+
+html:not(.dark) .ctp-icon {
+    color: #3db896;
+}
+
+.ctp-ampm {
+    border-left: 1px solid rgba(91,203,167,0.25);
+    padding-left: 6px;
+    margin-left: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+}
+
+/* ── Days Off — styled pill checkboxes ───────────────────── */
+.dayoff-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(91,203,167,0.3);
+    background: rgba(91,203,167,0.06);
+    color: #9CA3AF;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    letter-spacing: 0.03em;
+    position: relative;
+    overflow: hidden;
+}
+
+.dayoff-label::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(91,203,167,0.15), rgba(61,184,150,0.08));
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: inherit;
+}
+
+.dayoff-label:hover {
+    border-color: rgba(91,203,167,0.6);
+    color: #5BCBA7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(91,203,167,0.18);
+}
+
+.dayoff-label:hover::before {
+    opacity: 1;
+}
+
+.dayoff-label input[type="checkbox"] {
+    display: none; /* hide native checkbox */
+}
+
+/* The visible check dot */
+.dayoff-label .day-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(91,203,167,0.5);
+    background: transparent;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+/* Checked state */
+.dayoff-label.checked {
+    border-color: #5BCBA7;
+    background: linear-gradient(135deg, rgba(91,203,167,0.22), rgba(61,184,150,0.15));
+    color: #5BCBA7;
+    box-shadow: 0 0 14px rgba(91,203,167,0.25), 0 3px 8px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+.dayoff-label.checked::before {
+    opacity: 1;
+}
+
+.dayoff-label.checked .day-dot {
+    background: #5BCBA7;
+    border-color: #5BCBA7;
+    box-shadow: 0 0 6px rgba(91,203,167,0.6);
+}
+
+/* ── Subject Filter Buttons ───────────────────────────────── */
+.subject-filter.active {
+    transform: scale(1.05);
+}
+
+/* ── Schedule Tooltips ────────────────────────────────────── */
+.schedule-cell:hover .schedule-tooltip {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ── Hidden schedule rows for filtering ───────────────────── */
+.schedule-row-hidden {
+    display: none;
+}
+
+/* ── Completed schedule cells ─────────────────────────────── */
+.schedule-completed {
+    opacity: 0.6;
+    position: relative;
+}
+
+.schedule-completed::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #10B981;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.schedule-completed span {
+    text-decoration: line-through;
+}
+
+/* ── Themed scrollbar for schedule table ──────────────────── */
+.overflow-x-auto {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(91,203,167,0.5) rgba(31,41,55,0.3);
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+    height: 7px;
+    border-radius: 9999px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: rgba(31,41,55,0.25);
+    border-radius: 9999px;
+    margin: 0 8px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #3db896, #5BCBA7, #7ad9b8);
+    border-radius: 9999px;
+    box-shadow: 0 0 8px rgba(91,203,167,0.4);
+    transition: background 0.3s;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #5BCBA7, #7ad9b8, #5BCBA7);
+    box-shadow: 0 0 14px rgba(91,203,167,0.65);
+}

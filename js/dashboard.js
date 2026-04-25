@@ -429,6 +429,67 @@ function hideCurrentPageFromDropdown() {
     });
 }
 
+// Load Smart Study Plan for Dashboard
+async function loadDashboardStudyPlan() {
+    const tbody = document.getElementById("dashboardStudyPlanBody");
+    if (!tbody) return;
+
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+        tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-text-secondary dark:text-dark-text-secondary">Please log in to see your study plan.</td></tr>`;
+        return;
+    }
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/api/study-plan/saved", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+            if (res.status === 404) {
+                tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-text-secondary dark:text-dark-text-secondary">No study plan generated yet. <a href="smartstudyplan.html" class="text-primary hover:underline">Create one now</a></td></tr>`;
+            } else {
+                tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-red-500">Failed to load study plan.</td></tr>`;
+            }
+            return;
+        }
+
+        const data = await res.json();
+        
+        if (!data.schedule || data.schedule.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-text-secondary dark:text-dark-text-secondary">Your study plan is empty.</td></tr>`;
+            return;
+        }
+
+        // Filter out completed tasks
+        const pendingTasks = data.schedule.filter(entry => !entry.is_completed);
+
+        if (pendingTasks.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" class="py-8 text-center"><div class="flex flex-col items-center justify-center gap-2"><span class="material-symbols-outlined text-4xl text-green-500">task_alt</span><p class="font-bold text-text-primary dark:text-dark-text-primary">You have completed all your tasks!</p><p class="text-sm text-text-secondary dark:text-dark-text-secondary">Great job staying on top of your schedule.</p></div></td></tr>`;
+            return;
+        }
+
+        // Display up to 5 upcoming pending sessions on the dashboard to keep it clean
+        const scheduleToShow = pendingTasks.slice(0, 5);
+
+        tbody.innerHTML = scheduleToShow.map(entry => `
+            <tr class="hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors duration-200">
+            <td class="py-4 px-4 font-semibold text-text-primary dark:text-dark-text-primary">
+                ${entry.subject}
+                ${entry.is_hard ? '<span class="ml-2 text-[10px] bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-2 py-0.5 rounded-full">Hard</span>' : ''}
+            </td>
+            <td class="py-4 px-4 text-text-secondary dark:text-dark-text-secondary">${entry.day}, ${entry.from_time} - ${entry.to_time}</td>
+            <td class="py-4 px-4 text-text-secondary dark:text-dark-text-secondary">${entry.hours} ${entry.hours === 1 ? 'hr' : 'hrs'}</td>
+            <td class="py-4 px-4 text-center"><span class="px-3 py-1 text-xs font-bold text-yellow-800 bg-yellow-100 dark:bg-yellow-900/50 dark:text-yellow-300 rounded-full animate-pulse">Pending</span></td>
+            </tr>
+        `).join('');
+
+    } catch (err) {
+        console.error("Error loading study plan:", err);
+        tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-red-500">Error connecting to server.</td></tr>`;
+    }
+}
+
 // Notification and Profile dropdown functionality
 document.addEventListener('DOMContentLoaded', function() {
     initializeMobileMenu();
@@ -447,6 +508,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update greeting and date
     updateGreeting();
     updateCurrentDate();
+    
+    // Load dashboard study plan
+    loadDashboardStudyPlan();
     
     // Load today's quote
     const todaysQuote = getTodaysQuote();
