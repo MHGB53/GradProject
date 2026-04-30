@@ -587,11 +587,30 @@ function initializeScheduleCells() {
       // Send to server if we have an ID
       if (entryId) {
           try {
+              // Toggle completion + points are awarded in the same server call
               const res = await fetch(`${API_BASE}/entry/${entryId}/toggle`, {
                   method: "PUT",
                   headers: getAuthHeaders()
               });
               if (!res.ok) throw new Error("Failed to toggle completion");
+
+              const toggleData = await res.json();
+              const nowCompleted = toggleData.is_completed;
+
+              // Sync UI to server-confirmed state
+              this.classList.toggle("schedule-completed", nowCompleted);
+
+              const finalCompleted = nowCompleted;
+              const pts = toggleData.total_points ?? null;
+              const pointMsg = finalCompleted && pts !== null ? ` (+10 pts · ${pts} total)` : "";
+              showNotification(
+                  finalCompleted ? `${subName} completed! ✓${pointMsg}` : `${subName} marked incomplete`,
+                  finalCompleted ? "success" : "info"
+              );
+
+              checkAllCompleted();
+              return;   // skip duplicate notification below
+
           } catch (e) {
               console.error(e);
               // Revert UI on failure
@@ -601,7 +620,6 @@ function initializeScheduleCells() {
           }
       }
 
-      showNotification(!isCompleted ? `${subName} completed! ✓` : `${subName} marked incomplete`, !isCompleted ? "success" : "info");
 
       // Check if every session is now marked done
       checkAllCompleted();

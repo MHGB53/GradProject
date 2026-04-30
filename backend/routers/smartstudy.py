@@ -13,8 +13,18 @@ from datetime import datetime, timedelta, time as dtime
 from sqlalchemy.orm import Session
 
 from ..database import get_db
-from ..models import User, StudyPlan, StudyPlanEntry
+from ..models import User, StudyPlan, StudyPlanEntry, UserPoints
 from ..routers.auth import get_current_user
+
+POINTS_PER_TASK = 10   # points awarded per completed study task
+
+def _get_or_create_points(db: Session, user_id: int) -> UserPoints:
+    row = db.query(UserPoints).filter(UserPoints.user_id == user_id).first()
+    if not row:
+        row = UserPoints(user_id=user_id, total_points=0, tasks_completed=0)
+        db.add(row)
+        db.flush()
+    return row
 
 router = APIRouter(prefix="/api/study-plan", tags=["Smart Study Plan"])
 
@@ -508,19 +518,36 @@ def toggle_entry_completion(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    """Toggles the completion status of a specific study plan entry."""
+    """Toggles the completion status of a specific study plan entry and awards/revokes points."""
     entry = db.query(StudyPlanEntry).join(StudyPlan).filter(
         StudyPlanEntry.id == entry_id,
         StudyPlan.user_id == current_user.id
     ).first()
-    
+
     if not entry:
         raise HTTPException(status_code=404, detail="Entry not found or access denied.")
-        
+
+    # Toggle completion
     entry.is_completed = not entry.is_completed
+    now_completed = entry.is_completed
+
+    # Award or revoke points in the same transaction
+    pts = _get_or_create_points(db, current_user.id)
+    if now_completed:
+        pts.total_points    = pts.total_points    + POINTS_PER_TASK
+        pts.tasks_completed = pts.tasks_completed + 1
+    else:
+        pts.total_points    = max(0, pts.total_points    - POINTS_PER_TASK)
+        pts.tasks_completed = max(0, pts.tasks_completed - 1)
+
     db.commit()
-    
-    return {"message": "Toggled successfully", "is_completed": entry.is_completed}
+
+    return {
+        "message":      "Toggled successfully",
+        "is_completed": now_completed,
+        "total_points": pts.total_points,
+        "tasks_completed": pts.tasks_completed,
+    }
 
 def _plan_to_out(plan: StudyPlan, summary: List[SubjectSummary]) -> SavedPlanOut:
     """Convert a StudyPlan ORM object + summary list into SavedPlanOut."""

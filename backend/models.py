@@ -38,9 +38,29 @@ class User(Base):
     likes        = relationship("PostLike",      back_populates="user",   cascade="all, delete-orphan")
     comments     = relationship("PostComment",   back_populates="author", cascade="all, delete-orphan")
     study_plans  = relationship("StudyPlan",     back_populates="user",   cascade="all, delete-orphan")
+    points       = relationship("UserPoints",    back_populates="user",   uselist=False, cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<User id={self.id} username={self.username}>"
+
+
+# ──────────────────────────── Leaderboard / Points ────────────────────────────
+
+class UserPoints(Base):
+    """
+    One row per user — accumulates points earned by completing
+    Smart Study Plan tasks.  10 pts per task completed.
+    """
+    __tablename__ = "user_points"
+
+    id               = Column(Integer, primary_key=True, index=True)
+    # NO ACTION avoids SQL Server multiple-cascade-path error
+    user_id          = Column(Integer, ForeignKey("users.id", ondelete="NO ACTION"), nullable=False, unique=True, index=True)
+    total_points     = Column(Integer, nullable=False, default=0)
+    tasks_completed  = Column(Integer, nullable=False, default=0)
+    updated_at       = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+    user = relationship("User", back_populates="points")
 
 
 class PasswordReset(Base):
