@@ -8,7 +8,7 @@ const DENTOR_API = 'http://127.0.0.1:8000'; // same host as your FastAPI server
 
 const API = {
   xray: `${DENTOR_API}/api/ai-diagnosis/xray`,  // handles both panorama & periapical
-  lab:  `${DENTOR_API}/api/ai-diagnosis/lab`,
+  lab: `${DENTOR_API}/api/ai-diagnosis/lab`,
 };
 
 // ── State ────────────────────────────────────────────────────────────────
@@ -206,7 +206,7 @@ async function generateDiagnosis() {
 
   const [xrayRes, labRes] = await Promise.all([
     fetchModule('X-Ray Analysis', API.xray, xrayForm, 1),
-    fetchModule('Lab Results',    API.lab,  labForm,  2),
+    fetchModule('Lab Results', API.lab, labForm, 2),
   ]);
 
   updateGloStep(3, 'done');
@@ -316,11 +316,11 @@ function renderDashboard(xrayRes, labRes, history) {
     // Each finding as its own card
     const fList = Array.isArray(findings) && findings.length
       ? findings.map((f, idx) => {
-          const conf = f.confidence || f.prob || 0;
-          const pct  = (conf * 100).toFixed(1);
-          const clr  = conf >= 0.7 ? '#ef4444' : conf >= 0.4 ? '#f59e0b' : '#10b981';
-          const hasBox = f.bbox && f.bbox.length === 4;
-          return `<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-left:3px solid ${clr};border-radius:8px;padding:10px 14px;margin-bottom:8px;">
+        const conf = f.confidence || f.prob || 0;
+        const pct = (conf * 100).toFixed(1);
+        const clr = conf >= 0.7 ? '#ef4444' : conf >= 0.4 ? '#f59e0b' : '#10b981';
+        const hasBox = f.bbox && f.bbox.length === 4;
+        return `<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-left:3px solid ${clr};border-radius:8px;padding:10px 14px;margin-bottom:8px;">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;">
               <span style="font-size:.88rem;font-weight:700;color:#e2e8f0;">${idx + 1}. ${f.label || f.name || f}</span>
               <span style="background:${clr}22;color:${clr};border:1px solid ${clr}55;border-radius:20px;padding:2px 10px;font-size:.75rem;font-weight:800;white-space:nowrap;">${pct}%</span>
@@ -330,7 +330,7 @@ function renderDashboard(xrayRes, labRes, history) {
             </div>
             ${hasBox ? `<div style="font-size:.68rem;color:#94a3b8;font-family:monospace;margin-top:5px;">bbox [${f.bbox.map(v => Math.round(v)).join(', ')}]</div>` : ''}
           </div>`;
-        }).join('')
+      }).join('')
       : `<p style="font-size:.82rem;opacity:.7;padding:8px 0;">No significant findings detected.</p>`;
 
     xrayHTML = `
@@ -361,7 +361,7 @@ function renderDashboard(xrayRes, labRes, history) {
       ? flags.map(f => `
           <div class="finding-item">
             <span class="finding-label">${f.condition || f.marker || String(f)}</span>
-            <span class="conf-pill warn">${f.status || f.value || 'Abnormal'}${f.confidence ? ` · ${(f.confidence*100).toFixed(0)}%` : ''}</span>
+            <span class="conf-pill warn">${f.status || f.value || 'Abnormal'}${f.confidence ? ` · ${(f.confidence * 100).toFixed(0)}%` : ''}</span>
           </div>`).join('')
       : '';
     labHTML = `

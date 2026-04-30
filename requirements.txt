@@ -25,3 +25,7 @@ resend==2.6.0
 
 # ── AI / Gemini ──
 google-genai>=1.0.0
+torch
+torchvision
+ultralytics
+joblib

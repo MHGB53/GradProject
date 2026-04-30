@@ -195,7 +195,7 @@ async def analyze_xray(
 
             findings = []
             for i, prob in enumerate(probs):
-                if float(prob) > 0.45:   # 45% threshold
+                if float(prob) > 0.5:   # 50% threshold — matches reference Streamlit app
                     label = PANORAMA_CLASSES[i] if i < len(PANORAMA_CLASSES) else f"Class {i}"
                     findings.append({"label": label, "confidence": round(float(prob), 4)})
 
