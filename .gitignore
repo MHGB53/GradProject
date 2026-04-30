@@ -14,3 +14,4 @@ __pycache__/
 # SQLite (if ever used locally)
 *.db
 *.sqlite3
+/main.py 

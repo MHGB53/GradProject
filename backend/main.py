@@ -14,12 +14,34 @@ from . import models
 from .routers import auth, community, chatbot, flashcards, support, smartstudy, leaderboard, ai_diagnosis
 
 
+# ──────────────────────────── Schema migrations (idempotent) ────────────────────────────
+
+def _run_migrations():
+    """
+    Apply any missing column/table changes that SQLAlchemy's create_all() skips
+    (create_all only adds new tables, never new columns to existing ones).
+    Safe to call on every startup — each block checks before altering.
+    """
+    from sqlalchemy import inspect as sa_inspect, text
+    inspector = sa_inspect(engine)
+
+    # ── study_plan_entries.is_completed  (added in v2) ──────────────
+    entry_cols = [c["name"] for c in inspector.get_columns("study_plan_entries")]
+    if "is_completed" not in entry_cols:
+        with engine.begin() as conn:
+            conn.execute(text(
+                "ALTER TABLE study_plan_entries ADD is_completed BIT NOT NULL DEFAULT 0"
+            ))
+        print("[Migration] Added study_plan_entries.is_completed column.")
+
+
 # ──────────────────────────── Lifespan (startup / shutdown) ────────────────────────────
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: verify SQL Server connection and create / migrate tables
     test_connection()
     models.Base.metadata.create_all(bind=engine)
+    _run_migrations()   # safe column-level migrations
     # Ensure upload directories exist
     upload_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads", "community")
     profiles_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads", "profiles")
@@ -27,6 +49,7 @@ async def lifespan(app: FastAPI):
     os.makedirs(profiles_dir, exist_ok=True)
     yield
     # Shutdown: nothing special needed
+
 
 
 # ──────────────────────────── App Setup ────────────────────────────
