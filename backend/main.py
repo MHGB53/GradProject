@@ -11,7 +11,7 @@ from fastapi.responses import RedirectResponse
 
 from .database import engine, test_connection
 from . import models
-from .routers import auth, community, chatbot, flashcards, support, smartstudy, leaderboard
+from .routers import auth, community, chatbot, flashcards, support, smartstudy
 
 
 # ──────────────────────────── Lifespan (startup / shutdown) ────────────────────────────
@@ -69,7 +69,6 @@ app.include_router(chatbot.router)
 app.include_router(flashcards.router)
 app.include_router(support.router)
 app.include_router(smartstudy.router)
-app.include_router(leaderboard.router)
 
 
 # ──────────────────────────── Root → Login page ────────────────────────────
