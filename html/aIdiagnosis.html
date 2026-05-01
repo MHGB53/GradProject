@@ -1,695 +1,695 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dentor - AI Diagnosis</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-    tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#5bcba7",
-              "primary-light": "#7ad9b8",
-              "primary-dark": "#3db896",
-              "background": "#f6f8f7",
-              "dark-background": "#111827",
-              "text-primary": "#000000",
-              "dark-text-primary": "#F9FAFB",
-              "text-secondary": "#4b5563",
-              "dark-text-secondary": "#9CA3AF",
-              "border-color": "#e5e7eb",
-              "dark-border-color": "#374151",
-              "card": "#ffffff",
-              "dark-card": "#1F2937",
-              "input-bg": "#f3f4f6",
-              "dark-input-bg": "#1f3a34",
-              "foreground": "#ffffff",
-              "dark-foreground": "#1a2c26",
-              "muted": "#9ca3af",
-              "dark-muted": "#6b7280",
-            },
-            fontFamily: {
-              "display": ["Manrope", "Interstate", "sans-serif"]
-            },
-            borderRadius: {
-              "DEFAULT": "0.5rem",
-              "lg": "0.75rem",
-              "xl": "1rem",
-              "full": "9999px"
-            },
-            spacing: {
-              "13": "3.25rem",
-              "15": "3.75rem",
-              "128": "32rem"
-            },
-            animation: {
-              "fade-in": "fadeIn 0.5s ease-in-out",
-              "slide-down": "slideDown 0.3s ease-out",
-              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-            },
-            keyframes: {
-              fadeIn: {
-                "0%": { opacity: "0" },
-                "100%": { opacity: "1" }
-              },
-              slideDown: {
-                "0%": { transform: "translateY(-10px)", opacity: "0" },
-                "100%": { transform: "translateY(0)", opacity: "1" }
-              }
-            },
-            boxShadow: {
-              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
-              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
-              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
-            }
-          },
-        },
-      }
-</script>
-<script src="../js/themeManager.js"></script>
-<script src="../js/tokengaurd.js?v=999"></script>
-<link rel="stylesheet" href="../css/aIdiagnosis.css">
-</head>
-<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
-<div class="flex flex-col min-h-screen">
-
-<!-- Header -->
-<header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex items-center justify-between h-20">
-<div class="flex items-center gap-4">
-    <div class="relative inline-flex items-center -ml-20">
-        <img id="logoImage" src="../assets/Logo1.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
-        <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
-    </div>
-</div>
-<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html">
-<span class="relative z-10 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
-<span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
-</span>
-</a>
-<div class="relative group">
-<button class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
-<span class="relative z-10 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
-<span class="group-hover:scale-105 transition-transform duration-300">Features</span>
-<span class="material-symbols-outlined text-sm">expand_more</span>
-</span>
-</button>
-
-<!-- Features Dropdown -->
-<div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-<div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
-<h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
-</div>
-<div class="p-2">
-<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">Ã°Å¸â€œÅ¡</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
-</div>
-</a>
-<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">Ã°Å¸â€œÂ</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
-</div>
-</a>
-<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">Ã°Å¸ÂÂ¥</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
-</div>
-</a>
-<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">Ã°Å¸â€œâ€ž</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
-</div>
-</a>
-
-<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">Ã°Å¸Â§Â </span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
-</div>
-</a>
-<a href="3dmodels.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="text-xl">Ã°Å¸Â¦Â·</span>
-</div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">3D Models</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Interactive dental anatomy</p>
-</div>
-</a>
-</div>
-</div>
-</div>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="community.html">
-<span class="relative z-10 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">groups</span>
-<span class="group-hover:scale-105 transition-transform duration-300">Community</span>
-</span>
-</a>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="leaderboard.html">
-<span class="relative z-10 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">emoji_events</span>
-<span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
-</span>
-</a>
-<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html">
-<span class="relative z-10 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">smart_toy</span>
-<span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
-</span>
-</a>
-</nav>
-<div class="flex items-center gap-2">
-<!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
-<span id="darkModeIcon" class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">light_mode</span>
-</button>
-
-<!-- Notifications -->
-<div class="relative">
-<button id="notificationBtn" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
-<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">notifications</span>
-<span class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500"></span>
-</button>
-
-<!-- Notification Dropdown -->
-<div id="notificationDropdown" class="dropdown absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden">
-<div class="p-4 border-b border-border-color dark:border-dark-border-color">
-<h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
-</div>
-<div class="max-h-96 overflow-y-auto">
-<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer border-b border-border-color dark:border-dark-border-color">
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary">check_circle</span>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Diagnosis Completed</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">AI diagnosis ready for review</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 hours ago</p>
-</div>
-</div>
-</div>
-<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer border-b border-border-color dark:border-dark-border-color">
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-blue-500">info</span>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Case Uploaded</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Patient data successfully uploaded</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">5 hours ago</p>
-</div>
-</div>
-</div>
-<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer">
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-yellow-500">star</span>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Treatment Plan Created</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Recommended treatment available</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 day ago</p>
-</div>
-</div>
-</div>
-</div>
-<div class="p-3 border-t border-border-color dark:border-dark-border-color text-center">
-<a href="notification.html" class="text-sm text-primary hover:text-primary-dark font-semibold">View All</a>
-</div>
-</div>
-</div>
-
-<!-- Profile -->
-<div class="relative">
-<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("../assets/default photo.png");'></button>
-<div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
-<div class="p-4 border-b border-border-color dark:border-dark-border-color">
-<div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("../assets/default photo.png");'></div>
-<div>
-<h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">john.doe@email.com</p>
-</div>
-</div>
-</div>
-<div class="py-2">
-<a href="Profile.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-<span class="material-symbols-outlined text-lg">person</span>
-<span class="text-sm font-medium">My Profile</span>
-</a>
-<a href="flashcards.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-<span class="material-symbols-outlined text-lg">collections</span>
-<span class="text-sm font-medium">Flash Cards</span>
-</a>
-<a href="help&support.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-<span class="material-symbols-outlined text-lg">help</span>
-<span class="text-sm font-medium">Help & Support</span>
-</a>
-</div>
-<div class="border-t border-border-color dark:border-dark-border-color py-2">
-<a href="Login.html" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
-<span class="material-symbols-outlined text-lg">logout</span>
-<span class="text-sm font-medium">Sign Out</span>
-</a>
-</div>
-</div>
-</div>
-
-<!-- Mobile Menu Button -->
-<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</div>
-</div>
-</header>
-
-<!-- Mobile Sidebar Menu -->
-<div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
-<div id="mobileSidebarPanel" class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
-<div class="flex flex-col h-full">
-<!-- Mobile Menu Header -->
-<div class="p-6 border-b border-border-color dark:border-dark-border-color">
-<div class="flex items-center justify-between">
-<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-</div>
-
-<!-- Mobile Menu Content -->
-<div class="flex-1 overflow-y-auto p-4">
-<nav class="space-y-2">
-<a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined text-primary">dashboard</span>
-<span class="font-semibold text-text-primary dark:text-dark-text-primary">Dashboard</span>
-</a>
-
-<!-- Features Section -->
-<div class="pt-2">
-<p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI Features</p>
-<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="text-xl">Ã°Å¸â€œÅ¡</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized schedules</p>
-</div>
-</a>
-<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="text-xl">Ã°Å¸â€œÂ</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice exams</p>
-</div>
-</a>
-<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="text-xl">Ã°Å¸ÂÂ¥</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Cases</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Real scenarios</p>
-</div>
-</a>
-<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="text-xl">Ã°Å¸â€œâ€ž</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p>
-</div>
-</a>
-
-<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="text-xl">Ã°Å¸Â§Â </span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Dental Diagnosis</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Case analysis</p>
-</div>
-</a>
-</div>
-
-<div class="border-t border-border-color dark:border-dark-border-color my-4"></div>
-
-<a href="community.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined text-primary">groups</span>
-<span class="font-semibold text-text-primary dark:text-dark-text-primary">Community</span>
-</a>
-<a href="leaderboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined text-primary">emoji_events</span>
-<span class="font-semibold text-text-primary dark:text-dark-text-primary">Leaderboard</span>
-</a>
-<a href="chatbot.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
-<span class="material-symbols-outlined text-primary">smart_toy</span>
-<span class="font-semibold text-text-primary dark:text-dark-text-primary">Chatbot</span>
-</a>
-</nav>
-</div>
-
-<!-- Mobile Menu Footer -->
-<div class="p-4 border-t border-border-color dark:border-dark-border-color">
-<a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
-<span class="material-symbols-outlined">logout</span>
-<span class="font-semibold">Logout</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Main Content -->
-<main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-<!-- Page Header -->
-<div class="text-center mb-10 fade-in">
-  <div class="flex items-center justify-center gap-3 mb-3">
-    <span class="text-5xl animate-pulse">🦷</span>
-    <h1 class="text-4xl md:text-5xl font-bold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</h1>
-  </div>
-  <p class="text-base text-text-secondary dark:text-dark-text-secondary max-w-xl mx-auto">Provide imaging, lab data, and patient history â€” our AI synthesizes a complete integrated diagnosis.</p>
-</div>
-
-<!-- GLOBAL LOADING OVERLAY -->
-<div id="globalLoadingOverlay">
-  <div class="glo-spinner"></div>
-  <div class="glo-steps">
-    <div class="glo-step" id="glo-step-1">
-      <div class="glo-step-icon"><span class="material-symbols-outlined text-gray-500">radio_button_unchecked</span></div>
-      <div>
-        <div style="font-weight:700;font-size:.84rem;color:#fff">X-Ray Analysis</div>
-        <div style="font-size:.72rem;opacity:.6">Sending image to AI modelâ€¦</div>
-      </div>
-    </div>
-    <div class="glo-step" id="glo-step-2">
-      <div class="glo-step-icon"><span class="material-symbols-outlined text-gray-500">radio_button_unchecked</span></div>
-      <div>
-        <div style="font-weight:700;font-size:.84rem;color:#fff">Lab Results</div>
-        <div style="font-size:.72rem;opacity:.6">Processing laboratory dataâ€¦</div>
-      </div>
-    </div>
-    <div class="glo-step" id="glo-step-3">
-      <div class="glo-step-icon"><span class="material-symbols-outlined text-gray-500">radio_button_unchecked</span></div>
-      <div>
-        <div style="font-weight:700;font-size:.84rem;color:#fff">Patient History</div>
-        <div style="font-size:.72rem;opacity:.6">Compiling history dataâ€¦</div>
-      </div>
-    </div>
-  </div>
-  <div class="glo-progress-bar"><div class="glo-progress-fill" id="glo-progress-fill"></div></div>
-  <p style="font-size:.8rem;color:#9CA3AF">Processing â€” please do not close this page</p>
-</div>
-
-<!-- RESULTS DASHBOARD (hidden until generation) -->
-<div id="resultsDashboard"></div>
-
-<!-- WIZARD FORM -->
-<div id="wizardForm">
-
-  <!-- Step progress bar -->
-  <div class="wizard-steps fade-in-up">
-    <div class="wizard-step active" id="ws-1">
-      <div class="wizard-step-circle">1</div>
-      <div class="wizard-step-label">Imaging</div>
-    </div>
-    <div class="wizard-step-connector"><div class="wizard-step-connector-fill" id="wc-1"></div></div>
-    <div class="wizard-step" id="ws-2">
-      <div class="wizard-step-circle">2</div>
-      <div class="wizard-step-label">Lab Results</div>
-    </div>
-    <div class="wizard-step-connector"><div class="wizard-step-connector-fill" id="wc-2"></div></div>
-    <div class="wizard-step" id="ws-3">
-      <div class="wizard-step-circle">3</div>
-      <div class="wizard-step-label">History</div>
-    </div>
-  </div>
-
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       STEP 1 â€“ IMAGING
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-  <div class="wizard-panel active" id="wp-1">
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-  <div class="lg:col-span-2 space-y-6">
-
-    <!-- X-ray type -->
-    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
-      <div class="card-header">
-        <div class="card-icon"><span class="material-symbols-outlined text-primary">radiology</span></div>
-        <div>
-          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Step 1 â€” Select X-Ray Type</h2>
-          <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Choose the radiograph type before uploading</p>
-        </div>
-      </div>
-      <div class="xray-type-grid">
-        <div class="xray-type-card" id="xt-panorama" onclick="selectXrayType('panorama')">
-          <div class="xray-check"><span class="material-symbols-outlined text-white" style="font-size:13px">check</span></div>
-          <span class="xtype-icon">🦷</span>
-          <h4 class="text-text-primary dark:text-dark-text-primary">Panorama</h4>
-          <p class="text-text-secondary dark:text-dark-text-secondary">Full-mouth overview radiograph<br>â†’ app_xray model (ResNet-50)</p>
-        </div>
-        <div class="xray-type-card" id="xt-periapical" onclick="selectXrayType('periapical')">
-          <div class="xray-check"><span class="material-symbols-outlined text-white" style="font-size:13px">check</span></div>
-          <span class="xtype-icon">🔍</span>
-          <h4 class="text-text-primary dark:text-dark-text-primary">Periapical</h4>
-          <p class="text-text-secondary dark:text-dark-text-secondary">Single-tooth root-to-crown view<br>â†’ YOLO periapical model</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Upload zone (shown after type selected) -->
-    <div id="xray-upload-section" class="hidden diag-card bg-card dark:bg-dark-card shadow-lg">
-      <div class="card-header">
-        <div class="card-icon"><span class="material-symbols-outlined text-primary">upload</span></div>
-        <div>
-          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Upload X-Ray Image</h2>
-          <p id="xray-hint" class="text-xs text-text-secondary dark:text-dark-text-secondary"></p>
-        </div>
-      </div>
-      <div class="upload-zone" id="xray-drop-zone">
-        <input type="file" id="xray-file-input" accept="image/*,.dcm" class="hidden">
-        <div id="xray-prompt">
-          <div class="uz-icon"><span class="material-symbols-outlined text-primary text-3xl">add_photo_alternate</span></div>
-          <h3 class="text-text-primary dark:text-dark-text-primary">Click or drag & drop</h3>
-          <p>JPG, PNG, DICOM Â· Max 25 MB</p>
-        </div>
-        <div id="xray-card" class="hidden"></div>
-      </div>
-    </div>
-
-    <!-- Nav -->
-    <div class="flex justify-end">
-      <button class="btn-next" onclick="goToStep(2)">
-        Next: Lab Results <span class="material-symbols-outlined">arrow_forward</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Sidebar -->
-  <aside class="lg:col-span-1">
-    <div class="sticky top-24 space-y-5">
-      <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white rounded-2xl p-6 shadow-lg">
-        <h3 class="font-bold text-base mb-3">📡 AI Models</h3>
-        <div class="space-y-3">
-          <div class="bg-white/10 rounded-xl p-3">
-            <div class="font-bold text-sm">Panoramic</div>
-            <div class="text-xs opacity-75">ResNet-50 Â· 31 dental classes Â· Multi-label sigmoid</div>
-          </div>
-          <div class="bg-white/10 rounded-xl p-3">
-            <div class="font-bold text-sm">Periapical</div>
-            <div class="text-xs opacity-75">YOLOv8 Â· Object detection Â· Bounding boxes</div>
-          </div>
-        </div>
-      </div>
-      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-5">
-        <h3 class="font-bold text-sm text-blue-800 dark:text-blue-300 mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-sm">tips_and_updates</span>Tips</h3>
-        <ul class="text-xs text-blue-700 dark:text-blue-300 space-y-1.5">
-          <li>â€¢ Use high-resolution images for best accuracy</li>
-          <li>â€¢ DICOM files preserve original radiograph quality</li>
-          <li>â€¢ Ensure the full dental arch is visible (panoramic)</li>
-        </ul>
-      </div>
-    </div>
-  </aside>
-  </div>
-  </div>
-
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       STEP 2 â€“ LAB RESULTS
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-  <div class="wizard-panel" id="wp-2">
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-  <div class="lg:col-span-2 space-y-6">
-
-    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
-      <div class="card-header">
-        <div class="card-icon"><span class="material-symbols-outlined text-purple-500">science</span></div>
-        <div>
-          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Step 2 â€” Upload Lab Results</h2>
-          <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Upload a PDF or image of the patient's laboratory report</p>
-        </div>
-      </div>
-      <div class="upload-zone" id="lab-drop-zone">
-        <input type="file" id="lab-file-input" accept=".pdf,.doc,.docx,image/*" class="hidden">
-        <div id="lab-prompt">
-          <div class="uz-icon"><span class="material-symbols-outlined text-purple-500 text-3xl">description</span></div>
-          <h3 class="text-text-primary dark:text-dark-text-primary">Click or drag & drop</h3>
-          <p>PDF, DOC, JPG, PNG Â· Max 25 MB</p>
-        </div>
-        <div id="lab-card" class="hidden"></div>
-      </div>
-    </div>
-
-    <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-2xl p-5">
-      <h3 class="font-bold text-sm text-purple-800 dark:text-purple-300 mb-2">🔬 Lab Model Analyzes</h3>
-      <div class="grid grid-cols-2 gap-x-6 gap-y-1 text-xs text-purple-700 dark:text-purple-300">
-        <span>â€¢ WBC / RBC / Hemoglobin</span><span>â€¢ Glucose / HbA1c</span>
-        <span>â€¢ Platelets / Hematocrit</span><span>â€¢ Calcium / Sodium</span>
-        <span>â€¢ Creatinine / BUN</span><span>â€¢ LDL / HDL / Cholesterol</span>
-        <span>â€¢ ALT / AST / Albumin</span><span>â€¢ TSH / Thyroid markers</span>
-      </div>
-      <p class="text-xs text-purple-600 dark:text-purple-400 mt-3 opacity-75">Targets: Diabetes Â· Hyperlipidemia Â· Liver Â· Hypertension Â· Kidney Â· Anemia Â· Heart Risk Â· Thyroid Â· Infection</p>
-    </div>
-
-    <div class="flex justify-between">
-      <button class="btn-back" onclick="goToStep(1)"><span class="material-symbols-outlined">arrow_back</span>Back</button>
-      <button class="btn-next" onclick="goToStep(3)">Next: Patient History <span class="material-symbols-outlined">arrow_forward</span></button>
-    </div>
-  </div>
-
-  <aside class="lg:col-span-1">
-    <div class="sticky top-24">
-      <div class="bg-gradient-to-br from-purple-700 to-purple-900 text-white rounded-2xl p-6 shadow-lg">
-        <h3 class="font-bold text-base mb-3">🧬 Accepted Formats</h3>
-        <ul class="text-sm space-y-2">
-          <li class="flex items-center gap-2"><span>📄</span>PDF lab report printout</li>
-          <li class="flex items-center gap-2"><span>🖼</span>Photo of printed results</li>
-          <li class="flex items-center gap-2"><span>📊</span>Digital report (JPG/PNG)</li>
-        </ul>
-        <p class="text-xs opacity-70 mt-4">The model extracts numeric blood markers from the document and classifies systemic conditions.</p>
-      </div>
-    </div>
-  </aside>
-  </div>
-  </div>
-
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       STEP 3 â€“ PATIENT HISTORY
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-  <div class="wizard-panel" id="wp-3">
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-  <div class="lg:col-span-2 space-y-6">
-
-    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
-      <div class="card-header">
-        <div class="card-icon"><span class="material-symbols-outlined text-green-500">history_edu</span></div>
-        <div>
-          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Step 3 â€” Patient Medical History</h2>
-          <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Answer all 20 questions. This data is included in the integrated diagnosis.</p>
-        </div>
-      </div>
-      <div class="hq-list bg-background dark:bg-dark-background rounded-2xl border border-border-color dark:border-dark-border-color" id="hq-list">
-        <!-- Injected by buildHistory() -->
-      </div>
-    </div>
-
-    <!-- Completion progress -->
-    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
-      <div class="flex items-center justify-between mb-3">
-        <span class="text-sm font-bold text-text-primary dark:text-dark-text-primary">Form Completion</span>
-        <span class="text-sm font-bold text-primary" id="hq-label">0 / 20 answered</span>
-      </div>
-      <div class="completion-bar-track"><div class="completion-bar-fill" id="hq-bar" style="width:0%"></div></div>
-    </div>
-
-    <!-- GENERATE BUTTON -->
-    <div class="space-y-3">
-      <button class="btn-generate" onclick="generateDiagnosis()">
-        <span class="material-symbols-outlined" style="font-size:1.3rem">psychology</span>
-        Generate Final Integrated Diagnosis
-        <span class="material-symbols-outlined" style="font-size:1.3rem">auto_awesome</span>
-      </button>
-      <p class="text-center text-xs text-text-secondary dark:text-dark-text-secondary">All three data sources will be analyzed simultaneously using AI.</p>
-    </div>
-
-    <div class="flex justify-between">
-      <button class="btn-back" onclick="goToStep(2)"><span class="material-symbols-outlined">arrow_back</span>Back</button>
-      <button class="btn-back" onclick="resetHistory()"><span class="material-symbols-outlined">refresh</span>Reset</button>
-    </div>
-  </div>
-
-  <aside class="lg:col-span-1">
-    <div class="sticky top-24">
-      <div class="bg-gradient-to-br from-green-700 to-green-900 text-white rounded-2xl p-6 shadow-lg">
-        <h3 class="font-bold text-base mb-3">🏥 Why History Matters</h3>
-        <p class="text-sm opacity-90 mb-4">Systemic conditions directly influence dental treatment planning, drug selection, and surgical risk.</p>
-        <ul class="text-sm space-y-1.5">
-          <li>âœ“ Flags drug interactions</li>
-          <li>âœ“ Identifies bleeding risks</li>
-          <li>âœ“ Contextualizes X-ray findings</li>
-          <li>âœ“ Personalises treatment plan</li>
-        </ul>
-      </div>
-    </div>
-  </aside>
-  </div>
-  </div>
-
-</div><!-- end #wizardForm -->
-
-</main>
-
-</div>
-
-<!-- Toast Container -->
-<div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
-
-<!-- JavaScript -->
-<script src="../js/aIdiagnosis.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const logoImage = document.getElementById("logoImage");
-    if (!logoImage) return;
-    const isDark = document.documentElement.classList.contains("dark");
-    logoImage.src = isDark ? "../assets/Logo0.png" : "../assets/Logo.png";
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.attributeName === "class") {
-                const isDarkMode = document.documentElement.classList.contains("dark");
-                logoImage.style.opacity = "0";
-                setTimeout(() => {
-                    logoImage.src = isDarkMode ? "../assets/Logo0.png" : "../assets/Logo.png";
-                    logoImage.style.opacity = "1";
-                }, 150);
-            }
-        });
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-});
-</script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dentor - AI Diagnosis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5bcba7",
+              "primary-light": "#7ad9b8",
+              "primary-dark": "#3db896",
+              "background": "#f6f8f7",
+              "dark-background": "#111827",
+              "text-primary": "#000000",
+              "dark-text-primary": "#F9FAFB",
+              "text-secondary": "#4b5563",
+              "dark-text-secondary": "#9CA3AF",
+              "border-color": "#e5e7eb",
+              "dark-border-color": "#374151",
+              "card": "#ffffff",
+              "dark-card": "#1F2937",
+              "input-bg": "#f3f4f6",
+              "dark-input-bg": "#1f3a34",
+              "foreground": "#ffffff",
+              "dark-foreground": "#1a2c26",
+              "muted": "#9ca3af",
+              "dark-muted": "#6b7280",
+            },
+            fontFamily: {
+              "display": ["Manrope", "Interstate", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "13": "3.25rem",
+              "15": "3.75rem",
+              "128": "32rem"
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "pulse-soft": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" }
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" }
+              }
+            },
+            boxShadow: {
+              "glow": "0 0 20px rgba(91, 203, 167, 0.3)",
+              "glow-lg": "0 0 40px rgba(91, 203, 167, 0.4)",
+              "dark-glow": "0 0 20px rgba(91, 203, 167, 0.2)",
+            }
+          },
+        },
+      }
+</script>
+<script src="../js/themeManager.js"></script>
+<script src="../js/tokengaurd.js?v=999"></script>
+<link rel="stylesheet" href="../css/aIdiagnosis.css">
+</head>
+<body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
+<div class="flex flex-col min-h-screen">
+
+<!-- Header -->
+<header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-4">
+    <div class="relative inline-flex items-center -ml-20">
+        <img id="logoImage" src="../assets/Logo1.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+        <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
+    </div>
+</div>
+<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
+</span>
+</a>
+<div class="relative group">
+<button class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Features</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</span>
+</button>
+
+<!-- Features Dropdown -->
+<div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+<div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
+</div>
+<div class="p-2">
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📚</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📝</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🏥</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">📄</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
+</div>
+</a>
+
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🧠</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
+</div>
+</a>
+<a href="3dmodels.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🦷</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">3D Models</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Interactive dental anatomy</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="community.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">groups</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Community</span>
+</span>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="leaderboard.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">emoji_events</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
+</span>
+</a>
+<a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">smart_toy</span>
+<span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
+</span>
+</a>
+</nav>
+<div class="flex items-center gap-2">
+<!-- Dark Mode Toggle -->
+<button id="darkModeToggle" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
+<span id="darkModeIcon" class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">light_mode</span>
+</button>
+
+<!-- Notifications -->
+<div class="relative">
+<button id="notificationBtn" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
+<span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">notifications</span>
+<span class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+
+<!-- Notification Dropdown -->
+<div id="notificationDropdown" class="dropdown absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
+</div>
+<div class="max-h-96 overflow-y-auto">
+<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Diagnosis Completed</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">AI diagnosis ready for review</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 hours ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-blue-500">info</span>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Case Uploaded</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Patient data successfully uploaded</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">5 hours ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 hover:bg-background dark:hover:bg-dark-background cursor-pointer">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-yellow-500">star</span>
+<div class="flex-1">
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Treatment Plan Created</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Recommended treatment available</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 day ago</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-border-color dark:border-dark-border-color text-center">
+<a href="notification.html" class="text-sm text-primary hover:text-primary-dark font-semibold">View All</a>
+</div>
+</div>
+</div>
+
+<!-- Profile -->
+<div class="relative">
+<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("../assets/default photo.png");'></button>
+<div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+<div class="p-4 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("../assets/default photo.png");'></div>
+<div>
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">john.doe@email.com</p>
+</div>
+</div>
+</div>
+<div class="py-2">
+<a href="Profile.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">person</span>
+<span class="text-sm font-medium">My Profile</span>
+</a>
+<a href="flashcards.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">collections</span>
+<span class="text-sm font-medium">Flash Cards</span>
+</a>
+<a href="help&support.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="text-sm font-medium">Help & Support</span>
+</a>
+</div>
+<div class="border-t border-border-color dark:border-dark-border-color py-2">
+<a href="Login.html" class="flex items-center gap-3 px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span class="text-sm font-medium">Sign Out</span>
+</a>
+</div>
+</div>
+</div>
+
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+
+<!-- Mobile Sidebar Menu -->
+<div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+<div id="mobileSidebarPanel" class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
+<div class="flex flex-col h-full">
+<!-- Mobile Menu Header -->
+<div class="p-6 border-b border-border-color dark:border-dark-border-color">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
+<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+
+<!-- Mobile Menu Content -->
+<div class="flex-1 overflow-y-auto p-4">
+<nav class="space-y-2">
+<a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Dashboard</span>
+</a>
+
+<!-- Features Section -->
+<div class="pt-2">
+<p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI Features</p>
+<a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📚</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized schedules</p>
+</div>
+</a>
+<a href="examgen.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📝</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice exams</p>
+</div>
+</a>
+<a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🏥</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Cases</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Real scenarios</p>
+</div>
+</a>
+<a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">📄</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p>
+</div>
+</a>
+
+<a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="text-xl">🧠</span>
+<div>
+<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Dental Diagnosis</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Case analysis</p>
+</div>
+</a>
+</div>
+
+<div class="border-t border-border-color dark:border-dark-border-color my-4"></div>
+
+<a href="community.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Community</span>
+</a>
+<a href="leaderboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">emoji_events</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Leaderboard</span>
+</a>
+<a href="chatbot.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+<span class="font-semibold text-text-primary dark:text-dark-text-primary">Chatbot</span>
+</a>
+</nav>
+</div>
+
+<!-- Mobile Menu Footer -->
+<div class="p-4 border-t border-border-color dark:border-dark-border-color">
+<a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-semibold">Logout</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Main Content -->
+<main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+<!-- Page Header -->
+<div class="text-center mb-10 fade-in">
+  <div class="flex items-center justify-center gap-3 mb-3">
+    <span class="text-5xl animate-pulse">🦷</span>
+    <h1 class="text-4xl md:text-5xl font-bold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</h1>
+  </div>
+  <p class="text-base text-text-secondary dark:text-dark-text-secondary max-w-xl mx-auto">Provide imaging, lab data, and patient history — our AI synthesizes a complete integrated diagnosis.</p>
+</div>
+
+<!-- GLOBAL LOADING OVERLAY -->
+<div id="globalLoadingOverlay">
+  <div class="glo-spinner"></div>
+  <div class="glo-steps">
+    <div class="glo-step" id="glo-step-1">
+      <div class="glo-step-icon"><span class="material-symbols-outlined text-gray-500">radio_button_unchecked</span></div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#fff">X-Ray Analysis</div>
+        <div style="font-size:.72rem;opacity:.6">Sending image to AI model…</div>
+      </div>
+    </div>
+    <div class="glo-step" id="glo-step-2">
+      <div class="glo-step-icon"><span class="material-symbols-outlined text-gray-500">radio_button_unchecked</span></div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#fff">Lab Results</div>
+        <div style="font-size:.72rem;opacity:.6">Processing laboratory data…</div>
+      </div>
+    </div>
+    <div class="glo-step" id="glo-step-3">
+      <div class="glo-step-icon"><span class="material-symbols-outlined text-gray-500">radio_button_unchecked</span></div>
+      <div>
+        <div style="font-weight:700;font-size:.84rem;color:#fff">Patient History</div>
+        <div style="font-size:.72rem;opacity:.6">Compiling history data…</div>
+      </div>
+    </div>
+  </div>
+  <div class="glo-progress-bar"><div class="glo-progress-fill" id="glo-progress-fill"></div></div>
+  <p style="font-size:.8rem;color:#9CA3AF">Processing — please do not close this page</p>
+</div>
+
+<!-- RESULTS DASHBOARD (hidden until generation) -->
+<div id="resultsDashboard"></div>
+
+<!-- WIZARD FORM -->
+<div id="wizardForm">
+
+  <!-- Step progress bar -->
+  <div class="wizard-steps fade-in-up">
+    <div class="wizard-step active" id="ws-1">
+      <div class="wizard-step-circle">1</div>
+      <div class="wizard-step-label">Imaging</div>
+    </div>
+    <div class="wizard-step-connector"><div class="wizard-step-connector-fill" id="wc-1"></div></div>
+    <div class="wizard-step" id="ws-2">
+      <div class="wizard-step-circle">2</div>
+      <div class="wizard-step-label">Lab Results</div>
+    </div>
+    <div class="wizard-step-connector"><div class="wizard-step-connector-fill" id="wc-2"></div></div>
+    <div class="wizard-step" id="ws-3">
+      <div class="wizard-step-circle">3</div>
+      <div class="wizard-step-label">History</div>
+    </div>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       STEP 1 — IMAGING
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <div class="wizard-panel active" id="wp-1">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div class="lg:col-span-2 space-y-6">
+
+    <!-- X-ray type -->
+    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
+      <div class="card-header">
+        <div class="card-icon"><span class="material-symbols-outlined text-primary">radiology</span></div>
+        <div>
+          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Step 1 — Select X-Ray Type</h2>
+          <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Choose the radiograph type before uploading</p>
+        </div>
+      </div>
+      <div class="xray-type-grid">
+        <div class="xray-type-card" id="xt-panorama" onclick="selectXrayType('panorama')">
+          <div class="xray-check"><span class="material-symbols-outlined text-white" style="font-size:13px">check</span></div>
+          <span class="xtype-icon">🦷</span>
+          <h4 class="text-text-primary dark:text-dark-text-primary">Panorama</h4>
+          <p class="text-text-secondary dark:text-dark-text-secondary">Full-mouth overview radiograph<br>→ app_xray model (ResNet-50)</p>
+        </div>
+        <div class="xray-type-card" id="xt-periapical" onclick="selectXrayType('periapical')">
+          <div class="xray-check"><span class="material-symbols-outlined text-white" style="font-size:13px">check</span></div>
+          <span class="xtype-icon">🔍</span>
+          <h4 class="text-text-primary dark:text-dark-text-primary">Periapical</h4>
+          <p class="text-text-secondary dark:text-dark-text-secondary">Single-tooth root-to-crown view<br>→ YOLO periapical model</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload zone (shown after type selected) -->
+    <div id="xray-upload-section" class="hidden diag-card bg-card dark:bg-dark-card shadow-lg">
+      <div class="card-header">
+        <div class="card-icon"><span class="material-symbols-outlined text-primary">upload</span></div>
+        <div>
+          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Upload X-Ray Image</h2>
+          <p id="xray-hint" class="text-xs text-text-secondary dark:text-dark-text-secondary"></p>
+        </div>
+      </div>
+      <div class="upload-zone" id="xray-drop-zone">
+        <input type="file" id="xray-file-input" accept="image/*,.dcm" class="hidden">
+        <div id="xray-prompt">
+          <div class="uz-icon"><span class="material-symbols-outlined text-primary text-3xl">add_photo_alternate</span></div>
+          <h3 class="text-text-primary dark:text-dark-text-primary">Click or drag & drop</h3>
+          <p>JPG, PNG, DICOM · Max 25 MB</p>
+        </div>
+        <div id="xray-card" class="hidden"></div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="flex justify-end">
+      <button class="btn-next" onclick="goToStep(2)">
+        Next: Lab Results <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="lg:col-span-1">
+    <div class="sticky top-24 space-y-5">
+      <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white rounded-2xl p-6 shadow-lg">
+        <h3 class="font-bold text-base mb-3">📡 AI Models</h3>
+        <div class="space-y-3">
+          <div class="bg-white/10 rounded-xl p-3">
+            <div class="font-bold text-sm">Panoramic</div>
+            <div class="text-xs opacity-75">ResNet-50 · 31 dental classes · Multi-label sigmoid</div>
+          </div>
+          <div class="bg-white/10 rounded-xl p-3">
+            <div class="font-bold text-sm">Periapical</div>
+            <div class="text-xs opacity-75">YOLOv8 · Object detection · Bounding boxes</div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-5">
+        <h3 class="font-bold text-sm text-blue-800 dark:text-blue-300 mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-sm">tips_and_updates</span>Tips</h3>
+        <ul class="text-xs text-blue-700 dark:text-blue-300 space-y-1.5">
+          <li>• Use high-resolution images for best accuracy</li>
+          <li>• DICOM files preserve original radiograph quality</li>
+          <li>• Ensure the full dental arch is visible (panoramic)</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  </div>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       STEP 2 — LAB RESULTS
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <div class="wizard-panel" id="wp-2">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div class="lg:col-span-2 space-y-6">
+
+    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
+      <div class="card-header">
+        <div class="card-icon"><span class="material-symbols-outlined text-purple-500">science</span></div>
+        <div>
+          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Step 2 — Upload Lab Results</h2>
+          <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Upload a PDF or image of the patient's laboratory report</p>
+        </div>
+      </div>
+      <div class="upload-zone" id="lab-drop-zone">
+        <input type="file" id="lab-file-input" accept=".pdf,.doc,.docx,image/*" class="hidden">
+        <div id="lab-prompt">
+          <div class="uz-icon"><span class="material-symbols-outlined text-purple-500 text-3xl">description</span></div>
+          <h3 class="text-text-primary dark:text-dark-text-primary">Click or drag & drop</h3>
+          <p>PDF, DOC, JPG, PNG · Max 25 MB</p>
+        </div>
+        <div id="lab-card" class="hidden"></div>
+      </div>
+    </div>
+
+    <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-2xl p-5">
+      <h3 class="font-bold text-sm text-purple-800 dark:text-purple-300 mb-2">🔬 Lab Model Analyzes</h3>
+      <div class="grid grid-cols-2 gap-x-6 gap-y-1 text-xs text-purple-700 dark:text-purple-300">
+        <span>• WBC / RBC / Hemoglobin</span><span>• Glucose / HbA1c</span>
+        <span>• Platelets / Hematocrit</span><span>• Calcium / Sodium</span>
+        <span>• Creatinine / BUN</span><span>• LDL / HDL / Cholesterol</span>
+        <span>• ALT / AST / Albumin</span><span>• TSH / Thyroid markers</span>
+      </div>
+      <p class="text-xs text-purple-600 dark:text-purple-400 mt-3 opacity-75">Targets: Diabetes · Hyperlipidemia · Liver · Hypertension · Kidney · Anemia · Heart Risk · Thyroid · Infection</p>
+    </div>
+
+    <div class="flex justify-between">
+      <button class="btn-back" onclick="goToStep(1)"><span class="material-symbols-outlined">arrow_back</span>Back</button>
+      <button class="btn-next" onclick="goToStep(3)">Next: Patient History <span class="material-symbols-outlined">arrow_forward</span></button>
+    </div>
+  </div>
+
+  <aside class="lg:col-span-1">
+    <div class="sticky top-24">
+      <div class="bg-gradient-to-br from-purple-700 to-purple-900 text-white rounded-2xl p-6 shadow-lg">
+        <h3 class="font-bold text-base mb-3">🧬 Accepted Formats</h3>
+        <ul class="text-sm space-y-2">
+          <li class="flex items-center gap-2"><span>📄</span>PDF lab report printout</li>
+          <li class="flex items-center gap-2"><span>🖼</span>Photo of printed results</li>
+          <li class="flex items-center gap-2"><span>📊</span>Digital report (JPG/PNG)</li>
+        </ul>
+        <p class="text-xs opacity-70 mt-4">The model extracts numeric blood markers from the document and classifies systemic conditions.</p>
+      </div>
+    </div>
+  </aside>
+  </div>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       STEP 3 — PATIENT HISTORY
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <div class="wizard-panel" id="wp-3">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div class="lg:col-span-2 space-y-6">
+
+    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
+      <div class="card-header">
+        <div class="card-icon"><span class="material-symbols-outlined text-green-500">history_edu</span></div>
+        <div>
+          <h2 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Step 3 — Patient Medical History</h2>
+          <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Answer all 20 questions. This data is included in the integrated diagnosis.</p>
+        </div>
+      </div>
+      <div class="hq-list bg-background dark:bg-dark-background rounded-2xl border border-border-color dark:border-dark-border-color" id="hq-list">
+        <!-- Injected by buildHistory() -->
+      </div>
+    </div>
+
+    <!-- Completion progress -->
+    <div class="diag-card bg-card dark:bg-dark-card shadow-lg">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-sm font-bold text-text-primary dark:text-dark-text-primary">Form Completion</span>
+        <span class="text-sm font-bold text-primary" id="hq-label">0 / 20 answered</span>
+      </div>
+      <div class="completion-bar-track"><div class="completion-bar-fill" id="hq-bar" style="width:0%"></div></div>
+    </div>
+
+    <!-- GENERATE BUTTON -->
+    <div class="space-y-3">
+      <button class="btn-generate" onclick="generateDiagnosis()">
+        <span class="material-symbols-outlined" style="font-size:1.3rem">psychology</span>
+        Generate Final Integrated Diagnosis
+        <span class="material-symbols-outlined" style="font-size:1.3rem">auto_awesome</span>
+      </button>
+      <p class="text-center text-xs text-text-secondary dark:text-dark-text-secondary">All three data sources will be analyzed simultaneously using AI.</p>
+    </div>
+
+    <div class="flex justify-between">
+      <button class="btn-back" onclick="goToStep(2)"><span class="material-symbols-outlined">arrow_back</span>Back</button>
+      <button class="btn-back" onclick="resetHistory()"><span class="material-symbols-outlined">refresh</span>Reset</button>
+    </div>
+  </div>
+
+  <aside class="lg:col-span-1">
+    <div class="sticky top-24">
+      <div class="bg-gradient-to-br from-green-700 to-green-900 text-white rounded-2xl p-6 shadow-lg">
+        <h3 class="font-bold text-base mb-3">🏥 Why History Matters</h3>
+        <p class="text-sm opacity-90 mb-4">Systemic conditions directly influence dental treatment planning, drug selection, and surgical risk.</p>
+        <ul class="text-sm space-y-1.5">
+          <li>✓ Flags drug interactions</li>
+          <li>✓ Identifies bleeding risks</li>
+          <li>✓ Contextualizes X-ray findings</li>
+          <li>✓ Personalises treatment plan</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  </div>
+  </div>
+
+</div><!-- end #wizardForm -->
+
+</main>
+
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+<!-- JavaScript -->
+<script src="../js/aIdiagnosis.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const logoImage = document.getElementById("logoImage");
+    if (!logoImage) return;
+    const isDark = document.documentElement.classList.contains("dark");
+    logoImage.src = isDark ? "../assets/Logo0.png" : "../assets/Logo.png";
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === "class") {
+                const isDarkMode = document.documentElement.classList.contains("dark");
+                logoImage.style.opacity = "0";
+                setTimeout(() => {
+                    logoImage.src = isDarkMode ? "../assets/Logo0.png" : "../assets/Logo.png";
+                    logoImage.style.opacity = "1";
+                }, 150);
+            }
+        });
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+});
+</script>
+</body>
+</html>
