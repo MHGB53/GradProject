@@ -217,7 +217,15 @@ def delete_post(
     # Delete attachment files from disk
     for att in post.attachments:
         if os.path.exists(att.file_path):
-            os.remove(att.file_path)
+            try:
+                os.remove(att.file_path)
+            except Exception as e:
+                pass # Ignore file deletion errors
+
+    # Manually delete child records to avoid SQL Server FK constraint errors
+    db.query(PostLike).filter(PostLike.post_id == post_id).delete(synchronize_session=False)
+    db.query(PostComment).filter(PostComment.post_id == post_id).delete(synchronize_session=False)
+    db.query(PostAttachment).filter(PostAttachment.post_id == post_id).delete(synchronize_session=False)
 
     db.delete(post)
     db.commit()

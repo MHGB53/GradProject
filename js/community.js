@@ -167,7 +167,7 @@ function renderPostCard(post) {
                         </p>
                     </div>
                     ${isOwner ? `
-                    <button onclick="deletePost(${post.id})" 
+                    <button type="button" onclick="event.stopPropagation(); deletePost(${post.id})" 
                         class="text-text-secondary dark:text-dark-text-secondary hover:text-red-500 transition-colors p-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
                         title="Delete post">
                         <span class="material-symbols-outlined text-sm">delete</span>
@@ -343,9 +343,84 @@ async function submitPost(e) {
     }
 }
 
+// ──────────────────────────── Delete Confirmation Modal ────────────────────────────
+
+let currentDeleteTarget = null;
+let currentDeleteType = null;
+let currentPostContext = null;
+
+function openDeleteModal(id, type, postIdContext = null) {
+    currentDeleteTarget = id;
+    currentDeleteType = type;
+    currentPostContext = postIdContext;
+
+    const modal = document.getElementById('deleteItemModal');
+    const content = document.getElementById('deleteItemModalContent');
+    const title = document.getElementById('deleteItemModalTitle');
+    const text = document.getElementById('deleteItemModalText');
+    const confirmBtn = document.getElementById('confirmDeleteItemBtn');
+
+    if (!modal) return;
+
+    if (type === 'post') {
+        title.textContent = 'Delete post?';
+        text.textContent = 'Are you sure you want to delete this post? All comments and attachments will also be deleted. This action cannot be undone.';
+    } else {
+        title.textContent = 'Delete comment?';
+        text.textContent = 'Are you sure you want to delete this comment? This action cannot be undone.';
+    }
+
+    confirmBtn.onclick = confirmDeleteAction;
+
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.classList.add('opacity-100');
+        content?.classList.remove('scale-95');
+        content?.classList.add('scale-100');
+    }, 10);
+}
+
+function closeDeleteModal() {
+    const modal = document.getElementById('deleteItemModal');
+    const content = document.getElementById('deleteItemModalContent');
+    if (!modal) return;
+
+    modal.classList.remove('opacity-100');
+    modal.classList.add('opacity-0');
+    content?.classList.remove('scale-100');
+    content?.classList.add('scale-95');
+    setTimeout(() => modal.classList.add('hidden'), 300);
+    
+    currentDeleteTarget = null;
+    currentDeleteType = null;
+    currentPostContext = null;
+}
+
+async function confirmDeleteAction() {
+    const btn = document.getElementById('confirmDeleteItemBtn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Deleting...';
+    btn.disabled = true;
+
+    if (currentDeleteType === 'post') {
+        await performDeletePost(currentDeleteTarget);
+    } else if (currentDeleteType === 'comment') {
+        await performDeleteComment(currentDeleteTarget, currentPostContext);
+    }
+
+    btn.textContent = originalText;
+    btn.disabled = false;
+    closeDeleteModal();
+}
+
 // ──────────────────────────── Delete Post ────────────────────────────
 
-async function deletePost(postId) {
+function deletePost(postId) {
+    openDeleteModal(postId, 'post');
+}
+
+async function performDeletePost(postId) {
     try {
         const res = await fetch(`${API_BASE}/api/community/posts/${postId}`, {
             method: 'DELETE',
@@ -363,6 +438,7 @@ async function deletePost(postId) {
         }
     } catch (err) {
         console.error('Could not delete post:', err);
+        alert('Could not delete post: ' + err.message);
     }
 }
 
@@ -579,7 +655,11 @@ async function quickComment(postId) {
 
 // ──────────────────────────── Delete Comment ────────────────────────────
 
-async function deleteComment(commentId, postId) {
+function deleteComment(commentId, postId) {
+    openDeleteModal(commentId, 'comment', postId);
+}
+
+async function performDeleteComment(commentId, postId) {
     try {
         const res = await fetch(`${API_BASE}/api/community/comments/${commentId}`, {
             method: 'DELETE',
@@ -591,8 +671,20 @@ async function deleteComment(commentId, postId) {
 
         const countEl = document.querySelector(`#post-card-${postId} .comment-count`);
         if (countEl) countEl.textContent = Math.max(0, parseInt(countEl.textContent) - 1);
+        
+        // Also update the count in the modal header
+        const countSpan = document.getElementById('commentsCount');
+        if (countSpan) {
+            const curr = parseInt((countSpan.textContent || '(0)').replace(/\D/g, '')) || 0;
+            if (curr > 1) {
+                countSpan.textContent = `(${curr - 1})`;
+            } else {
+                countSpan.textContent = '';
+            }
+        }
     } catch (err) {
         console.error('Could not delete comment:', err);
+        alert('Could not delete comment: ' + err.message);
     }
 }
 

@@ -240,3 +240,16 @@ class StudyPlanEntry(Base):
 
     def __repr__(self):
         return f"<StudyPlanEntry id={self.id} plan_id={self.plan_id} day={self.day_of_week} subject={self.subject_name}>"
+
+
+class StudyPlanPenalty(Base):
+    """Tracks which days in a study plan have already been penalized for missing all tasks."""
+    __tablename__ = "study_plan_penalties"
+
+    id           = Column(Integer, primary_key=True, index=True)
+    plan_id      = Column(Integer, ForeignKey("study_plans.id", ondelete="CASCADE"), nullable=False, index=True)
+    day_of_week  = Column(String(20),  nullable=False)   # e.g. "Monday"
+    created_at   = Column(DateTime(timezone=True), server_default=func.now())
+
+    # plan relationship could be added if needed, but we mainly query by plan_id
+

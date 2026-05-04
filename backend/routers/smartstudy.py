@@ -13,7 +13,7 @@ from datetime import datetime, timedelta, time as dtime
 from sqlalchemy.orm import Session
 
 from ..database import get_db
-from ..models import User, StudyPlan, StudyPlanEntry, UserPoints
+from ..models import User, StudyPlan, StudyPlanEntry, UserPoints, StudyPlanPenalty
 from ..routers.auth import get_current_user
 
 POINTS_PER_TASK = 10   # points awarded per completed study task
@@ -490,6 +490,56 @@ def get_saved_plan(
     if not plan:
         raise HTTPException(status_code=404, detail="No saved study plan found.")
 
+    # ── Evaluate Penalties for Missed Days ──
+    if plan.created_at:
+        import datetime
+        from sqlalchemy.sql import and_
+
+        now = datetime.datetime.now(datetime.timezone.utc)
+        if plan.created_at.tzinfo is None:
+            created_at = plan.created_at.replace(tzinfo=datetime.timezone.utc)
+        else:
+            created_at = plan.created_at
+
+        # Calculate days since plan creation until today (exclusive)
+        past_days = []
+        curr_date = created_at.date()
+        end_date = now.date()
+        while curr_date < end_date:
+            past_days.append(curr_date.strftime('%A'))
+            curr_date += datetime.timedelta(days=1)
+        
+        # Unique past days to check
+        unique_past_days = set(past_days)
+        
+        if unique_past_days:
+            pts = None
+            for day in unique_past_days:
+                # Check if we already penalized this day
+                already_penalized = db.query(StudyPlanPenalty).filter(
+                    StudyPlanPenalty.plan_id == plan.id,
+                    StudyPlanPenalty.day_of_week == day
+                ).first()
+                
+                if not already_penalized:
+                    # Get all entries for this day
+                    day_entries = [e for e in plan.entries if e.day_of_week == day]
+                    if day_entries:
+                        # If NONE of them are completed, penalize!
+                        any_completed = any(e.is_completed for e in day_entries)
+                        if not any_completed:
+                            if pts is None:
+                                pts = _get_or_create_points(db, current_user.id)
+                            
+                            pts.total_points = max(0, pts.total_points - 10)
+                            
+                            # Record penalty
+                            penalty_record = StudyPlanPenalty(plan_id=plan.id, day_of_week=day)
+                            db.add(penalty_record)
+            
+            if pts is not None:
+                db.commit()
+
     # Rebuild summary from the stored entries
     subject_hours: Dict[str, float] = {}
     for e in plan.entries:
@@ -526,6 +576,12 @@ def toggle_entry_completion(
 
     if not entry:
         raise HTTPException(status_code=404, detail="Entry not found or access denied.")
+
+    # Enforce current day rule
+    import datetime
+    today_name = datetime.datetime.today().strftime('%A')
+    if entry.day_of_week != today_name:
+        raise HTTPException(status_code=400, detail=f"Cannot toggle task for {entry.day_of_week}. Only tasks for {today_name} can be modified.")
 
     # Toggle completion
     entry.is_completed = not entry.is_completed

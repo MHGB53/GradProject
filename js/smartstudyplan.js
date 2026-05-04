@@ -464,6 +464,8 @@ function renderScheduleTable(schedule, totalHours) {
   const idx = {};
   schedule.forEach(r => { (idx[r.day] = idx[r.day]||{})[r.from_time] = r; });
 
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+
   // Build body
   tbody.innerHTML = timeSlots.map(slot => {
     const cells = activeDays.map(day => {
@@ -475,14 +477,21 @@ function renderScheduleTable(schedule, totalHours) {
       const slug  = entry.subject.replace(/[^a-zA-Z0-9]/g,"_").toLowerCase();
       const completedClass = entry.is_completed ? "schedule-completed" : "";
       
-      return `<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm cursor-pointer relative group ${completedClass}"
-                  data-subject="${slug}" data-time="${slot}" data-day="${day}" data-entry-id="${entry.id || ''}">
-        <span class="inline-block rounded-full ${color.bg} px-3 py-1 text-xs font-semibold ${color.text} transition-all hover:scale-105 hover:shadow-md">${entry.subject}</span>
+      const isToday = day === today;
+      const cursorClass = isToday ? "cursor-pointer" : "cursor-not-allowed opacity-75 grayscale-[30%]";
+      const hoverScale = isToday ? "hover:scale-105 hover:shadow-md" : "";
+      
+      const lockOverlay = isToday ? "" : `<div class="absolute inset-0 bg-background/20 dark:bg-dark-background/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-lg pointer-events-none"><span class="material-symbols-outlined text-text-primary dark:text-dark-text-primary text-lg drop-shadow-md">lock</span></div>`;
+
+      return `<td class="schedule-cell whitespace-nowrap px-3 py-4 text-sm relative group ${cursorClass} ${completedClass}"
+                  data-subject="${slug}" data-time="${slot}" data-day="${day}" data-entry-id="${entry.id || ''}" data-istoday="${isToday}">
+        <span class="inline-block rounded-full ${color.bg} px-3 py-1 text-xs font-semibold ${color.text} transition-all ${hoverScale}">${entry.subject}</span>
+        ${lockOverlay}
         <div class="schedule-tooltip hidden absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-lg bg-gray-900 dark:bg-gray-800 text-white text-xs shadow-xl pointer-events-none">
           <div class="font-bold mb-1">${entry.subject}</div>
           <div class="text-gray-300">${day}, ${entry.from_time} – ${entry.to_time}</div>
           <div class="text-gray-300 mt-1">Duration: ${entry.hours} hrs</div>
-          <div class="text-green-400 mt-1 flex items-center gap-1">✓ Click to toggle completion</div>
+          <div class="${isToday ? 'text-green-400' : 'text-yellow-400'} mt-1 flex items-center gap-1">${isToday ? '✓ Click to toggle completion' : '🔒 Available on ' + day}</div>
           <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
         </div>
       </td>`;
@@ -572,9 +581,17 @@ function initializeSubjectFilters() {
 function initializeScheduleCells() {
   document.querySelectorAll(".schedule-cell[data-subject]").forEach(cell => {
     cell.addEventListener("click", async function() {
+      const isToday = this.getAttribute("data-istoday") === "true";
+      const subName = this.querySelector("span")?.textContent || "Subject";
+      const day = this.getAttribute("data-day");
+      
+      if (!isToday) {
+        showNotification(`You can only mark tasks for today. This task is for ${day}.`, "info");
+        return;
+      }
+
       const isCompleted = this.classList.contains("schedule-completed");
       const entryId = this.getAttribute("data-entry-id");
-      const subName = this.querySelector("span")?.textContent || "Subject";
       
       // Optimistic UI update
       this.classList.toggle("schedule-completed", !isCompleted);
@@ -592,7 +609,11 @@ function initializeScheduleCells() {
                   method: "PUT",
                   headers: getAuthHeaders()
               });
-              if (!res.ok) throw new Error("Failed to toggle completion");
+              
+              if (!res.ok) {
+                  const errData = await res.json().catch(() => null);
+                  throw new Error(errData?.detail || "Failed to toggle completion");
+              }
 
               const toggleData = await res.json();
               const nowCompleted = toggleData.is_completed;
@@ -615,7 +636,7 @@ function initializeScheduleCells() {
               console.error(e);
               // Revert UI on failure
               this.classList.toggle("schedule-completed", isCompleted);
-              showNotification(`Failed to save progress for ${subName}`, "error");
+              showNotification(e.message || `Failed to save progress for ${subName}`, "error");
               return;
           }
       }
