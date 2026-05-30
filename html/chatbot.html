@@ -74,6 +74,7 @@
 <script src="../js/themeManager.js"></script>
 <script src="../js/tokengaurd.js?v=999"></script>
 <link rel="stylesheet" href="../css/chatbot.css">
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300 overflow-hidden h-screen">
 <div class="flex flex-col h-full">
@@ -195,11 +196,11 @@
 </nav>
 <div class="flex items-center gap-4">
 <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Toggle dark mode" id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
 </button>
 <div class="relative">
-<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
@@ -270,7 +271,7 @@
 </div>
 </div>
 <!-- Mobile Menu Button -->
-<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<button aria-label="Open menu" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -285,7 +286,7 @@
 <div class="p-6 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center justify-between">
 <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -383,7 +384,7 @@
 <!-- Input Area -->
 <div id="chatInput" class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background dark:from-dark-background via-background/90 dark:via-dark-background/90 to-transparent">
 <div class="max-w-4xl mx-auto bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color focus-within:border-primary transition-all duration-300 flex items-center p-2">
-<input
+<input aria-label="اسأل Dentor أي سؤال في طب الأسنان… / Ask Dentor anything dental…"
   id="messageInput"
   type="text"
   autocomplete="off"

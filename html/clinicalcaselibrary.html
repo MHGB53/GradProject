@@ -75,6 +75,7 @@
 <script src="../js/themeManager.js"></script>
 <script src="../js/tokengaurd.js?v=999"></script>
 <link rel="stylesheet" href="../css/clinicalcaselibrary.css">
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
 <div class="flex flex-col min-h-screen">
@@ -198,11 +199,11 @@
 </nav>
 <div class="flex items-center gap-4">
 <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Toggle dark mode" id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
 </button>
 <div class="relative">
-<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
@@ -253,7 +254,7 @@
 </div>
 </div>
 <!-- Mobile Menu Button -->
-<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<button aria-label="Open menu" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -268,7 +269,7 @@
 <div class="p-6 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center justify-between">
 <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -353,10 +354,10 @@ Clinical Case Library
 <div class="flex items-center gap-3">
 <!-- View Mode Toggle -->
 <div class="flex items-center gap-1 bg-card dark:bg-dark-card rounded-lg p-1 border border-border-color dark:border-dark-border-color shadow-sm">
-<button id="gridViewBtn" class="p-2 rounded-md bg-primary text-white transition-all duration-300">
+<button aria-label="Grid view" id="gridViewBtn" class="p-2 rounded-md bg-primary text-white transition-all duration-300">
 <span class="material-symbols-outlined text-lg">grid_view</span>
 </button>
-<button id="listViewBtn" class="p-2 rounded-md text-text-secondary dark:text-dark-text-secondary hover:bg-background dark:hover:bg-dark-background transition-all duration-300">
+<button aria-label="List view" id="listViewBtn" class="p-2 rounded-md text-text-secondary dark:text-dark-text-secondary hover:bg-background dark:hover:bg-dark-background transition-all duration-300">
 <span class="material-symbols-outlined text-lg">view_list</span>
 </button>
 </div>
@@ -683,7 +684,7 @@ Start Simulation
 
 <!-- Pagination -->
 <div class="mt-8 flex items-center justify-center gap-2">
-<button class="flex items-center justify-center px-4 py-2 rounded-lg border border-border-color dark:border-dark-border-color text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card transition-all duration-300 disabled:opacity-50" disabled>
+<button aria-label="Previous" class="flex items-center justify-center px-4 py-2 rounded-lg border border-border-color dark:border-dark-border-color text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card transition-all duration-300 disabled:opacity-50" disabled>
 <span class="material-symbols-outlined text-lg">chevron_left</span>
 </button>
 <button class="w-10 h-10 rounded-lg bg-primary text-white font-bold text-sm">1</button>
@@ -691,7 +692,7 @@ Start Simulation
 <button class="w-10 h-10 rounded-lg text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card font-medium text-sm transition-all duration-300">3</button>
 <span class="text-text-secondary dark:text-dark-text-secondary">...</span>
 <button class="w-10 h-10 rounded-lg text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card font-medium text-sm transition-all duration-300">5</button>
-<button class="flex items-center justify-center px-4 py-2 rounded-lg border border-border-color dark:border-dark-border-color text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card transition-all duration-300">
+<button aria-label="Next" class="flex items-center justify-center px-4 py-2 rounded-lg border border-border-color dark:border-dark-border-color text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card transition-all duration-300">
 <span class="material-symbols-outlined text-lg">chevron_right</span>
 </button>
 </div>
@@ -791,7 +792,7 @@ Focus on cases that match your weakest specialty to maximize learning. Start wit
 </footer>
 
 <!-- Scroll to Top Button -->
-<button id="scrollToTop" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-lg hover:bg-primary-dark transform hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 opacity-0 pointer-events-none">
+<button aria-label="Scroll to top" id="scrollToTop" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-lg hover:bg-primary-dark transform hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 opacity-0 pointer-events-none">
 <span class="material-symbols-outlined">arrow_upward</span>
 </button>
 

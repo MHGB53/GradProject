@@ -77,6 +77,7 @@
 <script src="../js/themeManager.js"></script>
 <script src="../js/tokengaurd.js?v=999"></script>
 <link rel="stylesheet" href="../css/aIdiagnosis.css">
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
 <div class="flex flex-col min-h-screen">
@@ -87,7 +88,7 @@
 <div class="flex items-center justify-between h-20">
 <div class="flex items-center gap-4">
     <div class="relative inline-flex items-center -ml-20">
-        <img id="logoImage" src="../assets/Logo1.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
+        <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
         <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
     </div>
 </div>
@@ -192,13 +193,13 @@
 </nav>
 <div class="flex items-center gap-2">
 <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
+<button aria-label="Toggle dark mode" id="darkModeToggle" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
 <span id="darkModeIcon" class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">light_mode</span>
 </button>
 
 <!-- Notifications -->
 <div class="relative">
-<button id="notificationBtn" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
+<button aria-label="Notifications" id="notificationBtn" class="p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all duration-300 relative group">
 <span class="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary group-hover:text-primary transition-colors duration-300">notifications</span>
 <span class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500"></span>
 </button>
@@ -284,7 +285,7 @@
 </div>
 
 <!-- Mobile Menu Button -->
-<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<button aria-label="Open menu" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -300,7 +301,7 @@
 <div class="p-6 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center justify-between">
 <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -491,7 +492,7 @@
         </div>
       </div>
       <div class="upload-zone" id="xray-drop-zone">
-        <input type="file" id="xray-file-input" accept="image/*,.dcm" class="hidden">
+        <input aria-label="Upload X-ray image" type="file" id="xray-file-input" accept="image/*,.dcm" class="hidden">
         <div id="xray-prompt">
           <div class="uz-icon"><span class="material-symbols-outlined text-primary text-3xl">add_photo_alternate</span></div>
           <h3 class="text-text-primary dark:text-dark-text-primary">Click or drag & drop</h3>
@@ -554,7 +555,7 @@
         </div>
       </div>
       <div class="upload-zone" id="lab-drop-zone">
-        <input type="file" id="lab-file-input" accept=".pdf,.doc,.docx,image/*" class="hidden">
+        <input aria-label="Upload lab report" type="file" id="lab-file-input" accept=".pdf,.doc,.docx,image/*" class="hidden">
         <div id="lab-prompt">
           <div class="uz-icon"><span class="material-symbols-outlined text-purple-500 text-3xl">description</span></div>
           <h3 class="text-text-primary dark:text-dark-text-primary">Click or drag & drop</h3>
@@ -662,6 +663,11 @@
 </div><!-- end #wizardForm -->
 
 </main>
+<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+© 2024 Dentor. All rights reserved. Master your dental studies.
+</div>
+</footer>
 
 </div>
 

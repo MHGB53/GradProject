@@ -147,7 +147,7 @@ function renderPodium(users) {
             <div class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-xl bg-gray-200 dark:bg-gray-600 flex items-center justify-center overflow-hidden">
               ${avatarHtml(u.profile_photo, u.display_name, 'w-24 h-24', 'text-3xl')}
             </div>
-            <div class="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full w-12 h-12 flex items-center justify-center border-4 border-white shadow-lg bg-white/30">
+            <div class="absolute -top-6 left-1/2 -translate-x-1/2 rounded-full w-12 h-12 flex items-center justify-center border-4 border-white shadow-lg bg-white/30">
               <span class="material-symbols-outlined text-white text-2xl">${badgeIcon}</span>
             </div>
           </div>

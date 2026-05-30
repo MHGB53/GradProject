@@ -29,3 +29,6 @@ torch
 torchvision
 ultralytics
 joblib
+
+# ── HTTP client (AI proxy → Hugging Face) ──
+httpx>=0.27.0

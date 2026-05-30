@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
 <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
 <title>Dentor - User Profile</title>
@@ -77,6 +78,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
 <div class="flex min-h-screen w-full flex-col">
@@ -198,11 +200,11 @@
 </nav>
 <div class="flex items-center gap-4">
 <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Toggle dark mode" id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
 </button>
 <div class="relative">
-<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
@@ -255,7 +257,7 @@
 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
 <!-- Notification & Profile -->
 <div class="flex items-center gap-4 border-l border-border-color dark:border-dark-border-color pl-4">
-<button class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Notifications" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined text-[20px]">notifications</span>
 <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-accent-coral rounded-full border-2 border-background dark:border-dark-background"></span>
 </button>
@@ -310,10 +312,10 @@
 <div class="flex-shrink-0">
 <div class="group relative" id="avatar-container">
 <div id="hero-avatar" class="h-32 w-32 rounded-full bg-cover bg-center bg-no-repeat shadow-lg border-4 border-primary/20" style='background-image: url("../assets/default photo.png");'></div>
-<button id="upload-avatar-btn" class="absolute inset-0 flex items-center justify-center rounded-full bg-black/60 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:opacity-100 backdrop-blur-sm cursor-pointer">
+<button aria-label="Upload photo" id="upload-avatar-btn" class="absolute inset-0 flex items-center justify-center rounded-full bg-black/60 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:opacity-100 backdrop-blur-sm cursor-pointer">
 <span class="material-symbols-outlined text-2xl">photo_camera</span>
 </button>
-<input type="file" id="profile-upload" class="hidden" accept="image/*">
+<input aria-label="Upload profile photo" type="file" id="profile-upload" class="hidden" accept="image/*">
 </div>
 </div>
 <div class="flex-grow text-center lg:text-left">
@@ -391,6 +393,11 @@ Student ID: U-DENT-12345
 </div>
 </div>
 </main>
+<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+© 2024 Dentor. All rights reserved. Master your dental studies.
+</div>
+</footer>
 </div>
 
 <script src="../js/Profile.js?v=999"></script>

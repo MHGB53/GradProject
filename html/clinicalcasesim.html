@@ -75,6 +75,7 @@
 <script src="../js/themeManager.js"></script>
 <script src="../js/tokengaurd.js?v=999"></script>
 <link rel="stylesheet" href="../css/clinicalcasesim.css">
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
 <div class="flex flex-col min-h-screen">
@@ -197,11 +198,11 @@
 </nav>
 <div class="flex items-center gap-4">
 <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Toggle dark mode" id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
 </button>
 <div class="relative">
-<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
@@ -272,7 +273,7 @@
 </div>
 </div>
 <!-- Mobile Menu Button -->
-<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<button aria-label="Open menu" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -288,7 +289,7 @@
 <div class="p-6 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center justify-between">
 <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -378,7 +379,7 @@
 <div class="p-6 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center justify-between">
 <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -643,7 +644,7 @@ Relevant Medical History
 <div class="space-y-3 mb-6">
 <label class="diagnosis-option block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
 <div class="flex items-start gap-3">
-<input type="radio" name="diagnosis" value="1" class="mt-1">
+<input aria-label="Diagnosis option 1" type="radio" name="diagnosis" value="1" class="mt-1">
 <div class="flex-1">
 <p class="font-bold text-text-primary dark:text-dark-text-primary">Recurrent caries with failed restoration</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Secondary caries around existing filling requiring replacement</p>
@@ -652,7 +653,7 @@ Relevant Medical History
 </label>
 <label class="diagnosis-option block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
 <div class="flex items-start gap-3">
-<input type="radio" name="diagnosis" value="2" class="mt-1">
+<input aria-label="Diagnosis option 2" type="radio" name="diagnosis" value="2" class="mt-1">
 <div class="flex-1">
 <p class="font-bold text-text-primary dark:text-dark-text-primary">Enamel hypoplasia</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Developmental defect of tooth enamel</p>
@@ -661,7 +662,7 @@ Relevant Medical History
 </label>
 <label class="diagnosis-option block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
 <div class="flex items-start gap-3">
-<input type="radio" name="diagnosis" value="3" class="mt-1">
+<input aria-label="Diagnosis option 3" type="radio" name="diagnosis" value="3" class="mt-1">
 <div class="flex-1">
 <p class="font-bold text-text-primary dark:text-dark-text-primary">Dental fluorosis</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Excessive fluoride during tooth development</p>
@@ -714,7 +715,7 @@ Relevant Medical History
 <div class="space-y-3 mb-6">
 <label class="block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
 <div class="flex items-start gap-3">
-<input type="checkbox" class="mt-1">
+<input aria-label="Answer option" type="checkbox" class="mt-1">
 <div class="flex-1">
 <p class="font-bold text-text-primary dark:text-dark-text-primary">Remove existing restoration</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Complete removal of failed restoration and carious tissue</p>
@@ -723,7 +724,7 @@ Relevant Medical History
 </label>
 <label class="block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
 <div class="flex items-start gap-3">
-<input type="checkbox" class="mt-1">
+<input aria-label="Answer option" type="checkbox" class="mt-1">
 <div class="flex-1">
 <p class="font-bold text-text-primary dark:text-dark-text-primary">Composite restoration</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Direct composite resin restoration with layering technique</p>
@@ -732,7 +733,7 @@ Relevant Medical History
 </label>
 <label class="block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
 <div class="flex items-start gap-3">
-<input type="checkbox" class="mt-1">
+<input aria-label="Answer option" type="checkbox" class="mt-1">
 <div class="flex-1">
 <p class="font-bold text-text-primary dark:text-dark-text-primary">Post-operative care instructions</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Provide patient education on maintenance and care</p>

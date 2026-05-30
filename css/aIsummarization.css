@@ -7,72 +7,115 @@
         }
         
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
         
         @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.5; }
         }
         
         @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
         }
         
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        
+        .fade-in        { animation: fadeIn 0.6s ease-out; }
+        .loading-spinner { animation: spin 1s linear infinite; }
+        .progress-bar   { transition: width 0.3s ease; }
+
         .drag-over {
             background: rgba(91, 203, 167, 0.1);
             border-color: #5BCBA7 !important;
         }
-        
-        .loading-spinner {
-            animation: spin 1s linear infinite;
-        }
-        
-        .progress-bar {
-            transition: width 0.3s ease;
-        }
-        
-        /* Custom scrollbar for summary content */
-        #summaryContent::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        #summaryContent::-webkit-scrollbar-track {
-            background: transparent;
-            border-radius: 10px;
-        }
-        
-        #summaryContent::-webkit-scrollbar-thumb {
-            background: #5BCBA7;
-            border-radius: 10px;
-        }
-        
-        #summaryContent::-webkit-scrollbar-thumb:hover {
-            background: #4AA388;
-        }
-        
-        #summaryContent {
+
+        /* ── Custom scrollbar ─────────────────────────────────── */
+        #summaryContent::-webkit-scrollbar,
+        #translationBody::-webkit-scrollbar { width: 8px; }
+        #summaryContent::-webkit-scrollbar-track,
+        #translationBody::-webkit-scrollbar-track { background: transparent; border-radius: 10px; }
+        #summaryContent::-webkit-scrollbar-thumb,
+        #translationBody::-webkit-scrollbar-thumb { background: #5BCBA7; border-radius: 10px; }
+        #summaryContent::-webkit-scrollbar-thumb:hover,
+        #translationBody::-webkit-scrollbar-thumb:hover { background: #4AA388; }
+        #summaryContent, #translationBody {
             scrollbar-width: thin;
             scrollbar-color: #5BCBA7 transparent;
         }
-    
+
+        /* ── Summary / Translation wrapper ───────────────────── */
+        .summary-wrapper { padding: 4px 0; }
+
+        .summary-lang-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+        }
+        .en-badge {
+            background: rgba(91, 203, 167, 0.12);
+            color: #3db896;
+            border: 1px solid rgba(91, 203, 167, 0.35);
+        }
+        .ar-badge {
+            background: rgba(91, 203, 167, 0.12);
+            color: #3db896;
+            border: 1px solid rgba(91, 203, 167, 0.35);
+            float: right;
+        }
+
+        /* ── Paragraph / heading styles ──────────────────────── */
+        .summary-paragraph {
+            line-height: 1.85;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            color: inherit;
+        }
+
+        .summary-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #5bcba7;
+            margin: 18px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba(91, 203, 167, 0.25);
+        }
+
+        .summary-list {
+            margin: 8px 0 16px 0;
+            padding-left: 22px;
+            list-style-type: disc;
+        }
+        .summary-list li {
+            line-height: 1.8;
+            margin-bottom: 6px;
+            font-size: 0.93rem;
+        }
+
+        /* ── RTL (Arabic) overrides ──────────────────────────── */
+        .rtl-content { direction: rtl; text-align: right; }
+        .rtl-body .summary-paragraph { direction: rtl; text-align: right; }
+        .rtl-body .summary-section-title { direction: rtl; text-align: right; }
+        .rtl-body .summary-list {
+            padding-left: 0;
+            padding-right: 22px;
+            list-style-type: disc;
+            direction: rtl;
+            text-align: right;
+        }
+        .rtl-list { padding-left: 0; padding-right: 22px; }
+
+        /* ── Dark mode text color fixes ──────────────────────── */
+        .dark .summary-paragraph,
+        .dark .summary-list li {
+            color: #e5e7eb;
+        }
+        .dark .summary-section-title { color: #7ad9b8; }
+    

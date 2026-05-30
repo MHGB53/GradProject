@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -74,6 +74,7 @@
 <script src="../js/themeManager.js"></script>
 <script src="../js/tokengaurd.js?v=999"></script>
 <link rel="stylesheet" href="../css/aIsummarization.css">
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary transition-colors duration-300">
 <div class="flex flex-col min-h-screen">
@@ -83,10 +84,10 @@
 <div class="flex items-center gap-4">
     <div class="relative inline-flex items-center -ml-20">
         <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
-        <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
+        <a href="Home.html" aria-label="Home" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
     </div>
 </div>
-<nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+<nav class="hidden md:flex flex-1 justify-center items-center gap-1">
 <a class="nav-link px-6 py-3 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html" data-page="dashboard">
 <span class="relative z-10 flex items-center gap-2">
 <span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
@@ -195,11 +196,11 @@
 </nav>
 <div class="flex items-center gap-4">
 <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button id="darkModeToggle" aria-label="Toggle Dark Mode" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
 </button>
 <div class="relative">
-<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button id="notificationBtn" aria-label="Notifications" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
@@ -235,7 +236,7 @@
 </div>
 </div>
 <div class="relative">
-<button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("../assets/default photo.png");'></button>
+<button id="profileBtn" aria-label="User Profile" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("../assets/default photo.png");'></button>
 <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center gap-3">
@@ -270,7 +271,7 @@
 </div>
 </div>
 <!-- Mobile Menu Button -->
-<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<button id="mobileMenuBtn" aria-label="Open Mobile Menu" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -285,7 +286,7 @@
 <div class="p-6 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center justify-between">
 <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -359,9 +360,9 @@ Summarize Your Lectures Instantly with AI
 <p class="mt-4 max-w-2xl mx-auto text-lg text-text-secondary dark:text-dark-text-secondary">Upload your PDF or Word documents and let our AI provide you with a concise summary.</p>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="max-w-4xl mx-auto">
 <!-- Main Content Area -->
-<div class="lg:col-span-2 space-y-8">
+<div class="w-full space-y-8">
 <!-- Upload Card -->
 <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-8 border border-border-color dark:border-dark-border-color fade-in">
 <div class="flex items-center justify-between mb-6">
@@ -385,7 +386,7 @@ Upload Document
                                 Browse Files
                             </button>
 </div>
-<input type="file" id="fileInput" accept=".pdf,.doc,.docx" class="hidden">
+<input aria-label="Upload document" type="file" id="fileInput" accept=".pdf,.doc,.docx" class="hidden">
 </div>
 
 <!-- File Info (hidden initially) -->
@@ -398,7 +399,7 @@ Upload Document
 <p class="text-xs text-text-secondary dark:text-dark-text-secondary" id="fileSize">2.5 MB</p>
 </div>
 </div>
-<button id="removeFile" class="text-red-500 hover:text-red-700 transition-colors">
+<button aria-label="Close" id="removeFile" class="text-red-500 hover:text-red-700 transition-colors">
 <span class="material-symbols-outlined">close</span>
                         </button>
 </div>
@@ -450,15 +451,15 @@ Ready
 <!-- Summary Stats (hidden initially) -->
 <div id="summaryStats" class="hidden grid grid-cols-3 gap-4 mb-6">
 <div class="text-center p-3 bg-background dark:bg-dark-background rounded-lg">
-<div class="text-2xl font-bold text-primary">0</div>
+<div class="text-2xl font-bold text-primary stat-number">0</div>
 <div class="text-xs text-text-secondary dark:text-dark-text-secondary">Words</div>
 </div>
 <div class="text-center p-3 bg-background dark:bg-dark-background rounded-lg">
-<div class="text-2xl font-bold text-primary">0</div>
+<div class="text-2xl font-bold text-primary stat-number">0</div>
 <div class="text-xs text-text-secondary dark:text-dark-text-secondary">Paragraphs</div>
 </div>
 <div class="text-center p-3 bg-background dark:bg-dark-background rounded-lg">
-<div class="text-2xl font-bold text-primary">0%</div>
+<div class="text-2xl font-bold text-primary stat-number">0%</div>
 <div class="text-xs text-text-secondary dark:text-dark-text-secondary">Reduction</div>
 </div>
 </div>
@@ -482,58 +483,26 @@ Ready
 </div>
 </div>
 </div>
+</div>
 
-<!-- Sidebar -->
-<div class="lg:col-span-1 space-y-6 fade-in" style="animation-delay: 0.3s;">
-<!-- Features Card -->
-<div class="bg-card dark:bg-dark-card rounded-2xl p-6 border border-border-color dark:border-dark-border-color shadow-subtle">
-<h4 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">tips_and_updates</span>
-Features
-</h4>
-<div class="space-y-3">
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Extraction</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Key points and concepts</p>
+<!-- Arabic Translation Card (slides in below summary when translated) -->
+<div id="translationCard" class="hidden bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-8 border border-border-color dark:border-dark-border-color fade-in">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">translate</span>
+الترجمة العربية
+</h3>
+<span class="text-xs bg-primary/10 dark:bg-primary/20 text-primary px-3 py-1 rounded-full font-semibold">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+Helsinki-NLP
+</span>
 </div>
-</div>
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Medical Accuracy</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Preserves terminology</p>
-</div>
-</div>
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Multi-Format</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">PDF, DOC, DOCX support</p>
-</div>
-</div>
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-<div>
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Fast Processing</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary">Results in seconds</p>
-</div>
-</div>
+<div id="translationBody" class="prose prose-lg max-w-none mb-6 p-6 bg-background/50 dark:bg-dark-background/50 rounded-xl min-h-[200px] max-h-[600px] overflow-y-auto">
 </div>
 </div>
 
-<!-- Tips Card -->
-<div class="bg-primary-light dark:bg-primary/20 rounded-2xl p-6">
-<div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-2xl text-primary">lightbulb</span>
-<div>
-<h4 class="font-bold text-primary dark:text-primary-light mb-1">Pro Tip</h4>
-<p class="text-sm text-primary-dark dark:text-primary-light/90">For best results, upload clear, text-based PDFs. Scanned images may have reduced accuracy.</p>
 </div>
-</div>
-</div>
-</div>
+
 </div>
 </main>
 <footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
@@ -543,7 +512,10 @@ Features
 </footer>
 </div>
 
-<script src="../js/aIsummarization.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="../js/aIsummarization.js?v=20260530c"></script>
 <script>
 
 // Logo mode switching

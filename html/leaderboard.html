@@ -78,6 +78,7 @@
     rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
@@ -248,12 +249,12 @@
           </nav>
           <div class="flex items-center gap-4">
             <!-- Dark Mode Toggle -->
-            <button id="darkModeToggle"
+            <button aria-label="Toggle dark mode" id="darkModeToggle"
               class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
               <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
             </button>
             <div class="relative">
-              <button id="notificationBtn"
+              <button aria-label="Notifications" id="notificationBtn"
                 class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
                 <span class="material-symbols-outlined">notifications</span>
                 <span
@@ -344,7 +345,7 @@
               </div>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobileMenuBtn"
+            <button aria-label="Open menu" id="mobileMenuBtn"
               class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
               <span class="material-symbols-outlined">menu</span>
             </button>
@@ -361,7 +362,7 @@
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
             <div class="flex items-center justify-between">
               <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-              <button id="closeMobileMenu"
+              <button aria-label="Close" id="closeMobileMenu"
                 class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined">close</span>
               </button>
@@ -504,7 +505,8 @@
           <div class="p-6 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
             <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Full Rankings</h3>
           </div>
-          <table class="w-full text-left">
+          <div class="overflow-x-auto">
+          <table class="w-full text-left min-w-[480px]">
             <thead class="bg-background dark:bg-dark-background border-b-2 border-border-color dark:border-dark-border-color">
               <tr>
                 <th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary w-1/12">Rank</th>
@@ -515,6 +517,7 @@
             </thead>
             <tbody id="rankingsTbody" class="divide-y divide-border-color dark:divide-dark-border-color"></tbody>
           </table>
+          </div>
         </div>
       </div>
 
@@ -525,7 +528,7 @@
             <div class="absolute inset-0 bg-black/10 rounded-t-2xl"></div>
             <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
             <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16 blur-2xl"></div>
-            <button onclick="closeUserInfo()" class="absolute top-3 right-3 text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-300 hover:rotate-90">
+            <button aria-label="Close" onclick="closeUserInfo()" class="absolute top-3 right-3 text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-300 hover:rotate-90">
               <span class="material-symbols-outlined text-lg">close</span>
             </button>
             <!-- Avatar overlapping the banner — positioned at the bottom, centered -->
@@ -574,6 +577,11 @@
       </div>
 
     </main>
+<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+© 2024 Dentor. All rights reserved. Master your dental studies.
+</div>
+</footer>
 
   </div>
 

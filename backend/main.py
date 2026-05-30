@@ -11,7 +11,7 @@ from fastapi.responses import RedirectResponse
 
 from .database import engine, test_connection
 from . import models
-from .routers import auth, community, chatbot, flashcards, support, smartstudy, leaderboard, ai_diagnosis
+from .routers import auth, community, chatbot, flashcards, support, smartstudy, leaderboard, ai_diagnosis, ai_proxy
 
 
 # ──────────────────────────── Schema migrations (idempotent) ────────────────────────────
@@ -94,6 +94,7 @@ app.include_router(support.router)
 app.include_router(smartstudy.router)
 app.include_router(leaderboard.router)
 app.include_router(ai_diagnosis.router)
+app.include_router(ai_proxy.router)
 
 # ──────────────────────────── Root → Login page ────────────────────────────
 @app.get("/", tags=["Frontend"])

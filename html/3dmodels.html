@@ -65,6 +65,7 @@
       }
     })();
   </script>
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
@@ -187,11 +188,11 @@
           </nav>
           <div class="flex items-center gap-4">
             <!-- Dark Mode Toggle -->
-            <button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+            <button aria-label="Toggle dark mode" id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
               <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
             </button>
             <div class="relative">
-              <button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+              <button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
                 <span class="material-symbols-outlined">notifications</span>
                 <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
               </button>
@@ -262,7 +263,7 @@
               </div>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+            <button aria-label="Open menu" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
               <span class="material-symbols-outlined">menu</span>
             </button>
           </div>
@@ -277,7 +278,7 @@
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
             <div class="flex items-center justify-between">
               <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-              <button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+              <button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined">close</span>
               </button>
             </div>
@@ -667,6 +668,11 @@
         </div>
       </div>
     </main>
+<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+© 2024 Dentor. All rights reserved. Master your dental studies.
+</div>
+</footer>
   </div>
 
 

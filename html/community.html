@@ -76,6 +76,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
 <link rel="stylesheet" href="../css/community.css">
+<link rel="stylesheet" href="../css/a11y.css">
 </head>
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
 <div class="flex flex-col min-h-screen">
@@ -197,11 +198,11 @@
 </nav>
 <div class="flex items-center gap-4">
 <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Toggle dark mode" id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
 </button>
 <div class="relative">
-<button id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+<button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
@@ -292,7 +293,7 @@
 </div>
 </div>
 <!-- Mobile Menu Button -->
-<button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+<button aria-label="Open menu" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -307,7 +308,7 @@
 <div class="p-6 border-b border-border-color dark:border-dark-border-color">
 <div class="flex items-center justify-between">
 <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-<button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+<button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -381,7 +382,7 @@
 <div class="flex gap-3 items-start">
 <div class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center flex-shrink-0 text-sm" id="composerAvatar">?</div>
       <form id="postComposer" class="flex-1" enctype="multipart/form-data">
-<textarea id="composer-textarea" class="w-full border-none focus:ring-0 resize-none text-text-primary dark:text-dark-text-primary text-sm placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary bg-transparent mb-3 transition-all duration-300" rows="2" placeholder="What's on your mind?" style="min-height:3rem;overflow:hidden;"></textarea>
+<textarea aria-label="What's on your mind?" id="composer-textarea" class="w-full border-none focus:ring-0 resize-none text-text-primary dark:text-dark-text-primary text-sm placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary bg-transparent mb-3 transition-all duration-300" rows="2" placeholder="What's on your mind?" style="min-height:3rem;overflow:hidden;"></textarea>
 
 <!-- File Preview Area -->
 <div id="filePreview" class="hidden mb-3 p-3 rounded-xl bg-background dark:bg-dark-background border border-border-color dark:border-dark-border-color">
@@ -439,6 +440,11 @@
     </div>
   </div>
 </main>
+<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+© 2024 Dentor. All rights reserved. Master your dental studies.
+</div>
+</footer>
 
 <!-- Likes Modal -->
 <div id="likesModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
@@ -448,7 +454,7 @@
         <span class="material-symbols-outlined text-primary">favorite</span>
         Likes
       </h3>
-      <button onclick="closeLikesModal()" class="text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary transition-colors">
+      <button aria-label="Close" onclick="closeLikesModal()" class="text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary transition-colors">
         <span class="material-symbols-outlined">close</span>
       </button>
     </div>
@@ -466,7 +472,7 @@
       <div class="absolute inset-0 bg-black/10"></div>
       <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16 blur-2xl"></div>
-      <button onclick="closeUserInfoModal()" class="absolute top-3 right-3 text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-300 hover:rotate-90">
+      <button aria-label="Close" onclick="closeUserInfoModal()" class="absolute top-3 right-3 text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-300 hover:rotate-90">
         <span class="material-symbols-outlined text-lg">close</span>
       </button>
     </div>
@@ -475,7 +481,7 @@
       <!-- Profile Image -->
       <div class="flex flex-col items-center -mt-12">
         <div class="relative">
-          <img id="userInfoAvatar" src="" class="w-24 h-24 rounded-full border-4 border-card dark:border-dark-card shadow-2xl" />
+          <img id="userInfoAvatar" src="" alt="User avatar" class="w-24 h-24 rounded-full border-4 border-card dark:border-dark-card shadow-2xl" />
           <div class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 rounded-full border-3 border-card dark:border-dark-card"></div>
         </div>
         
@@ -519,7 +525,7 @@
         <span class="material-symbols-outlined text-primary">chat_bubble</span>
         Comments <span id="commentsCount" class="text-sm text-text-secondary dark:text-dark-text-secondary font-normal"></span>
       </h3>
-      <button onclick="closeCommentsModal()" class="text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary transition-colors">
+      <button aria-label="Close" onclick="closeCommentsModal()" class="text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary transition-colors">
         <span class="material-symbols-outlined">close</span>
       </button>
   </div>
@@ -528,8 +534,8 @@
 </div>
     <div class="p-6 border-t border-border-color dark:border-dark-border-color">
       <div class="flex items-center gap-2">
-        <input id="newCommentInput" class="flex-1 border-none focus:ring-2 focus:ring-primary text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-3 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
-        <button type="button" onclick="addComment()" class="flex items-center justify-center rounded-full bg-primary text-white w-10 h-10 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-lg">
+        <input aria-label="Write a comment..." id="newCommentInput" class="flex-1 border-none focus:ring-2 focus:ring-primary text-sm bg-background dark:bg-dark-background text-text-primary dark:text-dark-text-primary rounded-full px-4 py-3 placeholder:text-text-secondary dark:placeholder:text-dark-text-secondary" placeholder="Write a comment..." />
+        <button aria-label="Send" type="button" onclick="addComment()" class="flex items-center justify-center rounded-full bg-primary text-white w-10 h-10 hover:bg-primary-dark transition-all duration-300 hover:scale-110 shadow-lg">
           <span class="material-symbols-outlined text-xl">send</span>
         </button>
       </div>
