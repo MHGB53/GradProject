@@ -2,28 +2,31 @@
 Dentor AI Proxy Router
 ======================
 Exposes two JWT-protected endpoints that act as a secure middleman
-between the browser and the Hugging Face (HF) microservice:
+between the browser and the Hugging Face (HF) Serverless Inference API:
 
   POST /api/ai/summarize  –  BioBART medical summarization
   POST /api/ai/translate  –  Helsinki-NLP English→Arabic translation
 
 Security:
-  • HF_API_BASE_URL and HF_API_KEY are read exclusively from .env.
-  • No secret is ever sent to the browser.
+  • HF_SUMMARIZE_URL, HF_TRANSLATE_URL, and HF_READ_TOKEN are read
+    exclusively from .env — never exposed to the browser.
   • Only authenticated Dentor users (valid JWT) can reach these endpoints.
 
 Chunking:
-  • Long texts are split into ≤ 3 000-character chunks (word-safe via
-    textwrap.wrap) before being forwarded to the HF pipeline.
-  • Each chunk is processed sequentially; results are joined with '\\n\\n'.
-  • If one chunk fails, processing continues and the error is logged
-    without exposing stack traces to the client.
+  • Summarization: text is split into ≤ 3 000-character word-safe chunks.
+  • Translation:   text is split into ≤ 1 000-character word-safe chunks.
+  • Chunks are processed SEQUENTIALLY to respect HF cold-start behaviour.
+  • Results are joined with '\\n\\n'.
+
+Error handling:
+  • HTTP 503 (cold start) and any other non-200 response from HF are caught
+    and surfaced as HTTP 500 with a user-friendly message.
+  • Raw stack traces are never leaked to the client.
 """
 
 import os
 import textwrap
 import logging
-import asyncio
 
 import httpx
 from dotenv import load_dotenv
@@ -38,15 +41,16 @@ load_dotenv(override=True)
 
 logger = logging.getLogger(__name__)
 
-HF_BASE_URL: str = os.getenv("HF_API_BASE_URL", "").rstrip("/")
-HF_API_KEY:  str = os.getenv("HF_API_KEY", "")
-HF_TIMEOUT:  float = float(os.getenv("HF_TIMEOUT_SECONDS", "60"))
+HF_SUMMARIZE_URL: str = os.getenv("HF_SUMMARIZE_URL", "").rstrip("/")
+HF_TRANSLATE_URL: str = os.getenv("HF_TRANSLATE_URL", "").rstrip("/")
+HF_READ_TOKEN:    str = os.getenv("HF_READ_TOKEN", "")
+HF_TIMEOUT:       float = float(os.getenv("HF_TIMEOUT_SECONDS", "120"))
 
-# Maximum characters per chunk sent to the HF model.
-# BioBART handles ~3000 chars comfortably.
-# Helsinki has a ~512-token limit → use ~900 chars to stay safe.
-CHUNK_SIZE           = 3000   # for summarization
-TRANSLATE_CHUNK_SIZE = 900    # for translation
+# Maximum characters per chunk sent to each model.
+# BioBART:   ~3 000 chars   (≈ 512 BPE tokens)
+# Helsinki:  ~1 000 chars   (≈ 150 BPE tokens — strict 512-token decoder)
+SUMMARIZE_CHUNK_SIZE = 3000
+TRANSLATE_CHUNK_SIZE = 1000
 
 # ──────────────────────────── Router ────────────────────────────
 router = APIRouter(prefix="/api/ai", tags=["AI Proxy"])
@@ -68,11 +72,11 @@ class TranslateResponse(BaseModel):
 
 
 # ──────────────────────────── Helpers ────────────────────────────
-def _split_into_chunks(text: str, chunk_size: int = CHUNK_SIZE) -> list[str]:
+def _split_into_chunks(text: str, chunk_size: int) -> list[str]:
     """
-    Split *text* into word-safe chunks of at most *chunk_size* characters.
-    Uses textwrap.wrap so words are never cut in half.
-    Empty or whitespace-only text returns an empty list.
+    Split *text* into word-safe chunks of at most *chunk_size* characters
+    using textwrap.wrap so no word is ever cut in half.
+    Returns an empty list for blank input.
     """
     text = text.strip()
     if not text:
@@ -86,25 +90,50 @@ def _split_into_chunks(text: str, chunk_size: int = CHUNK_SIZE) -> list[str]:
 
 
 def _hf_headers() -> dict:
-    """Return the common headers required by the HF space."""
+    """Return the Authorization + Content-Type headers for HF Inference API."""
     return {
+        "Authorization": f"Bearer {HF_READ_TOKEN}",
         "Content-Type": "application/json",
-        "X-API-Key": HF_API_KEY,
     }
 
 
 def _validate_config() -> None:
-    """Raise a 500 if the required .env variables are missing."""
-    if not HF_BASE_URL:
+    """Raise HTTP 500 if any required .env variable is missing."""
+    missing = []
+    if not HF_SUMMARIZE_URL:
+        missing.append("HF_SUMMARIZE_URL")
+    if not HF_TRANSLATE_URL:
+        missing.append("HF_TRANSLATE_URL")
+    if not HF_READ_TOKEN:
+        missing.append("HF_READ_TOKEN")
+    if missing:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="HF_API_BASE_URL is not configured on the server.",
+            detail=f"Server misconfiguration: missing env var(s): {', '.join(missing)}.",
         )
-    if not HF_API_KEY:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="HF_API_KEY is not configured on the server.",
-        )
+
+
+def _extract_text_from_hf_response(data: object, field: str) -> str:
+    """
+    Parse the HF Serverless Inference API response.
+
+    The API returns one of:
+      • [{"summary_text": "..."}]            (summarization pipeline)
+      • [{"translation_text": "..."}]        (translation pipeline)
+      • {"summary_text": "..."}              (single-item dict variant)
+      • {"translation_text": "..."}
+      • {"generated_text": "..."}            (text-generation fallback)
+    """
+    # Unwrap list wrapper
+    if isinstance(data, list) and data:
+        data = data[0]
+
+    if isinstance(data, dict):
+        for key in (field, "generated_text", "translation_text", "summary_text"):
+            if key in data and data[key]:
+                return str(data[key]).strip()
+
+    return ""
 
 
 # ──────────────────────────── Endpoints ─────────────────────────
@@ -112,17 +141,18 @@ def _validate_config() -> None:
 @router.post(
     "/summarize",
     response_model=SummarizeResponse,
-    summary="Summarize medical text via BioBART (chunked)",
+    summary="Summarize medical text via BioBART (chunked, sequential)",
 )
 async def summarize_text(
     request: TextRequest,
     _current_user: User = Depends(get_current_user),
 ) -> SummarizeResponse:
     """
-    Accept free-form medical text, chunk it, summarize each chunk via the
-    HF BioBART model, and return the concatenated result.
+    Accept free-form medical text, split it into word-safe chunks of
+    ≤ 3 000 characters, summarize each chunk sequentially via the HF
+    BioBART Serverless Inference API, and return the concatenated result.
 
-    - **text**: The raw text extracted from the uploaded document.
+    - **text**: Raw text extracted from the uploaded document.
     - Requires a valid Bearer JWT token (Authorization header).
     """
     _validate_config()
@@ -134,50 +164,69 @@ async def summarize_text(
             detail="The 'text' field must not be empty.",
         )
 
-    chunks = _split_into_chunks(text, CHUNK_SIZE)
+    chunks = _split_into_chunks(text, SUMMARIZE_CHUNK_SIZE)
+    summaries: list[str] = []
 
-    # Limit to 2 concurrent requests — HF free tier is single-threaded
-    semaphore = asyncio.Semaphore(2)
+    async with httpx.AsyncClient(timeout=HF_TIMEOUT) as client:
+        for idx, chunk in enumerate(chunks):
+            try:
+                response = await client.post(
+                    HF_SUMMARIZE_URL,
+                    headers=_hf_headers(),
+                    json={"inputs": chunk, "options": {"wait_for_model": True}},
+                )
 
-    async def _summarize_chunk(idx: int, chunk: str) -> tuple[int, str]:
-        """Send one chunk to HF; retry once on timeout. Returns (index, result)."""
-        async with semaphore:
-            for attempt in range(2):  # up to 2 attempts per chunk
-                async with httpx.AsyncClient(timeout=HF_TIMEOUT) as client:
-                    try:
-                        response = await client.post(
-                            f"{HF_BASE_URL}/summarize",
-                            headers=_hf_headers(),
-                            json={"text": chunk},
-                        )
-                        if response.status_code != 200:
-                            logger.warning(
-                                "HF /summarize chunk %d returned HTTP %d: %s",
-                                idx, response.status_code, response.text[:200],
-                            )
-                            return idx, ""
-                        data = response.json()
-                        return idx, data.get("summary", "").strip()
-                    except httpx.TimeoutException:
-                        if attempt == 0:
-                            logger.warning("HF /summarize chunk %d timed out, retrying...", idx)
-                            await asyncio.sleep(2)
-                            continue
-                        logger.warning("HF /summarize chunk %d timed out after retry — skipping.", idx)
-                        return idx, ""
-                    except Exception as exc:
-                        logger.error("Unexpected error on chunk %d: %s", idx, exc)
-                        return idx, ""
-        return idx, ""
+                if response.status_code == 503:
+                    logger.warning(
+                        "HF summarize chunk %d: model cold-starting (503). "
+                        "Consider increasing HF_TIMEOUT_SECONDS.",
+                        idx,
+                    )
+                    raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail=(
+                            "The summarization model is currently starting up. "
+                            "Please wait 20–30 seconds and try again."
+                        ),
+                    )
 
-    # Fire all chunks concurrently (semaphore limits to 2 at a time)
-    results = await asyncio.gather(*[_summarize_chunk(i, c) for i, c in enumerate(chunks)])
-    summaries = [t for _, t in sorted(results, key=lambda x: x[0]) if t]
+                if response.status_code != 200:
+                    logger.warning(
+                        "HF summarize chunk %d returned HTTP %d: %s",
+                        idx,
+                        response.status_code,
+                        response.text[:300],
+                    )
+                    raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail=(
+                            f"The summarization service returned an unexpected error "
+                            f"(HTTP {response.status_code}). Please try again later."
+                        ),
+                    )
+
+                result = _extract_text_from_hf_response(response.json(), "summary_text")
+                if result:
+                    summaries.append(result)
+                else:
+                    logger.warning("HF summarize chunk %d: empty result in response body.", idx)
+
+            except HTTPException:
+                raise  # re-raise our own HTTP errors unchanged
+            except Exception as exc:
+                logger.error("Unexpected error on summarize chunk %d: %s", idx, exc, exc_info=True)
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail="An unexpected error occurred while contacting the summarization service.",
+                )
 
     if not summaries:
         raise HTTPException(
-            status_code=status.HTTP_502_BAD_GATEWAY,
-            detail="The AI service did not return a summary. It may be starting up — please try again in a moment.",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=(
+                "The summarization service did not return any output. "
+                "The model may still be loading — please try again in a moment."
+            ),
         )
 
     return SummarizeResponse(
@@ -189,17 +238,19 @@ async def summarize_text(
 @router.post(
     "/translate",
     response_model=TranslateResponse,
-    summary="Translate medical text to Arabic via Helsinki-NLP (chunked)",
+    summary="Translate medical text to Arabic via Helsinki-NLP (chunked, sequential)",
 )
 async def translate_text(
     request: TextRequest,
     _current_user: User = Depends(get_current_user),
 ) -> TranslateResponse:
     """
-    Accept English medical text, chunk it, translate each chunk to Arabic via
-    the HF Helsinki model, and return the concatenated result.
+    Accept English medical text, split it into word-safe chunks of
+    ≤ 1 000 characters, translate each chunk sequentially to Arabic via
+    the HF Helsinki-NLP Serverless Inference API, and return the
+    concatenated result.
 
-    - **text**: The English text to translate (typically the AI summary).
+    - **text**: English text to translate (typically the AI summary).
     - Requires a valid Bearer JWT token (Authorization header).
     """
     _validate_config()
@@ -212,48 +263,68 @@ async def translate_text(
         )
 
     chunks = _split_into_chunks(text, TRANSLATE_CHUNK_SIZE)
+    translations: list[str] = []
 
-    semaphore = asyncio.Semaphore(2)
+    async with httpx.AsyncClient(timeout=HF_TIMEOUT) as client:
+        for idx, chunk in enumerate(chunks):
+            try:
+                response = await client.post(
+                    HF_TRANSLATE_URL,
+                    headers=_hf_headers(),
+                    json={"inputs": chunk, "options": {"wait_for_model": True}},
+                )
 
+                if response.status_code == 503:
+                    logger.warning(
+                        "HF translate chunk %d: model cold-starting (503). "
+                        "Consider increasing HF_TIMEOUT_SECONDS.",
+                        idx,
+                    )
+                    raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail=(
+                            "The translation model is currently starting up. "
+                            "Please wait 20–30 seconds and try again."
+                        ),
+                    )
 
-    async def _translate_chunk(idx: int, chunk: str) -> tuple[int, str]:
-        """Send one chunk to HF; retry once on timeout. Returns (index, result)."""
-        async with semaphore:
-            for attempt in range(2):
-                async with httpx.AsyncClient(timeout=HF_TIMEOUT) as client:
-                    try:
-                        response = await client.post(
-                            f"{HF_BASE_URL}/translate",
-                            headers=_hf_headers(),
-                            json={"text": chunk},
-                        )
-                        if response.status_code != 200:
-                            logger.warning(
-                                "HF /translate chunk %d returned HTTP %d: %s",
-                                idx, response.status_code, response.text[:200],
-                            )
-                            return idx, ""
-                        data = response.json()
-                        return idx, data.get("translation", "").strip()
-                    except httpx.TimeoutException:
-                        if attempt == 0:
-                            logger.warning("HF /translate chunk %d timed out, retrying...", idx)
-                            await asyncio.sleep(2)
-                            continue
-                        logger.warning("HF /translate chunk %d timed out after retry — skipping.", idx)
-                        return idx, ""
-                    except Exception as exc:
-                        logger.error("Unexpected error on chunk %d: %s", idx, exc)
-                        return idx, ""
-        return idx, ""
+                if response.status_code != 200:
+                    logger.warning(
+                        "HF translate chunk %d returned HTTP %d: %s",
+                        idx,
+                        response.status_code,
+                        response.text[:300],
+                    )
+                    raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail=(
+                            f"The translation service returned an unexpected error "
+                            f"(HTTP {response.status_code}). Please try again later."
+                        ),
+                    )
 
-    results = await asyncio.gather(*[_translate_chunk(i, c) for i, c in enumerate(chunks)])
-    translations = [t for _, t in sorted(results, key=lambda x: x[0]) if t]
+                result = _extract_text_from_hf_response(response.json(), "translation_text")
+                if result:
+                    translations.append(result)
+                else:
+                    logger.warning("HF translate chunk %d: empty result in response body.", idx)
+
+            except HTTPException:
+                raise  # re-raise our own HTTP errors unchanged
+            except Exception as exc:
+                logger.error("Unexpected error on translate chunk %d: %s", idx, exc)
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail="An unexpected error occurred while contacting the translation service.",
+                )
 
     if not translations:
         raise HTTPException(
-            status_code=status.HTTP_502_BAD_GATEWAY,
-            detail="The AI service did not return a translation. It may be starting up — please try again in a moment.",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=(
+                "The translation service did not return any output. "
+                "The model may still be loading — please try again in a moment."
+            ),
         )
 
     return TranslateResponse(
