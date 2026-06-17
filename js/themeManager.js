@@ -13,6 +13,17 @@
   }
 })();
 
+// Set the Dentor logo as the browser-tab favicon on every page that loads this
+// script. Replaces any placeholder/empty favicon links once the DOM is ready.
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll("link[rel~='icon']").forEach(el => el.remove());
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  link.type = 'image/png';
+  link.href = '/assets/favicon.png';
+  document.head.appendChild(link);
+});
+
 // Global theme functions that any page can use
 const ThemeManager = {
   // Get current theme

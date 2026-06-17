@@ -110,27 +110,45 @@ async function extractFromTXT(file) {
     return await file.text();
 }
 
+/** Pre-clean text BEFORE sending to the model to remove PDF slide artifacts */
+function preCleanExtractedText(text) {
+    if (!text) return "";
+    return text
+        // Remove weird geometric shapes often exported from PowerPoint bullets
+        .replace(/[◦◧Φ▦◸◤◖►■□▪▫●○►◄▼▲◈◉◊]/g, ' ')
+        // Remove standard bullets and stray indicators
+        .replace(/[\u2022\u2023\u25E6\u25C6\u25CF]/g, ' ')
+        // Collapse multiple spaces
+        .replace(/[ \t]{2,}/g, ' ')
+        // Remove stray single letters that might be list markers if they clutter
+        .trim();
+}
+
 /** Dispatch to the correct extractor based on file type */
 async function extractText(file) {
     const name = file.name.toLowerCase();
+    let rawText = "";
     if (name.endsWith('.pdf')) {
-        return await extractFromPDF(file);
+        rawText = await extractFromPDF(file);
     } else if (name.endsWith('.docx')) {
-        return await extractFromDOCX(file);
+        rawText = await extractFromDOCX(file);
     } else if (name.endsWith('.doc')) {
         // .doc (old binary format) — mammoth can handle some cases
-        try { return await extractFromDOCX(file); } catch (_) {
+        try { rawText = await extractFromDOCX(file); } catch (_) {
             throw new Error('Legacy .doc files may not be supported. Please save as .docx and try again.');
         }
     } else if (name.endsWith('.txt')) {
-        return await extractFromTXT(file);
+        rawText = await extractFromTXT(file);
     } else {
         throw new Error('Unsupported file type. Please upload a PDF, DOCX, or TXT file.');
     }
+    
+    return preCleanExtractedText(rawText);
 }
 
 // ────────────────────────────────────────────────────────────────────────────
 // 4. DRAG & DROP / FILE INPUT
+
 // ────────────────────────────────────────────────────────────────────────────
 function initializeFileUpload() {
     const dropZone    = document.getElementById('dropZone');
@@ -266,90 +284,93 @@ function _cleanText(text) {
 }
 
 /**
- * formatTextToBullets(text, isArabic)
+ * formatTextToHTML(text, isArabic)
  * ====================================
- * Main formatter used for BOTH English summary and Arabic translation.
- *
- * Strategy:
- *  1. Clean the raw text.
- *  2. Split on existing bullet markers (•, -, *) OR on sentence ends.
- *  3. Wrap every meaningful piece in <li> inside a single <ul>.
- *  4. Apply RTL + line-height for Arabic.
+ * Formats the raw text from the AI into clean HTML paragraphs and lists.
+ * Maintains proper RTL direction for Arabic.
+ * Artificially splits long blocks of text into smaller paragraphs for readability.
  */
-function formatTextToBullets(text, isArabic = false) {
+function formatTextToHTML(text, isArabic = false) {
     if (!text || !text.trim())
         return '<p class="summary-paragraph">No content available.</p>';
 
     const clean = _cleanText(text);
     const dir   = isArabic ? 'dir="rtl" lang="ar"' : 'dir="ltr"';
-    const lhStyle = isArabic ? 'style="line-height:1.9; text-align:right;"' : 'style="line-height:1.8;"';
+    const lhStyle = isArabic ? 'style="line-height:1.9; text-align:right; margin-bottom:14px;"' : 'style="line-height:1.8; margin-bottom:14px;"';
 
-    let items = [];
+    // Split text into paragraphs based on double newlines
+    let rawParagraphs = clean.split(/\n{2,}/);
+    let html = '';
 
-    // 1. Split the text into lines first
-    const rawLines = clean.split('\n');
-
-    rawLines.forEach(line => {
-        line = line.trim();
-        if (!line) return;
-
-        // Clean leading bullet/number markers from the line
-        let lineClean = line
-            .replace(/^[\u2022\u2023\u25E6\u25C6\u25CF\-\*]\s*/, '')
-            .replace(/^\d+[.)\s]+\s*/, '')
-            .replace(/^Step\s+\d+[.:\s]+\s*/i, '');
-
-        if (!lineClean) return;
-
-        // Split on inline bullets/indicators:
-        const inlineBulletRegex = /\s*[\u2022\u2023\u25E6\u25C6\u25CF]\s*|\s+[-*]\s+|\s+--\s+|\s+(?=[()][\w\u0600-\u06FF]+[()])|\s+(?=\b[TNM]\d\b)|\s+(?=\b\d+[.)]\s)|\s+(?=\b[\u0660-\u0669]+[.)]\s)/g;
+    // Helper: auto-split long text blocks into smaller paragraphs (e.g. every ~3 sentences)
+    const autoChunkText = (block) => {
+        // Match sentence endings (. ! ? ؟) followed by a space
+        const sentences = block.split(/(?<=[.!?\u061F])\s+/);
+        if (sentences.length <= 3) return [block]; // Short enough
         
-        let segments = lineClean.split(inlineBulletRegex)
-            .map(s => s.trim())
-            .filter(s => s.length > 1);
+        const chunks = [];
+        let currentChunk = [];
+        
+        sentences.forEach(sentence => {
+            currentChunk.push(sentence);
+            if (currentChunk.length >= 3) {
+                chunks.push(currentChunk.join(' '));
+                currentChunk = [];
+            }
+        });
+        if (currentChunk.length > 0) chunks.push(currentChunk.join(' '));
+        return chunks;
+    };
 
-        if (segments.length === 1) {
-            // Split by sentence ends: . ! ? ؟ followed by space or end of string
-            let sentenceSegments = segments[0]
-                .replace(/([.!?\u061F])\s+/g, '$1|SPLIT|')
-                .split('|SPLIT|')
-                .map(s => s.trim())
-                .filter(s => s.length > 2);
-            items.push(...sentenceSegments);
-        } else if (segments.length > 1) {
-            items.push(...segments);
+    rawParagraphs.forEach(para => {
+        para = para.trim();
+        if (!para) return;
+
+        // Check if paragraph looks like a list
+        const lines = para.split('\n');
+        const listItems = [];
+        const textLines = [];
+
+        lines.forEach(line => {
+            const trimmedLine = line.trim();
+            if (!trimmedLine) return;
+            
+            const isListItem = /^([\u2022\u2023\u25E6\u25C6\u25CF\-\*]|\d+[.)])/.test(trimmedLine);
+            if (isListItem) {
+                const cleanItem = trimmedLine.replace(/^([\u2022\u2023\u25E6\u25C6\u25CF\-\*]|\d+[.)])\s*/, '');
+                if (cleanItem.length > 2) listItems.push(cleanItem);
+            } else {
+                textLines.push(trimmedLine);
+            }
+        });
+
+        // Add standard text as auto-chunked paragraphs
+        if (textLines.length > 0) {
+            const joinedText = textLines.join(' ');
+            const subParagraphs = autoChunkText(joinedText);
+            subParagraphs.forEach(subPara => {
+                const pText = _inlineFormat(subPara);
+                html += `<p class="summary-paragraph" ${dir} ${lhStyle}>${pText}</p>`;
+            });
+        }
+
+        // Add list items
+        if (listItems.length > 0) {
+            html += `<ul class="summary-list${isArabic ? ' rtl-list' : ''}" ${dir} ${lhStyle}>`;
+            listItems.forEach(item => {
+                html += `<li style="margin-bottom: 8px;">${_inlineFormat(item)}</li>`;
+            });
+            html += '</ul>';
         }
     });
 
-    // 1b. Drop duplicate items left by model "repetition loops"
-    //     (e.g. the same sentence translated over and over). We keep the first
-    //     occurrence and remove later exact duplicates, plus tiny fragments.
-    const _seen = new Set();
-    items = items.filter(it => {
-        const key = it.replace(/\s+/g, ' ').trim().toLowerCase();
-        if (key.length < 2) return false;        // single-char junk
-        if (_seen.has(key)) return false;         // repeated sentence
-        _seen.add(key);
-        return true;
-    });
-
-    // Also collapse immediately-repeated words inside an item (e.g. "الورم الورم",
-    // "مُعَدّة مُعَدّة مُعَدّة" → keep one). \p{M} keeps Arabic diacritics attached.
-    items = items.map(it =>
-        it.replace(/([\p{L}\p{M}]+)(\s+\1){1,}/gu, '$1')
-    );
-
-    // 2. Build the HTML list
-    if (items.length === 0)
+    if (!html) {
         return `<p class="summary-paragraph" ${dir} ${lhStyle}>${escapeHTML(clean)}</p>`;
-
-    let html = `<ul class="summary-list${isArabic ? ' rtl-list' : ''}" ${dir} ${lhStyle}>`;
-    items.forEach(item => {
-        html += `<li style="margin-bottom: 8px;">${_inlineFormat(item)}</li>`;
-    });
-    html += '</ul>';
+    }
+    
     return html;
 }
+
 
 function _inlineFormat(text) {
     // Ensure text ends with a period if it doesn't already end with punctuation
@@ -365,7 +386,7 @@ function _inlineFormat(text) {
 }
 
 // Keep formatSummaryHTML as an alias so existing callers don't break
-const formatSummaryHTML = formatTextToBullets;
+const formatSummaryHTML = formatTextToHTML;
 
 // ────────────────────────────────────────────────────────────────────────────
 // 7. SUMMARIZE FLOW
@@ -498,7 +519,7 @@ function displayEnglishSummary(rawSummary) {
                 English Summary — BioBART
             </div>
             <div class="summary-body">
-                ${formatTextToBullets(rawSummary, false)}
+                ${formatTextToHTML(rawSummary, false)}
             </div>
         </div>`;
 
@@ -596,7 +617,7 @@ function displayArabicTranslation(rawTranslation) {
                 الترجمة العربية — Helsinki-NLP
             </div>
             <div class="summary-body rtl-body" dir="rtl">
-                ${formatTextToBullets(rawTranslation, true)}
+                ${formatTextToHTML(rawTranslation, true)}
             </div>
         </div>`;
 
@@ -778,7 +799,7 @@ function _buildPrintDocument() {
 
 /** Convert raw summary text to HTML suitable for PDF export */
 function _summaryToExportHTML(rawText, isRTL) {
-    return formatTextToBullets(rawText, isRTL);
+    return formatTextToHTML(rawText, isRTL);
 }
 
 // ────────────────────────────────────────────────────────────────────────────

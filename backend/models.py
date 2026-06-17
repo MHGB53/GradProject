@@ -11,7 +11,7 @@ Tables:
 
 from sqlalchemy import (
     Column, Integer, String, Boolean, DateTime,
-    ForeignKey, UniqueConstraint, Text
+    ForeignKey, UniqueConstraint, Text, Unicode, UnicodeText
 )
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
@@ -81,7 +81,7 @@ class Post(Base):
 
     id         = Column(Integer, primary_key=True, index=True)
     user_id    = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
-    content    = Column(Text, nullable=True)   # Text is optional if files are attached
+    content    = Column(UnicodeText, nullable=True)   # NVARCHAR(MAX) so Arabic stores correctly
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
@@ -104,7 +104,7 @@ class PostAttachment(Base):
 
     id         = Column(Integer, primary_key=True, index=True)
     post_id    = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), nullable=False, index=True)
-    file_name  = Column(String(255), nullable=False)          # original filename
+    file_name  = Column(Unicode(255), nullable=False)         # original filename (Unicode-safe)
     file_path  = Column(String(500), nullable=False)          # relative path on disk  e.g. "community/abc.jpg"
     file_type  = Column(String(20),  nullable=False)          # image | video | pdf | doc
     mime_type  = Column(String(100), nullable=True)
@@ -136,7 +136,7 @@ class PostComment(Base):
     post_id    = Column(Integer, ForeignKey("posts.id",  ondelete="CASCADE"),   nullable=False, index=True)
     # No CASCADE on user_id — SQL Server does not allow multiple cascade paths to users
     user_id    = Column(Integer, ForeignKey("users.id",  ondelete="NO ACTION"), nullable=False, index=True)
-    content    = Column(Text, nullable=False)
+    content    = Column(UnicodeText, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     post   = relationship("Post", back_populates="comments")
@@ -149,7 +149,7 @@ class ChatSession(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
-    title = Column(String(100), default="New Chat", nullable=False)
+    title = Column(Unicode(100), default="New Chat", nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     messages = relationship("ChatMessage", back_populates="session", cascade="all, delete-orphan")
@@ -162,7 +162,7 @@ class ChatMessage(Base):
     id = Column(Integer, primary_key=True, index=True)
     session_id = Column(Integer, ForeignKey("chat_sessions.id", ondelete="CASCADE"), nullable=False, index=True)
     role = Column(String(50), nullable=False) # "user" or "assistant"
-    content = Column(Text, nullable=False)
+    content = Column(UnicodeText, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     session = relationship("ChatSession", back_populates="messages")
@@ -181,6 +181,30 @@ class Flashcard(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User")
+
+# ──────────────────────────── AI Exam Generator ────────────────────────────
+
+class ExamResult(Base):
+    """A completed AI-generated exam, scored, tied to the user who took it."""
+    __tablename__ = "exam_results"
+
+    id            = Column(Integer, primary_key=True, index=True)
+    user_id       = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    title         = Column(String(255), nullable=False)
+    difficulty    = Column(String(50),  nullable=False, default="intermediate")
+    num_questions = Column(Integer,     nullable=False, default=0)
+    score         = Column(Integer,     nullable=False, default=0)   # percentage 0-100
+    time_taken    = Column(Integer,     nullable=True)               # seconds spent
+    # Full content so the exam can be re-opened under "View Results"
+    questions_json = Column(Text, nullable=True)                     # the quiz questions array
+    answers_json   = Column(Text, nullable=True)                     # the user's answers array
+    created_at    = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User")
+
+    def __repr__(self):
+        return f"<ExamResult id={self.id} user_id={self.user_id} score={self.score}>"
+
 
 # ──────────────────────────── Support & Complaints ────────────────────────────
 

@@ -144,103 +144,81 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize exam generator features
     initializeExamGenerator();
+
+    // Render previously completed exams from localStorage
+    renderRecentExams();
 });
 
 // Lectures data by subject
-const lecturesData = {
-    anatomy: [
-        { id: 1, name: "Introduction to Dental Anatomy", weeks: "Week 1-2" },
-        { id: 2, name: "Tooth Morphology and Structure", weeks: "Week 3-4" },
-        { id: 3, name: "Oral Cavity Structures", weeks: "Week 5-6" },
-        { id: 4, name: "Temporomandibular Joint", weeks: "Week 7" },
-        { id: 5, name: "Muscles of Mastication", weeks: "Week 8-9" },
-        { id: 6, name: "Blood Supply and Innervation", weeks: "Week 10-11" },
-        { id: 7, name: "Salivary Glands", weeks: "Week 12" }
-    ],
-    pharmacology: [
-        { id: 1, name: "Introduction to Dental Pharmacology", weeks: "Week 1-2" },
-        { id: 2, name: "Local Anesthetics", weeks: "Week 3-4" },
-        { id: 3, name: "Analgesics and Pain Management", weeks: "Week 5-6" },
-        { id: 4, name: "Antibiotics in Dentistry", weeks: "Week 7-8" },
-        { id: 5, name: "Sedation and Anxiolytics", weeks: "Week 9-10" },
-        { id: 6, name: "Emergency Medications", weeks: "Week 11" },
-        { id: 7, name: "Drug Interactions", weeks: "Week 12" }
-    ],
-    pathology: [
-        { id: 1, name: "Introduction to Oral Pathology", weeks: "Week 1-2" },
-        { id: 2, name: "Dental Caries and Pulp Disease", weeks: "Week 3-4" },
-        { id: 3, name: "Periodontal Diseases", weeks: "Week 5-6" },
-        { id: 4, name: "Oral Infections", weeks: "Week 7-8" },
-        { id: 5, name: "Oral Lesions and Tumors", weeks: "Week 9-10" },
-        { id: 6, name: "Developmental Disorders", weeks: "Week 11" },
-        { id: 7, name: "Systemic Diseases in Dentistry", weeks: "Week 12" }
-    ],
-    radiology: [
-        { id: 1, name: "Introduction to Dental Radiography", weeks: "Week 1-2" },
-        { id: 2, name: "Radiation Physics and Safety", weeks: "Week 3-4" },
-        { id: 3, name: "Intraoral Radiographic Techniques", weeks: "Week 5-6" },
-        { id: 4, name: "Extraoral Radiography", weeks: "Week 7-8" },
-        { id: 5, name: "Panoramic Imaging", weeks: "Week 9" },
-        { id: 6, name: "CBCT and 3D Imaging", weeks: "Week 10-11" },
-        { id: 7, name: "Radiographic Interpretation", weeks: "Week 12" }
-    ]
-};
-
 // Exam Generator Functionality
 function initializeExamGenerator() {
-    // Subject selection and lecture population
-    const subjectSelect = document.getElementById('subject');
-    const lecturesSection = document.getElementById('lecturesSection');
-    const lecturesList = document.getElementById('lecturesList');
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const selectedCountSpan = document.getElementById('selectedCount');
+    // Show file name when selected
+    const fileInput = document.getElementById('referenceFile');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const dropZone = document.getElementById('dropZone');
     
-    if (subjectSelect) {
-        subjectSelect.addEventListener('change', function() {
-            const subject = this.value;
-            
-            if (subject && lecturesData[subject]) {
-                // Show lectures section
-                lecturesSection.classList.remove('hidden');
-                lecturesSection.classList.add('slide-in');
-                
-                // Populate lectures
-                populateLectures(subject);
-                
-                // Reset select all
-                selectAllCheckbox.checked = false;
-                updateSelectedCount();
+    if (fileInput && fileNameDisplay && dropZone) {
+        // Handle file input change
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+                fileNameDisplay.classList.remove('hidden');
+                dropZone.classList.add('border-primary', 'bg-primary/5');
             } else {
-                // Hide lectures section
-                lecturesSection.classList.add('hidden');
-                lecturesList.innerHTML = '';
+                fileNameDisplay.classList.add('hidden');
+                dropZone.classList.remove('border-primary', 'bg-primary/5');
             }
         });
-    }
-    
-    // Select all functionality
-    if (selectAllCheckbox) {
-        selectAllCheckbox.addEventListener('change', function() {
-            const checkboxes = lecturesList.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = this.checked;
-                updateLectureCheckboxStyle(checkbox);
-            });
-            updateSelectedCount();
+
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
         });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropZone.classList.add('border-primary', 'bg-primary/10');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('border-primary', 'bg-primary/10');
+        }
+
+        dropZone.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files && files.length > 0) {
+                fileInput.files = files; // Assign files to input
+                
+                // Manually trigger change event
+                const event = new Event('change');
+                fileInput.dispatchEvent(event);
+            }
+        }
     }
     
-    // Question slider sync with input
+    // Question slider — live value label
     const questionSlider = document.getElementById('questionSlider');
-    const questionInput = document.getElementById('questions');
-    
-    if (questionSlider && questionInput) {
+    const questionsVal = document.getElementById('questionsVal');
+    if (questionSlider && questionsVal) {
+        questionsVal.textContent = questionSlider.value;
         questionSlider.addEventListener('input', function() {
-            questionInput.value = this.value;
-        });
-        
-        questionInput.addEventListener('input', function() {
-            questionSlider.value = this.value;
+            questionsVal.textContent = this.value;
         });
     }
     
@@ -278,27 +256,10 @@ function initializeExamGenerator() {
     
     if (generateBtn && btnText) {
         generateBtn.addEventListener('click', function() {
-            // Validate form
-            const subject = document.getElementById('subject').value;
-            
-            if (!subject) {
-                showNotification('Please select a subject', 'error');
-                return;
-            }
-            
-            // Get selected lectures
-            const lecturesList = document.getElementById('lecturesList');
-            const selectedLectures = [];
-            
-            if (lecturesList) {
-                const lectureCheckboxes = lecturesList.querySelectorAll('input[type="checkbox"]:checked');
-                lectureCheckboxes.forEach(checkbox => {
-                    selectedLectures.push(checkbox.getAttribute('data-lecture-id'));
-                });
-            }
-            
-            if (subject && selectedLectures.length === 0) {
-                showNotification('Please select at least one lecture', 'error');
+            // Validate file input
+            const fileInput = document.getElementById('referenceFile');
+            if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                showNotification('Please upload a reference document (PDF/Word)', 'error');
                 return;
             }
             
@@ -306,8 +267,8 @@ function initializeExamGenerator() {
             const difficultyBtn = document.querySelector('.difficulty-btn.bg-primary');
             const difficulty = difficultyBtn ? difficultyBtn.getAttribute('data-level') : 'intermediate';
             
-            // Get number of questions
-            const numQuestions = document.getElementById('questions').value;
+            // Get number of questions (from the slider)
+            const numQuestions = document.getElementById('questionSlider').value;
             
             // Get selected question types
             const questionTypes = [];
@@ -324,11 +285,12 @@ function initializeExamGenerator() {
             
             // Store exam configuration
             const examConfig = {
-                subject: subject,
+                subject: "Custom Document", // Default subject
+                fileName: (fileInput.files[0] && fileInput.files[0].name) || "Custom Document",
                 difficulty: difficulty,
                 numQuestions: numQuestions,
                 questionTypes: questionTypes,
-                selectedLectures: selectedLectures
+                selectedLectures: []
             };
             
             localStorage.setItem('examConfig', JSON.stringify(examConfig));
@@ -340,15 +302,54 @@ function initializeExamGenerator() {
             // Change button text
             btnText.innerHTML = '<span class="animate-pulse">Generating...</span>';
             
-            // Simulate generation and navigate to quiz
-            setTimeout(() => {
-                showNotification('Exam generated successfully!', 'success');
+            // Generate real quiz from AI proxy
+            // Bypass login requirement for development / testing
+            let token = localStorage.getItem('token');
+            if (!token) {
+                token = 'dummy_token_for_dev';
+            }
+
+            const formData = new FormData();
+            formData.append('subject', "Custom Document");
+            formData.append('difficulty', difficulty);
+            formData.append('num_questions', parseInt(numQuestions));
+            formData.append('question_types', JSON.stringify(questionTypes));
+            formData.append('lectures', JSON.stringify([]));
+
+            if (fileInput && fileInput.files.length > 0) {
+                formData.append('file', fileInput.files[0]);
+            }
+
+            fetch('/api/ai/generate-quiz', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Store the raw response in localStorage for the quiz page to parse
+                    localStorage.setItem('generatedQuizRaw', data.raw_response);
+                    showNotification('Exam generated successfully!', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'quiz.html';
+                    }, 500);
+                } else {
+                    throw new Error(data.detail || "Failed to generate quiz");
+                }
+            })
+            .catch(err => {
+                console.error("Quiz gen error:", err);
+                showNotification('Failed to generate exam. The model might be loading.', 'error');
                 
-                // Navigate to quiz page after a short delay
-                setTimeout(() => {
-                    window.location.href = 'quiz.html';
-                }, 500);
-            }, 1500);
+                // Re-enable button
+                this.disabled = false;
+                this.classList.remove('opacity-75', 'cursor-not-allowed');
+                btnText.innerHTML = 'Generate Exam';
+            });
         });
     }
 }
@@ -429,6 +430,98 @@ function updateSelectAllState() {
         selectAllCheckbox.checked = allChecked;
         selectAllCheckbox.indeterminate = someChecked && !allChecked;
     }
+}
+
+// ─────────────────────── Recent Exams (localStorage) ───────────────────────
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function timeAgo(ts) {
+    if (!ts) return 'recently';
+    const mins = Math.floor((Date.now() - ts) / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return `${mins} minute${mins === 1 ? '' : 's'} ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs} hour${hrs === 1 ? '' : 's'} ago`;
+    const days = Math.floor(hrs / 24);
+    return `${days} day${days === 1 ? '' : 's'} ago`;
+}
+
+async function fetchRecentExams() {
+    // Prefer the server (per-account, shared across devices); fall back to the
+    // local cache when not logged in or the request fails.
+    const token = localStorage.getItem('access_token');
+    if (token) {
+        try {
+            const res = await fetch('/api/exams/recent', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                return data.map(e => ({
+                    id: e.id,
+                    title: e.title,
+                    difficulty: e.difficulty,
+                    numQuestions: e.num_questions,
+                    score: e.score,
+                    completedAt: e.created_at ? new Date(e.created_at).getTime() : null
+                }));
+            }
+        } catch (err) {
+            console.warn('Could not load exams from server, using local cache:', err);
+        }
+    }
+    try { return JSON.parse(localStorage.getItem('recentExams') || '[]'); } catch (_) { return []; }
+}
+
+async function renderRecentExams() {
+    const list = document.getElementById('recentExamsList');
+    if (!list) return;
+
+    const exams = await fetchRecentExams();
+
+    if (!exams.length) {
+        list.className = '';
+        list.innerHTML = `
+            <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-10 border border-dashed border-border-color dark:border-dark-border-color text-center">
+                <span class="material-symbols-outlined text-4xl text-text-secondary dark:text-dark-text-secondary mb-2">history</span>
+                <p class="text-text-secondary dark:text-dark-text-secondary">No exams yet. Generate and complete an exam to see it here.</p>
+            </div>`;
+        return;
+    }
+
+    list.className = 'grid md:grid-cols-2 gap-6';
+    list.innerHTML = exams.map(ex => {
+        const score = typeof ex.score === 'number' ? ex.score : 0;
+        const scoreColor = score >= 70
+            ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+            : score >= 50
+                ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400'
+                : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400';
+        const diff = (ex.difficulty || 'intermediate');
+        const diffLabel = diff.charAt(0).toUpperCase() + diff.slice(1);
+        return `
+            <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle p-6 border border-border-color dark:border-dark-border-color hover:border-primary transition-all">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
+                            <span class="material-symbols-outlined text-2xl text-primary">quiz</span>
+                        </span>
+                        <div>
+                            <h4 class="font-bold text-text-primary dark:text-dark-text-primary">${escapeHtml(ex.title || 'Custom Document Exam')}</h4>
+                            <p class="text-xs text-text-secondary dark:text-dark-text-secondary">${diffLabel} • ${ex.numQuestions || 0} Questions</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold px-3 py-1 rounded-full ${scoreColor}">${score}%</span>
+                </div>
+                <div class="flex items-center justify-between text-xs text-text-secondary dark:text-dark-text-secondary">
+                    <span>Completed ${timeAgo(ex.completedAt)}</span>
+                    ${ex.id ? `<a href="quiz.html?review=${ex.id}" class="text-primary hover:underline font-semibold">View Results</a>` : ''}
+                </div>
+            </div>`;
+    }).join('');
 }
 
 // Show notification

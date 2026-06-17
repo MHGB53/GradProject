@@ -3,7 +3,7 @@ Pydantic schemas for request/response validation.
 """
 
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional, List
+from typing import Optional, List, Any
 from datetime import datetime
 
 
@@ -206,6 +206,34 @@ class FlashcardOut(FlashcardBase):
     created_at: Optional[datetime]
 
     model_config = {"from_attributes": True}
+
+
+# ──────────────────────────── AI Exam Generator ────────────────────────────
+
+class ExamResultCreate(BaseModel):
+    title: str = Field(..., description="Exam title, usually the lecture file name")
+    difficulty: str = Field("intermediate", description="beginner | intermediate | advanced")
+    num_questions: int = Field(0, ge=0, description="Number of questions in the exam")
+    score: int = Field(0, ge=0, le=100, description="Score percentage 0-100")
+    time_taken: Optional[int] = Field(None, ge=0, description="Seconds spent on the exam")
+    questions: Optional[List[dict]] = Field(None, description="Full quiz questions for review")
+    answers: Optional[List[Any]] = Field(None, description="The user's answers for review")
+
+class ExamResultOut(BaseModel):
+    id: int
+    title: str
+    difficulty: str
+    num_questions: int
+    score: int
+    created_at: Optional[datetime]
+    points_earned: Optional[int] = None   # set on create response only
+
+    model_config = {"from_attributes": True}
+
+class ExamResultDetail(ExamResultOut):
+    time_taken: Optional[int] = None
+    questions: List[dict] = []
+    answers: List[Any] = []
 
 
 # ──────────────────────────── Support & Complaints ────────────────────────────
