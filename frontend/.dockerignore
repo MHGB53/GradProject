@@ -1,0 +1,30 @@
+# Exclude everything that isn't needed to build the Nginx static-file image.
+# The frontend build context is the project root so we must explicitly exclude
+# the large directories that belong only to the backend.
+
+# Backend source
+backend/
+uploads/
+
+# Python artefacts
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.py
+*.sql
+
+# Secrets and config
+.env
+.gitignore
+
+# Git history
+.git/
+
+# Node (if ever added)
+node_modules/
+
+# Docs and scratch files
+*.md
+*.txt
+scratch_*.js

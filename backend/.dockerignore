@@ -1,0 +1,36 @@
+# Python bytecode
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Git
+.git/
+.gitignore
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Node (if ever added)
+node_modules/
+
+# Development scratch files
+scratch_*.py
+scratch_*.js
+test_*.py
+fix_db.py
+
+# User uploads — mounted as a named Docker volume at runtime
+uploads/

@@ -1,0 +1,116 @@
+version: "3.9"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dentor – local development stack
+#
+# Usage:
+#   docker compose up --build
+#
+# First-run database setup (run once after `mssql` is healthy):
+#   docker exec dentor-mssql-1 \
+#     /opt/mssql-tools18/bin/sqlcmd \
+#     -S localhost -U sa -P "DentorLocal2024!" -No -C \
+#     -Q "IF DB_ID('DentorDB') IS NULL CREATE DATABASE DentorDB"
+#
+# SQLAlchemy will then auto-create all tables on the first `backend` startup.
+#
+# Access points after stack is up:
+#   http://localhost       → Dentor app (Nginx → FastAPI)
+#   http://localhost:8000  → FastAPI direct (Uvicorn, useful for /docs)
+#   localhost:1433         → SQL Server (connect via SSMS with SA creds below)
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ───────────────────────────────────────────────
+  # Microsoft SQL Server 2022 (Linux / Express)
+  # ───────────────────────────────────────────────
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA:  "Y"
+      SA_PASSWORD:  "DentorLocal2024!"
+      MSSQL_PID:    "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - dentor_net
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - /opt/mssql-tools18/bin/sqlcmd
+        - -S
+        - localhost
+        - -U
+        - sa
+        - -P
+        - "DentorLocal2024!"
+        - -Q
+        - "SELECT 1"
+        - -No
+        - -C
+        - -b
+      interval: 15s
+      timeout:  10s
+      retries:  10
+      start_period: 60s
+
+  # ───────────────────────────────────────────────
+  # FastAPI Backend  →  http://localhost:8000
+  # Build context is the project root so the Dockerfile can access
+  # requirements.txt and mount the frontend static files that
+  # backend/main.py still serves via FastAPI StaticFiles.
+  # ───────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env                      # loads GEMINI_API_KEY, MODAL_* URLs, JWT secret …
+    environment:
+      # Override .env SQL Server settings to target the containerized instance.
+      # DB_USER / DB_PASSWORD switch the driver from Windows Auth to SQL Auth,
+      # which is required inside a Linux container.
+      DB_SERVER:   mssql
+      DB_USER:     sa
+      DB_PASSWORD: "DentorLocal2024!"
+      DB_NAME:     DentorDB
+    volumes:
+      - uploads_data:/app/uploads  # persist user-uploaded files across restarts
+    networks:
+      - dentor_net
+    depends_on:
+      mssql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ───────────────────────────────────────────────
+  # Nginx Frontend  →  http://localhost
+  # Multi-stage image: Alpine gathers html/css/js/assets;
+  # Nginx serves them and reverse-proxies /api/* to `backend`.
+  # ───────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - dentor_net
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+# ─────────────────────────────────────────────────────────────────────────────
+volumes:
+  mssql_data:    # SQL Server data files — survives container restarts
+  uploads_data:  # User-uploaded images and documents
+
+networks:
+  dentor_net:
+    driver: bridge

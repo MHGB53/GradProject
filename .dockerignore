@@ -1,0 +1,37 @@
+# Root-level .dockerignore — applies to both backend and frontend builds
+# (build context for both services is the project root)
+
+# Git history
+.git/
+.gitignore
+
+# Secrets — never bake into an image
+.env
+
+# Python bytecode and virtual environments
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+htmlcov/
+.coverage
+*.egg-info/
+dist/
+build/
+
+# Node (future-proofing)
+node_modules/
+
+# Development / one-off scripts
+scratch_*.py
+scratch_*.js
+test_modal.py
+fix_db.py
+
+# User uploads — mounted as a named Docker volume at runtime
+uploads/
