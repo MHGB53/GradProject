@@ -472,24 +472,24 @@
 </div>
 <div>
 <div class="flex items-center gap-2 mb-2">
-<span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-lg">Restorative</span>
-<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary bg-background dark:bg-dark-background px-3 py-1 rounded-lg">Intermediate</span>
+<span id="caseSpecialtyBadge" class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-lg">Restorative</span>
+<span id="caseDifficultyBadge" class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary bg-background dark:bg-dark-background px-3 py-1 rounded-lg">Advanced</span>
 </div>
-<h1 class="text-3xl md:text-4xl font-extrabold text-text-primary dark:text-dark-text-primary">
-Restorative Dentistry Case
+<h1 id="caseTitle" class="text-3xl md:text-4xl font-extrabold text-text-primary dark:text-dark-text-primary">
+Diastema Closure &amp; Direct Veneers
 </h1>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-2">Complex case involving multiple restorations and esthetic considerations</p>
+<p id="caseDescription" class="text-sm text-text-secondary dark:text-dark-text-secondary mt-2"></p>
 </div>
 </div>
 <div class="flex flex-col gap-2">
 <div class="flex items-center gap-2 text-sm">
 <span class="material-symbols-outlined text-yellow-400">star</span>
-<span class="font-bold">4.8</span>
-<span class="text-text-secondary dark:text-dark-text-secondary">(1.2k reviews)</span>
+<span id="caseRating" class="font-bold">0.0</span>
+<span id="caseReviews" class="text-text-secondary dark:text-dark-text-secondary">(0 ratings)</span>
 </div>
 <div class="text-sm text-text-secondary dark:text-dark-text-secondary">
 <span class="material-symbols-outlined text-sm align-middle">schedule</span>
-Estimated time: <span class="font-semibold">45 minutes</span>
+Estimated time: <span id="caseTime" class="font-semibold">60 minutes</span>
 </div>
 </div>
 </div>
@@ -528,49 +528,15 @@ Estimated time: <span class="font-semibold">45 minutes</span>
 </div>
 
 <!-- Patient Details -->
-<div class="grid md:grid-cols-2 gap-4 mb-6">
-<div class="p-4 bg-background dark:bg-dark-background rounded-lg">
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mb-1">Patient Name</p>
-<p class="text-sm font-bold text-text-primary dark:text-dark-text-primary">Sarah Miller</p>
-</div>
-<div class="p-4 bg-background dark:bg-dark-background rounded-lg">
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mb-1">Age / Gender</p>
-<p class="text-sm font-bold text-text-primary dark:text-dark-text-primary">35 years / Female</p>
-</div>
-<div class="p-4 bg-background dark:bg-dark-background rounded-lg">
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mb-1">Chief Complaint</p>
-<p class="text-sm font-bold text-text-primary dark:text-dark-text-primary">Tooth sensitivity and discoloration</p>
-</div>
-<div class="p-4 bg-background dark:bg-dark-background rounded-lg">
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mb-1">Medical History</p>
-<p class="text-sm font-bold text-text-primary dark:text-dark-text-primary">No significant conditions</p>
-</div>
-</div>
+<div id="patientGrid" class="grid md:grid-cols-2 gap-4 mb-6"></div>
 
-<!-- Medical History Details -->
+<!-- Patient Presentation Details -->
 <div class="p-4 bg-blue-50 dark:bg-blue-900/10 rounded-lg border border-blue-200 dark:border-blue-700/30 mb-6">
 <h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-3 flex items-center gap-2">
 <span class="material-symbols-outlined text-blue-500">medical_information</span>
-Relevant Medical History
+Patient Presentation
 </h3>
-<ul class="space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
-<span>No known allergies</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
-<span>Non-smoker</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
-<span>Regular dental check-ups</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-yellow-500 text-sm mt-0.5">warning</span>
-<span>History of dental caries</span>
-</li>
-</ul>
+<ul id="presentationList" class="space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary"></ul>
 </div>
 
 <div class="flex justify-end">
@@ -597,21 +563,21 @@ Relevant Medical History
 
 <!-- Clinical Image -->
 <div class="mb-6">
-<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJEN9FCfH-0ffsiSFyTAEOmvsb455ulnDp9WkKzGZEV2RNuxoPsRX8Te38TGeWJKPpjnKscG65-cU4x2pcQUnnO_uxqp1Xkzq_yjUI378QJxsZTelB1CgHbGJkzEgZx-BLOLbUbLMNC5ELxh1j9-IdTK5Q4_Hv3OtTWVNTEbJut99rq7inux5sPfsM5wXKvMILaF9i6R93fcYzu7GDUoDqSla8VvSjrg6fLrtgJH0TamyPU39OjD81u86QU1IahBXB38GMB8inPA" 
-     alt="Clinical Examination" 
+<img id="examImage" src="" alt="Initial clinical situation"
      class="w-full h-64 object-cover rounded-xl border border-border-color dark:border-dark-border-color">
+<p id="examCaption" class="text-xs text-text-secondary dark:text-dark-text-secondary mt-2 italic"></p>
 </div>
 
 <!-- Clinical Findings -->
-<div class="space-y-3 mb-6">
-<div class="p-4 bg-background dark:bg-dark-background rounded-lg">
-<h4 class="font-bold text-text-primary dark:text-dark-text-primary mb-2">Visual Examination</h4>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Tooth #14 shows significant discoloration and visible carious lesion on the occlusal surface. Marginal integrity of existing restoration is compromised.</p>
-</div>
-<div class="p-4 bg-background dark:bg-dark-background rounded-lg">
-<h4 class="font-bold text-text-primary dark:text-dark-text-primary mb-2">Patient Symptoms</h4>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary">Reports sensitivity to cold and sweet foods. Pain level 4/10, intermittent.</p>
-</div>
+<div id="findingsList" class="space-y-3 mb-6"></div>
+
+<!-- Clinical Image Gallery -->
+<div id="galleryWrap" class="mb-6 hidden">
+<h4 class="font-bold text-text-primary dark:text-dark-text-primary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">photo_library</span>
+Clinical Image Gallery
+</h4>
+<div id="galleryGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
 </div>
 
 <div class="flex justify-between">
@@ -641,35 +607,7 @@ Relevant Medical History
 </div>
 
 <!-- Diagnosis Options -->
-<div class="space-y-3 mb-6">
-<label class="diagnosis-option block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
-<div class="flex items-start gap-3">
-<input aria-label="Diagnosis option 1" type="radio" name="diagnosis" value="1" class="mt-1">
-<div class="flex-1">
-<p class="font-bold text-text-primary dark:text-dark-text-primary">Recurrent caries with failed restoration</p>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Secondary caries around existing filling requiring replacement</p>
-</div>
-</div>
-</label>
-<label class="diagnosis-option block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
-<div class="flex items-start gap-3">
-<input aria-label="Diagnosis option 2" type="radio" name="diagnosis" value="2" class="mt-1">
-<div class="flex-1">
-<p class="font-bold text-text-primary dark:text-dark-text-primary">Enamel hypoplasia</p>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Developmental defect of tooth enamel</p>
-</div>
-</div>
-</label>
-<label class="diagnosis-option block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
-<div class="flex items-start gap-3">
-<input aria-label="Diagnosis option 3" type="radio" name="diagnosis" value="3" class="mt-1">
-<div class="flex-1">
-<p class="font-bold text-text-primary dark:text-dark-text-primary">Dental fluorosis</p>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Excessive fluoride during tooth development</p>
-</div>
-</div>
-</label>
-</div>
+<div id="diagnosisOptions" class="space-y-3 mb-6"></div>
 
 <!-- Selection Status -->
 <div id="selectionStatus" class="hidden mb-4 p-3 bg-primary/10 border border-primary/30 rounded-lg">
@@ -711,35 +649,45 @@ Relevant Medical History
 </div>
 </div>
 
+<p id="treatmentPrompt" class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4"></p>
+
 <!-- Treatment Options -->
-<div class="space-y-3 mb-6">
-<label class="block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
-<div class="flex items-start gap-3">
-<input aria-label="Answer option" type="checkbox" class="mt-1">
-<div class="flex-1">
-<p class="font-bold text-text-primary dark:text-dark-text-primary">Remove existing restoration</p>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Complete removal of failed restoration and carious tissue</p>
+<div id="treatmentOptions" class="space-y-3 mb-6"></div>
+
+<!-- Materials Used -->
+<div class="p-4 bg-primary/5 dark:bg-primary/10 rounded-lg border border-primary/30 mb-6">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">inventory_2</span>
+Materials Used
+</h3>
+<ul id="materialsList" class="grid sm:grid-cols-2 gap-2 text-sm text-text-secondary dark:text-dark-text-secondary"></ul>
 </div>
+
+<!-- Prescription -->
+<div class="p-4 bg-background dark:bg-dark-background rounded-lg border border-border-color dark:border-dark-border-color mb-6">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500">prescriptions</span>
+Prescription &amp; Post-Operative Instructions
+</h3>
+<span class="text-xs text-text-secondary dark:text-dark-text-secondary">Rx</span>
 </div>
-</label>
-<label class="block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
-<div class="flex items-start gap-3">
-<input aria-label="Answer option" type="checkbox" class="mt-1">
-<div class="flex-1">
-<p class="font-bold text-text-primary dark:text-dark-text-primary">Composite restoration</p>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Direct composite resin restoration with layering technique</p>
+<div id="prescriptionList" class="space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary"></div>
 </div>
-</div>
-</label>
-<label class="block p-4 bg-background dark:bg-dark-background rounded-lg border-2 border-border-color dark:border-dark-border-color hover:border-primary cursor-pointer transition-all duration-300">
-<div class="flex items-start gap-3">
-<input aria-label="Answer option" type="checkbox" class="mt-1">
-<div class="flex-1">
-<p class="font-bold text-text-primary dark:text-dark-text-primary">Post-operative care instructions</p>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mt-1">Provide patient education on maintenance and care</p>
-</div>
-</div>
-</label>
+
+<!-- Knowledge Check Quiz -->
+<div class="p-4 bg-purple-50 dark:bg-purple-900/10 rounded-lg border border-purple-200 dark:border-purple-700/30 mb-6">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-purple-500">quiz</span>
+Knowledge Check
+</h3>
+<p id="quizQuestion" class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4"></p>
+<div class="space-y-3" id="quizOptions"></div>
+<button onclick="checkQuiz()" class="mt-4 px-5 py-2 bg-purple-500 text-white rounded-lg font-semibold text-sm hover:bg-purple-600 transition-all duration-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check</span>
+Check Answer
+</button>
+<p id="quizResult" class="hidden mt-3 text-sm font-semibold"></p>
 </div>
 
 <div class="flex justify-between">
@@ -769,17 +717,24 @@ Relevant Medical History
 <!-- Results Summary -->
 <div class="grid md:grid-cols-3 gap-4 mb-6">
 <div class="p-4 bg-background dark:bg-dark-background rounded-lg text-center">
-<p class="text-3xl font-bold text-primary mb-1">85%</p>
+<p id="scoreOverall" class="text-3xl font-bold text-primary mb-1">0%</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Overall Score</p>
 </div>
 <div class="p-4 bg-background dark:bg-dark-background rounded-lg text-center">
-<p class="text-3xl font-bold text-green-500 mb-1">38 min</p>
+<p id="scoreTime" class="text-3xl font-bold text-green-500 mb-1">0 min</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Time Taken</p>
 </div>
 <div class="p-4 bg-background dark:bg-dark-background rounded-lg text-center">
-<p class="text-3xl font-bold text-blue-500 mb-1">4/5</p>
+<p id="scoreCorrect" class="text-3xl font-bold text-blue-500 mb-1">0/3</p>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Correct Decisions</p>
 </div>
+</div>
+
+<!-- Final Result Image -->
+<div class="mb-6">
+<img id="resultImage" src="" alt="Final result"
+     class="w-full h-64 object-cover rounded-xl border border-border-color dark:border-dark-border-color">
+<p id="resultCaption" class="text-xs text-text-secondary dark:text-dark-text-secondary mt-2 italic"></p>
 </div>
 
 <!-- Feedback -->
@@ -788,9 +743,24 @@ Relevant Medical History
 <span class="material-symbols-outlined text-blue-500">smart_toy</span>
 AI Feedback
 </h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-Great job on this case! Your diagnosis was accurate and treatment plan was appropriate. Consider reviewing the optimal composite layering technique for better esthetic results.
-</p>
+<p id="feedbackText" class="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed"></p>
+</div>
+
+<!-- Rate this Case -->
+<div class="p-4 bg-background dark:bg-dark-background rounded-lg border border-border-color dark:border-dark-border-color mb-6 text-center">
+<h3 class="font-bold text-text-primary dark:text-dark-text-primary mb-1 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-yellow-400">grade</span>
+Rate this Case
+</h3>
+<div id="ratingStars" class="flex items-center justify-center gap-1 my-2">
+<button type="button" aria-label="Rate 1 star" data-value="1" class="material-symbols-outlined text-3xl text-text-secondary hover:text-yellow-400 transition-colors cursor-pointer">star_border</button>
+<button type="button" aria-label="Rate 2 stars" data-value="2" class="material-symbols-outlined text-3xl text-text-secondary hover:text-yellow-400 transition-colors cursor-pointer">star_border</button>
+<button type="button" aria-label="Rate 3 stars" data-value="3" class="material-symbols-outlined text-3xl text-text-secondary hover:text-yellow-400 transition-colors cursor-pointer">star_border</button>
+<button type="button" aria-label="Rate 4 stars" data-value="4" class="material-symbols-outlined text-3xl text-text-secondary hover:text-yellow-400 transition-colors cursor-pointer">star_border</button>
+<button type="button" aria-label="Rate 5 stars" data-value="5" class="material-symbols-outlined text-3xl text-text-secondary hover:text-yellow-400 transition-colors cursor-pointer">star_border</button>
+</div>
+<p id="ratingMessage" class="text-sm text-text-secondary dark:text-dark-text-secondary">Tap a star to rate this case.</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Overall rating: <span id="ratingOverall" class="font-semibold text-text-primary dark:text-dark-text-primary">—</span></p>
 </div>
 
 <!-- Actions -->
@@ -803,7 +773,7 @@ Great job on this case! Your diagnosis was accurate and treatment plan was appro
 <span class="material-symbols-outlined">refresh</span>
 <span>Retry Case</span>
 </button>
-<a href="clinicalcaselibrary.html" class="px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all duration-300 flex items-center justify-center gap-2 no-underline">
+<a id="nextCaseBtn" href="clinicalcaselibrary.html" class="px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary-dark transition-all duration-300 flex items-center justify-center gap-2 no-underline">
 <span class="material-symbols-outlined">arrow_forward</span>
 <span>Next Case</span>
 </a>
@@ -825,11 +795,11 @@ Case Information
 <div class="space-y-3">
 <div class="flex items-center justify-between">
 <span class="text-sm text-text-secondary dark:text-dark-text-secondary">Difficulty</span>
-<span class="text-sm font-bold text-orange-500">Intermediate</span>
+<span id="sidebarDifficulty" class="text-sm font-bold text-red-500">Advanced</span>
 </div>
 <div class="flex items-center justify-between">
 <span class="text-sm text-text-secondary dark:text-dark-text-secondary">Specialty</span>
-<span class="text-sm font-bold text-primary">Restorative</span>
+<span id="sidebarSpecialty" class="text-sm font-bold text-primary">Restorative</span>
 </div>
 <div class="flex items-center justify-between">
 <span class="text-sm text-text-secondary dark:text-dark-text-secondary">Steps</span>
@@ -839,7 +809,7 @@ Case Information
 <span class="text-sm text-text-secondary dark:text-dark-text-secondary">Rating</span>
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
-<span class="text-sm font-bold text-text-primary dark:text-dark-text-primary">4.8</span>
+<span id="sidebarRating" class="text-sm font-bold text-text-primary dark:text-dark-text-primary">0.0</span>
 </div>
 </div>
 </div>
@@ -851,24 +821,7 @@ Case Information
 <span class="material-symbols-outlined text-primary">school</span>
 Learning Objectives
 </h3>
-<ul class="space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-primary text-sm mt-0.5">check</span>
-<span>Identify recurrent caries</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-primary text-sm mt-0.5">check</span>
-<span>Plan composite restoration</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-primary text-sm mt-0.5">check</span>
-<span>Apply proper technique</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="material-symbols-outlined text-primary text-sm mt-0.5">check</span>
-<span>Patient education</span>
-</li>
-</ul>
+<ul id="objectivesList" class="space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary"></ul>
 </div>
 
 <!-- Help Card -->
@@ -902,7 +855,7 @@ Stuck on this case? Access hints and additional resources.
 
 </div>
 
-<script src="../js/clinicalcasesim.js"></script>
+<script src="../js/clinicalcasesim.js?v=6"></script>
 <script>
 
 // Logo mode switching

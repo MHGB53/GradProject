@@ -214,7 +214,7 @@
 <div class="max-h-64 overflow-y-auto">
 <div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
 <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Case Available</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Advanced Endodontics case added</p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Diastema Closure &amp; Direct Veneers case added</p>
 </div>
 </div>
 </div>
@@ -373,7 +373,7 @@ Clinical Case Library
 <span class="material-symbols-outlined text-blue-500 text-2xl">folder_open</span>
 </div>
 <div>
-<p class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">25</p>
+<p id="statTotal" class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">7</p>
 <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Total Cases</p>
 </div>
 </div>
@@ -384,7 +384,7 @@ Clinical Case Library
 <span class="material-symbols-outlined text-green-500 text-2xl">check_circle</span>
 </div>
 <div>
-<p class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">12</p>
+<p id="statCompleted" class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">0</p>
 <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Completed</p>
 </div>
 </div>
@@ -395,7 +395,7 @@ Clinical Case Library
 <span class="material-symbols-outlined text-purple-500 text-2xl">trending_up</span>
 </div>
 <div>
-<p class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">5</p>
+<p class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">1</p>
 <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Trending</p>
 </div>
 </div>
@@ -406,7 +406,7 @@ Clinical Case Library
 <span class="material-symbols-outlined text-yellow-500 text-2xl">star</span>
 </div>
 <div>
-<p class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">4.7</p>
+<p id="statAvgRating" class="text-2xl font-bold text-text-primary dark:text-dark-text-primary">4.9</p>
 <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Avg Rating</p>
 </div>
 </div>
@@ -422,108 +422,65 @@ Clinical Case Library
 <!-- Cases Grid -->
 <div id="casesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
 
-<!-- Case 1 -->
-<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-specialty="restorative" data-difficulty="intermediate">
+<!-- Case 1: Diastema Closure & Direct Veneers (3M Filtek Easy Match) -->
+<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-case="diastema" data-specialty="restorative" data-difficulty="advanced">
 <div class="relative overflow-hidden h-48">
-<img alt="Restorative Dentistry Case" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJEN9FCfH-0ffsiSFyTAEOmvsb455ulnDp9WkKzGZEV2RNuxoPsRX8Te38TGeWJKPpjnKscG65-cU4x2pcQUnnO_uxqp1Xkzq_yjUI378QJxsZTelB1CgHbGJkzEgZx-BLOLbUbLMNC5ELxh1j9-IdTK5Q4_Hv3OtTWVNTEbJut99rq7inux5sPfsM5wXKvMILaF9i6R93fcYzu7GDUoDqSla8VvSjrg6fLrtgJH0TamyPU39OjD81u86QU1IahBXB38GMB8inPA"/>
+<img alt="Diastema closure and direct veneers before and after" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://dentalblog.solventum.com/wp-content/uploads/2026/01/19012026_Header_1200x880.png"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute top-3 right-3">
-<span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
+<span class="status-badge bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
 </div>
 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
-<span class="text-xs font-bold text-white">4.8</span>
+<span class="card-rating text-xs font-bold text-white">0.0</span>
 </div>
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-white text-sm">visibility</span>
-<span class="text-xs font-bold text-white">1.2k</span>
+<span class="card-count text-xs font-bold text-white">0</span>
 </div>
 </div>
 </div>
 <div class="p-5">
 <div class="flex justify-between items-center mb-2">
 <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Restorative</span>
-<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Intermediate</span>
+<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Advanced</span>
 </div>
-<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Restorative Dentistry</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Complex case involving multiple restorations and esthetic considerations.</p>
+<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Diastema Closure &amp; Direct Veneers</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Esthetic closure of anterior diastemas and replacement of defective restorations using a single-shade universal composite (3M Filtek Easy Match).</p>
 <div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">schedule</span>
-<span>45 min</span>
+<span>15 min</span>
 </div>
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">groups</span>
-<span>856</span>
+<span class="card-count">0</span>
 </div>
 </div>
-<button onclick="window.location.href='clinicalcasesim.html'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+<button onclick="window.location.href='clinicalcasesim.html?case=diastema'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
 <span class="material-symbols-outlined">play_circle</span>
-Start Simulation
+<span class="card-cta">Start Simulation</span>
 </button>
 </div>
 </div>
 
-<!-- Case 2 -->
-<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-specialty="pediatric" data-difficulty="beginner">
+<!-- Case 2: Class I Crowding — Combination Case (3M Clarity Aligners) -->
+<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-case="crowding" data-specialty="orthodontics" data-difficulty="advanced">
 <div class="relative overflow-hidden h-48">
-<img alt="Pediatric Dentistry Case" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW0I2iVCjRs6Q47PJKw5HpSp37cBlqqrsku_LsSN-c5v1ifbu1JjJVsWupZpKoW59uNEy8arXNE29PLNW9qR0Zmon3-Ni-QiErh6h48e10Z798illcGBo5Q7axo0eksQEuF2oZK5SvAerFsIEhXmKCIq4Gy2YueY203iMtH248zmwie5ajhQo-FgFGjD8Islzryud-czK_8EGjpZzW7ov2aH817oJBBBB6besQj7Gqn6BgQnraLNXjBWMhktD72SUYxbfMm9c2_A"/>
+<img alt="Class I crowding clear aligner combination case" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://dentalblog.solventum.com/wp-content/uploads/2026/05/260526_Ortho_case_4.png"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute top-3 right-3">
-<span class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">Completed</span>
+<span class="status-badge bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">Trending</span>
 </div>
 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
-<span class="text-xs font-bold text-white">4.6</span>
+<span class="card-rating text-xs font-bold text-white">0.0</span>
 </div>
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-white text-sm">visibility</span>
-<span class="text-xs font-bold text-white">980</span>
-</div>
-</div>
-</div>
-<div class="p-5">
-<div class="flex justify-between items-center mb-2">
-<span class="text-xs font-bold uppercase tracking-wider text-pink-500 bg-pink-500/10 px-2 py-1 rounded">Pediatric</span>
-<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Beginner</span>
-</div>
-<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Pediatric Dentistry</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Child patient with behavioral issues and extensive caries.</p>
-<div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span>30 min</span>
-</div>
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">groups</span>
-<span>612</span>
-</div>
-</div>
-<button onclick="window.location.href='clinicalcasesim.html'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">play_circle</span>
-Start Simulation
-</button>
-</div>
-</div>
-
-<!-- Case 3 -->
-<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-specialty="orthodontics" data-difficulty="advanced">
-<div class="relative overflow-hidden h-48">
-<img alt="Orthodontics Case" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2mOr6d40bCUj5ZEKvbbpK3UJf_SKCnRMskHt_Kq06PNoK2ePDg5dvBIGSUdqwz3KASqIR5Tj3iTcx5FsRpLE_RwIF5Unaw58-gZAZHV5Tk77tDKr8_yn7GAYcAk3g0GgfLIJq3Wn6pDxvWyzDQ8V_T7yQbZJY5L8PHzRJs3SZ9qdBPfN2x7-MbIQYvZxX4hEn_u2ky4iYJ0iv2wbwdpbP2AtDpsSJJqjQEIsKIIDmoddmYz3c9_H_oyWRDqjagSLBMXVTs-gpdw"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-<div class="absolute top-3 right-3">
-<span class="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">In Progress</span>
-</div>
-<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
-<span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
-<span class="text-xs font-bold text-white">4.9</span>
-</div>
-<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
-<span class="material-symbols-outlined text-white text-sm">visibility</span>
-<span class="text-xs font-bold text-white">1.5k</span>
+<span class="card-count text-xs font-bold text-white">0</span>
 </div>
 </div>
 </div>
@@ -532,127 +489,170 @@ Start Simulation
 <span class="text-xs font-bold uppercase tracking-wider text-indigo-500 bg-indigo-500/10 px-2 py-1 rounded">Orthodontics</span>
 <span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Advanced</span>
 </div>
-<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Orthodontics</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Intricate case requiring precise alignment and functional correction.</p>
+<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Class I Crowding &mdash; Combination Case</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Clear-aligner treatment of lower crowding and an impacted molar with IPR and fixed-appliance finishing (3M Clarity Aligners &amp; brackets).</p>
 <div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">schedule</span>
-<span>60 min</span>
+<span>20 min</span>
 </div>
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">groups</span>
-<span>1.1k</span>
+<span class="card-count">0</span>
 </div>
 </div>
-<button onclick="window.location.href='clinicalcasesim.html'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+<button onclick="window.location.href='clinicalcasesim.html?case=crowding'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
 <span class="material-symbols-outlined">play_circle</span>
-Continue Simulation
+<span class="card-cta">Start Simulation</span>
 </button>
 </div>
 </div>
 
-<!-- Case 4 -->
-<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-specialty="endodontics" data-difficulty="advanced">
+<!-- Case 3: Glass-Ceramic Onlay (Selective-Etch Adhesive Bonding) -->
+<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-case="onlay-ceramic" data-specialty="restorative" data-difficulty="intermediate">
 <div class="relative overflow-hidden h-48">
-<img alt="Endodontics Case" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnMXoAh0jiXLbdakdovHK6XN_SayO6xY6BEc4adVTjISQHR_8TelklxDNRSNRxab-hqzPhaYJO9wP_RuU3ZCy8zasZlMCDLGwfFMXPZM7yGcRpRwS341r5wEJY1Dw_68DY2ZYzmsHziEhn_715Oh_hbaQXRo-cMT6fTfgeh4PZqUxdsKlVjtbcleJLzfNplw9JY_7RvyBnnjKfZracrcnWwkH0EJJ-2R3oMYopsC42ZndGks3U3EV86HcxGFhIIfJwUHXwmzPA8w"/>
+<img alt="Glass-ceramic onlay adhesive bonding" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://dentalblog.solventum.com/wp-content/uploads/2026/01/image_9.png"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute top-3 right-3">
-<span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
+<span class="status-badge bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
 </div>
 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
-<span class="text-xs font-bold text-white">4.7</span>
+<span class="card-rating text-xs font-bold text-white">0.0</span>
 </div>
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-white text-sm">visibility</span>
-<span class="text-xs font-bold text-white">756</span>
+<span class="card-count text-xs font-bold text-white">0</span>
 </div>
 </div>
 </div>
 <div class="p-5">
 <div class="flex justify-between items-center mb-2">
-<span class="text-xs font-bold uppercase tracking-wider text-red-500 bg-red-500/10 px-2 py-1 rounded">Endodontics</span>
-<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Advanced</span>
-</div>
-<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Endodontics</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Root canal treatment on a molar with complex anatomy.</p>
-<div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span>50 min</span>
-</div>
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">groups</span>
-<span>734</span>
-</div>
-</div>
-<button onclick="window.location.href='clinicalcasesim.html'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">play_circle</span>
-Start Simulation
-</button>
-</div>
-</div>
-
-<!-- Case 5 -->
-<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-specialty="periodontics" data-difficulty="intermediate">
-<div class="relative overflow-hidden h-48">
-<img alt="Periodontics Case" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvDEyIp8yxXou9tFgVJqRI8WFo7SPxC1Hbw4Voas_lvAKWoI7aVC9C-P1Z9PzZz99w3wP6doIoyxyZWjTi587jEsjQ9Qn3p0AeEx-W2tyLwT_Q11C8peugYiN8OEfSi808wvBNdLubRDFd9sz9L_5Dgjqv2l4PIOpPT29Ag-OPs9fZhRwDkj_NhdFCr1KKttxHyeoKQUu33m1dqQKOD1Ui552-mr42-MYhIN66uPAbVU8sr4HIaUtH7Vwiv0vAeuATLlwW4mjmoA"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-<div class="absolute top-3 right-3">
-<span class="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">Trending</span>
-</div>
-<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
-<span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
-<span class="text-xs font-bold text-white">4.8</span>
-</div>
-<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
-<span class="material-symbols-outlined text-white text-sm">visibility</span>
-<span class="text-xs font-bold text-white">1.8k</span>
-</div>
-</div>
-</div>
-<div class="p-5">
-<div class="flex justify-between items-center mb-2">
-<span class="text-xs font-bold uppercase tracking-wider text-purple-500 bg-purple-500/10 px-2 py-1 rounded">Periodontics</span>
+<span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Restorative</span>
 <span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Intermediate</span>
 </div>
-<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Periodontics</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Advanced periodontal disease with tissue regeneration.</p>
+<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Adhesive Bonding of a Glass-Ceramic Onlay</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Selective-etch adhesive cementation of an IPS e.max glass-ceramic onlay (Scotchbond Universal Plus &amp; RelyX Universal).</p>
 <div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">schedule</span>
-<span>40 min</span>
+<span>15 min</span>
 </div>
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">groups</span>
-<span>1.4k</span>
+<span class="card-count">0</span>
 </div>
 </div>
-<button onclick="window.location.href='clinicalcasesim.html'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+<button onclick="window.location.href='clinicalcasesim.html?case=onlay-ceramic'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
 <span class="material-symbols-outlined">play_circle</span>
-Start Simulation
+<span class="card-cta">Start Simulation</span>
 </button>
 </div>
 </div>
 
-<!-- Case 6 -->
-<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-specialty="restorative" data-difficulty="advanced">
+<!-- Case 4: Narrow Class II Restorations (Filtek Easy Match) -->
+<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-case="class2" data-specialty="restorative" data-difficulty="intermediate">
 <div class="relative overflow-hidden h-48">
-<img alt="Complex Crown Work" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2sEYXIKzU7WHxJGxKgwBulqcKkObG_5QLT3iIeGcR_KTQa_S_LYmNh0MU_xb7OU_4tJM9JGJy0mkRGqYHizD8AY77bq7mOea2foD8i9BltrVv96ISIgJvtYnc_sg-ZWzIwYabYr09xuVNp7rxL7jM3tZRV5CwsJjb3yzQFThoP2XawBuaJPLqRHF0ypa7CO2Bq0MIjtg3h600egBx-NM-JnlADCMSDjPIQWuLccfkzjst8_nsxIAQgLci-AI5hCtol0lTySYR-w"/>
+<img alt="Narrow Class II composite restorations" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://dentalblog.solventum.com/wp-content/uploads/2026/02/240226_Header_1200x880.png"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 <div class="absolute top-3 right-3">
-<span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
+<span class="status-badge bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
 </div>
 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
-<span class="text-xs font-bold text-white">4.5</span>
+<span class="card-rating text-xs font-bold text-white">0.0</span>
 </div>
 <div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
 <span class="material-symbols-outlined text-white text-sm">visibility</span>
-<span class="text-xs font-bold text-white">542</span>
+<span class="card-count text-xs font-bold text-white">0</span>
+</div>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Restorative</span>
+<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Intermediate</span>
+</div>
+<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Narrow Class II Restorations</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Minimally invasive direct composite restoration of narrow interproximal (D1) lesions with 3M Filtek Easy Match.</p>
+<div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>18 min</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="card-count">0</span>
+</div>
+</div>
+<button onclick="window.location.href='clinicalcasesim.html?case=class2'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="card-cta">Start Simulation</span>
+</button>
+</div>
+</div>
+
+<!-- Case 5: Metal Onlay (Selective-Etch Adhesive Bonding) -->
+<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-case="onlay-metal" data-specialty="restorative" data-difficulty="intermediate">
+<div class="relative overflow-hidden h-48">
+<img alt="Metal onlay adhesive bonding" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://dentalblog.solventum.com/wp-content/uploads/2026/01/image_9-1.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-3 right-3">
+<span class="status-badge bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
+<span class="card-rating text-xs font-bold text-white">0.0</span>
+</div>
+<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-white text-sm">visibility</span>
+<span class="card-count text-xs font-bold text-white">0</span>
+</div>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Restorative</span>
+<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Intermediate</span>
+</div>
+<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Adhesive Bonding of a Metal Onlay</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Selective-etch adhesive cementation of a non-precious metal onlay on a severely worn molar (Scotchbond Universal Plus &amp; RelyX Universal).</p>
+<div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>15 min</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="card-count">0</span>
+</div>
+</div>
+<button onclick="window.location.href='clinicalcasesim.html?case=onlay-metal'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="card-cta">Start Simulation</span>
+</button>
+</div>
+</div>
+
+<!-- Case 6: Anterior Restoration Longevity (Filtek Supreme XTE) -->
+<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-case="anterior-longevity" data-specialty="restorative" data-difficulty="advanced">
+<div class="relative overflow-hidden h-48">
+<img alt="Anterior composite restoration 13-year longevity" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://dentalblog.solventum.com/wp-content/uploads/2026/06/Anterior_restoration_2.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-3 right-3">
+<span class="status-badge bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">Trending</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
+<span class="card-rating text-xs font-bold text-white">0.0</span>
+</div>
+<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-white text-sm">visibility</span>
+<span class="card-count text-xs font-bold text-white">0</span>
 </div>
 </div>
 </div>
@@ -661,40 +661,68 @@ Start Simulation
 <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Restorative</span>
 <span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Advanced</span>
 </div>
-<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Complex Crown Work</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Crown preparation and placement with esthetic demands.</p>
+<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Anterior Restoration Longevity</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">A 13-year follow-up of direct composite masking hypomineralization white spots on the incisors with 3M Filtek Supreme XTE.</p>
 <div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">schedule</span>
-<span>55 min</span>
+<span>15 min</span>
 </div>
 <div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-sm">groups</span>
-<span>423</span>
+<span class="card-count">0</span>
 </div>
 </div>
-<button onclick="window.location.href='clinicalcasesim.html'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+<button onclick="window.location.href='clinicalcasesim.html?case=anterior-longevity'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
 <span class="material-symbols-outlined">play_circle</span>
-Start Simulation
+<span class="card-cta">Start Simulation</span>
 </button>
 </div>
 </div>
 
+<!-- Case 7: CAD/CAM Glass-Ceramic Inlays (Selective-Etch Adhesive Cementation) -->
+<div class="case-card group bg-card dark:bg-dark-card rounded-2xl overflow-hidden shadow-subtle hover:shadow-lg border border-border-color dark:border-dark-border-color hover:border-primary transition-all duration-300" data-case="inlay-cadcam" data-specialty="restorative" data-difficulty="intermediate">
+<div class="relative overflow-hidden h-48">
+<img alt="CAD/CAM glass-ceramic inlays adhesive cementation" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://dentalblog.solventum.com/wp-content/uploads/2025/12/image_10.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-3 right-3">
+<span class="status-badge bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">New</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-yellow-400 text-sm">star</span>
+<span class="card-rating text-xs font-bold text-white">0.0</span>
+</div>
+<div class="flex items-center gap-1 bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-white text-sm">visibility</span>
+<span class="card-count text-xs font-bold text-white">0</span>
+</div>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Restorative</span>
+<span class="text-xs font-medium text-text-secondary dark:text-dark-text-secondary">Intermediate</span>
+</div>
+<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-primary transition-colors">Adhesive Cementation of CAD/CAM Inlays</h3>
+<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">Selective-etch adhesive cementation of chairside CAD/CAM glass-ceramic inlays for secondary caries (Scotchbond Universal Plus, RelyX Universal, Elipar DeepCure).</p>
+<div class="flex items-center gap-3 mb-4 text-xs text-text-secondary dark:text-dark-text-secondary">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>18 min</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="card-count">0</span>
+</div>
+</div>
+<button onclick="window.location.href='clinicalcasesim.html?case=inlay-cadcam'" class="w-full py-2.5 px-4 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="card-cta">Start Simulation</span>
+</button>
+</div>
 </div>
 
-<!-- Pagination -->
-<div class="mt-8 flex items-center justify-center gap-2">
-<button aria-label="Previous" class="flex items-center justify-center px-4 py-2 rounded-lg border border-border-color dark:border-dark-border-color text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card transition-all duration-300 disabled:opacity-50" disabled>
-<span class="material-symbols-outlined text-lg">chevron_left</span>
-</button>
-<button class="w-10 h-10 rounded-lg bg-primary text-white font-bold text-sm">1</button>
-<button class="w-10 h-10 rounded-lg text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card font-medium text-sm transition-all duration-300">2</button>
-<button class="w-10 h-10 rounded-lg text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card font-medium text-sm transition-all duration-300">3</button>
-<span class="text-text-secondary dark:text-dark-text-secondary">...</span>
-<button class="w-10 h-10 rounded-lg text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card font-medium text-sm transition-all duration-300">5</button>
-<button aria-label="Next" class="flex items-center justify-center px-4 py-2 rounded-lg border border-border-color dark:border-dark-border-color text-text-secondary dark:text-dark-text-secondary hover:bg-card dark:hover:bg-dark-card transition-all duration-300">
-<span class="material-symbols-outlined text-lg">chevron_right</span>
-</button>
 </div>
 
 </div>
@@ -713,18 +741,22 @@ Your Progress
 <div class="p-4 bg-background dark:bg-dark-background rounded-lg">
 <div class="flex justify-between items-baseline mb-2">
 <span class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Completed</span>
-<span class="text-xl font-bold text-primary">12/25</span>
+<span id="progressCompleted" class="text-xl font-bold text-primary">0/7</span>
 </div>
 <div class="w-full bg-border-color dark:bg-dark-border-color rounded-full h-2">
-<div class="bg-primary h-2 rounded-full" style="width: 48%"></div>
+<div id="progressBarFill" class="bg-primary h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
 </div>
 </div>
 <div class="p-4 bg-background dark:bg-dark-background rounded-lg">
 <div class="flex justify-between items-baseline">
 <span class="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">Average Score</span>
-<span class="text-xl font-bold text-green-500">88%</span>
+<span id="progressAvgScore" class="text-xl font-bold text-green-500">—</span>
 </div>
 </div>
+<button id="resetProgressBtn" class="w-full text-xs text-text-secondary dark:text-dark-text-secondary hover:text-red-500 transition-colors flex items-center justify-center gap-1 pt-1">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+<span>Reset progress</span>
+</button>
 </div>
 </div>
 
@@ -738,28 +770,19 @@ Specialty Mastery
 <div>
 <div class="flex justify-between items-center mb-1">
 <span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Restorative</span>
-<span class="text-sm font-bold text-primary">75%</span>
+<span id="masteryRestorativePct" class="text-sm font-bold text-primary">0%</span>
 </div>
 <div class="w-full bg-border-color dark:bg-dark-border-color rounded-full h-2">
-<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
-</div>
-</div>
-<div>
-<div class="flex justify-between items-center mb-1">
-<span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Pediatric</span>
-<span class="text-sm font-bold text-pink-500">60%</span>
-</div>
-<div class="w-full bg-border-color dark:bg-dark-border-color rounded-full h-2">
-<div class="bg-pink-500 h-2 rounded-full" style="width: 60%"></div>
+<div id="masteryRestorativeBar" class="bg-primary h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
 </div>
 </div>
 <div>
 <div class="flex justify-between items-center mb-1">
 <span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Orthodontics</span>
-<span class="text-sm font-bold text-indigo-500">90%</span>
+<span id="masteryOrthodonticsPct" class="text-sm font-bold text-indigo-500">0%</span>
 </div>
 <div class="w-full bg-border-color dark:bg-dark-border-color rounded-full h-2">
-<div class="bg-indigo-500 h-2 rounded-full" style="width: 90%"></div>
+<div id="masteryOrthodonticsBar" class="bg-indigo-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
 </div>
 </div>
 </div>
@@ -772,7 +795,7 @@ Specialty Mastery
 <h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary">Pro Tip</h3>
 </div>
 <p class="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-Focus on cases that match your weakest specialty to maximize learning. Start with <span class="font-bold text-pink-500">Pediatric</span> cases to improve!
+When closing diastemas with a single-shade composite, control restoration <span class="font-bold text-primary">thickness</span> and tooth proportion to achieve a natural blending effect — start with the <span class="font-bold text-primary">Diastema Closure</span> case!
 </p>
 </div>
 
@@ -798,7 +821,7 @@ Focus on cases that match your weakest specialty to maximize learning. Start wit
 
 </div>
 
-<script src="../js/clinicalcaselibrary.js"></script>
+<script src="../js/clinicalcaselibrary.js?v=5"></script>
 <script>
 
 // Logo mode switching

@@ -51,7 +51,147 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeViewToggle();
     initializeScrollToTop();
     hideCurrentPageFromDropdown();
+    renderLibraryProgress();
+    renderLibraryRatings();
+    initializeResetProgress();
 });
+
+// Student ratings + completion counts (written by the Case Simulator) -------
+const RATINGS_KEY = 'dentor_case_ratings';
+const COMPLETIONS_KEY = 'dentor_case_completions';
+
+function getRatings() {
+    try {
+        return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {};
+    } catch (e) {
+        return {};
+    }
+}
+
+function getCompletions() {
+    try {
+        return JSON.parse(localStorage.getItem(COMPLETIONS_KEY)) || {};
+    } catch (e) {
+        return {};
+    }
+}
+
+// Overall rating for a case = average of all student ratings (0 until rated).
+function caseAverage(id) {
+    const entry = getRatings()[id];
+    if (!entry || !entry.studentCount) return 0;
+    return entry.studentSum / entry.studentCount;
+}
+
+// Update each card's rating, completion count, and the overall "Avg Rating".
+function renderLibraryRatings() {
+    const cards = document.querySelectorAll('.case-card');
+    const completions = getCompletions();
+    let sum = 0;
+    let rated = 0;
+
+    cards.forEach(card => {
+        const id = card.getAttribute('data-case');
+        if (!id) return;
+
+        const avg = caseAverage(id);
+        card.querySelectorAll('.card-rating').forEach(el => {
+            el.textContent = avg.toFixed(1);
+        });
+        if (avg > 0) { sum += avg; rated += 1; }
+
+        const count = completions[id] || 0;
+        card.querySelectorAll('.card-count').forEach(el => {
+            el.textContent = count;
+        });
+    });
+
+    const avgEl = document.getElementById('statAvgRating');
+    if (avgEl) avgEl.textContent = rated > 0 ? (sum / rated).toFixed(1) : '0.0';
+}
+
+// Shared progress storage (written by the Case Simulator)
+const PROGRESS_KEY = 'dentor_case_progress';
+
+function getProgress() {
+    try {
+        return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {};
+    } catch (e) {
+        return {};
+    }
+}
+
+// Read saved progress and update the stats, "Your Progress", specialty mastery,
+// and each case card's status.
+function renderLibraryProgress() {
+    const progress = getProgress();
+    const cards = document.querySelectorAll('.case-card');
+    const totalCases = cards.length || 1;
+
+    let completedCount = 0;
+    let scoreSum = 0;
+
+    cards.forEach(card => {
+        const id = card.getAttribute('data-case');
+        const record = id ? progress[id] : null;
+        const badge = card.querySelector('.status-badge');
+        const cta = card.querySelector('.card-cta');
+
+        if (record && record.completed) {
+            completedCount += 1;
+            scoreSum += record.score;
+
+            if (badge) {
+                badge.textContent = 'Completed';
+                badge.className = 'status-badge bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg';
+            }
+            if (cta) cta.textContent = 'Review Case';
+        }
+    });
+
+    const avgScore = completedCount > 0 ? Math.round(scoreSum / completedCount) : null;
+
+    // Stats cards
+    setText('statTotal', totalCases);
+    setText('statCompleted', completedCount);
+
+    // Your Progress card
+    setText('progressCompleted', completedCount + '/' + totalCases);
+    const bar = document.getElementById('progressBarFill');
+    if (bar) bar.style.width = Math.round((completedCount / totalCases) * 100) + '%';
+    setText('progressAvgScore', avgScore === null ? '—' : avgScore + '%');
+
+    // Specialty mastery (one case per specialty in the current library)
+    updateMastery('restorative', progress, 'masteryRestorativePct', 'masteryRestorativeBar');
+    updateMastery('orthodontics', progress, 'masteryOrthodonticsPct', 'masteryOrthodonticsBar');
+}
+
+function updateMastery(specialtyKey, progress, pctId, barId) {
+    let best = 0;
+    Object.keys(progress).forEach(id => {
+        const rec = progress[id];
+        if (rec && rec.completed && rec.specialty === specialtyKey) {
+            best = Math.max(best, rec.score);
+        }
+    });
+    setText(pctId, best + '%');
+    const bar = document.getElementById(barId);
+    if (bar) bar.style.width = best + '%';
+}
+
+function initializeResetProgress() {
+    const btn = document.getElementById('resetProgressBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+        localStorage.removeItem(PROGRESS_KEY);
+        renderLibraryProgress();
+    });
+}
+
+function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+}
 
 // Dark Mode - Using Global ThemeManager
 function initializeDarkMode() {
