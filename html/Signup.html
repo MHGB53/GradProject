@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dentor Sign Up</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#50d3a7",
+              "background-light": "#f6f8f7",
+              "background-dark": "#131f1b",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+</script>
+<script src="../js/themeManager.js"></script>
+<link rel="stylesheet" href="../css/Login.css">
+
+<link rel="stylesheet" href="../css/a11y.css">
+</head>
+<body class="flex items-center justify-center min-h-screen font-display dental-bg animated-bg">
+  <div class="flex items-center justify-center min-h-screen p-4">
+  <div class="w-full max-w-md p-8 space-y-6 bg-background-light dark:bg-background-dark rounded-xl shadow-lg border border-primary/20 dark:border-primary/10">
+<div class="text-center -mt-2">
+<div class="flex justify-center items-center -mb-12 -mt-24">
+    <img class="h-46 w-auto object-contain -mb-20" src="../assets/Logo.png" alt="Dentor logo"/>
+</div>
+<h2 class="text-center text-3xl font-bold text-gray-900 dark:text-white">Create your account</h2>
+<p class="text-center text-gray-600 dark:text-gray-400">Join Dentor, your dental student helper platform</p>
+</div>
+<form id="signupForm" class="space-y-5">
+  <div>
+  <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="full_name">Full name</label>
+  <div class="mt-1">
+  <input autocomplete="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-primary dark:focus:border-primary" id="full_name" name="full_name" placeholder="Ahmed Ali" type="text"/>
+  </div>
+  </div>
+  <div>
+  <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="username">Username</label>
+  <div class="mt-1">
+  <input autocomplete="username" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-primary dark:focus:border-primary" id="username" name="username" placeholder="username" required="" type="text"/>
+  </div>
+  </div>
+  <div>
+  <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="student_id">Student ID</label>
+  <div class="mt-1">
+  <input inputmode="numeric" maxlength="8" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-primary dark:focus:border-primary" id="student_id" name="student_id" placeholder="62210134" required="" type="text"/>
+  </div>
+  <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">8 digits, must start with 6.</p>
+  </div>
+  <div>
+  <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="email">University email</label>
+  <div class="mt-1">
+  <input autocomplete="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-primary dark:focus:border-primary" id="email" name="email" placeholder="Mohamed.62210134@acu.edu.eg" required="" type="email"/>
+  </div>
+  <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Format: Name.StudentID@acu.edu.eg</p>
+  </div>
+  <div>
+  <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="phone_number">Phone number</label>
+  <div class="mt-1">
+  <input autocomplete="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-primary dark:focus:border-primary" id="phone_number" name="phone_number" placeholder="+201234567890" required="" type="tel"/>
+  </div>
+  <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">We'll send a verification code by SMS.</p>
+  </div>
+  <div>
+  <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="password">Password</label>
+        <div class="mt-1 relative">
+          <input autocomplete="new-password" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-primary dark:focus:border-primary pr-10" id="password" name="password" placeholder="At least 8 characters" required type="password" />
+          <button type="button" id="togglePassword" class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 dark:text-gray-400 focus:outline-none" tabindex="-1">
+            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+          </div>
+  <div>
+  <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="confirm_password">Confirm password</label>
+  <div class="mt-1">
+  <input autocomplete="new-password" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-primary dark:focus:border-primary" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required type="password" />
+  </div>
+  </div>
+
+    <!-- Error / success banners -->
+    <div id="errorMessage" class="hidden text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg px-4 py-3 text-center"></div>
+    <div id="successMessage" class="hidden text-sm text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg px-4 py-3 text-center"></div>
+
+    <div>
+      <button id="signupBtn" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-black bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark disabled:opacity-60 disabled:cursor-not-allowed transition-opacity" type="submit">
+        Sign Up
+      </button>
+    </div>
+
+    <p class="text-center text-sm text-gray-600 dark:text-gray-400">
+      Already have an account?
+      <a class="font-medium text-primary hover:text-primary/80" href="Login.html">Log in</a>
+    </p>
+</form>
+
+</div>
+</div>
+<script src="../js/Signup.js"></script>
+  <script src="../js/pageloader.js"></script>
+</body>
+
+</html>

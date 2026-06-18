@@ -2,25 +2,70 @@
 Pydantic schemas for request/response validation.
 """
 
-from pydantic import BaseModel, EmailStr, Field
+import re
+
+from pydantic import BaseModel, EmailStr, Field, field_validator, model_validator
 from typing import Optional, List, Any
 from datetime import datetime
+
+
+# ──────────────────────────── Validation rules ────────────────────────────
+# University accounts only. The email is of the form  <student_id>.Name@acu.edu.eg
+# e.g.  42210134.Mohamed@acu.edu.eg  — the 8-digit number must match the
+# student_id field, and a valid student_id is 8 digits starting with 4.
+ACU_EMAIL_RE   = re.compile(r"^(\d{8})\.[A-Za-z]+(?:\.[A-Za-z]+)*@acu\.edu\.eg$")
+STUDENT_ID_RE  = re.compile(r"^4\d{7}$")          # 8 digits, first digit is 4
+PHONE_RE       = re.compile(r"^\+?\d{10,15}$")    # digits, optional leading +
 
 
 # ──────────────────────────── Auth Schemas ────────────────────────────
 
 class RegisterRequest(BaseModel):
     username: str = Field(..., min_length=3, max_length=50, description="Unique username")
-    email: EmailStr = Field(..., description="Valid email address")
+    email: EmailStr = Field(..., description="University email, e.g. 42210134.Name@acu.edu.eg")
     full_name: Optional[str] = Field(None, max_length=100, description="Display name")
+    student_id: str = Field(..., description="8-digit student ID starting with 4")
+    phone_number: str = Field(..., description="Phone number for SMS verification")
     password: str = Field(..., min_length=8, description="Password (min 8 characters)")
+
+    @field_validator("student_id")
+    @classmethod
+    def _validate_student_id(cls, v: str) -> str:
+        v = v.strip()
+        if not STUDENT_ID_RE.match(v):
+            raise ValueError("Invalid student ID. It must be exactly 8 digits and start with 4.")
+        return v
+
+    @field_validator("phone_number")
+    @classmethod
+    def _validate_phone(cls, v: str) -> str:
+        v = v.strip().replace(" ", "")
+        if not PHONE_RE.match(v):
+            raise ValueError("Invalid phone number. Enter 10–15 digits (optionally starting with +).")
+        return v
+
+    @model_validator(mode="after")
+    def _validate_email_matches_id(self):
+        email = str(self.email)
+        match = ACU_EMAIL_RE.match(email)
+        if not match:
+            raise ValueError(
+                "Email must be a valid university address of the form "
+                "<student_id>.Name@acu.edu.eg"
+            )
+        email_id = match.group(1)
+        if email_id != self.student_id:
+            raise ValueError("The student ID inside the email does not match the Student ID field.")
+        return self
 
     model_config = {
         "json_schema_extra": {
             "example": {
                 "username": "dental_student",
-                "email": "student@dentor.com",
-                "full_name": "Ahmed Ali",
+                "email": "42210134.Mohamed@acu.edu.eg",
+                "full_name": "Mohamed Ali",
+                "student_id": "42210134",
+                "phone_number": "+201234567890",
                 "password": "SecurePass123"
             }
         }
@@ -60,6 +105,26 @@ class ChangePasswordRequest(BaseModel):
 class VerifyOTPResponse(BaseModel):
     message: str
     reset_token: str
+
+
+# ──────────────────────────── Account Verification Schemas ────────────────────────────
+
+class VerifyPhoneRequest(BaseModel):
+    email: EmailStr = Field(..., description="The account email")
+    otp: str = Field(..., min_length=6, max_length=6, description="6-digit SMS code")
+
+
+class ResendVerificationRequest(BaseModel):
+    email: EmailStr = Field(..., description="The account email")
+
+
+class PendingVerificationResponse(BaseModel):
+    message: str
+    email: str
+    email_verified: bool
+    phone_verified: bool
+    # Only populated when no SMS provider is configured (dev mode) so the flow is testable.
+    dev_otp: Optional[str] = None
 
 
 

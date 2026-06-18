@@ -40,7 +40,12 @@ async function runAuthGuard() {
 
     // 2. Auth Guard: Automatically protect routes
     const path = window.location.pathname.toLowerCase();
-    const isPublicPage = path.includes('login.html') || path.includes('forget_password');
+    const isPublicPage = path.includes('login.html')
+        || path.includes('signup.html')
+        || path.includes('verify.html')
+        || path.includes('home.html')
+        || path.includes('forget_password')
+        || path === '/' || path === '';
 
     if (!isPublicPage) {
         const token = localStorage.getItem('access_token');

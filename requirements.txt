@@ -23,6 +23,9 @@ python-multipart==0.0.26
 python-dotenv==1.0.1
 resend==2.6.0
 
+# ── SMS (phone OTP verification) ──
+twilio==9.4.1
+
 # ── AI / Gemini ──
 google-genai>=1.0.0
 torch

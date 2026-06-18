@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dentor - Verify your account</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#50d3a7",
+              "background-light": "#f6f8f7",
+              "background-dark": "#131f1b",
+            },
+            fontFamily: { "display": ["Inter", "sans-serif"] },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+</script>
+<script src="../js/themeManager.js"></script>
+<link rel="stylesheet" href="../css/Login.css">
+<link rel="stylesheet" href="../css/a11y.css">
+</head>
+<body class="flex items-center justify-center min-h-screen font-display dental-bg animated-bg">
+  <div class="flex items-center justify-center min-h-screen p-4">
+  <div class="w-full max-w-md p-8 space-y-6 bg-background-light dark:bg-background-dark rounded-xl shadow-lg border border-primary/20 dark:border-primary/10">
+<div class="text-center -mt-2">
+<div class="flex justify-center items-center -mb-12 -mt-24">
+    <img class="h-46 w-auto object-contain -mb-20" src="../assets/Logo.png" alt="Dentor logo"/>
+</div>
+<h2 class="text-center text-3xl font-bold text-gray-900 dark:text-white">Verify your account</h2>
+<p class="text-center text-gray-600 dark:text-gray-400">Two quick steps to activate your university account</p>
+</div>
+
+<!-- Step 1: Email -->
+<div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+  <div class="flex items-start gap-3">
+    <span id="emailStatusIcon" class="mt-0.5 text-xl">📧</span>
+    <div>
+      <p class="font-medium text-gray-900 dark:text-white">1. Confirm your email</p>
+      <p id="emailStatusText" class="text-sm text-gray-600 dark:text-gray-400">
+        We sent an activation link to <span id="emailAddr" class="font-medium"></span>. Open it to confirm your email.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Step 2: Phone OTP -->
+<form id="otpForm" class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 space-y-4">
+  <div class="flex items-start gap-3">
+    <span id="phoneStatusIcon" class="mt-0.5 text-xl">📱</span>
+    <div class="flex-1">
+      <p class="font-medium text-gray-900 dark:text-white">2. Enter the SMS code</p>
+      <p class="text-sm text-gray-600 dark:text-gray-400">Type the 6-digit code we texted to your phone.</p>
+    </div>
+  </div>
+
+  <div id="devOtpBanner" class="hidden text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg px-3 py-2 text-center">
+    Dev mode (no SMS provider yet): your code is <span id="devOtpValue" class="font-bold"></span>
+  </div>
+
+  <input inputmode="numeric" maxlength="6" id="otp" name="otp" placeholder="------"
+    class="w-full text-center tracking-[0.5em] text-lg px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary bg-background-light dark:bg-background-dark/50 dark:border-gray-600 dark:text-white" required type="text"/>
+
+  <div id="errorMessage" class="hidden text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg px-4 py-3 text-center"></div>
+  <div id="successMessage" class="hidden text-sm text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg px-4 py-3 text-center"></div>
+
+  <button id="verifyBtn" type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-black bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-60 disabled:cursor-not-allowed transition-opacity">
+    Verify phone
+  </button>
+</form>
+
+<div class="text-center text-sm text-gray-600 dark:text-gray-400 space-y-2">
+  <p>Didn't get anything? <button id="resendBtn" class="font-medium text-primary hover:text-primary/80">Resend code & email</button></p>
+  <p><a class="font-medium text-primary hover:text-primary/80" href="Login.html">Back to login</a></p>
+</div>
+
+</div>
+</div>
+<script src="../js/Verify.js"></script>
+  <script src="../js/pageloader.js"></script>
+</body>
+</html>

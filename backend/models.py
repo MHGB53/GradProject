@@ -27,9 +27,20 @@ class User(Base):
     username        = Column(String(50),  unique=True, nullable=False, index=True)
     email           = Column(String(255), unique=True, nullable=False, index=True)
     full_name       = Column(Unicode(100), nullable=True)
+    student_id      = Column(String(8),   unique=True, nullable=True, index=True)   # 8 digits, starts with 6
+    phone_number    = Column(String(20),  nullable=True)
     profile_photo   = Column(String(500), nullable=True)
     hashed_password = Column(String(255), nullable=False)
     is_active       = Column(Boolean, default=True)
+
+    # ── Identity verification (university account check) ──
+    email_verified       = Column(Boolean, default=False)   # confirmed via activation link
+    phone_verified       = Column(Boolean, default=False)   # confirmed via SMS OTP
+    verification_token   = Column(String(64),  nullable=True, index=True)  # email activation token
+    verification_expires = Column(DateTime(timezone=True), nullable=True)
+    phone_otp            = Column(String(10),  nullable=True)
+    phone_otp_expires    = Column(DateTime(timezone=True), nullable=True)
+
     created_at      = Column(DateTime(timezone=True), server_default=func.now())
     updated_at      = Column(DateTime(timezone=True), onupdate=func.now())
 

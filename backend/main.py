@@ -57,6 +57,28 @@ def _run_migrations():
                 ))
                 print(f"[Migration] Converted {table}.{col} to {type_sql} (Unicode).")
 
+    # ── users identity/verification columns (added in v3) ──────────
+    if "users" in table_names:
+        user_cols = [c["name"] for c in inspector.get_columns("users")]
+        # Verification flags default to 1 so EXISTING users (registered before this
+        # feature) stay verified and are not locked out. New users created by the app
+        # explicitly pass False, so the default only affects the backfill.
+        new_user_cols = [
+            ("student_id",           "student_id NVARCHAR(8) NULL"),
+            ("phone_number",         "phone_number NVARCHAR(20) NULL"),
+            ("email_verified",       "email_verified BIT NOT NULL DEFAULT 1"),
+            ("phone_verified",       "phone_verified BIT NOT NULL DEFAULT 1"),
+            ("verification_token",   "verification_token NVARCHAR(64) NULL"),
+            ("verification_expires", "verification_expires DATETIMEOFFSET NULL"),
+            ("phone_otp",            "phone_otp NVARCHAR(10) NULL"),
+            ("phone_otp_expires",    "phone_otp_expires DATETIMEOFFSET NULL"),
+        ]
+        for col_name, col_sql in new_user_cols:
+            if col_name not in user_cols:
+                with engine.begin() as conn:
+                    conn.execute(text(f"ALTER TABLE users ADD {col_sql}"))
+                print(f"[Migration] Added users.{col_name} column.")
+
     # ── exam_results extra columns (time + full content for review) ──
     if "exam_results" in inspector.get_table_names():
         exam_cols = [c["name"] for c in inspector.get_columns("exam_results")]
@@ -151,7 +173,7 @@ app.include_router(exams.router)
 @app.get("/", tags=["Frontend"])
 def root():
     """Redirect root to the Login page."""
-    return RedirectResponse(url="/html/Login.html")
+    return RedirectResponse(url="/html/Home.html")
 
 
 @app.get("/health", tags=["Health"])
