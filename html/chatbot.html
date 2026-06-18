@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -84,7 +84,7 @@
 <div class="flex items-center gap-4">
     <div class="relative inline-flex items-center -ml-20">
         <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
-        <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
+        <a href="dashboard.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
     </div>
 </div>
 <nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
@@ -202,33 +202,16 @@
 <div class="relative">
 <button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
 <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
 <h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
 </div>
 <div class="max-h-64 overflow-y-auto">
-<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-<div class="flex items-start gap-3">
-<div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now available for practice.</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
-</div>
-</div>
-</div>
-<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-<div class="flex items-start gap-3">
-<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has been updated with new materials.</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
-</div>
-</div>
-</div>
+                  <div class="p-8 text-center text-text-secondary dark:text-dark-text-secondary">
+                    <span class="material-symbols-outlined text-4xl mb-2 block opacity-50">notifications_none</span>
+                    <p class="text-sm">No notifications yet</p>
+                  </div>
 </div>
 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
 <button onclick="window.location.href='notification.html'" class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
@@ -384,12 +367,12 @@
 <!-- Input Area -->
 <div id="chatInput" class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background dark:from-dark-background via-background/90 dark:via-dark-background/90 to-transparent">
 <div class="max-w-4xl mx-auto bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color focus-within:border-primary transition-all duration-300 flex items-center p-2">
-<input aria-label="اسأل Dentor أي سؤال في طب الأسنان… / Ask Dentor anything dental…"
+<input aria-label="???? Dentor ?? ???? ?? ?? ???????� / Ask Dentor anything dental�"
   id="messageInput"
   type="text"
   autocomplete="off"
   class="flex-1 bg-transparent border-none focus:ring-0 text-sm text-text-primary dark:text-dark-text-primary placeholder-text-secondary dark:placeholder-dark-text-secondary outline-none px-4 py-2"
-  placeholder="اسأل Dentor أي سؤال في طب الأسنان… / Ask Dentor anything dental…"
+  placeholder="???? Dentor ?? ???? ?? ?? ???????� / Ask Dentor anything dental�"
 />
 <button id="sendButton" aria-label="Send message" class="bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed rounded-xl w-10 h-10 flex items-center justify-center transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-md shrink-0">
 <span class="material-symbols-outlined text-white text-lg">send</span>

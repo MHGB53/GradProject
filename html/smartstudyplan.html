@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -77,7 +77,7 @@
   <script src="../js/themeManager.js"></script>
   <script src="../js/tokengaurd.js?v=999"></script>
   <link rel="stylesheet" href="../css/smartstudyplan.css">
-<link rel="stylesheet" href="../css/a11y.css">
+  <link rel="stylesheet" href="../css/a11y.css">
 </head>
 
 <body
@@ -91,7 +91,7 @@
             <div class="relative inline-flex items-center -ml-20">
               <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo"
                 class="h-80 w-auto transition-opacity duration-300">
-              <a href="Home.html"
+              <a href="dashboard.html"
                 style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
             </div>
           </div>
@@ -177,7 +177,7 @@
                       <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
                     </div>
                   </a>
-                  
+
                   <a href="aIdiagnosis.html"
                     class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
                     <div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -257,8 +257,6 @@
               <button aria-label="Notifications" id="notificationBtn"
                 class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
                 <span class="material-symbols-outlined">notifications</span>
-                <span
-                  class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
               </button>
               <div id="notificationDropdown"
                 class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
@@ -266,31 +264,9 @@
                   <h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
                 </div>
                 <div class="max-h-64 overflow-y-auto">
-                  <div
-                    class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz
-                          Available</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is
-                          now available for practice.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update
-                        </p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan
-                          has been updated with new materials.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
-                      </div>
-                    </div>
+                  <div class="p-8 text-center text-text-secondary dark:text-dark-text-secondary">
+                    <span class="material-symbols-outlined text-4xl mb-2 block opacity-50">notifications_none</span>
+                    <p class="text-sm">No notifications yet</p>
                   </div>
                 </div>
                 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
@@ -414,7 +390,7 @@
                     <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p>
                   </div>
                 </a>
-                
+
                 <a href="aIdiagnosis.html"
                   class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">🧠</span>
@@ -510,21 +486,33 @@
               <div class="custom-time-picker" id="customTimePicker">
                 <span class="material-symbols-outlined ctp-icon">schedule</span>
                 <select aria-label="Hour" id="ctpHour" class="ctp-select">
-                  <option value="01">01</option><option value="02">02</option>
-                  <option value="03">03</option><option value="04">04</option>
-                  <option value="05">05</option><option value="06">06</option>
-                  <option value="07">07</option><option value="08">08</option>
-                  <option value="09" selected>09</option><option value="10">10</option>
-                  <option value="11">11</option><option value="12">12</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09" selected>09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
                 </select>
                 <span class="ctp-colon">:</span>
                 <select aria-label="Minute" id="ctpMinute" class="ctp-select">
-                  <option value="00" selected>00</option><option value="05">05</option>
-                  <option value="10">10</option><option value="15">15</option>
-                  <option value="20">20</option><option value="25">25</option>
-                  <option value="30">30</option><option value="35">35</option>
-                  <option value="40">40</option><option value="45">45</option>
-                  <option value="50">50</option><option value="55">55</option>
+                  <option value="00" selected>00</option>
+                  <option value="05">05</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                  <option value="35">35</option>
+                  <option value="40">40</option>
+                  <option value="45">45</option>
+                  <option value="50">50</option>
+                  <option value="55">55</option>
                 </select>
                 <select aria-label="AM/PM time" id="ctpAmPm" class="ctp-select ctp-ampm">
                   <option value="AM" selected>AM</option>
@@ -626,16 +614,16 @@
         <!-- Weekly Hours slider + Day-off pills + Custom time picker sync -->
         <script>
           document.addEventListener('DOMContentLoaded', () => {
-            // ── Range slider live label ──────────────────────────
+            // -- Range slider live label --------------------------
             const sl = document.getElementById('weeklyHoursInput');
             const lbl = document.getElementById('weeklyHoursVal');
             sl?.addEventListener('input', () => lbl.textContent = sl.value);
 
-            // ── Custom time picker → hidden input sync ───────────
-            const ctpHour  = document.getElementById('ctpHour');
-            const ctpMin   = document.getElementById('ctpMinute');
-            const ctpAmPm  = document.getElementById('ctpAmPm');
-            const hidden   = document.getElementById('startTimeInput');
+            // -- Custom time picker ? hidden input sync -----------
+            const ctpHour = document.getElementById('ctpHour');
+            const ctpMin = document.getElementById('ctpMinute');
+            const ctpAmPm = document.getElementById('ctpAmPm');
+            const hidden = document.getElementById('startTimeInput');
 
             function syncTimeInput() {
               let h = parseInt(ctpHour.value, 10);
@@ -643,7 +631,7 @@
               const ap = ctpAmPm.value;
               if (ap === 'PM' && h !== 12) h += 12;
               if (ap === 'AM' && h === 12) h = 0;
-              hidden.value = `${String(h).padStart(2,'0')}:${m}`;
+              hidden.value = `${String(h).padStart(2, '0')}:${m}`;
             }
 
             ctpHour?.addEventListener('change', syncTimeInput);
@@ -652,7 +640,7 @@
             syncTimeInput(); // set initial value
 
             // Expose a helper so JS (loadSavedPlan) can restore the picker
-            window.restoreTimePicker = function(val) {
+            window.restoreTimePicker = function (val) {
               // val is like "09:00" (24-hr)
               if (!val || !ctpHour || !ctpMin || !ctpAmPm) return;
               const [hStr, mStr] = val.split(':');
@@ -660,13 +648,13 @@
               const ap = h >= 12 ? 'PM' : 'AM';
               if (h === 0) h = 12;
               else if (h > 12) h -= 12;
-              ctpHour.value = String(h).padStart(2,'0');
-              ctpMin.value  = mStr;
+              ctpHour.value = String(h).padStart(2, '0');
+              ctpMin.value = mStr;
               ctpAmPm.value = ap;
               syncTimeInput();
             };
 
-            // ── Pill-style day-off checkboxes ────────────────────
+            // -- Pill-style day-off checkboxes --------------------
             document.querySelectorAll('.dayoff-label').forEach(label => {
               const cb = label.querySelector('input[type="checkbox"]');
               if (cb && cb.checked) label.classList.add('checked');
@@ -679,7 +667,7 @@
             });
           });
         </script>
-        <!-- ══════════════ RESULTS SECTION (hidden until plan generated) ══════════════ -->
+        <!-- -------------- RESULTS SECTION (hidden until plan generated) -------------- -->
         <div id="resultsSection" class="hidden">
           <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div class="lg:col-span-2 fade-in" style="animation-delay: 0.2s;">
@@ -691,7 +679,7 @@
                 <div class="flex items-center gap-2 text-sm bg-primary/10 dark:bg-primary/20 px-3 py-2 rounded-lg">
                   <span class="material-symbols-outlined text-primary text-lg">schedule</span>
                   <span class="text-text-secondary dark:text-dark-text-secondary">Total: <span id="totalHoursBadge"
-                      class="font-bold text-primary">— hrs</span></span>
+                      class="font-bold text-primary">� hrs</span></span>
                 </div>
               </div>
 
@@ -704,7 +692,7 @@
                 </button>
               </div>
 
-              <!-- ── Completion Banner (hidden until all sessions marked done) ── -->
+              <!-- -- Completion Banner (hidden until all sessions marked done) -- -->
               <div id="completionBanner"
                 class="hidden mb-4 rounded-xl border border-primary/40 bg-primary/10 dark:bg-primary/15 dark:border-primary/30 px-6 py-4 flex items-start gap-4 shadow-sm">
                 <span class="material-symbols-outlined text-2xl text-primary mt-0.5 flex-shrink-0">verified</span>
@@ -717,7 +705,7 @@
                 </div>
               </div>
 
-              <!-- ── Create New Plan button ── -->
+              <!-- -- Create New Plan button -- -->
               <div class="flex justify-end mb-4">
                 <button id="createNewPlanBtn"
                   class="flex items-center gap-2 rounded-lg border-2 border-primary px-5 py-2 text-sm font-bold text-primary bg-transparent hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm">
@@ -771,7 +759,7 @@
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30"
                           colspan="5">
-                          <div class="text-center text-xs">—</div>
+                          <div class="text-center text-xs">�</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group"
@@ -784,7 +772,7 @@
                             <div class="text-gray-300">Friday, 12:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -795,7 +783,7 @@
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="12 PM" data-day="Saturday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                       </tr>
 
@@ -811,7 +799,7 @@
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30"
                           colspan="5">
-                          <div class="text-center text-xs">—</div>
+                          <div class="text-center text-xs">�</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group"
@@ -824,7 +812,7 @@
                             <div class="text-gray-300">Friday, 1:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -842,7 +830,7 @@
                             <div class="text-gray-300">Saturday, 1:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -863,19 +851,19 @@
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30"
                           colspan="5">
-                          <div class="text-center text-xs">—</div>
+                          <div class="text-center text-xs">�</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="2 PM" data-day="Friday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="2 PM" data-day="Saturday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                       </tr>
 
@@ -891,19 +879,19 @@
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30"
                           colspan="5">
-                          <div class="text-center text-xs">—</div>
+                          <div class="text-center text-xs">�</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="3 PM" data-day="Friday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="3 PM" data-day="Saturday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                       </tr>
 
@@ -919,19 +907,19 @@
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary opacity-30"
                           colspan="5">
-                          <div class="text-center text-xs">—</div>
+                          <div class="text-center text-xs">�</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="4 PM" data-day="Friday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="4 PM" data-day="Saturday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                       </tr>
 
@@ -955,7 +943,7 @@
                             <div class="text-gray-300">Sunday, 5:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -973,7 +961,7 @@
                             <div class="text-gray-300">Monday, 5:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -991,7 +979,7 @@
                             <div class="text-gray-300">Tuesday, 5:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -1009,7 +997,7 @@
                             <div class="text-gray-300">Wednesday, 5:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -1027,7 +1015,7 @@
                             <div class="text-gray-300">Thursday, 5:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -1038,13 +1026,13 @@
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="5 PM" data-day="Friday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="5 PM" data-day="Saturday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                       </tr>
                       <tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
@@ -1084,13 +1072,13 @@
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="6 PM" data-day="Friday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="6 PM" data-day="Saturday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                       </tr>
                       <tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
@@ -1130,13 +1118,13 @@
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="7 PM" data-day="Friday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="7 PM" data-day="Saturday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                       </tr>
                       <tr class="hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors">
@@ -1151,31 +1139,31 @@
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="8 PM" data-day="Sunday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="8 PM" data-day="Monday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="8 PM" data-day="Tuesday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="8 PM" data-day="Wednesday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary"
                           data-time="8 PM" data-day="Thursday">
                           <div class="text-center text-xs text-text-secondary dark:text-dark-text-secondary opacity-30">
-                            —</div>
+                            �</div>
                         </td>
                         <td
                           class="schedule-cell whitespace-nowrap px-3 py-4 text-sm text-text-secondary dark:text-dark-text-secondary cursor-pointer relative group"
@@ -1188,7 +1176,7 @@
                             <div class="text-gray-300">Friday, 8:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -1206,7 +1194,7 @@
                             <div class="text-gray-300">Saturday, 8:00 PM</div>
                             <div class="text-gray-300 mt-1">Duration: 1 hour</div>
                             <div class="text-green-400 text-xs mt-1 flex items-center gap-1">
-                              <span>✓</span> Click to mark complete
+                              <span>?</span> Click to mark complete
                             </div>
                             <div
                               class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800">
@@ -1270,11 +1258,11 @@
                   <div class="space-y-3">
                     <div class="flex items-center justify-between p-3 rounded-lg bg-primary/5 dark:bg-primary/10">
                       <span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Focus Areas</span>
-                      <span id="insightFocusAreas" class="text-xs font-bold text-primary">— subjects</span>
+                      <span id="insightFocusAreas" class="text-xs font-bold text-primary">� subjects</span>
                     </div>
                     <div class="flex items-center justify-between p-3 rounded-lg bg-background dark:bg-dark-background">
                       <span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Study Days</span>
-                      <span id="insightStudyDays" class="text-xs font-bold text-primary">— days/week</span>
+                      <span id="insightStudyDays" class="text-xs font-bold text-primary">� days/week</span>
                     </div>
                     <div class="flex items-center justify-between p-3 rounded-lg bg-primary/5 dark:bg-primary/10">
                       <span class="text-sm font-medium text-text-primary dark:text-dark-text-primary">Efficiency</span>
@@ -1290,11 +1278,12 @@
         </div>
       </div><!-- /#resultsSection -->
     </main>
-<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
-<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
-© 2024 Dentor. All rights reserved. Master your dental studies.
-</div>
-</footer>
+    <footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+      <div
+        class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+        © 2026 Dentor. All rights reserved. Master your dental studies.
+      </div>
+    </footer>
   </div>
 
   <script src="../js/smartstudyplan.js?v=1001"></script>

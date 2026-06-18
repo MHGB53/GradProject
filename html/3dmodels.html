@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -53,186 +54,228 @@
     }
   </script>
   <script src="../js/themeManager.js"></script>
-<script src="../js/tokengaurd.js?v=999"></script>
+  <script src="../js/tokengaurd.js?v=999"></script>
   <!-- Apply dark mode immediately to prevent flash of light mode -->
   <script>
-    (function () {
-      // Check for saved preference or default to light mode
-      // Also check for old 'theme' key for backward compatibility
-      const currentMode = localStorage.getItem('theme') || 'light';
-      if (currentMode === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-    })();
+      (function () {
+        // Check for saved preference or default to light mode
+        // Also check for old 'theme' key for backward compatibility
+        const currentMode = localStorage.getItem('theme') || 'light';
+        if (currentMode === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      })();
   </script>
-<link rel="stylesheet" href="../css/a11y.css">
+  <link rel="stylesheet" href="../css/a11y.css">
 </head>
 
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
   <div class="flex flex-col min-h-screen">
-    <header class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
+    <header
+      class="bg-background/80 dark:bg-dark-background/80 backdrop-blur-xl sticky top-0 z-30 border-b border-border-color dark:border-dark-border-color">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
           <div class="flex items-center gap-4">
             <div class="relative inline-flex items-center -ml-20">
-              <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
-              <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
+              <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo"
+                class="h-80 w-auto transition-opacity duration-300">
+              <a href="dashboard.html"
+                style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
             </div>
           </div>
           <nav class="hidden md:flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
-            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="dashboard.html" data-page="dashboard">
+            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden"
+              href="dashboard.html" data-page="dashboard">
               <span class="relative z-10 flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
+                <span
+                  class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform duration-300">dashboard</span>
                 <span class="group-hover:scale-105 transition-transform duration-300">Dashboard</span>
               </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md">
+              </div>
             </a>
             <div class="relative group">
-              <button class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
+              <button
+                class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative overflow-hidden">
                 <span class="relative z-10 flex items-center gap-2">
-                  <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
+                  <span
+                    class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">star</span>
                   <span class="group-hover:scale-105 transition-transform duration-300">Features</span>
                   <span class="material-symbols-outlined text-sm">expand_more</span>
                 </span>
               </button>
 
               <!-- Features Dropdown -->
-              <div class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+              <div
+                class="absolute left-0 mt-2 w-72 bg-card dark:bg-dark-card rounded-2xl shadow-xl border border-border-color dark:border-dark-border-color overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div
+                  class="p-3 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
                   <h3 class="font-bold text-text-primary dark:text-dark-text-primary text-sm">AI-Powered Features</h3>
                 </div>
                 <div class="p-2">
-                  <a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <a href="smartstudyplan.html"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+                    <div
+                      class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">📚</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan
+                      </p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized study schedules
+                      </p>
                     </div>
                   </a>
-                  <a href="examgen.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <a href="examgen.html"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+                    <div
+                      class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">📝</span>
                     </div>
                     <div class="flex-1">
                       <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams</p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Create custom practice exams
+                      </p>
                     </div>
                   </a>
-                  <a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <a href="clinicalcaselibrary.html"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+                    <div
+                      class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">🏥</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case Simulator</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Case
+                        Simulator</p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice real-world scenarios
+                      </p>
                     </div>
                   </a>
-                  <a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <a href="aIsummarization.html"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+                    <div
+                      class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">📄</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization
+                      </p>
                       <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
                     </div>
                   </a>
-                  
-                  <a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+
+                  <a href="aIdiagnosis.html"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
                     <div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">🧠</span>
                     </div>
                     <div class="flex-1">
-                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis</p>
+                      <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Dental Diagnosis
+                      </p>
                       <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Intelligent case analysis</p>
                     </div>
                   </a>
-                  <a href="3dmodels.html" class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
-                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <a href="3dmodels.html"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
+                    <div
+                      class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span class="text-xl">🦷</span>
                     </div>
                     <div class="flex-1">
                       <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">3D Models</p>
-                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Interactive dental anatomy</p>
+                      <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Interactive dental anatomy
+                      </p>
                     </div>
                   </a>
                 </div>
               </div>
             </div>
-            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="community.html" data-page="community">
+            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden"
+              href="community.html" data-page="community">
               <span class="relative z-10 flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">groups</span>
+                <span
+                  class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">groups</span>
                 <span class="group-hover:scale-105 transition-transform duration-300">Community</span>
               </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md">
+              </div>
             </a>
-            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="leaderboard.html" data-page="leaderboard">
+            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden"
+              href="leaderboard.html" data-page="leaderboard">
               <span class="relative z-10 flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">emoji_events</span>
+                <span
+                  class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">emoji_events</span>
                 <span class="group-hover:scale-105 transition-transform duration-300">Leaderboard</span>
               </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md">
+              </div>
             </a>
-            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden" href="chatbot.html" data-page="chatbot">
+            <a class="nav-link px-5 py-2.5 text-sm font-semibold text-text-secondary dark:text-dark-text-secondary hover:text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-500 rounded-full relative group overflow-hidden"
+              href="chatbot.html" data-page="chatbot">
               <span class="relative z-10 flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
+                <span
+                  class="material-symbols-outlined text-sm group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">smart_toy</span>
                 <span class="group-hover:scale-105 transition-transform duration-300">Chatbot</span>
               </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+              <div
+                class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md">
+              </div>
             </a>
           </nav>
           <div class="flex items-center gap-4">
             <!-- Dark Mode Toggle -->
-            <button aria-label="Toggle dark mode" id="darkModeToggle" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+            <button aria-label="Toggle dark mode" id="darkModeToggle"
+              class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
               <span id="darkModeIcon" class="material-symbols-outlined">light_mode</span>
             </button>
             <div class="relative">
-              <button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
+              <button aria-label="Notifications" id="notificationBtn"
+                class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
                 <span class="material-symbols-outlined">notifications</span>
-                <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
               </button>
-              <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+              <div id="notificationDropdown"
+                class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
                 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
                   <h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
                 </div>
                 <div class="max-h-64 overflow-y-auto">
-                  <div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now available for practice.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has been updated with new materials.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
-                      </div>
-                    </div>
+                  <div class="p-8 text-center text-text-secondary dark:text-dark-text-secondary">
+                    <span class="material-symbols-outlined text-4xl mb-2 block opacity-50">notifications_none</span>
+                    <p class="text-sm">No notifications yet</p>
                   </div>
                 </div>
                 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
-                  <button onclick="window.location.href='notification.html'" class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
+                  <button onclick="window.location.href='notification.html'"
+                    class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All
+                    Notifications</button>
                 </div>
               </div>
             </div>
             <div class="relative">
-              <button id="profileBtn" class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300" style='background-image: url("../assets/default photo.png");'></button>
-              <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
+              <button id="profileBtn"
+                class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary cursor-pointer hover:border-primary-dark transition-colors duration-300"
+                style='background-image: url("../assets/default photo.png");'></button>
+              <div id="profileDropdown"
+                class="hidden absolute right-0 mt-2 w-64 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
                 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
                   <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary" style='background-image: url("../assets/default photo.png");'></div>
+                    <div class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary"
+                      style='background-image: url("../assets/default photo.png");'></div>
                     <div>
                       <h3 class="font-bold text-text-primary dark:text-dark-text-primary">John Doe</h3>
                       <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Dental Student</p>
@@ -241,21 +284,25 @@
                   </div>
                 </div>
                 <div class="py-2">
-                  <a href="Profile.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+                  <a href="Profile.html"
+                    class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
                     <span class="material-symbols-outlined text-lg">person</span>
                     <span class="text-sm font-medium">My Profile</span>
                   </a>
-                  <a href="flashcards.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+                  <a href="flashcards.html"
+                    class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
                     <span class="material-symbols-outlined text-lg">view_carousel</span>
                     <span class="text-sm font-medium">Your Flashcards</span>
                   </a>
-                  <a href="help&support.html" class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
+                  <a href="help&support.html"
+                    class="flex items-center gap-3 px-4 py-3 text-text-primary dark:text-dark-text-primary hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
                     <span class="material-symbols-outlined text-lg">help</span>
                     <span class="text-sm font-medium">Help & Support</span>
                   </a>
                 </div>
                 <div class="border-t border-border-color dark:border-dark-border-color py-2">
-                  <a href="Login.html" class="flex items-center gap-3 px-4 py-2.5 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+                  <a href="Login.html"
+                    class="flex items-center gap-3 px-4 py-2.5 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     <span class="text-sm font-medium">Sign Out</span>
                   </a>
@@ -263,7 +310,8 @@
               </div>
             </div>
             <!-- Mobile Menu Button -->
-            <button aria-label="Open menu" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
+            <button aria-label="Open menu" id="mobileMenuBtn"
+              class="md:hidden p-2 rounded-lg hover:bg-border-color/50 dark:hover:bg-dark-border-color transition-all">
               <span class="material-symbols-outlined">menu</span>
             </button>
           </div>
@@ -273,54 +321,63 @@
 
     <!-- Mobile Sidebar Menu -->
     <div id="mobileSidebar" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
-      <div id="mobileSidebarPanel" class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
+      <div id="mobileSidebarPanel"
+        class="fixed top-0 left-0 h-full w-80 bg-card dark:bg-dark-card shadow-2xl transform -translate-x-full transition-transform duration-300">
         <div class="flex flex-col h-full">
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
             <div class="flex items-center justify-between">
               <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Menu</h2>
-              <button aria-label="Close" id="closeMobileMenu" class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+              <button aria-label="Close" id="closeMobileMenu"
+                class="p-2 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined">close</span>
               </button>
             </div>
           </div>
           <div class="flex-1 overflow-y-auto p-4">
             <nav class="space-y-2">
-              <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+              <a href="dashboard.html"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined text-primary">dashboard</span>
                 <span class="font-semibold text-text-primary dark:text-dark-text-primary">Dashboard</span>
               </a>
               <div class="pt-2">
-                <p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI Features</p>
-                <a href="smartstudyplan.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+                <p class="px-4 py-2 text-xs font-bold text-text-secondary dark:text-dark-text-secondary uppercase">AI
+                  Features</p>
+                <a href="smartstudyplan.html"
+                  class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">📚</span>
                   <div>
                     <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Smart Study Plan</p>
                     <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Personalized schedules</p>
                   </div>
                 </a>
-                <a href="examgen.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+                <a href="examgen.html"
+                  class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">📝</span>
                   <div>
                     <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Exam Generator</p>
                     <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Practice exams</p>
                   </div>
                 </a>
-                <a href="clinicalcaselibrary.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+                <a href="clinicalcaselibrary.html"
+                  class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">🏥</span>
                   <div>
                     <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Clinical Cases</p>
                     <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Real scenarios</p>
                   </div>
                 </a>
-                <a href="aIsummarization.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+                <a href="aIsummarization.html"
+                  class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">📄</span>
                   <div>
                     <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">AI Summarization</p>
                     <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p>
                   </div>
                 </a>
-                
-                <a href="aIdiagnosis.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+
+                <a href="aIdiagnosis.html"
+                  class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">🧠</span>
                   <div>
                     <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Dental Diagnosis</p>
@@ -329,22 +386,26 @@
                 </a>
               </div>
               <div class="border-t border-border-color dark:border-dark-border-color my-4"></div>
-              <a href="community.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+              <a href="community.html"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined text-primary">groups</span>
                 <span class="font-semibold text-text-primary dark:text-dark-text-primary">Community</span>
               </a>
-              <a href="leaderboard.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+              <a href="leaderboard.html"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined text-primary">emoji_events</span>
                 <span class="font-semibold text-text-primary dark:text-dark-text-primary">Leaderboard</span>
               </a>
-              <a href="chatbot.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
+              <a href="chatbot.html"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                 <span class="material-symbols-outlined text-primary">smart_toy</span>
                 <span class="font-semibold text-text-primary dark:text-dark-text-primary">Chatbot</span>
               </a>
             </nav>
           </div>
           <div class="p-4 border-t border-border-color dark:border-dark-border-color">
-            <a href="/login" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
+            <a href="/login"
+              class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
               <span class="material-symbols-outlined">logout</span>
               <span class="font-semibold">Logout</span>
             </a>
@@ -360,25 +421,34 @@
           <h1 class="text-3xl font-extrabold text-text-primary dark:text-dark-text-primary">3D Dental Models</h1>
         </div>
 
-        <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden mb-8">
+        <div
+          class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden mb-8">
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
-            <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Interactive 3D Dental Anatomy</h2>
-            <p class="text-text-secondary dark:text-dark-text-secondary">Explore detailed 3D models of dental structures for enhanced learning</p>
+            <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Interactive 3D Dental
+              Anatomy</h2>
+            <p class="text-text-secondary dark:text-dark-text-secondary">Explore detailed 3D models of dental structures
+              for enhanced learning</p>
           </div>
 
           <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
               <!-- Articular Disc TMJ -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Articular Disc (TMJ)</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Temporomandibular joint disc anatomy and articulation</p>
-                    <button onclick="selectModel('articular_disc_tmj', 'Articular Disc (TMJ)', 'Detailed 3D model of the temporomandibular joint articular disc showing its shape, attachments, and relationship to the condyle and fossa.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Articular Disc
+                      (TMJ)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Temporomandibular joint
+                      disc anatomy and articulation</p>
+                    <button
+                      onclick="selectModel('articular_disc_tmj', 'Articular Disc (TMJ)', 'Detailed 3D model of the temporomandibular joint articular disc showing its shape, attachments, and relationship to the condyle and fossa.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -386,15 +456,21 @@
               </div>
 
               <!-- Upper Left Lateral Incisor -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Upper Left Lateral Incisor (#22)</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Maxillary lateral incisor morphology and root form</p>
-                    <button onclick="selectModel('dente_22_-_upper_left_lateral_incisor_id_22e', 'Upper Left Lateral Incisor (#22)', 'Maxillary left lateral incisor (FDI #22) showing crown morphology, cingulum, and single root with typical curvature.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Upper Left Lateral
+                      Incisor (#22)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Maxillary lateral incisor
+                      morphology and root form</p>
+                    <button
+                      onclick="selectModel('dente_22_-_upper_left_lateral_incisor_id_22e', 'Upper Left Lateral Incisor (#22)', 'Maxillary left lateral incisor (FDI #22) showing crown morphology, cingulum, and single root with typical curvature.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -402,15 +478,21 @@
               </div>
 
               <!-- Lower Left First Molar -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lower Left First Molar (#36)</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mandibular first molar with 5 cusps and bifurcated roots</p>
-                    <button onclick="selectModel('dente_36_-_lower_left_first_molar_id_36d', 'Lower Left First Molar (#36)', 'Mandibular left first molar (FDI #36) showing 5 cusps, mesial and distal roots, and multi-canal root anatomy.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lower Left First
+                      Molar (#36)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mandibular first molar
+                      with 5 cusps and bifurcated roots</p>
+                    <button
+                      onclick="selectModel('dente_36_-_lower_left_first_molar_id_36d', 'Lower Left First Molar (#36)', 'Mandibular left first molar (FDI #36) showing 5 cusps, mesial and distal roots, and multi-canal root anatomy.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -418,15 +500,21 @@
               </div>
 
               <!-- Lower Left Second Molar -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lower Left Second Molar (#37)</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mandibular second molar with 4 cusps and root anatomy</p>
-                    <button onclick="selectModel('dente_37_-_lower_left_second_molar_id_37a', 'Lower Left Second Molar (#37)', 'Mandibular left second molar (FDI #37) showing 4-cusp pattern and mesial/distal root configuration.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lower Left Second
+                      Molar (#37)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mandibular second molar
+                      with 4 cusps and root anatomy</p>
+                    <button
+                      onclick="selectModel('dente_37_-_lower_left_second_molar_id_37a', 'Lower Left Second Molar (#37)', 'Mandibular left second molar (FDI #37) showing 4-cusp pattern and mesial/distal root configuration.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -434,15 +522,21 @@
               </div>
 
               <!-- Head & Neck Anatomy -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🧠</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Head &amp; Neck Anatomy</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Full craniofacial and cervical structures for dentistry</p>
-                    <button onclick="selectModel('head_and_neck_anatomy_for_dentistry', 'Head &amp; Neck Anatomy', 'Comprehensive 3D model of head and neck anatomy relevant to dentistry, including nerves, vessels, muscles, and glands.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Head &amp; Neck
+                      Anatomy</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Full craniofacial and
+                      cervical structures for dentistry</p>
+                    <button
+                      onclick="selectModel('head_and_neck_anatomy_for_dentistry', 'Head &amp; Neck Anatomy', 'Comprehensive 3D model of head and neck anatomy relevant to dentistry, including nerves, vessels, muscles, and glands.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -450,15 +544,21 @@
               </div>
 
               <!-- Lateral Pterygoids -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">💪</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lateral Pterygoid Muscles</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Key muscles of mastication and jaw movement</p>
-                    <button onclick="selectModel('lateral_pterygoids', 'Lateral Pterygoid Muscles', '3D model of the superior and inferior heads of the lateral pterygoid muscle showing their origins, insertions, and role in jaw function.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Lateral Pterygoid
+                      Muscles</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Key muscles of mastication
+                      and jaw movement</p>
+                    <button
+                      onclick="selectModel('lateral_pterygoids', 'Lateral Pterygoid Muscles', '3D model of the superior and inferior heads of the lateral pterygoid muscle showing their origins, insertions, and role in jaw function.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -466,15 +566,20 @@
               </div>
 
               <!-- Mandible -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-gray-100 dark:bg-gray-700/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-gray-100 dark:bg-gray-700/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦴</span>
                   </div>
                   <div class="flex-1">
                     <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandible</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Complete lower jaw bone with dental sockets</p>
-                    <button onclick="selectModel('mandible', 'Mandible', 'Full 3D model of the mandible showing the body, ramus, condylar and coronoid processes, and mandibular canal.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Complete lower jaw bone
+                      with dental sockets</p>
+                    <button
+                      onclick="selectModel('mandible', 'Mandible', 'Full 3D model of the mandible showing the body, ramus, condylar and coronoid processes, and mandibular canal.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -482,15 +587,21 @@
               </div>
 
               <!-- Mandibular First Premolar -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular First Premolar</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Two-cusp premolar with prominent buccal cusp</p>
-                    <button onclick="selectModel('mandibular_first_premolar', 'Mandibular First Premolar', 'Mandibular first premolar showing its distinctive buccal and lingual cusps with single root and canal system.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular First
+                      Premolar</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Two-cusp premolar with
+                      prominent buccal cusp</p>
+                    <button
+                      onclick="selectModel('mandibular_first_premolar', 'Mandibular First Premolar', 'Mandibular first premolar showing its distinctive buccal and lingual cusps with single root and canal system.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -498,15 +609,21 @@
               </div>
 
               <!-- Mandibular Left Central Incisor -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-cyan-100 dark:bg-cyan-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-cyan-100 dark:bg-cyan-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Left Central Incisor</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Smallest and most symmetrical tooth in the arch</p>
-                    <button onclick="selectModel('mandibular_left_central_incisor', 'Mandibular Left Central Incisor', 'Mandibular left central incisor — the smallest tooth in the mouth, with a symmetrical crown and narrow single root.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Left
+                      Central Incisor</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Smallest and most
+                      symmetrical tooth in the arch</p>
+                    <button
+                      onclick="selectModel('mandibular_left_central_incisor', 'Mandibular Left Central Incisor', 'Mandibular left central incisor � the smallest tooth in the mouth, with a symmetrical crown and narrow single root.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -514,15 +631,21 @@
               </div>
 
               <!-- Mandibular Left Second Premolar -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-lime-100 dark:bg-lime-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-lime-100 dark:bg-lime-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Left Second Premolar</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Three-cusp Y-pattern variant with well-developed lingual</p>
-                    <button onclick="selectModel('mandibular_left_second_premolar', 'Mandibular Left Second Premolar', 'Mandibular left second premolar with 3-cusp (Y-type) pattern showing buccal, mesiolingual, and distolingual cusps.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Left
+                      Second Premolar</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Three-cusp Y-pattern
+                      variant with well-developed lingual</p>
+                    <button
+                      onclick="selectModel('mandibular_left_second_premolar', 'Mandibular Left Second Premolar', 'Mandibular left second premolar with 3-cusp (Y-type) pattern showing buccal, mesiolingual, and distolingual cusps.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -530,15 +653,21 @@
               </div>
 
               <!-- Mandibular Third Molar -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-rose-100 dark:bg-rose-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-rose-100 dark:bg-rose-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Third Molar (Wisdom)</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Wisdom tooth with variable anatomy and fused roots</p>
-                    <button onclick="selectModel('mandibular_third_molar', 'Mandibular Third Molar (Wisdom)', 'Mandibular third molar showing its variable crown morphology, fused roots, and complex root canal system — key for extraction planning.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Mandibular Third
+                      Molar (Wisdom)</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Wisdom tooth with variable
+                      anatomy and fused roots</p>
+                    <button
+                      onclick="selectModel('mandibular_third_molar', 'Mandibular Third Molar (Wisdom)', 'Mandibular third molar showing its variable crown morphology, fused roots, and complex root canal system � key for extraction planning.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -546,15 +675,21 @@
               </div>
 
               <!-- Maxillary Canine -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">🦷</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Maxillary Canine</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Longest tooth with the longest single root</p>
-                    <button onclick="selectModel('maxillary_canine', 'Maxillary Canine', 'Maxillary canine — the longest tooth in the mouth, with a prominent cusp and the longest root of any tooth in the dentition.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Maxillary Canine
+                    </h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Longest tooth with the
+                      longest single root</p>
+                    <button
+                      onclick="selectModel('maxillary_canine', 'Maxillary Canine', 'Maxillary canine � the longest tooth in the mouth, with a prominent cusp and the longest root of any tooth in the dentition.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -562,15 +697,21 @@
               </div>
 
               <!-- Sagittal Cut of Cranium & Mandible -->
-              <div class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
+              <div
+                class="model-card bg-white dark:bg-dark-card rounded-2xl border border-border-color dark:border-dark-border-color shadow-subtle p-6 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-start gap-4">
-                  <div class="model-icon w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div
+                    class="model-icon w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span class="text-2xl">💀</span>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Sagittal Cut — Cranium &amp; Mandible</h3>
-                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mid-sagittal section showing internal skull and jaw</p>
-                    <button onclick="selectModel('sagittal_cut_of_the_human_cranium_and_mandible_2', 'Sagittal Cut — Cranium &amp; Mandible', 'Mid-sagittal section through the human skull and mandible revealing internal bony architecture, nasal cavity, and dental relationships.')" class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
+                    <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Sagittal Cut �
+                      Cranium &amp; Mandible</h3>
+                    <p class="text-text-secondary dark:text-dark-text-secondary text-sm mb-4">Mid-sagittal section
+                      showing internal skull and jaw</p>
+                    <button
+                      onclick="selectModel('sagittal_cut_of_the_human_cranium_and_mandible_2', 'Sagittal Cut � Cranium &amp; Mandible', 'Mid-sagittal section through the human skull and mandible revealing internal bony architecture, nasal cavity, and dental relationships.')"
+                      class="inline-flex items-center text-primary hover:text-primary-dark font-medium text-sm">
                       View Model <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                     </button>
                   </div>
@@ -580,64 +721,68 @@
             </div>
           </div>
         </div>
-        
+
         <!-- 3D Model Viewer Section -->
-        <div id="modelViewer" class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden mb-8">
+        <div id="modelViewer"
+          class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden mb-8">
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
             <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Model Viewer</h2>
-            <p id="viewerDescription" class="text-text-secondary dark:text-dark-text-secondary">Select a model above to view interactive 3D visualization</p>
+            <p id="viewerDescription" class="text-text-secondary dark:text-dark-text-secondary">Select a model above to
+              view interactive 3D visualization</p>
           </div>
-          
+
           <div class="p-6">
-            <div id="viewerContent" class="rounded-xl overflow-hidden border border-border-color dark:border-dark-border-color bg-gray-50 dark:bg-dark-background">
+            <div id="viewerContent"
+              class="rounded-xl overflow-hidden border border-border-color dark:border-dark-border-color bg-gray-50 dark:bg-dark-background">
               <!-- Model info bar -->
               <div class="flex items-center gap-3 px-5 py-3 border-b border-border-color dark:border-dark-border-color">
                 <span class="material-symbols-outlined text-primary">view_in_ar</span>
                 <div>
-                  <h3 id="modelName" class="text-base font-bold text-text-primary dark:text-dark-text-primary leading-tight">3D Dental Model Viewer</h3>
+                  <h3 id="modelName"
+                    class="text-base font-bold text-text-primary dark:text-dark-text-primary leading-tight">3D Dental
+                    Model Viewer</h3>
                   <p id="modelDescription" class="text-xs text-text-secondary dark:text-dark-text-secondary">
-                    Select a dental model above — then drag to rotate, scroll to zoom.
+                    Select a dental model above � then drag to rotate, scroll to zoom.
                   </p>
                 </div>
               </div>
               <!-- model-viewer -->
-              <model-viewer
-                id="dentalModelViewer"
-                src="../assets/models/mandibular_left_central_incisor.glb"
-                alt="Interactive 3D Dental Model"
-                auto-rotate
-                camera-controls
-                style="width: 100%; height: 500px; background: transparent;"
-                loading="eager"
-                shadow-intensity="1"
-                environment-image="neutral"
-                exposure="1"
-              >
+              <model-viewer id="dentalModelViewer" src="../assets/models/mandibular_left_central_incisor.glb"
+                alt="Interactive 3D Dental Model" auto-rotate camera-controls
+                style="width: 100%; height: 500px; background: transparent;" loading="eager" shadow-intensity="1"
+                environment-image="neutral" exposure="1">
                 <!-- Fallback slot shown while loading -->
                 <div slot="progress-bar" style="display:none"></div>
                 <div slot="poster" class="flex items-center justify-center w-full h-full">
                   <div class="text-center">
-                    <div class="text-5xl mb-3">🦷</div>
-                    <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Loading 3D model…</p>
+                    <div class="text-5xl mb-3">??</div>
+                    <p class="text-sm text-text-secondary dark:text-dark-text-secondary">Loading 3D model�</p>
                   </div>
                 </div>
               </model-viewer>
               <!-- Hint bar -->
-              <div class="flex items-center justify-center gap-6 px-5 py-3 border-t border-border-color dark:border-dark-border-color text-xs text-text-secondary dark:text-dark-text-secondary">
-                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">mouse</span> Drag to rotate</span>
-                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">pinch</span> Pinch / scroll to zoom</span>
-                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">pan_tool</span> Right-drag to pan</span>
+              <div
+                class="flex items-center justify-center gap-6 px-5 py-3 border-t border-border-color dark:border-dark-border-color text-xs text-text-secondary dark:text-dark-text-secondary">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">mouse</span> Drag
+                  to rotate</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">pinch</span> Pinch
+                  / scroll to zoom</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">pan_tool</span>
+                  Right-drag to pan</span>
               </div>
             </div>
           </div>
         </div>
-        
-        <div class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden">
+
+        <div
+          class="bg-card dark:bg-dark-card rounded-2xl shadow-subtle border border-border-color dark:border-dark-border-color overflow-hidden">
           <div class="p-6 border-b border-border-color dark:border-dark-border-color">
-            <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Learning with 3D Models</h2>
-            <p class="text-text-secondary dark:text-dark-text-secondary">Enhance your dental education with interactive visualizations</p>
+            <h2 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-2">Learning with 3D Models
+            </h2>
+            <p class="text-text-secondary dark:text-dark-text-secondary">Enhance your dental education with interactive
+              visualizations</p>
           </div>
-          
+
           <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-5">
@@ -645,34 +790,39 @@
                   <span class="material-symbols-outlined text-white">visibility</span>
                 </div>
                 <h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2">Visual Learning</h3>
-                <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Understand complex anatomical structures through interactive 3D visualization.</p>
+                <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Understand complex anatomical
+                  structures through interactive 3D visualization.</p>
               </div>
-              
+
               <div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-5">
                 <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
                   <span class="material-symbols-outlined text-white">touch_app</span>
                 </div>
-                <h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2">Hands-On Experience</h3>
-                <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Rotate, zoom, and dissect virtual models to explore from every angle.</p>
+                <h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2">Hands-On Experience
+                </h3>
+                <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Rotate, zoom, and dissect virtual
+                  models to explore from every angle.</p>
               </div>
-              
+
               <div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-5">
                 <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
                   <span class="material-symbols-outlined text-white">school</span>
                 </div>
                 <h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-2">Enhanced Retention</h3>
-                <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Studies show 3D visualization improves knowledge retention by up to 75%.</p>
+                <p class="text-text-secondary dark:text-dark-text-secondary text-sm">Studies show 3D visualization
+                  improves knowledge retention by up to 75%.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </main>
-<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
-<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
-© 2024 Dentor. All rights reserved. Master your dental studies.
-</div>
-</footer>
+    <footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+      <div
+        class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+        © 2026 Dentor. All rights reserved. Master your dental studies.
+      </div>
+    </footer>
   </div>
 
 
@@ -680,4 +830,5 @@
   <!-- Google model-viewer web component - loaded as ES module after all page scripts -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 </body>
+
 </html>

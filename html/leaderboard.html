@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -78,7 +78,7 @@
     rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-<link rel="stylesheet" href="../css/a11y.css">
+  <link rel="stylesheet" href="../css/a11y.css">
 </head>
 
 <body class="bg-background dark:bg-dark-background font-display text-text-primary dark:text-dark-text-primary">
@@ -91,7 +91,7 @@
             <div class="relative inline-flex items-center -ml-20">
               <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo"
                 class="h-80 w-auto transition-opacity duration-300">
-              <a href="Home.html"
+              <a href="dashboard.html"
                 style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
             </div>
           </div>
@@ -177,7 +177,7 @@
                       <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture summaries & notes</p>
                     </div>
                   </a>
-                  
+
                   <a href="aIdiagnosis.html"
                     class="flex items-center gap-3 px-4 py-3 hover:bg-background dark:hover:bg-dark-background rounded-lg transition-all group/item">
                     <div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -257,8 +257,6 @@
               <button aria-label="Notifications" id="notificationBtn"
                 class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
                 <span class="material-symbols-outlined">notifications</span>
-                <span
-                  class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
               </button>
               <div id="notificationDropdown"
                 class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
@@ -266,31 +264,9 @@
                   <h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
                 </div>
                 <div class="max-h-64 overflow-y-auto">
-                  <div
-                    class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz
-                          Available</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is
-                          now available for practice.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update
-                        </p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan
-                          has been updated with new materials.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
-                      </div>
-                    </div>
+                  <div class="p-8 text-center text-text-secondary dark:text-dark-text-secondary">
+                    <span class="material-symbols-outlined text-4xl mb-2 block opacity-50">notifications_none</span>
+                    <p class="text-sm">No notifications yet</p>
                   </div>
                 </div>
                 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
@@ -410,7 +386,7 @@
                     <p class="text-xs text-text-secondary dark:text-dark-text-secondary">Lecture notes</p>
                   </div>
                 </a>
-                
+
                 <a href="aIdiagnosis.html"
                   class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-all">
                   <span class="text-xl">🧠</span>
@@ -452,39 +428,44 @@
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <!-- Header -->
       <div class="mb-8 text-center">
-        <h2 class="text-4xl font-extrabold text-text-primary dark:text-dark-text-primary tracking-tight">🏆 Leaderboard</h2>
-        <p class="text-text-secondary dark:text-dark-text-secondary mt-2">Points are earned by completing Smart Study Plan tasks.</p>
+        <h2 class="text-4xl font-extrabold text-text-primary dark:text-dark-text-primary tracking-tight">?? Leaderboard
+        </h2>
+        <p class="text-text-secondary dark:text-dark-text-secondary mt-2">Points are earned by completing Smart Study
+          Plan tasks.</p>
       </div>
 
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+        <div
+          class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
           <div class="flex items-center justify-between">
             <div>
               <p class="text-blue-100 text-sm font-medium mb-1">Total Students</p>
-              <h3 id="statTotalStudents" class="text-3xl font-bold">—</h3>
+              <h3 id="statTotalStudents" class="text-3xl font-bold">�</h3>
             </div>
             <div class="bg-white/20 backdrop-blur-sm rounded-xl p-3">
               <span class="material-symbols-outlined text-3xl">groups</span>
             </div>
           </div>
         </div>
-        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+        <div
+          class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
           <div class="flex items-center justify-between">
             <div>
               <p class="text-purple-100 text-sm font-medium mb-1">Average Points</p>
-              <h3 id="statAvgScore" class="text-3xl font-bold">—</h3>
+              <h3 id="statAvgScore" class="text-3xl font-bold">�</h3>
             </div>
             <div class="bg-white/20 backdrop-blur-sm rounded-xl p-3">
               <span class="material-symbols-outlined text-3xl">trending_up</span>
             </div>
           </div>
         </div>
-        <div class="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+        <div
+          class="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
           <div class="flex items-center justify-between">
             <div>
               <p class="text-green-100 text-sm font-medium mb-1">Your Rank</p>
-              <h3 id="statMyRank" class="text-3xl font-bold">—</h3>
+              <h3 id="statMyRank" class="text-3xl font-bold">�</h3>
             </div>
             <div class="bg-white/20 backdrop-blur-sm rounded-xl p-3">
               <span class="material-symbols-outlined text-3xl">emoji_events</span>
@@ -495,53 +476,66 @@
 
       <!-- Top 3 Podium (rendered by JS) -->
       <div class="mb-10">
-        <h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-6 text-center">🏆 Top Performers 🏆</h3>
+        <h3 class="text-2xl font-bold text-text-primary dark:text-dark-text-primary mb-6 text-center">?? Top Performers
+          ??</h3>
         <div id="podiumSection"></div>
       </div>
 
       <!-- Full Rankings Table -->
       <div class="max-w-5xl mx-auto">
-        <div class="bg-card dark:bg-dark-card shadow-subtle rounded-2xl overflow-hidden border border-border-color dark:border-dark-border-color">
-          <div class="p-6 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
+        <div
+          class="bg-card dark:bg-dark-card shadow-subtle rounded-2xl overflow-hidden border border-border-color dark:border-dark-border-color">
+          <div
+            class="p-6 border-b border-border-color dark:border-dark-border-color bg-background dark:bg-dark-background">
             <h3 class="text-xl font-bold text-text-primary dark:text-dark-text-primary">Full Rankings</h3>
           </div>
           <div class="overflow-x-auto">
-          <table class="w-full text-left min-w-[480px]">
-            <thead class="bg-background dark:bg-dark-background border-b-2 border-border-color dark:border-dark-border-color">
-              <tr>
-                <th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary w-1/12">Rank</th>
-                <th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary w-7/12">Student</th>
-                <th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary w-3/12">Points</th>
-                <th class="p-4 w-1/12"></th>
-              </tr>
-            </thead>
-            <tbody id="rankingsTbody" class="divide-y divide-border-color dark:divide-dark-border-color"></tbody>
-          </table>
+            <table class="w-full text-left min-w-[480px]">
+              <thead
+                class="bg-background dark:bg-dark-background border-b-2 border-border-color dark:border-dark-border-color">
+                <tr>
+                  <th
+                    class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary w-1/12">
+                    Rank</th>
+                  <th
+                    class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary w-7/12">
+                    Student</th>
+                  <th
+                    class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary w-3/12">
+                    Points</th>
+                  <th class="p-4 w-1/12"></th>
+                </tr>
+              </thead>
+              <tbody id="rankingsTbody" class="divide-y divide-border-color dark:divide-dark-border-color"></tbody>
+            </table>
           </div>
         </div>
       </div>
 
       <!-- User Info Modal (populated by leaderboard.js) -->
-      <div id="userInfoModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+      <div id="userInfoModal"
+        class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
         <div class="bg-card dark:bg-dark-card rounded-2xl shadow-2xl max-w-sm w-full">
           <div class="relative h-24 bg-gradient-to-br from-primary via-primary-dark to-purple-500">
             <div class="absolute inset-0 bg-black/10 rounded-t-2xl"></div>
             <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
             <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16 blur-2xl"></div>
-            <button aria-label="Close" onclick="closeUserInfo()" class="absolute top-3 right-3 text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-300 hover:rotate-90">
+            <button aria-label="Close" onclick="closeUserInfo()"
+              class="absolute top-3 right-3 text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-300 hover:rotate-90">
               <span class="material-symbols-outlined text-lg">close</span>
             </button>
-            <!-- Avatar overlapping the banner — positioned at the bottom, centered -->
+            <!-- Avatar overlapping the banner � positioned at the bottom, centered -->
             <div class="absolute -bottom-12 left-1/2 -translate-x-1/2">
               <div id="modalAvatar"
-                   class="w-24 h-24 rounded-full border-4 border-card dark:border-dark-card shadow-2xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                class="w-24 h-24 rounded-full border-4 border-card dark:border-dark-card shadow-2xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
                 <span class="material-symbols-outlined text-4xl text-gray-400 dark:text-gray-300">person</span>
               </div>
             </div>
           </div>
           <div class="px-6 pb-6 pt-16">
             <div class="flex flex-col items-center">
-              <h3 id="modalUserName" class="text-xl font-bold text-text-primary dark:text-dark-text-primary mt-2 text-center"></h3>
+              <h3 id="modalUserName"
+                class="text-xl font-bold text-text-primary dark:text-dark-text-primary mt-2 text-center"></h3>
               <div class="w-full space-y-3 mt-5">
                 <div class="flex items-center gap-3 p-3 rounded-xl bg-background dark:bg-dark-background">
                   <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -577,11 +571,12 @@
       </div>
 
     </main>
-<footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
-<div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
-© 2024 Dentor. All rights reserved. Master your dental studies.
-</div>
-</footer>
+    <footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
+      <div
+        class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
+        © 2026 Dentor. All rights reserved. Master your dental studies.
+      </div>
+    </footer>
 
   </div>
 

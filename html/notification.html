@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -83,7 +83,7 @@
             <div class="relative inline-flex items-center -ml-20">
     <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo"
         class="h-80 w-auto transition-opacity duration-300">
-    <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
+    <a href="dashboard.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
 </div>
           </div>
           <nav class="hidden md:flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
@@ -238,8 +238,6 @@
                 id="notificationBtn"
                 class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
                 <span class="material-symbols-outlined">notifications</span>
-                <span
-                  class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
               </button>
               <div
                 id="notificationDropdown"
@@ -248,35 +246,9 @@
                   <h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
                 </div>
                 <div class="max-h-64 overflow-y-auto">
-                  <div
-                    class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now
-                          available for practice.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
-                      </div>
-                      <button aria-label="Close" class="dismiss-btn text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary">
-                        <span class="material-symbols-outlined text-lg">close</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div
-                    class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-                    <div class="flex items-start gap-3">
-                      <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
-                      <div class="flex-1">
-                        <p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has
-                          been updated with new materials.</p>
-                        <p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
-                      </div>
-                      <button aria-label="Close" class="dismiss-btn text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary">
-                        <span class="material-symbols-outlined text-lg">close</span>
-                      </button>
-                    </div>
+                  <div class="p-8 text-center text-text-secondary dark:text-dark-text-secondary">
+                    <span class="material-symbols-outlined text-4xl mb-2 block opacity-50">notifications_none</span>
+                    <p class="text-sm">No notifications yet</p>
                   </div>
                 </div>
                 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
@@ -476,144 +448,19 @@
 
           <!-- Notification List -->
           <div class="divide-y divide-border-color dark:divide-dark-border-color" id="notificationList">
-            <!-- Notification Item 1 -->
-            <div class="p-6 hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors notification-item" data-status="unread">
-              <div class="flex items-start gap-4">
-                <div class="w-3 h-3 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div class="flex-1">
-                  <div class="flex items-start justify-between">
-                    <h3 class="text-lg font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</h3>
-                    <span class="text-xs text-text-secondary dark:text-dark-text-secondary whitespace-nowrap">2 minutes ago</span>
-                  </div>
-                  <p class="text-text-secondary dark:text-dark-text-secondary mt-2">Endodontics Quiz #5 is now available for practice. Test your knowledge on root canal treatments.</p>
-                  <div class="mt-4 flex gap-2">
-                    <button class="px-4 py-2 text-sm font-medium text-primary hover:text-primary-dark bg-primary/10 hover:bg-primary/20 rounded-full transition-colors view-details-btn">
-                      Take Quiz
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary bg-background dark:bg-dark-background hover:bg-background/80 dark:hover:bg-dark-background/80 rounded-full transition-colors dismiss-btn">
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div class="p-12 text-center text-text-secondary dark:text-dark-text-secondary">
+              <span class="material-symbols-outlined text-5xl mb-3 block opacity-50">notifications_none</span>
+              <p class="text-lg font-medium">No notifications</p>
+              <p class="text-sm mt-1">You're all caught up!</p>
             </div>
-
-            <!-- Notification Item 2 -->
-            <div class="p-6 hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors notification-item" data-status="unread">
-              <div class="flex items-start gap-4">
-                <div class="w-3 h-3 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                <div class="flex-1">
-                  <div class="flex items-start justify-between">
-                    <h3 class="text-lg font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</h3>
-                    <span class="text-xs text-text-secondary dark:text-dark-text-secondary whitespace-nowrap">1 hour ago</span>
-                  </div>
-                  <p class="text-text-secondary dark:text-dark-text-secondary mt-2">Your weekly study plan has been updated with new materials for Periodontics.</p>
-                  <div class="mt-4 flex gap-2">
-                    <button class="px-4 py-2 text-sm font-medium text-primary hover:text-primary-dark bg-primary/10 hover:bg-primary/20 rounded-full transition-colors view-details-btn">
-                      View Plan
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary bg-background dark:bg-dark-background hover:bg-background/80 dark:hover:bg-dark-background/80 rounded-full transition-colors dismiss-btn">
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Notification Item 3 -->
-            <div class="p-6 hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors notification-item" data-status="unread">
-              <div class="flex items-start gap-4">
-                <div class="w-3 h-3 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div class="flex-1">
-                  <div class="flex items-start justify-between">
-                    <h3 class="text-lg font-semibold text-text-primary dark:text-dark-text-primary">Achievement Unlocked</h3>
-                    <span class="text-xs text-text-secondary dark:text-dark-text-secondary whitespace-nowrap">3 hours ago</span>
-                  </div>
-                  <p class="text-text-secondary dark:text-dark-text-secondary mt-2">Congratulations! You've completed 100 flashcards. Keep up the great work!</p>
-                  <div class="mt-4 flex gap-2">
-                    <button class="px-4 py-2 text-sm font-medium text-primary hover:text-primary-dark bg-primary/10 hover:bg-primary/20 rounded-full transition-colors view-details-btn">
-                      View Achievement
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary bg-background dark:bg-dark-background hover:bg-background/80 dark:hover:bg-dark-background/80 rounded-full transition-colors dismiss-btn">
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Notification Item 4 -->
-            <div class="p-6 hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors notification-item" data-status="read">
-              <div class="flex items-start gap-4">
-                <div class="w-3 h-3 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div class="flex-1">
-                  <div class="flex items-start justify-between">
-                    <h3 class="text-lg font-semibold text-text-primary dark:text-dark-text-primary">Community Post Liked</h3>
-                    <span class="text-xs text-text-secondary dark:text-dark-text-secondary whitespace-nowrap">5 hours ago</span>
-                  </div>
-                  <p class="text-text-secondary dark:text-dark-text-secondary mt-2">Dr. Sarah Johnson liked your post about pediatric dentistry techniques.</p>
-                  <div class="mt-4 flex gap-2">
-                    <button class="px-4 py-2 text-sm font-medium text-primary hover:text-primary-dark bg-primary/10 hover:bg-primary/20 rounded-full transition-colors view-details-btn">
-                      View Post
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary bg-background dark:bg-dark-background hover:bg-background/80 dark:hover:bg-dark-background/80 rounded-full transition-colors dismiss-btn">
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Notification Item 5 -->
-            <div class="p-6 hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors notification-item" data-status="read">
-              <div class="flex items-start gap-4">
-                <div class="w-3 h-3 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div class="flex-1">
-                  <div class="flex items-start justify-between">
-                    <h3 class="text-lg font-semibold text-text-primary dark:text-dark-text-primary">New Clinical Case</h3>
-                    <span class="text-xs text-text-secondary dark:text-dark-text-secondary whitespace-nowrap">1 day ago</span>
-                  </div>
-                  <p class="text-text-secondary dark:text-dark-text-secondary mt-2">A new clinical case on dental implants has been added to the library.</p>
-                  <div class="mt-4 flex gap-2">
-                    <button class="px-4 py-2 text-sm font-medium text-primary hover:text-primary-dark bg-primary/10 hover:bg-primary/20 rounded-full transition-colors view-details-btn">
-                      View Case
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary bg-background dark:bg-dark-background hover:bg-background/80 dark:hover:bg-dark-background/80 rounded-full transition-colors dismiss-btn">
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Notification Item 6 -->
-            <div class="p-6 hover:bg-background/50 dark:hover:bg-dark-background/50 transition-colors notification-item" data-status="read">
-              <div class="flex items-start gap-4">
-                <div class="w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                <div class="flex-1">
-                  <div class="flex items-start justify-between">
-                    <h3 class="text-lg font-semibold text-text-primary dark:text-dark-text-primary">Reminder: Exam Tomorrow</h3>
-                    <span class="text-xs text-text-secondary dark:text-dark-text-secondary whitespace-nowrap">1 day ago</span>
-                  </div>
-                  <p class="text-text-secondary dark:text-dark-text-secondary mt-2">Don't forget your Oral Pathology exam scheduled for tomorrow at 10:00 AM.</p>
-                  <div class="mt-4 flex gap-2">
-                    <button class="px-4 py-2 text-sm font-medium text-primary hover:text-primary-dark bg-primary/10 hover:bg-primary/20 rounded-full transition-colors view-details-btn">
-                      View Details
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-text-secondary dark:text-dark-text-secondary hover:text-text-primary dark:hover:text-dark-text-primary bg-background dark:bg-dark-background hover:bg-background/80 dark:hover:bg-dark-background/80 rounded-full transition-colors dismiss-btn">
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>
     </main>
 <footer class="bg-card dark:bg-dark-card mt-auto border-t border-border-color dark:border-dark-border-color">
 <div class="container mx-auto px-6 lg:px-10 py-6 text-center text-text-secondary dark:text-dark-text-secondary text-sm">
-© 2024 Dentor. All rights reserved. Master your dental studies.
+� 2026 Dentor. All rights reserved. Master your dental studies.
 </div>
 </footer>
 

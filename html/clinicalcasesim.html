@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -86,7 +86,7 @@
 <div class="flex items-center gap-4">
     <div class="relative inline-flex items-center -ml-20">
         <img id="logoImage" src="../assets/Logo.png" alt="Dentor Logo" class="h-80 w-auto transition-opacity duration-300">
-        <a href="Home.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
+        <a href="dashboard.html" style="position:absolute; top:50%; left:0; transform:translateY(-50%); height:60px; width:240px;"></a>
     </div>
 </div>
 <nav class="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
@@ -204,33 +204,16 @@
 <div class="relative">
 <button aria-label="Notifications" id="notificationBtn" class="relative p-2 rounded-full text-text-secondary dark:text-dark-text-secondary hover:bg-gray-100 dark:hover:bg-dark-card transition-colors duration-300">
 <span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-background dark:ring-dark-background"></span>
 </button>
 <div id="notificationDropdown" class="hidden absolute right-0 mt-2 w-80 bg-card dark:bg-dark-card rounded-xl shadow-lg border border-border-color dark:border-dark-border-color z-50">
 <div class="p-4 border-b border-border-color dark:border-dark-border-color">
 <h3 class="font-bold text-text-primary dark:text-dark-text-primary">Notifications</h3>
 </div>
 <div class="max-h-64 overflow-y-auto">
-<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-<div class="flex items-start gap-3">
-<div class="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">New Quiz Available</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Endodontics Quiz #5 is now available for practice.</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">2 minutes ago</p>
-</div>
-</div>
-</div>
-<div class="p-4 border-b border-border-color dark:border-dark-border-color hover:bg-gray-50 dark:hover:bg-dark-card/50 transition-colors">
-<div class="flex items-start gap-3">
-<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
-<div class="flex-1">
-<p class="text-sm font-semibold text-text-primary dark:text-dark-text-primary">Study Plan Update</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Your weekly study plan has been updated with new materials.</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">1 hour ago</p>
-</div>
-</div>
-</div>
+                  <div class="p-8 text-center text-text-secondary dark:text-dark-text-secondary">
+                    <span class="material-symbols-outlined text-4xl mb-2 block opacity-50">notifications_none</span>
+                    <p class="text-sm">No notifications yet</p>
+                  </div>
 </div>
 <div class="p-3 border-t border-border-color dark:border-dark-border-color">
 <button onclick="window.location.href='notification.html'" class="w-full text-center text-sm text-primary hover:text-primary-dark font-semibold py-2">View All Notifications</button>
@@ -760,7 +743,7 @@ Rate this Case
 <button type="button" aria-label="Rate 5 stars" data-value="5" class="material-symbols-outlined text-3xl text-text-secondary hover:text-yellow-400 transition-colors cursor-pointer">star_border</button>
 </div>
 <p id="ratingMessage" class="text-sm text-text-secondary dark:text-dark-text-secondary">Tap a star to rate this case.</p>
-<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Overall rating: <span id="ratingOverall" class="font-semibold text-text-primary dark:text-dark-text-primary">—</span></p>
+<p class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1">Overall rating: <span id="ratingOverall" class="font-semibold text-text-primary dark:text-dark-text-primary">�</span></p>
 </div>
 
 <!-- Actions -->
@@ -824,21 +807,6 @@ Learning Objectives
 <ul id="objectivesList" class="space-y-2 text-sm text-text-secondary dark:text-dark-text-secondary"></ul>
 </div>
 
-<!-- Help Card -->
-<div class="bg-gradient-to-br from-yellow-50 to-yellow-100/50 dark:from-yellow-900/20 dark:to-yellow-800/10 rounded-2xl border border-yellow-200 dark:border-yellow-700/30 shadow-subtle p-6">
-<h3 class="text-lg font-bold text-text-primary dark:text-dark-text-primary mb-3 flex items-center gap-2">
-<span class="material-symbols-outlined text-yellow-500">help</span>
-Need Help?
-</h3>
-<p class="text-sm text-text-secondary dark:text-dark-text-secondary mb-4">
-Stuck on this case? Access hints and additional resources.
-</p>
-<button class="w-full px-4 py-2 bg-yellow-500 text-white rounded-lg font-semibold hover:bg-yellow-600 transition-all duration-300 flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">tips_and_updates</span>
-<span>Get Hint</span>
-</button>
-</div>
-
 </aside>
 
 </div>
@@ -849,7 +817,7 @@ Stuck on this case? Access hints and additional resources.
 <!-- Footer -->
 <footer class="bg-card dark:bg-dark-card border-t border-border-color dark:border-dark-border-color py-6 mt-auto">
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-text-secondary dark:text-dark-text-secondary">
-© 2024 Dentor. All rights reserved. Master your dental studies.
+� 2026 Dentor. All rights reserved. Master your dental studies.
 </div>
 </footer>
 
