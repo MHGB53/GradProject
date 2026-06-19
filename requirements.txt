@@ -7,7 +7,7 @@ uvicorn[standard]==0.32.1
 
 # ── SQL Server ──
 sqlalchemy==2.0.36
-pyodbc==5.2.0
+psycopg2-binary>=2.9.0
 
 # ── Auth / Security ──
 bcrypt==4.3.0
