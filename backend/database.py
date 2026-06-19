@@ -1,27 +1,29 @@
 """
-Database configuration for SQL Server (SSMS).
-Reads connection settings from the .env file in the project root.
+Database configuration.
 
-Supported connection modes:
-  1. SQL Server Authentication  -> set DB_USER and DB_PASSWORD in .env
-  2. Windows Authentication     -> leave DB_USER and DB_PASSWORD blank in .env
+Two modes, chosen automatically:
 
-Requirements:
-  - Microsoft ODBC Driver 17 (or 18) for SQL Server must be installed.
-    Download: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-  - The database (DB_NAME) must already exist in your SQL Server instance.
-    Create it in SSMS with: CREATE DATABASE DentorDB;
+  1. PRODUCTION (Render / any host that provides DATABASE_URL)
+     - Set the DATABASE_URL environment variable (Render does this automatically
+       when you attach a PostgreSQL instance). Requires psycopg2-binary.
+
+  2. LOCAL DEVELOPMENT (SQL Server / SSMS)
+     - Leave DATABASE_URL unset. Connection is built from DB_SERVER / DB_NAME /
+       DB_USER / DB_PASSWORD. Requires the Microsoft ODBC Driver 17/18 + pyodbc.
+       - SQL Server Authentication -> set DB_USER and DB_PASSWORD
+       - Windows Authentication    -> leave DB_USER and DB_PASSWORD blank
 """
 
 import os
-import pyodbc
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Load variables from .env file
+# Load variables from .env file (only matters locally; ignored if file is absent)
 load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL", "")
 
 DB_SERVER   = os.getenv("DB_SERVER", r"localhost\SQLEXPRESS")
 DB_NAME     = os.getenv("DB_NAME",   "DentorDB")
@@ -32,8 +34,10 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 def _detect_driver() -> str:
     """
     Auto-detect the best available SQL Server ODBC driver installed on this machine.
-    Prefers newer drivers (18 > 17 > legacy).
+    Prefers newer drivers (18 > 17 > legacy). Only called in local SQL Server mode.
     """
+    import pyodbc  # imported lazily so production (Postgres) never needs it
+
     preferred = [
         "ODBC Driver 18 for SQL Server",
         "ODBC Driver 17 for SQL Server",
@@ -53,9 +57,9 @@ def _detect_driver() -> str:
     )
 
 
-def _build_connection_string() -> str:
+def _build_sqlserver_url() -> str:
     """
-    Build the SQLAlchemy connection URL for SQL Server.
+    Build the SQLAlchemy connection URL for local SQL Server.
     Uses Windows Auth if DB_USER is not set, otherwise SQL Server Auth.
     """
     driver = _detect_driver()
@@ -77,10 +81,25 @@ def _build_connection_string() -> str:
         )
 
 
-DATABASE_URL = _build_connection_string()
+def _resolve_database_url() -> str:
+    """
+    Prefer DATABASE_URL (production/Render Postgres). Fall back to SQL Server locally.
+    """
+    if DATABASE_URL:
+        url = DATABASE_URL
+        # SQLAlchemy needs the "postgresql://" scheme; Render hands out "postgres://".
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql://", 1)
+        print("[DB] Using DATABASE_URL (PostgreSQL)")
+        return url
+    return _build_sqlserver_url()
+
+
+_RESOLVED_URL = _resolve_database_url()
+_IS_POSTGRES = _RESOLVED_URL.startswith("postgresql")
 
 engine = create_engine(
-    DATABASE_URL,
+    _RESOLVED_URL,
     echo=False,           # Set True to log every SQL statement (useful for debugging)
     pool_pre_ping=True,   # Check connection health before each request
     pool_size=5,
@@ -102,11 +121,12 @@ def get_db():
 
 
 def test_connection():
-    """Utility to verify the SQL Server connection at startup."""
+    """Utility to verify the database connection at startup."""
+    backend = "PostgreSQL" if _IS_POSTGRES else "SQL Server"
     try:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
-        print(f"[DB] Connected to SQL Server -> {DB_SERVER}/{DB_NAME}")
+        print(f"[DB] Connected to {backend}")
     except Exception as exc:
-        print(f"[DB] ERROR - Could not connect to SQL Server: {exc}")
+        print(f"[DB] ERROR - Could not connect to {backend}: {exc}")
         raise

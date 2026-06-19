@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 
-from .database import engine, test_connection
+from .database import engine, test_connection, _IS_POSTGRES
 from . import models
 from .routers import auth, community, chatbot, flashcards, support, smartstudy, leaderboard, ai_diagnosis, ai_proxy, exams
 
@@ -21,7 +21,15 @@ def _run_migrations():
     Apply any missing column/table changes that SQLAlchemy's create_all() skips
     (create_all only adds new tables, never new columns to existing ones).
     Safe to call on every startup — each block checks before altering.
+
+    NOTE: these statements use SQL Server (T-SQL) syntax and only patch a
+    pre-existing local SQL Server database. On PostgreSQL (Render) a fresh
+    database is created by create_all() with every column already present in
+    models.py, so this is skipped entirely.
     """
+    if _IS_POSTGRES:
+        return
+
     from sqlalchemy import inspect as sa_inspect, text
     inspector = sa_inspect(engine)
 
