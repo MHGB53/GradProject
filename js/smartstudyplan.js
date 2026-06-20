@@ -3,7 +3,7 @@
    Connects smartstudyplan.html → /api/study-plan/* endpoints
    ========================================================= */
 
-const API_BASE = "http://127.0.0.1:8000/api/study-plan";
+const API_BASE = window.location.origin + "/api/study-plan";
 const ALL_DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 
 // Subject colour palette (cycles for any number of subjects)

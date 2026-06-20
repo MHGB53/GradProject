@@ -4,7 +4,7 @@
 //  Requires a valid JWT in localStorage ('access_token').
 // ============================================================
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = window.location.origin;
 
 // ──────────────────────────── Auth Helpers ────────────────────────────
 

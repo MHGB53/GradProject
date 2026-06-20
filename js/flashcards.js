@@ -14,7 +14,7 @@ const getAuthHeaders = () => {
 
 async function loadFlashcards() {
     try {
-        const response = await fetch('http://localhost:8000/api/flashcards', {
+        const response = await fetch('/api/flashcards', {
             headers: getAuthHeaders()
         });
         if (!response.ok) throw new Error('Failed to fetch flashcards');
@@ -146,7 +146,7 @@ function initializeCardForm() {
         }
         
         try {
-            const response = await fetch('http://localhost:8000/api/flashcards', {
+            const response = await fetch('/api/flashcards', {
                 method: 'POST',
                 headers: getAuthHeaders(),
                 body: JSON.stringify({
@@ -292,7 +292,7 @@ async function confirmDelete() {
         const id = cardToDelete.getAttribute('data-id');
         try {
             if (id) {
-                const response = await fetch(`http://localhost:8000/api/flashcards/${id}`, {
+                const response = await fetch(`/api/flashcards/${id}`, {
                     method: 'DELETE',
                     headers: getAuthHeaders()
                 });
@@ -364,7 +364,7 @@ function initializeEditCardForm() {
         
         try {
             if (id) {
-                const response = await fetch(`http://localhost:8000/api/flashcards/${id}`, {
+                const response = await fetch(`/api/flashcards/${id}`, {
                     method: 'PUT',
                     headers: getAuthHeaders(),
                     body: JSON.stringify({

@@ -441,7 +441,7 @@ async function loadDashboardStudyPlan() {
     }
 
     try {
-        const res = await fetch("http://127.0.0.1:8000/api/study-plan/saved", {
+        const res = await fetch("/api/study-plan/saved", {
             headers: { "Authorization": `Bearer ${token}` }
         });
 

@@ -3,7 +3,7 @@
    Connects leaderboard.html → /api/leaderboard/* endpoints
    ========================================================= */
 
-const LB_API = 'http://localhost:8000/api/leaderboard';
+const LB_API = window.location.origin + '/api/leaderboard';
 
 function getAuthHeaders() {
     const token = localStorage.getItem('access_token');
@@ -99,7 +99,7 @@ function levelFromPoints(pts) {
 //   - Coloured initials circle otherwise
 // ─────────────────────────────────────────────────────────────
 function avatarHtml(photoUrl, displayName, sizeClass = 'w-24 h-24', textClass = 'text-2xl') {
-    const BASE = 'http://localhost:8000';
+    const BASE = window.location.origin;
     // Build an absolute URL for relative paths coming from the backend
     let src = '';
     if (photoUrl) {

@@ -4,7 +4,7 @@
 
 // ── API endpoints on the Dentor FastAPI backend (no Mercury needed) ─────
 // These match backend/routers/ai_diagnosis.py
-const DENTOR_API = 'http://127.0.0.1:8000'; // same host as your FastAPI server
+const DENTOR_API = window.location.origin; // same host as your FastAPI server
 
 const API = {
   xray: `${DENTOR_API}/api/ai-diagnosis/xray`,  // handles both panorama & periapical
